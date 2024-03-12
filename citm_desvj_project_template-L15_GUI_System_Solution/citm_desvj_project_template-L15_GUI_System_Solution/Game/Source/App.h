@@ -25,6 +25,7 @@ class Map;
 class Physics;
 class GuiManager;
 class DialogueManager;
+class ModuleFonts;
 
 class App
 {
@@ -109,6 +110,7 @@ public:
 	Physics* physics;
 	GuiManager* guiManager;
 	DialogueManager* dialogueManager;
+	ModuleFonts* fonts;
 
 private:
 

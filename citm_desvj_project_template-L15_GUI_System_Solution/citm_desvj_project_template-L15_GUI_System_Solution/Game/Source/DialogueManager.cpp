@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Scene.h"
 #include "Window.h"
+#include "ModuleFonts.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -30,6 +31,9 @@ bool DialogueManager::Start()
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz 1234567890.,'=(?!)+-*/      " };
+	Font = app->fonts->Load("Assets/Fonts/typography.png", lookupTable, 2);
+
 	item = dialogueList.start;
 
 	return true;
@@ -51,7 +55,8 @@ bool DialogueManager::Update(float dt)
 
 		if (item != NULL && ret == true)
 		{
-			app->render->DrawText(item->data->text.GetString(), dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, 1170, 40);
+			//app->render->DrawText(item->data->text.GetString(), dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, 1170, 40);
+			app->fonts->BlitText(dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, Font,item->data->text.GetString());
 
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 			{

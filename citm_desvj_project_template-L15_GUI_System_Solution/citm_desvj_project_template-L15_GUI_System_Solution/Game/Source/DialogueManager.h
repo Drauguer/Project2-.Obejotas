@@ -41,6 +41,8 @@ public:
 	bool testDialogue = false;
 	uint windowW, windowH;
 
+	int Font = -1;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__

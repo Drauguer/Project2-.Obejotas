@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "GuiManager.h"
+#include "ModuleFonts.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -40,6 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
 	dialogueManager = new DialogueManager();
+	fonts = new ModuleFonts();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -55,6 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogueManager);
+	AddModule(fonts);
 
 	// Render last to swap buffer
 	AddModule(render);

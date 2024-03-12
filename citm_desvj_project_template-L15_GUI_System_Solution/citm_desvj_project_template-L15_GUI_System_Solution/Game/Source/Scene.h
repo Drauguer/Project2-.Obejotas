@@ -57,6 +57,8 @@ private:
 	// Test Dialogue
 	Dialogue* testDialogue;
 	Dialogue* testDialogue2;
+
+	
 };
 
 #endif // __SCENE_H__
