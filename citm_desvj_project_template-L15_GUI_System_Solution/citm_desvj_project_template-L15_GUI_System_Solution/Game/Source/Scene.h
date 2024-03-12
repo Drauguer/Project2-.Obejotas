@@ -53,6 +53,10 @@ private:
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
+
+	// Test Dialogue
+	Dialogue* testDialogue;
+	Dialogue* testDialogue2;
 };
 
 #endif // __SCENE_H__

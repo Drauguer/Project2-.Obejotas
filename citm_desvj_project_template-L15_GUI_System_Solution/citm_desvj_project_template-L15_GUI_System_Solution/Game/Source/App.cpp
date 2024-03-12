@@ -39,6 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
+	dialogueManager = new DialogueManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -53,6 +54,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(guiManager);
+	AddModule(dialogueManager);
 
 	// Render last to swap buffer
 	AddModule(render);

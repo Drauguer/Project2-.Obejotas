@@ -6,6 +6,7 @@
 #include "PerfTimer.h"
 #include "Timer.h"
 #include "EntityManager.h"
+#include "DialogueManager.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
@@ -23,6 +24,7 @@ class Map;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
+class DialogueManager;
 
 class App
 {
@@ -106,6 +108,7 @@ public:
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
+	DialogueManager* dialogueManager;
 
 private:
 

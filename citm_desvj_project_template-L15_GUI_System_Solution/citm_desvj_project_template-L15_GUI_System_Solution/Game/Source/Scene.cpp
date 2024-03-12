@@ -12,6 +12,7 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "DialogueManager.h"
 
 Scene::Scene() : Module()
 {
@@ -74,6 +75,9 @@ bool Scene::Start()
 
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
+
+	testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("Hello World!", DialogueType::PLAYER);
+	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("Diabloooo \n Que pasaa ", DialogueType::PLAYER);
 
 	return true;
 }
