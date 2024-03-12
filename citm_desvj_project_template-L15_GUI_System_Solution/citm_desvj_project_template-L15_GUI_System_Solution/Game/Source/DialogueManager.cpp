@@ -56,6 +56,11 @@ bool DialogueManager::Update(float dt)
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 			{
 				item = item->next;
+				
+				if (item == NULL)
+				{
+					testDialogue = false;
+				}
 			}
 		}
 	}
