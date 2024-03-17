@@ -33,6 +33,16 @@ bool Player::Start() {
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 
+	int player[8] = {
+		0, 0,
+		12, 0,
+		12, 16,
+		0, 16,
+	};
+
+	pbody = app->physics->CreateChain(position.x, position.y, player, 8, bodyType::DYNAMIC);
+	pbody->listener = this;
+	pbody->ctype = ColliderType::PLAYER;
 
 	return true;
 }
@@ -57,6 +67,11 @@ bool Player::Update(float dt)
 		position.y += 0.2 * dt;
 	}
 		
+	//position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 5);
+	//position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 7);
+
+	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
+
 	app->render->DrawTexture(texture,position.x,position.y);
 
 	return true;
@@ -78,8 +93,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
 		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
+	case ColliderType::NPC:
+		LOG("Collision NPC");
 		break;
 	default:
 		break;

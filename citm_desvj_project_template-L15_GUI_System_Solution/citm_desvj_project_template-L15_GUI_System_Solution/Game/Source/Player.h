@@ -33,6 +33,7 @@ public:
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
+	
 
 	//Audio fx
 	int pickCoinFxId;

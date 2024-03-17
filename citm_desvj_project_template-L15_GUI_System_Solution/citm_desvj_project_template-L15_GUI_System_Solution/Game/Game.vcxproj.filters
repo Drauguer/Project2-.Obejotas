@@ -27,6 +27,7 @@
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\DialogueManager.cpp" />
     <ClCompile Include="Source\ModuleFonts.cpp" />
+    <ClCompile Include="Source\NPC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -82,6 +83,7 @@
     <ClInclude Include="Source\DialogueManager.h" />
     <ClInclude Include="Source\Dialogue.h" />
     <ClInclude Include="Source\ModuleFonts.h" />
+    <ClInclude Include="Source\NPC.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

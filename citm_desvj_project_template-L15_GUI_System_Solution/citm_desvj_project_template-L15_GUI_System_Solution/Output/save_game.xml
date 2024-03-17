@@ -5,10 +5,13 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<:anonymous />
 	<scene />
+	<:anonymous />
 	<entitymanager />
+	<guiManager />
+	<dialoguemanager />
+	<:anonymous />
 	<renderer>
-		<camera x="977" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>

@@ -55,7 +55,7 @@ bool DialogueManager::Update(float dt)
 
 		if (item != NULL && ret == true)
 		{
-			//app->render->DrawText(item->data->text.GetString(), dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, 1170, 40);
+			
 			app->fonts->BlitText(dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, Font,item->data->text.GetString());
 
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)

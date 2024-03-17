@@ -10,6 +10,7 @@ enum class EntityType
 {
 	PLAYER,
 	ITEM,
+	NPC,
 	UNKNOWN
 };
 
@@ -81,6 +82,7 @@ public:
 	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters; 
+	PhysBody* pbody;
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

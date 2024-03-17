@@ -26,6 +26,8 @@
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
+	<npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png" dialogue="visca catalunya"/>
+	  <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png" dialogue="viva españa"/>
   </scene>
   
 </config>
