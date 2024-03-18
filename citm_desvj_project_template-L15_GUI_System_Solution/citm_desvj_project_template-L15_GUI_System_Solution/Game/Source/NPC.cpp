@@ -49,10 +49,12 @@ bool NPC::Start() {
 bool NPC::Update(float dt)
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	if (pbody->Contains(app->scene->player->position.x, app->scene->player->position.y) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
-		isTalking = !isTalking;
+		app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
 	}
+
+	
 
 	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
 	app->render->DrawTexture(texture, position.x, position.y);
@@ -69,10 +71,7 @@ void NPC::OnCollision(PhysBody* physA, PhysBody* physB)
 {
 	if (physB->ctype == ColliderType::PLAYER)
 	{
-		if (isTalking)
-		{
-			app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
-		}
+		
 		
 	}
 }

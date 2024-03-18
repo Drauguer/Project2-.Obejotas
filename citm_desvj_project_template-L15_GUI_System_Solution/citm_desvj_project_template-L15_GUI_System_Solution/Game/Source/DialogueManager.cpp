@@ -46,6 +46,7 @@ bool DialogueManager::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
 		testDialogue = !testDialogue;
+		item = dialogueList.start;
 	}
 
 	if (testDialogue)
@@ -60,11 +61,13 @@ bool DialogueManager::Update(float dt)
 
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 			{
+				dialogueList.Del(item);
 				item = item->next;
 				
 				if (item == NULL)
 				{
 					testDialogue = false;
+					item = dialogueList.start;
 				}
 			}
 		}
