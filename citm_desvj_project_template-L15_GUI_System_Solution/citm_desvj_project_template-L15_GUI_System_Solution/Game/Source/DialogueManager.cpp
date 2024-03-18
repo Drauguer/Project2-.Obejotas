@@ -46,23 +46,26 @@ bool DialogueManager::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
 		testDialogue = !testDialogue;
-		item = dialogueList.start;
+		LOG("Dialogue Start");
 	}
 
 	if (testDialogue)
 	{
-		SDL_Rect dialogueBoxPos = { windowW / 2 - 600, windowH / 2 + 120, 1200, 250};
-		app->render->DrawRectangle(dialogueBoxPos, 0, 50, 255, 255);
+		item = dialogueList.start;
+		
 
 		if (item != NULL && ret == true)
 		{
-			
+			SDL_Rect dialogueBoxPos = { windowW / 2 - 600, windowH / 2 + 120, 1200, 250 };
+			app->render->DrawRectangle(dialogueBoxPos, 0, 50, 255, 255);
 			app->fonts->BlitText(dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, Font,item->data->text.GetString());
+			LOG("Write Text");
 
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 			{
 				dialogueList.Del(item);
 				item = item->next;
+				LOG("Next dialogue");
 				
 				if (item == NULL)
 				{

@@ -49,9 +49,13 @@ bool NPC::Start() {
 bool NPC::Update(float dt)
 {
 
-	if (pbody->Contains(app->scene->player->position.x, app->scene->player->position.y) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	if (this->pbody->Contains(app->scene->player->position.x, app->scene->player->position.y))
 	{
-		app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+		{
+			app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
+		}
+		
 	}
 
 	
@@ -69,9 +73,8 @@ bool NPC::CleanUp()
 
 void NPC::OnCollision(PhysBody* physA, PhysBody* physB)
 {
-	if (physB->ctype == ColliderType::PLAYER)
+	/*if (physB->ctype == ColliderType::PLAYER)
 	{
-		
-		
-	}
+		app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
+	}*/
 }
