@@ -25,6 +25,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	bool OnCollisionStay(PhysBody* physA, PhysBody* physB);
+
 public:
 
 	bool isPicked = false;
@@ -37,8 +39,8 @@ private:
 	const char* dialogueChar;
 	SString dialogueString;
 	PhysBody* rangeDialogue;
-	bool isTalking = false;
-	//List<Dialogue*> NpcDialogue;
+	bool hasTalked = false;
+	
 };
 
 #endif // __ITEM_H__

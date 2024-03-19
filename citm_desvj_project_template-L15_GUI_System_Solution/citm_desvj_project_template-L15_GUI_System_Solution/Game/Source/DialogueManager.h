@@ -39,6 +39,7 @@ public:
 	List<Dialogue*> dialogueList;
 	ListItem<Dialogue*>* item;
 	bool testDialogue = false;
+	bool isTalking = false;
 	uint windowW, windowH;
 
 	int Font = -1;

@@ -39,7 +39,7 @@ bool NPC::Start() {
 		-60, 60,
 	};
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 60, 60, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 60, 60, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
@@ -49,12 +49,10 @@ bool NPC::Start() {
 bool NPC::Update(float dt)
 {
 
-	if (this->pbody->Contains(app->scene->player->position.x, app->scene->player->position.y))
+	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && app->dialogueManager->isTalking == false)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		{
-			app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
-		}
+		
+		app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
 		
 	}
 
@@ -73,8 +71,20 @@ bool NPC::CleanUp()
 
 void NPC::OnCollision(PhysBody* physA, PhysBody* physB)
 {
-	/*if (physB->ctype == ColliderType::PLAYER)
+	
+}
+
+bool NPC::OnCollisionStay(PhysBody* physA, PhysBody* physB) 
+{
+	int xA, yA, xB, yB;
+
+	physA->GetPosition(xA, yA);
+	physB->GetPosition(xB, yB);
+
+	if (xB <= xA + (physA->width * 2) && xB >= xA && yB >= yA && yB <= yA + (physA->height * 2))
 	{
-		app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
-	}*/
+		return true;
+	}
+
+	return false;
 }

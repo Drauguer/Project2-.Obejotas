@@ -43,9 +43,10 @@ bool DialogueManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && isTalking == false)
 	{
 		testDialogue = !testDialogue;
+		isTalking = true;
 		LOG("Dialogue Start");
 	}
 
@@ -70,6 +71,7 @@ bool DialogueManager::Update(float dt)
 				if (item == NULL)
 				{
 					testDialogue = false;
+					isTalking = false;
 					item = dialogueList.start;
 				}
 			}

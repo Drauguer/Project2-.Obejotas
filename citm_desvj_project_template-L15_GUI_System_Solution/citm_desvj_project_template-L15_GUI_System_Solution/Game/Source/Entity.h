@@ -74,6 +74,10 @@ public:
 
 	};
 
+	virtual bool OnCollisionStay(PhysBody* physA, PhysBody* physB) {
+		return true;
+	};
+
 
 
 public:
