@@ -49,6 +49,7 @@ bool Scene::Awake(pugi::xml_node config)
 		item->parameters = itemNode;
 	}
 
+	// iterate NPCs in scene
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
 		NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
@@ -86,8 +87,8 @@ bool Scene::Start()
 
 	
 
-	testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
-	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);
+	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
+	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 
 	return true;
 }

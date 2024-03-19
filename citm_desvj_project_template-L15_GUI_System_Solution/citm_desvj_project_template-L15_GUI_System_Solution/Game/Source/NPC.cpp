@@ -16,13 +16,23 @@ NPC::NPC() : Entity(EntityType::NPC)
 
 NPC::~NPC() {}
 
+void NPC::InitDialogues()
+{
+	// Load all the dialogues
+	for (pugi::xml_node node = parameters.child("dialogue"); node; node = node.next_sibling("dialogue")) {
+		dialogueChar = node.attribute("text").as_string();
+		dialogueString = dialogueChar;
+		dialoguesNPC.Add(dialogueString);
+	}
+	
+}
+
 bool NPC::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	dialogueChar = parameters.attribute("dialogue").as_string();
-	dialogueString = dialogueChar;
+	InitDialogues();
 
 	return true;
 }
@@ -52,7 +62,12 @@ bool NPC::Update(float dt)
 	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && app->dialogueManager->isTalking == false)
 	{
 		
-		app->dialogueManager->CreateDialogue(dialogueString, DialogueType::NPC);
+		ListItem<SString>* item;
+
+		for (item = dialoguesNPC.start; item != NULL; item = item->next)
+		{
+			app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
+		}
 		
 	}
 

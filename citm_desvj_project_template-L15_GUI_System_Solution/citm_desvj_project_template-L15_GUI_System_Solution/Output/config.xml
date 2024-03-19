@@ -26,8 +26,16 @@
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-	<npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png" dialogue="visca catalunya"/>
-	  <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png" dialogue="viva españa"/>
+	<npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png">
+		<dialogue text="visca catalunya"/>
+		<dialogue text="dialogue 2"/>
+	</npc>
+	<npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png">
+		<dialogue text="viva espanya"/>
+		<dialogue text="dialogue 2"/>
+		<dialogue text="dialogue 3"/>
+		<dialogue text="dialogue 4"/>
+	</npc>
   </scene>
   
 </config>

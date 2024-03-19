@@ -4,9 +4,12 @@
 #include "Entity.h"
 #include "Point.h"
 #include "Dialogue.h"
+#include "SString.h"
+#include "List.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
+class SString;
 
 class NPC : public Entity
 {
@@ -27,9 +30,12 @@ public:
 
 	bool OnCollisionStay(PhysBody* physA, PhysBody* physB);
 
+	void InitDialogues();
+
 public:
 
 	bool isPicked = false;
+	List<SString> dialoguesNPC;
 
 private:
 
@@ -40,6 +46,7 @@ private:
 	SString dialogueString;
 	PhysBody* rangeDialogue;
 	bool hasTalked = false;
+	
 	
 };
 
