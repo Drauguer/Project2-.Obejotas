@@ -132,10 +132,10 @@ bool Scene::Update(float dt)
 	iPoint origin = iPoint(2, 2);
 
 	//If mouse button is pressed modify player position
-	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
+	/*if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN) {
 		player->position = iPoint(highlightedTileWorld.x, highlightedTileWorld.y);
 		app->map->pathfinding->CreatePath(origin, mouseTile);
-	}
+	}*/
 
 	// L13: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
