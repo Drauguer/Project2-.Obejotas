@@ -26,6 +26,8 @@ class Physics;
 class GuiManager;
 class DialogueManager;
 class ModuleFonts;
+class MainMenu;
+class ModuleFadeToBlack;
 
 class App
 {
@@ -111,6 +113,8 @@ public:
 	GuiManager* guiManager;
 	DialogueManager* dialogueManager;
 	ModuleFonts* fonts;
+	MainMenu* mainMenu;
+	ModuleFadeToBlack* fadeToBlack;
 
 private:
 

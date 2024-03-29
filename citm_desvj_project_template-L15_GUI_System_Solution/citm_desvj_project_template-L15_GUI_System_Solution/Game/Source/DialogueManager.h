@@ -10,7 +10,7 @@ class DialogueManager : public Module
 {
 public:
 
-	DialogueManager();
+	DialogueManager(bool startEnabled);
 
 	// Destructor
 	virtual ~DialogueManager();

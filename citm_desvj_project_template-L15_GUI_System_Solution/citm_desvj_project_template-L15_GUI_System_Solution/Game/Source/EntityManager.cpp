@@ -9,7 +9,7 @@
 #include "Defs.h"
 #include "Log.h"
 
-EntityManager::EntityManager() : Module()
+EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("entitymanager");
 }
@@ -132,4 +132,23 @@ bool EntityManager::Update(float dt)
 	}
 
 	return ret;
+}
+
+void EntityManager::Enable()
+{
+	if (!active)
+	{
+		active = true;
+
+		Start();
+	}
+}
+
+void EntityManager::Disable()
+{
+	if (active)
+	{
+		active = false;
+		CleanUp();
+	}
 }

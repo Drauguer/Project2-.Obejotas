@@ -18,7 +18,7 @@
 #pragma comment( lib, "../Game/Source/External/Box2D/libx86/ReleaseLib/Box2D.lib" )
 #endif
 
-Physics::Physics() : Module()
+Physics::Physics(bool startEnabled) : Module(startEnabled)
 {
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
@@ -395,4 +395,23 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 	}
 
 	return ret;
+}
+
+void Physics::Enable()
+{
+	if (!active)
+	{
+		active = true;
+
+		Start();
+	}
+}
+
+void Physics::Disable()
+{
+	if (active)
+	{
+		active = false;
+		CleanUp();
+	}
 }

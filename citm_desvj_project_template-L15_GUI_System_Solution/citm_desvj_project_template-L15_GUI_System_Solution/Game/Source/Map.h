@@ -115,7 +115,7 @@ class Map : public Module
 {
 public:
 
-    Map();
+    Map(bool startEnabled);
 
     // Destructor
     virtual ~Map();
@@ -152,6 +152,10 @@ public:
 
     int GetTileWidth();
     int GetTileHeight();
+
+    void Enable();
+
+    void Disable();
 
 
 public: 

@@ -16,7 +16,7 @@
 #include "GuiManager.h"
 #include "DialogueManager.h"
 
-Scene::Scene() : Module()
+Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
 }
@@ -181,4 +181,23 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Press Gui Control: %d", control->id);
 
 	return true;
+}
+
+void Scene::Enable()
+{
+	if (!active)
+	{
+		active = true;
+
+		Start();
+	}
+}
+
+void Scene::Disable()
+{
+	if (active)
+	{
+		active = false;
+		CleanUp();
+	}
 }

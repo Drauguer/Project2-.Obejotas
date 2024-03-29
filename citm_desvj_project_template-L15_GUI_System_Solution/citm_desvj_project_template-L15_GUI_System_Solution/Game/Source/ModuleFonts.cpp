@@ -9,7 +9,7 @@
 
 #include<string.h>
 
-ModuleFonts::ModuleFonts()
+ModuleFonts::ModuleFonts(bool startEnabled) : Module(startEnabled)
 {
 
 }

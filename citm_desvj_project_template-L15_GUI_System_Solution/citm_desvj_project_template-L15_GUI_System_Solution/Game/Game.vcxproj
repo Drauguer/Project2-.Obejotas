@@ -104,7 +104,9 @@
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\Input.cpp" />
+    <ClCompile Include="Source\MainMenu.cpp" />
     <ClCompile Include="Source\Map.cpp" />
+    <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\ModuleFonts.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
@@ -124,7 +126,9 @@
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Item.h" />
+    <ClInclude Include="Source\MainMenu.h" />
     <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\Pathfinding.h" />

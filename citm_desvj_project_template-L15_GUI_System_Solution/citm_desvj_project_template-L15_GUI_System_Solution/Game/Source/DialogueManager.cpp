@@ -10,7 +10,7 @@
 #include "Defs.h"
 #include "Log.h"
 
-DialogueManager::DialogueManager() : Module()
+DialogueManager::DialogueManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("dialoguemanager");
 }

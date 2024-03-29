@@ -1,5 +1,5 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#ifndef __MAINMENU_H__
+#define __MAINMENU_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -9,14 +9,14 @@
 
 struct SDL_Texture;
 
-class Scene : public Module
+class MainMenu : public Module
 {
 public:
 
-	Scene(bool startEnabled);
+	MainMenu(bool startEnabled);
 
 	// Destructor
-	virtual ~Scene();
+	virtual ~MainMenu();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -36,15 +36,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	// Return the player position
-	iPoint GetPLayerPosition();
-
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	// Enable Module
 	void Enable();
-	
+
 	// Disable Module
 	void Disable();
 
@@ -55,18 +52,11 @@ private:
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
 
+
+
 	
-
-	// L15: TODO 2: Declare a GUI Control Button 
-	GuiControlButton* gcButtom;
-
-	// Test Dialogue
-	Dialogue* testDialogue;
-	Dialogue* testDialogue2;
-
 public:
-	//L03: DONE 3b: Declare a Player attribute
-	Player* player;
+	
 };
 
-#endif // __SCENE_H__
+#endif // __MAINMENU_H__

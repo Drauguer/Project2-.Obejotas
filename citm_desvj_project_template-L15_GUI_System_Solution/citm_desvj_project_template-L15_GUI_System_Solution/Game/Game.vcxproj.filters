@@ -28,6 +28,8 @@
     <ClCompile Include="Source\DialogueManager.cpp" />
     <ClCompile Include="Source\ModuleFonts.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
+    <ClCompile Include="Source\MainMenu.cpp" />
+    <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -84,6 +86,8 @@
     <ClInclude Include="Source\Dialogue.h" />
     <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\NPC.h" />
+    <ClInclude Include="Source\MainMenu.h" />
+    <ClInclude Include="Source\ModuleFadeToBlack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

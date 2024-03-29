@@ -12,7 +12,7 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
-Map::Map() : Module(), mapLoaded(false)
+Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
 {
     name.Create("map");
 }
@@ -404,5 +404,24 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
     width = mapData.width;
     height = mapData.height;
 
+}
+
+void Map::Enable()
+{
+    if (!active)
+    {
+        active = true;
+
+        Start();
+    }
+}
+
+void Map::Disable()
+{
+    if (active)
+    {
+        active = false;
+        CleanUp();
+    }
 }
 

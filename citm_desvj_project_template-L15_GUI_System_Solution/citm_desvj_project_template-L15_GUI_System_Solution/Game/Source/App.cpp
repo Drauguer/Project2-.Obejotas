@@ -9,6 +9,8 @@
 #include "Physics.h"
 #include "GuiManager.h"
 #include "ModuleFonts.h"
+#include "MainMenu.h"
+#include "ModuleFadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -29,19 +31,20 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// L3: DONE 1: Add the EntityManager Module to App
 
-	win = new Window();
-	input = new Input();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
-	//L07 DONE 2: Add Physics module
-	physics = new Physics();
-	scene = new Scene();
-	map = new Map();
-	entityManager = new EntityManager();
-	guiManager = new GuiManager();
-	dialogueManager = new DialogueManager();
-	fonts = new ModuleFonts();
+	win = new Window(true);
+	input = new Input(true);
+	render = new Render(true);
+	tex = new Textures(true);
+	audio = new Audio(true);
+	physics = new Physics(false);
+	scene = new Scene(false);
+	map = new Map(false);
+	entityManager = new EntityManager(false);
+	guiManager = new GuiManager(true);
+	dialogueManager = new DialogueManager(true);
+	fonts = new ModuleFonts(true);
+	mainMenu = new MainMenu(true);
+	fadeToBlack = new ModuleFadeToBlack(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,10 +57,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(scene);
 	AddModule(map);
+	AddModule(mainMenu);
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogueManager);
 	AddModule(fonts);
+	AddModule(fadeToBlack);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -89,16 +94,13 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
-	// L1: DONE 3: Measure the amount of ms that takes to execute the Awake and LOG the result
+	
 	Timer timer = Timer();
 
 	bool ret = LoadConfig();
 
 	if(ret == true)
 	{
-		// L04: DONE 3: Read the title from the config file and set the windows title 
-		// substitute "Video Game Template" string from the value of the title in the config file
-		// also read maxFrameDuration 
 		gameTitle.Create(configFile.child("config").child("app").child("title").child_value());
 		win->SetTitle(gameTitle.GetString());
 		maxFrameDuration = configFile.child("config").child("app").child("maxFrameDuration").attribute("value").as_int();
@@ -135,7 +137,11 @@ bool App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->active == true)
+		{
+			ret = item->data->Start();
+		}
+		
 		item = item->next;
 	}
 
