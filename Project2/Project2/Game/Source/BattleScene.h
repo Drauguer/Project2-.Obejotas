@@ -1,5 +1,5 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#ifndef __BATTLESCENE_H__
+#define __BATTLESCENE_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -9,14 +9,23 @@
 
 struct SDL_Texture;
 
-class Scene : public Module
+
+enum CombatState
+{
+	SELECT_CHARACTER,
+	SELECT_ACTION,
+	ENEMY_ATTACK,
+	NONE
+};
+
+class BattleScene : public Module
 {
 public:
 
-	Scene(bool startEnabled);
+	BattleScene(bool startEnabled);
 
 	// Destructor
-	virtual ~Scene();
+	virtual ~BattleScene();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -36,15 +45,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	// Return the player position
-	iPoint GetPLayerPosition();
-
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	// Enable Module
 	void Enable();
-	
+
 	// Disable Module
 	void Disable();
 
@@ -57,7 +63,7 @@ private:
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
 
-	
+
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
@@ -67,17 +73,12 @@ private:
 	Dialogue* testDialogue2;
 
 public:
-	//L03: DONE 3b: Declare a Player attribute
-	Player* player;
-	List<Player*> allies;
+	CombatState combatState;
 
-	//List of enemies (reemplazar porque no son players xd) 
-	List<Player*> enemies;
-
-
-	bool isOnCombat = false;
 	bool playerWin = false;
-	bool playerLose= false;
+	bool playerLose = false;
+
+
 };
 
-#endif // __SCENE_H__
+#endif // __BATTLESCENE_H__

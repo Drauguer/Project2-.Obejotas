@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Scene.h"
+#include "BattleScene.h"
 #include "Map.h"
 #include "Physics.h"
 #include "GuiManager.h"
@@ -38,6 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio(true);
 	physics = new Physics(false);
 	scene = new Scene(false);
+	battleScene = new BattleScene(false);
 	map = new Map(false);
 	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);

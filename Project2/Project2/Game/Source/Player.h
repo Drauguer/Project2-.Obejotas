@@ -38,6 +38,10 @@ public:
 	//Audio fx
 	int pickCoinFxId;
 
+	//Player Propierties
+	int life;
+	int attack;
+
 };
 
 #endif // __PLAYER_H__

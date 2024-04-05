@@ -116,8 +116,11 @@ bool Scene::Update(float dt)
 
 	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += (int)ceil(camSpeed * dt);
+	
+	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+		isOnCombat = !isOnCombat;
 
-	// L09 DONE 6: Implement a method that repositions the player in the map with a mouse click
+
 
 	// Get the mouse position and obtain the map coordinate
 	iPoint mousePos;
@@ -201,3 +204,21 @@ void Scene::Disable()
 		CleanUp();
 	}
 }
+
+void Scene::CheckState()
+{
+	for (int i = 0; i < allies.Count(); i++)
+	{
+		if (allies[i]->life > 0) 
+		{
+			playerLose = false;
+			break;
+		}
+	}
+	if (playerLose) {
+		return;
+	}
+}
+
+
+
