@@ -19,7 +19,7 @@
 
 BattleScene::BattleScene(bool startEnabled) : Module(startEnabled)
 {
-	name.Create("scene");
+	name.Create("battleScene");
 }
 
 // Destructor
@@ -52,16 +52,80 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
-	if (app->scene->isOnCombat) 
+	if (app->scene->isOnCombat && !hasStartedCombat) 
 	{
-		//Printear textos de atacar y pasar 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		combatState = CombatState::SELECT_CHARACTER;
+		app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+		hasStartedCombat = true;
+	}
+
+	switch (combatState)
+	{
+	case CombatState::SELECT_CHARACTER:
+		//Navigate in the selection character menu
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) 
+		{
+			if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count())
+			{
+				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
+				currentPlayerInCombatIndex +=1;
+				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) 
+		{
+			if (currentPlayerInCombatIndex - 1 >= 0)
+			{
+				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
+				currentPlayerInCombatIndex -=1;
+				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+			}
+		}
+		//Selected character, waiting for action
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			if (app->scene->allies[currentPlayerInCombatIndex]->life > 0)
+			{
+				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
+				combatState = CombatState::SELECT_ACTION;
+			}
+			else
+			{
+				printf("that character is dead, please select another");
+			}
+		}
+		break;
+	case CombatState::SELECT_ACTION:
+		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
 
-		}
+			printf("Bola de fuego, hace su daño al primer enemigo");
+			app->scene->enemies[0]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
+			CheckState();
+			combatState = CombatState::ENEMY_ATTACK;
 
+		}
+		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+		{
+			printf("curacion, obtiene 10 de vida");
+			app->scene->allies[currentPlayerInCombatIndex]->life += 10;
+			combatState = CombatState::ENEMY_ATTACK;
+
+		}
+		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
+			printf("vuelves a la seleccion de personaje");
+			combatState = CombatState::SELECT_CHARACTER;
+		}
+		break;
+	case CombatState::ENEMY_ATTACK:
+		//Aqui va el ataque del enemigo y despues un check State
+		CheckState();
+		combatState = CombatState::SELECT_CHARACTER;
+		break;
+	default:
+		break;
 	}
-	
 
 	return true;
 }
@@ -111,6 +175,8 @@ void BattleScene::Disable()
 
 void BattleScene::CheckState()
 {
+	playerLose = true;
+	playerWin = true;
 	for (int i = 0; i < app->scene->allies.Count(); i++)
 	{
 		if (app->scene->allies[i]->life > 0)
@@ -120,6 +186,10 @@ void BattleScene::CheckState()
 		}
 	}
 	if (playerLose) {
+		printf("Has perdido el combate");
+		app->scene->Enable();
+		app->scene->isOnCombat = false;
+		hasStartedCombat = false;
 		return;
 	}
 	for (int i = 0; i < app->scene->enemies.Count(); i++)
@@ -131,6 +201,10 @@ void BattleScene::CheckState()
 		}
 	}
 	if (playerWin) {
+		printf("Has ganado el combate");
+		app->scene->Enable();
+		app->scene->isOnCombat = false;
+		hasStartedCombat = false;
 		return;
 	}
 }

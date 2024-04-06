@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "NPC.h"
 #include "ModuleFonts.h"
+#include "BattleScene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -85,7 +86,8 @@ bool Scene::Start()
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
-	
+	enemies.Add(player);
+	allies.Add(player);
 
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
@@ -104,21 +106,31 @@ bool Scene::Update(float dt)
 {
 	//L02 DONE 3: Make the camera movement independent of framerate
 	float camSpeed = 1; 
+	if (!isOnCombat) {
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			app->render->camera.y -= (int)ceil(camSpeed * dt);
 
-	if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y -= (int)ceil(camSpeed * dt);
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			app->render->camera.y += (int)ceil(camSpeed * dt);
 
-	if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y += (int)ceil(camSpeed * dt);
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			app->render->camera.x -= (int)ceil(camSpeed * dt);
 
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x -= (int)ceil(camSpeed * dt);
-
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x += (int)ceil(camSpeed * dt);
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			app->render->camera.x += (int)ceil(camSpeed * dt);
+	}
+	
 	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	{
+		
 		isOnCombat = !isOnCombat;
+		player->position.x = 400;
+		player->position.y = 400;
+		this->Disable();
+		app->battleScene->Enable();
+	}
+
 
 
 
@@ -202,21 +214,6 @@ void Scene::Disable()
 	{
 		active = false;
 		CleanUp();
-	}
-}
-
-void Scene::CheckState()
-{
-	for (int i = 0; i < allies.Count(); i++)
-	{
-		if (allies[i]->life > 0) 
-		{
-			playerLose = false;
-			break;
-		}
-	}
-	if (playerLose) {
-		return;
 	}
 }
 

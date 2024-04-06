@@ -39,8 +39,11 @@ public:
 	int pickCoinFxId;
 
 	//Player Propierties
-	int life;
-	int attack;
+	int life = 40;
+	int attack = 40;
+
+	//Attack features
+	bool isHighlighted;
 
 };
 

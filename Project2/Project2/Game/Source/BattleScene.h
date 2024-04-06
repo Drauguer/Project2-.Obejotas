@@ -14,6 +14,7 @@ enum CombatState
 {
 	SELECT_CHARACTER,
 	SELECT_ACTION,
+	SELECT_ENEMY,
 	ENEMY_ATTACK,
 	NONE
 };
@@ -56,6 +57,8 @@ public:
 
 	void CheckState();
 
+	void FindEnemyWithMostLife();
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
@@ -77,6 +80,10 @@ public:
 
 	bool playerWin = false;
 	bool playerLose = false;
+
+	bool hasStartedCombat;
+
+	int currentPlayerInCombatIndex = 0;
 
 
 };

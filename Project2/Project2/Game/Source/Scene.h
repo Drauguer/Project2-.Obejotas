@@ -48,8 +48,6 @@ public:
 	// Disable Module
 	void Disable();
 
-	void CheckState();
-
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
@@ -71,13 +69,13 @@ public:
 	Player* player;
 	List<Player*> allies;
 
+
 	//List of enemies (reemplazar porque no son players xd) 
 	List<Player*> enemies;
 
 
 	bool isOnCombat = false;
-	bool playerWin = false;
-	bool playerLose= false;
+
 };
 
 #endif // __SCENE_H__

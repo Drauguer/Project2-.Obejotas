@@ -56,7 +56,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
-
+	AddModule(battleScene);
 	AddModule(scene);
 	AddModule(map);
 	AddModule(mainMenu);
