@@ -96,6 +96,7 @@ public:
 
 	int life;
 	int attack;
+	bool isHighlighted;
 };
 
 #endif // __ENTITY_H__

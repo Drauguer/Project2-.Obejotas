@@ -61,6 +61,7 @@ bool BattleScene::Update(float dt)
 	{
 		combatState = CombatState::SELECT_CHARACTER;
 		app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+		app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
 		hasStartedCombat = true;
 	}
 
@@ -105,14 +106,16 @@ bool BattleScene::Update(float dt)
 		{
 
 			printf("Bola de fuego, hace su daño al primer enemigo\n");
-			app->scene->enemies[0]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
+			selectAttackIndex = 1;
+			
 			CheckState();
-			combatState = CombatState::ENEMY_ATTACK;
+			combatState = CombatState::SELECT_ENEMY;
 
 		}
 		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		{
 			printf("curacion, obtiene 10 de vida\n");
+			selectAttackIndex = 2;
 			app->scene->allies[currentPlayerInCombatIndex]->life += 10;
 			combatState = CombatState::ENEMY_ATTACK;
 
@@ -122,6 +125,52 @@ bool BattleScene::Update(float dt)
 			printf("vuelves a la seleccion de personaje\n");
 			combatState = CombatState::SELECT_CHARACTER;
 		}
+		break;
+	case CombatState::SELECT_ENEMY:
+		//Navigate in the selection enemy menu
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			if (currentEnemySelectedIndex + 1 < app->scene->enemies.Count())
+			{
+				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
+				currentEnemySelectedIndex += 1;
+				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			if (currentEnemySelectedIndex - 1 >= 0)
+			{
+				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
+				currentEnemySelectedIndex -= 1;
+				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
+			}
+		}
+		//Selected character, waiting for action
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			if (app->scene->enemies[currentEnemySelectedIndex]->life > 0)
+			{
+				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
+				
+				switch (selectAttackIndex)
+				{
+				case 1:
+					app->scene->enemies[currentEnemySelectedIndex]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
+					combatState = CombatState::ENEMY_ATTACK;
+					break;
+				case 2:
+					combatState = CombatState::ENEMY_ATTACK;
+					break;
+				}
+
+			}
+			else
+			{
+				printf("that enemy is dead, please select another\n");
+			}
+		}
+
 		break;
 	case CombatState::ENEMY_ATTACK:
 		//Aqui va el ataque del enemigo y despues un check State
