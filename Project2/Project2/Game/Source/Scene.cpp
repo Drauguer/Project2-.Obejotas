@@ -10,6 +10,7 @@
 #include "NPC.h"
 #include "ModuleFonts.h"
 #include "BattleScene.h"
+#include "BaseEnemy.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -57,6 +58,14 @@ bool Scene::Awake(pugi::xml_node config)
 		npc->parameters = npcNode;
 	}
 
+	// iterate Enemies in scene
+	for (pugi::xml_node npcNode = config.child("enemy"); npcNode; npcNode = npcNode.next_sibling("enemy"))
+	{
+		BaseEnemy* enemy = (BaseEnemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemies.Add(enemy);
+		enemy->parameters = npcNode;
+	}
+
 	return ret;
 }
 
@@ -86,7 +95,7 @@ bool Scene::Start()
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
-	enemies.Add(player);
+	
 	allies.Add(player);
 
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);

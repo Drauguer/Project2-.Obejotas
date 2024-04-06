@@ -84,8 +84,9 @@ public:
 	bool hasStartedCombat;
 
 	int currentPlayerInCombatIndex = 0;
+	int currentEnemyInCombatIndex = 0;
 
-
+	int timerEnemy = 0;
 };
 
 #endif // __BATTLESCENE_H__

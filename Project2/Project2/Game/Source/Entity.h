@@ -11,6 +11,7 @@ enum class EntityType
 	PLAYER,
 	ITEM,
 	NPC,
+	ENEMY,
 	UNKNOWN
 };
 
@@ -92,6 +93,9 @@ public:
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;       
 	bool renderable = true;
+
+	int life;
+	int attack;
 };
 
 #endif // __ENTITY_H__

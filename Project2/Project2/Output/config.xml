@@ -19,7 +19,7 @@
   </window>
 
   <scene>
-    <player x="150" y="672" texturePath="Assets/Textures/player1.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
+    <player x="150" y="672" texturePath="Assets/Textures/player1.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" life="30" attack="10"/>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
     <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
@@ -36,6 +36,8 @@
 		<dialogue text="dialogue 3"/>
 		<dialogue text="dialogue 4"/>
 	</npc>
+	<enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
+	<enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
   </scene>
   
 </config>

@@ -17,6 +17,11 @@
 #include "GuiManager.h"
 #include "DialogueManager.h"
 
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+
+
 BattleScene::BattleScene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("battleScene");
@@ -91,7 +96,7 @@ bool BattleScene::Update(float dt)
 			}
 			else
 			{
-				printf("that character is dead, please select another");
+				printf("that character is dead, please select another\n");
 			}
 		}
 		break;
@@ -99,7 +104,7 @@ bool BattleScene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
 
-			printf("Bola de fuego, hace su daño al primer enemigo");
+			printf("Bola de fuego, hace su daño al primer enemigo\n");
 			app->scene->enemies[0]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
 			CheckState();
 			combatState = CombatState::ENEMY_ATTACK;
@@ -107,24 +112,45 @@ bool BattleScene::Update(float dt)
 		}
 		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		{
-			printf("curacion, obtiene 10 de vida");
+			printf("curacion, obtiene 10 de vida\n");
 			app->scene->allies[currentPlayerInCombatIndex]->life += 10;
 			combatState = CombatState::ENEMY_ATTACK;
 
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
-			printf("vuelves a la seleccion de personaje");
+			printf("vuelves a la seleccion de personaje\n");
 			combatState = CombatState::SELECT_CHARACTER;
 		}
 		break;
 	case CombatState::ENEMY_ATTACK:
 		//Aqui va el ataque del enemigo y despues un check State
-		CheckState();
-		combatState = CombatState::SELECT_CHARACTER;
+		timerEnemy++;
+		srand((unsigned) time(NULL));
+		int indexAttack = rand() % app->scene->allies.Count();
+
+		if (app->scene->enemies[currentEnemyInCombatIndex]->life <= 0)
+		{
+			currentEnemyInCombatIndex++;
+		}
+		
+		if (timerEnemy >= 120)
+		{
+			printf("ataque de enemigo\n");
+			app->scene->allies[indexAttack]->life -= app->scene->enemies[currentEnemyInCombatIndex]->attack;
+			timerEnemy = 0;
+			currentEnemyInCombatIndex++;
+		}
+
+		if (currentEnemyInCombatIndex == app->scene->enemies.Count())
+		{
+			CheckState();
+			currentEnemyInCombatIndex = 0;
+			combatState = CombatState::SELECT_CHARACTER;
+		}
+		
 		break;
-	default:
-		break;
+	
 	}
 
 	return true;

@@ -22,6 +22,7 @@ bool Player::Awake() {
 
 	//L03: DONE 2: Initialize Player parameters
 	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	
 
 	return true;
 }
@@ -29,9 +30,13 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	
 
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
+
+	/*life = parameters.attribute("life").as_int();
+	attack = parameters.attribute("attack").as_int();*/
 
 	int player[8] = {
 		0, 0,

@@ -71,7 +71,7 @@ public:
 
 
 	//List of enemies (reemplazar porque no son players xd) 
-	List<Player*> enemies;
+	List<Entity*> enemies;
 
 
 	bool isOnCombat = false;

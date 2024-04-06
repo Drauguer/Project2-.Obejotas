@@ -30,6 +30,8 @@
     <ClCompile Include="Source\NPC.cpp" />
     <ClCompile Include="Source\MainMenu.cpp" />
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
+    <ClCompile Include="Source\BattleScene.cpp" />
+    <ClCompile Include="Source\BaseEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -88,6 +90,8 @@
     <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\MainMenu.h" />
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
+    <ClInclude Include="Source\BattleScene.h" />
+    <ClInclude Include="Source\BaseEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

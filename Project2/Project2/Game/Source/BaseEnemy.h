@@ -1,5 +1,5 @@
-#ifndef __NPC_H__
-#define __NPC_H__
+#ifndef __BASEENEMY_H__
+#define __BASEENEMY_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -11,12 +11,12 @@
 struct SDL_Texture;
 class SString;
 
-class NPC : public Entity
+class BaseEnemy : public Entity
 {
 public:
 
-	NPC();
-	virtual ~NPC();
+	BaseEnemy();
+	virtual ~BaseEnemy();
 
 	bool Awake();
 
@@ -46,8 +46,8 @@ private:
 	SString dialogueString;
 	PhysBody* rangeDialogue;
 	bool hasTalked = false;
-	
-	
+
+
 };
 
-#endif // __NPC_H__
+#endif // __BASEENEMY_H__
