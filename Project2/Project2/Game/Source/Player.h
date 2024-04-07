@@ -41,9 +41,12 @@ public:
 	//Player Propierties
 	int life = 30;
 	int attack = 10;
+	
 
 	//Attack features
 	bool isHighlighted;
+	int numAttacks = 2;
+
 
 };
 

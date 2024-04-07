@@ -57,6 +57,8 @@ public:
 
 	void CheckState();
 
+	void CheckAttack();
+
 	void FindEnemyWithMostLife();
 
 private:
@@ -66,7 +68,7 @@ private:
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
 
-
+	SDL_Rect playerIndicator;
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
@@ -89,6 +91,8 @@ public:
 	int selectAttackIndex = 0;
 
 	int timerEnemy = 0;
+
+	
 	
 };
 

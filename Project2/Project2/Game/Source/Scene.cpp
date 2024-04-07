@@ -134,8 +134,6 @@ bool Scene::Update(float dt)
 	{
 		
 		isOnCombat = !isOnCombat;
-		player->position.x = 400;
-		player->position.y = 400;
 		this->Disable();
 		app->battleScene->Enable();
 	}

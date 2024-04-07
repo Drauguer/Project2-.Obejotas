@@ -57,11 +57,13 @@ bool Player::Update(float dt)
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 	if (app->scene->isOnCombat) 
 	{
+		position.x = 100;
+		position.y = 150;
+
 		//AttackScene
 		if (isHighlighted) {
 			//Aqui va una animacion del pesonaje resaltado
-			position.x = 100;
-			position.y = 100;
+			
 
 		}
 

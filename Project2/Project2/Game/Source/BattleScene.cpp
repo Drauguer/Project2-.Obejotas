@@ -100,25 +100,40 @@ bool BattleScene::Update(float dt)
 				printf("that character is dead, please select another\n");
 			}
 		}
+
+		app->render->DrawCircle(app->scene->allies[currentPlayerInCombatIndex]->position.x - 20, app->scene->allies[currentPlayerInCombatIndex]->position.y + 20, 5, 255, 0, 0, 255);
+
 		break;
 	case CombatState::SELECT_ACTION:
-		if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+
+		for (int i = 0; i < 2; ++i)
 		{
-
-			printf("Bola de fuego, hace su daño al primer enemigo\n");
-			selectAttackIndex = 1;
-			
-			CheckState();
-			combatState = CombatState::SELECT_ENEMY;
-
+			app->render->DrawRectangle({ 400 + 100 * i, 600, 70, 70 }, 0, 255, 0, 255);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		{
-			printf("curacion, obtiene 10 de vida\n");
-			selectAttackIndex = 2;
-			app->scene->allies[currentPlayerInCombatIndex]->life += 10;
-			combatState = CombatState::ENEMY_ATTACK;
 
+		app->render->DrawCircle(430 + 100 * selectAttackIndex, 575, 15, 255, 0, 0, 255);
+
+		//Navigate in the selection character menu
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->numAttacks - 1)
+			{
+				selectAttackIndex += 1;
+				
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		{
+			if (selectAttackIndex > 0)
+			{
+				selectAttackIndex -= 1;
+			
+			}
+		}
+		//Selected character, waiting for action
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			CheckAttack();
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
@@ -155,11 +170,11 @@ bool BattleScene::Update(float dt)
 				
 				switch (selectAttackIndex)
 				{
-				case 1:
+				case 0:
 					app->scene->enemies[currentEnemySelectedIndex]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
 					combatState = CombatState::ENEMY_ATTACK;
 					break;
-				case 2:
+				case 1:
 					combatState = CombatState::ENEMY_ATTACK;
 					break;
 				}
@@ -170,6 +185,9 @@ bool BattleScene::Update(float dt)
 				printf("that enemy is dead, please select another\n");
 			}
 		}
+
+		app->render->DrawCircle(app->scene->enemies[currentEnemySelectedIndex]->position.x + 75, app->scene->enemies[currentEnemySelectedIndex]->position.y + 40, 5, 255, 0, 0, 255);
+
 
 		break;
 	case CombatState::ENEMY_ATTACK:
@@ -281,6 +299,27 @@ void BattleScene::CheckState()
 		app->scene->isOnCombat = false;
 		hasStartedCombat = false;
 		return;
+	}
+}
+
+void BattleScene::CheckAttack()
+{
+	// Mira que ataque tiene que hacer el personaje
+	// Los ataques estarán definidos en los .cpp de cada personaje
+
+
+	// Este codigo es de prueba, no es definitivo
+	switch (selectAttackIndex)
+	{
+	case 0:
+		printf("Bola de Fuego\n");
+		combatState = CombatState::SELECT_ENEMY;
+		break;
+	case 1:
+		printf("Curación +10 de vida\n");
+		app->scene->allies[currentPlayerInCombatIndex]->life += 10;
+		combatState = CombatState::ENEMY_ATTACK;
+		break;
 	}
 }
 
