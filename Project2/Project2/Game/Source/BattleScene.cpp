@@ -106,6 +106,8 @@ bool BattleScene::Update(float dt)
 		break;
 	case CombatState::SELECT_ACTION:
 
+		// Codigo provisional para los "iconos" de los ataques
+
 		for (int i = 0; i < 2; ++i)
 		{
 			app->render->DrawRectangle({ 400 + 100 * i, 600, 70, 70 }, 0, 255, 0, 255);
@@ -113,7 +115,7 @@ bool BattleScene::Update(float dt)
 
 		app->render->DrawCircle(430 + 100 * selectAttackIndex, 575, 15, 255, 0, 0, 255);
 
-		//Navigate in the selection character menu
+		//Navigate in the selection attack menu
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		{
 			if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->numAttacks - 1)
@@ -130,10 +132,10 @@ bool BattleScene::Update(float dt)
 			
 			}
 		}
-		//Selected character, waiting for action
+		//Selected action
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
-			CheckAttack();
+			app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(selectAttackIndex, currentPlayerInCombatIndex);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
@@ -302,26 +304,7 @@ void BattleScene::CheckState()
 	}
 }
 
-void BattleScene::CheckAttack()
-{
-	// Mira que ataque tiene que hacer el personaje
-	// Los ataques estarán definidos en los .cpp de cada personaje
 
-
-	// Este codigo es de prueba, no es definitivo
-	switch (selectAttackIndex)
-	{
-	case 0:
-		printf("Bola de Fuego\n");
-		combatState = CombatState::SELECT_ENEMY;
-		break;
-	case 1:
-		printf("Curación +10 de vida\n");
-		app->scene->allies[currentPlayerInCombatIndex]->life += 10;
-		combatState = CombatState::ENEMY_ATTACK;
-		break;
-	}
-}
 
 
 

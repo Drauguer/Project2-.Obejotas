@@ -23,8 +23,11 @@ public:
 
 	bool CleanUp();
 
-	// L07 DONE 6: Define OnCollision function for the player. 
+	// Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+
+	// Mira que ataque tiene que hacer el personaje
+	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
 public:
 

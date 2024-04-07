@@ -57,8 +57,6 @@ public:
 
 	void CheckState();
 
-	void CheckAttack();
-
 	void FindEnemyWithMostLife();
 
 private:

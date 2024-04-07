@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "BattleScene.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -122,6 +123,24 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision NPC");
 		break;
 	default:
+		break;
+	}
+}
+
+
+// Mira que ataque tiene que hacer el personaje
+void Player::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
+{
+	switch (selectAttackIndex)
+	{
+	case 0:
+		printf("Bola de Fuego\n");
+		app->battleScene->combatState = CombatState::SELECT_ENEMY;
+		break;
+	case 1:
+		printf("Curación +10 de vida\n");
+		app->scene->allies[currentPlayerIndex]->life += 10;
+		app->battleScene->combatState = CombatState::ENEMY_ATTACK;
 		break;
 	}
 }
