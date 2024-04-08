@@ -59,6 +59,7 @@ bool BattleScene::Update(float dt)
 {
 	if (app->scene->isOnCombat && !hasStartedCombat) 
 	{
+		CheckState();
 		combatState = CombatState::SELECT_CHARACTER;
 		app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
 		app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
@@ -69,21 +70,21 @@ bool BattleScene::Update(float dt)
 	{
 	case CombatState::SELECT_CHARACTER:
 		//Navigate in the selection character menu
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) 
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{
 			if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count())
 			{
 				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
-				currentPlayerInCombatIndex +=1;
+				currentPlayerInCombatIndex += 1;
 				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
 			}
 		}
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) 
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
 			if (currentPlayerInCombatIndex - 1 >= 0)
 			{
 				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
-				currentPlayerInCombatIndex -=1;
+				currentPlayerInCombatIndex -= 1;
 				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
 			}
 		}
@@ -121,7 +122,7 @@ bool BattleScene::Update(float dt)
 			if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->numAttacks - 1)
 			{
 				selectAttackIndex += 1;
-				
+
 			}
 		}
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
@@ -129,26 +130,29 @@ bool BattleScene::Update(float dt)
 			if (selectAttackIndex > 0)
 			{
 				selectAttackIndex -= 1;
-			
+
 			}
 		}
 		//Selected action
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
+			currentEnemySelectedIndex = FindFirstEnemyIndex();
 			app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(selectAttackIndex, currentPlayerInCombatIndex);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
 			printf("vuelves a la seleccion de personaje\n");
 			combatState = CombatState::SELECT_CHARACTER;
+
 		}
 		break;
 	case CombatState::SELECT_ENEMY:
 		//Navigate in the selection enemy menu
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{
-			if (currentEnemySelectedIndex + 1 < app->scene->enemies.Count())
+			if (currentEnemySelectedIndex + 1 < app->scene->enemies.Count() && app->scene->enemies[currentEnemySelectedIndex + 1]->life > 0)
 			{
+
 				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
 				currentEnemySelectedIndex += 1;
 				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
@@ -156,7 +160,7 @@ bool BattleScene::Update(float dt)
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
-			if (currentEnemySelectedIndex - 1 >= 0)
+			if (currentEnemySelectedIndex - 1 >= 0 && app->scene->enemies[currentEnemySelectedIndex - 1]->life > 0)
 			{
 				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
 				currentEnemySelectedIndex -= 1;
@@ -169,7 +173,7 @@ bool BattleScene::Update(float dt)
 			if (app->scene->enemies[currentEnemySelectedIndex]->life > 0)
 			{
 				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
-				
+
 				switch (selectAttackIndex)
 				{
 				case 0:
@@ -187,10 +191,11 @@ bool BattleScene::Update(float dt)
 				printf("that enemy is dead, please select another\n");
 			}
 		}
-
 		app->render->DrawCircle(app->scene->enemies[currentEnemySelectedIndex]->position.x + 75, app->scene->enemies[currentEnemySelectedIndex]->position.y + 40, 5, 255, 0, 0, 255);
 
 
+
+		
 		break;
 	case CombatState::ENEMY_ATTACK:
 		//Aqui va el ataque del enemigo y despues un check State
@@ -305,6 +310,19 @@ void BattleScene::CheckState()
 		return;
 	}
 }
+
+int BattleScene::FindFirstEnemyIndex() 
+{
+	for (int i = 0; i < app->scene->enemies.Count(); i++)
+	{
+		if (app->scene->enemies[i]->life > 0) {
+			return i;
+		}
+	}
+	return -1;
+
+}
+
 
 
 
