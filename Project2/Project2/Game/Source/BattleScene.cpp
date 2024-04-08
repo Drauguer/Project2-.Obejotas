@@ -283,6 +283,7 @@ void BattleScene::CheckState()
 	if (playerLose) {
 		printf("Has perdido el combate");
 		app->scene->Enable();
+		Disable();
 		app->scene->isOnCombat = false;
 		hasStartedCombat = false;
 		return;
@@ -298,6 +299,7 @@ void BattleScene::CheckState()
 	if (playerWin) {
 		printf("Has ganado el combate");
 		app->scene->Enable();
+		Disable();
 		app->scene->isOnCombat = false;
 		hasStartedCombat = false;
 		return;
