@@ -4,8 +4,10 @@
 #include "Module.h"
 #include "Player.h"
 #include "NPC.h"
+#include "BaseAlly.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+
 
 struct SDL_Texture;
 
@@ -67,7 +69,9 @@ private:
 public:
 	//L03: DONE 3b: Declare a Player attribute
 	Player* player;
-	List<Player*> allies;
+	BaseAlly* playerInCombat;
+	BaseAlly* allyInCombat1;
+	List<BaseAlly*> allies;
 
 
 	//List of enemies (reemplazar porque no son players xd) 

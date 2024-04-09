@@ -8,10 +8,13 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "BattleScene.h"
 
-BaseAlly::BaseAlly() : Entity(EntityType::ENEMY)
+BaseAlly::BaseAlly() : Entity(EntityType::ALLY)
 {
 	name.Create("base ally");
+	abilities.Add({ 1, "Fireball" });
+	abilities.Add({ 2, "Potion" });
 }
 
 BaseAlly::~BaseAlly() {}
@@ -27,8 +30,8 @@ void BaseAlly::InitDialogues()
 
 }
 
-bool BaseAlly::Awake() {
-
+bool BaseAlly::Awake() 
+{
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -61,8 +64,6 @@ bool BaseAlly::Start() {
 
 bool BaseAlly::Update(float dt)
 {
-
-
 	if (life > 0) {
 		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
 		app->render->DrawTexture(texture, position.x, position.y);
@@ -95,4 +96,21 @@ bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 	}
 
 	return false;
+}
+
+// Mira que ataque tiene que hacer el personaje
+void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
+{
+	switch (selectAttackIndex)
+	{
+	case 0:
+		printf("Bola de Fuego\n");
+		app->battleScene->combatState = CombatState::SELECT_ENEMY;
+		break;
+	case 1:
+		printf("Curación +10 de vida\n");
+		app->scene->allies[currentPlayerIndex]->life += 10;
+		app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		break;
+	}
 }

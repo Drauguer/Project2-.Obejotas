@@ -118,6 +118,8 @@ bool Player::Update(float dt)
 			vel.x += 0.2 * dt;
 			currentAnimation = &sideWalk;
 			sideWalk.Update();	
+			isFlipped = false;
+
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			vel.y += -0.2 * dt;
@@ -143,7 +145,7 @@ bool Player::Update(float dt)
 		//pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
 	}
 
-	app->render->DrawTexture(texture,position.x,position.y,&currentAnimation->GetCurrentFrame());
+	app->render->DrawTexture(texture,position.x,position.y,&currentAnimation->GetCurrentFrame(), isFlipped);
 
 	return true;
 }
@@ -172,20 +174,3 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-
-// Mira que ataque tiene que hacer el personaje
-void Player::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
-{
-	switch (selectAttackIndex)
-	{
-	case 0:
-		printf("Bola de Fuego\n");
-		app->battleScene->combatState = CombatState::SELECT_ENEMY;
-		break;
-	case 1:
-		printf("Curación +10 de vida\n");
-		app->scene->allies[currentPlayerIndex]->life += 10;
-		app->battleScene->combatState = CombatState::ENEMY_ATTACK;
-		break;
-	}
-}

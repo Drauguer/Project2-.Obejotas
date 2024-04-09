@@ -27,8 +27,6 @@ public:
 	// Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	// Mira que ataque tiene que hacer el personaje
-	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
 public:
 

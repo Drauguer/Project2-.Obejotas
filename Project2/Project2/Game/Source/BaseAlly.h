@@ -1,5 +1,5 @@
-#ifndef __BASEENEMY_H__
-#define __BASEENEMY_H__
+#ifndef __BASEALLY_H__
+#define __BASEALLY_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -10,6 +10,14 @@
 
 struct SDL_Texture;
 class SString;
+
+
+struct Ability
+{
+	int id;
+	char* name;
+};
+
 
 class BaseAlly : public Entity
 {
@@ -32,10 +40,20 @@ public:
 
 	void InitDialogues();
 
+	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
+
 public:
 
 	bool isPicked = false;
 	List<SString> dialoguesNPC;
+
+	//Attack Features
+	bool isHighlighted;
+	int numAttacks = 2;
+
+	List<Ability> abilities;
+
+	pugi::xml_node config;
 
 private:
 
@@ -47,7 +65,9 @@ private:
 	PhysBody* rangeDialogue;
 	bool hasTalked = false;
 
+	
+
 
 };
 
-#endif // __BASEENEMY_H__
+#endif // __BASEALLY_H__

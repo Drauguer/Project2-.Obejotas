@@ -4,8 +4,10 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
-#include "NPC.h"
 #include "BaseEnemy.h"
+#include "NPC.h"
+#include "BaseAlly.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -96,6 +98,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ENEMY:
 		entity = new BaseEnemy();
+		break;
+	case EntityType::ALLY:
+		entity = new BaseAlly();
 		break;
 	default:
 		break;

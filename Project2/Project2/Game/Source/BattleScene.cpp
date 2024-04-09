@@ -9,6 +9,7 @@
 #include "Map.h"
 #include "Item.h"
 #include "NPC.h"
+#include "BaseAlly.h"
 #include "ModuleFonts.h"
 
 #include "Defs.h"
