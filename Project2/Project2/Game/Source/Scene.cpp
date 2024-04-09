@@ -91,7 +91,7 @@ bool Scene::Start()
 	img = app->tex->Load("Assets/Textures/test.png");
 	
 	//Music is commented so that you can add your own music
-	/*app->audio->PlayMusic("Assets/Audio/Music/WAVs/Music Loops/Wilderness-Daytime-1-_loop_.ogg", 2.0f);*/
+	app->audio->PlayMusic("Assets/Audio/Music/WAVs/Music Loops/Wilderness-Daytime-1-_loop_.ogg", 2.0f);
 
 	//SFX loading
 	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
@@ -140,13 +140,6 @@ bool Scene::Update(float dt)
 	}
 
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		/*app->audio->PlayFx(walkingRockFx);*/
-		
-
-	}
-
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		if (!isFullScreen) {
 			SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
@@ -183,10 +176,11 @@ bool Scene::Update(float dt)
 	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
-		app->audio->PlayFx(encounterFx);
+		
 		isOnCombat = !isOnCombat;
 		this->Disable();
 		app->battleScene->Enable();
+		app->audio->PlayFx(encounterFx);
 	}
 
 

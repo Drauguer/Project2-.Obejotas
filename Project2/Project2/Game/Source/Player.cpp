@@ -122,17 +122,19 @@ bool Player::Update(float dt)
 			currentAnimation = &sideWalk;
 			sideWalk.Update();	
 			isFlipped = false;
-
+			app->audio->PlayFx(walkingRockFx);
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			vel.y += -0.2 * dt;
 			currentAnimation = &backWalk;
 			backWalk.Update();
+			app->audio->PlayFx(walkingRockFx);
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			vel.y += 0.2 * dt;
 			currentAnimation = &frontWalk;
 			frontWalk.Update();
+			app->audio->PlayFx(walkingRockFx);
 		}
 		else {
 			sideWalk.Reset();
