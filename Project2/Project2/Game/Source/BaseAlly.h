@@ -55,15 +55,27 @@ public:
 
 	pugi::xml_node config;
 
+	bool hasAttacked = false;
+
 private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
 	const char* dialogueChar;
+
 	SString dialogueString;
 	PhysBody* rangeDialogue;
 	bool hasTalked = false;
+
+
+	//Loading abilities
+	int abilityId;
+	const char* abilityName;
+	SString abilityString;
+
+
+
 
 	
 

@@ -73,7 +73,9 @@ bool BattleScene::Update(float dt)
 		//Navigate in the selection character menu
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{
-			if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count())
+			if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count() && 
+				app->scene->allies[currentPlayerInCombatIndex+1]->life >0 &&
+				!app->scene->allies[currentPlayerInCombatIndex+1]->hasAttacked)
 			{
 				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
 				currentPlayerInCombatIndex += 1;
@@ -82,7 +84,9 @@ bool BattleScene::Update(float dt)
 		}
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
-			if (currentPlayerInCombatIndex - 1 >= 0)
+			if (currentPlayerInCombatIndex - 1 >= 0 && 
+				app->scene->allies[currentPlayerInCombatIndex-1]->life > 0 &&
+				!app->scene->allies[currentPlayerInCombatIndex-1]->hasAttacked)
 			{
 				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
 				currentPlayerInCombatIndex -= 1;
@@ -120,7 +124,7 @@ bool BattleScene::Update(float dt)
 		//Navigate in the selection attack menu
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		{
-			if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->numAttacks - 1)
+			if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->abilities.Count() - 1)
 			{
 				selectAttackIndex += 1;
 
@@ -138,11 +142,12 @@ bool BattleScene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
 			currentEnemySelectedIndex = FindFirstEnemyIndex();
-			app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(selectAttackIndex, currentPlayerInCombatIndex);
+			app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(app->scene->allies[currentPlayerInCombatIndex]->abilities[selectAttackIndex].id, currentPlayerInCombatIndex);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
 			printf("vuelves a la seleccion de personaje\n");
+			currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
 			combatState = CombatState::SELECT_CHARACTER;
 
 		}
@@ -179,10 +184,8 @@ bool BattleScene::Update(float dt)
 				{
 				case 0:
 					app->scene->enemies[currentEnemySelectedIndex]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
-					combatState = CombatState::ENEMY_ATTACK;
 					break;
 				case 1:
-					combatState = CombatState::ENEMY_ATTACK;
 					break;
 				}
 
@@ -191,12 +194,27 @@ bool BattleScene::Update(float dt)
 			{
 				printf("that enemy is dead, please select another\n");
 			}
+			if (CheckAllPlayersAttacked()) {
+				app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+			}
+			else
+			{
+				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
+				app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+			}
 		}
+		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
+			printf("vuelves a la seleccion de personaje\n");
+			currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
+			combatState = CombatState::SELECT_CHARACTER;
+
+		}
+
+		CheckState();
 		app->render->DrawCircle(app->scene->enemies[currentEnemySelectedIndex]->position.x + 75, app->scene->enemies[currentEnemySelectedIndex]->position.y + 40, 5, 255, 0, 0, 255);
 
 
-
-		
 		break;
 	case CombatState::ENEMY_ATTACK:
 		//Aqui va el ataque del enemigo y despues un check State
@@ -213,6 +231,7 @@ bool BattleScene::Update(float dt)
 		{
 			printf("ataque de enemigo\n");
 			app->scene->allies[indexAttack]->life -= app->scene->enemies[currentEnemyInCombatIndex]->attack;
+			printf("%d", app->scene->allies[indexAttack]->life);
 			timerEnemy = 0;
 			currentEnemyInCombatIndex++;
 		}
@@ -221,6 +240,8 @@ bool BattleScene::Update(float dt)
 		{
 			CheckState();
 			currentEnemyInCombatIndex = 0;
+			SetAllPlayersAliveToAttack();
+			currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
 			combatState = CombatState::SELECT_CHARACTER;
 		}
 		
@@ -322,6 +343,39 @@ int BattleScene::FindFirstEnemyIndex()
 	}
 	return -1;
 
+}
+
+int BattleScene::FindFirstPlayerToAttackIndex() 
+{
+	for (int i = 0; i < app->scene->allies.Count(); i++)
+	{
+		if (app->scene->allies[i]->life > 0 && !app->scene->allies[i]->hasAttacked) {
+			return i;
+		}
+	}
+	return -1;
+
+}
+
+bool BattleScene::CheckAllPlayersAttacked() 
+{
+	for (int i = 0; i < app->scene->allies.Count(); i++)
+	{
+		if (!app->scene->allies[i]->hasAttacked) {
+			return false;
+		}
+	}
+	return true;
+
+}
+
+void BattleScene::SetAllPlayersAliveToAttack() {
+	for (int i = 0; i < app->scene->allies.Count(); i++)
+	{
+		if (app->scene->allies[i]->life>0) {
+			app->scene->allies[i]->hasAttacked = false;
+		}
+	}
 }
 
 

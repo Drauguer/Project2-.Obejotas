@@ -67,11 +67,12 @@ bool Scene::Awake(pugi::xml_node config)
 		enemy->parameters = enemyNode;
 	}
 	
-	for (pugi::xml_node allyNode = config.child("playerCombat"); allyNode; allyNode = allyNode.next_sibling("playerCombat"))
+	for (pugi::xml_node allyNode = config.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))
 	{
 		BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 		allies.Add(ally);
 		ally->parameters = allyNode;
+		
 	}
 
 	return ret;

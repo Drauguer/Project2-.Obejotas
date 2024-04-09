@@ -20,28 +20,34 @@
 
   <scene>
     <player x="150" y="672" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" life="30" attack="10"/>
-    <playerCombat x="150" y="200" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" life="30" attack="10"/>
-    <playerCombat x="150" y="400" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" life="40" attack="10"/>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
     <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-	<npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png">
-		<dialogue text="visca catalunya"/>
-		<dialogue text="dialogue 2"/>
-	</npc>
-	<npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png">
-		<dialogue text="viva espanya"/>
-		<dialogue text="dialogue 2"/>
-		<dialogue text="dialogue 3"/>
-		<dialogue text="dialogue 4"/>
-	</npc>
-	<ally x="100" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
-	<ally x="109" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
-  <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
-	<enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
+
+    <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png">
+      <dialogue text="visca catalunya"/>
+      <dialogue text="dialogue 2"/>
+    </npc>
+    <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png">
+      <dialogue text="viva espanya"/>
+      <dialogue text="dialogue 2"/>
+      <dialogue text="dialogue 3"/>
+      <dialogue text="dialogue 4"/>
+    </npc>
+
+    <ally x="150" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5">
+      <ability id="0" name="fireBall"/>
+      <ability id="1" name="curation"/>
+    </ally>
+    <ally x="100" y="250" texturepath="Assets/Textures/item64x64.png" life="20" attack="15">
+      <ability id="0" name="fireBall"/>
+      <ability id="1" name="curation"/>
+    </ally>
+
+    <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
+    <enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
   </scene>
-  
 </config>

@@ -13,8 +13,6 @@
 BaseAlly::BaseAlly() : Entity(EntityType::ALLY)
 {
 	name.Create("base ally");
-	abilities.Add({ 1, "Fireball" });
-	abilities.Add({ 2, "Potion" });
 }
 
 BaseAlly::~BaseAlly() {}
@@ -37,6 +35,15 @@ bool BaseAlly::Awake()
 	texturePath = parameters.attribute("texturepath").as_string();
 	life = parameters.attribute("life").as_int();
 	attack = parameters.attribute("attack").as_int();
+
+	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability")) 
+	{
+		abilityId = node.attribute("id").as_int();
+		abilityName = node.attribute("name").as_string();
+		char* abilityString = const_cast<char*>(abilityName);
+		abilities.Add({ abilityId, abilityString });
+	}
+	
 
 	//InitDialogues();
 
@@ -101,16 +108,27 @@ bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 // Mira que ataque tiene que hacer el personaje
 void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 {
+	//Here we check if we have to select an enemy or just make the effect 
+
 	switch (selectAttackIndex)
 	{
 	case 0:
 		printf("Bola de Fuego\n");
+		hasAttacked = true;
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 		break;
 	case 1:
+		hasAttacked = true;
 		printf("Curación +10 de vida\n");
 		app->scene->allies[currentPlayerIndex]->life += 10;
-		app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		}
+		else
+		{
+			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+		}
 		break;
 	}
 }

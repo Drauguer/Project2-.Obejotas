@@ -61,6 +61,12 @@ public:
 
 	int FindFirstEnemyIndex();
 
+	bool CheckAllPlayersAttacked();
+
+	void SetAllPlayersAliveToAttack();
+
+	int FindFirstPlayerToAttackIndex();
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
