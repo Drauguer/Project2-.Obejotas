@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -50,7 +51,13 @@ public:
 	bool isHighlighted;
 	int numAttacks = 2;
 
+	//Animation overwolrd
 
+	Animation frontWalk;
+	Animation backWalk;
+	Animation sideWalk;
+	Animation* currentAnimation = nullptr;
+	bool isFlipped = false;
 };
 
 #endif // __PLAYER_H__

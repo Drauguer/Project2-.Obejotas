@@ -13,6 +13,39 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
+
+	//sideWalk
+
+	sideWalk.PushBack({ 0,0,32,32 });
+	sideWalk.PushBack({ 32,0,32,32 });
+	sideWalk.PushBack({ 64,0,32,32 });
+	sideWalk.PushBack({ 96,0,32,32 });
+	sideWalk.PushBack({ 128,0,32,32 });
+	sideWalk.PushBack({ 160,0,32,32 });
+	sideWalk.loop = true;
+	sideWalk.speed = 0.2f;
+	
+	//frontWalk
+	frontWalk.PushBack({ 0,32,32,32 });
+	frontWalk.PushBack({ 32,32,32,32 });
+	frontWalk.PushBack({ 64,32,32,32 });
+	frontWalk.PushBack({ 96,32,32,32 });
+	frontWalk.PushBack({ 128,32,32,32 });
+	frontWalk.PushBack({ 160,32,32,32 });
+	frontWalk.loop = true;
+	frontWalk.speed = 0.2f;
+
+
+	//backWalk
+	backWalk.PushBack({ 0,64,32,32 });
+	backWalk.PushBack({ 32,64,32,32 });
+	backWalk.PushBack({ 64,64,32,32 });
+	backWalk.PushBack({ 96,64,32,32 });
+	backWalk.PushBack({ 128,64,32,32 });
+	backWalk.PushBack({ 160,64,32,32 });
+	backWalk.loop = true;
+	backWalk.speed = 0.2f;
+
 }
 
 Player::~Player() {
@@ -49,7 +82,7 @@ bool Player::Start() {
 	pbody = app->physics->CreateChain(position.x, position.y, player, 8, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
-
+	currentAnimation = &frontWalk;
 	return true;
 }
 
@@ -72,22 +105,34 @@ bool Player::Update(float dt)
 	else
 	{
 		//Movement scene
+	
 		b2Vec2 vel = b2Vec2(0, 0);
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel.x += -0.2 * dt;
+			isFlipped = true;
+			currentAnimation = &sideWalk;
+			sideWalk.Update();
 		}
-
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			vel.x += 0.2 * dt;
+			currentAnimation = &sideWalk;
+			sideWalk.Update();	
 		}
-
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			vel.y += -0.2 * dt;
+			currentAnimation = &backWalk;
+			backWalk.Update();
 		}
-
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			vel.y += 0.2 * dt;
+			currentAnimation = &frontWalk;
+			frontWalk.Update();
+		}
+		else {
+			sideWalk.Reset();
+			frontWalk.Reset();
+			backWalk.Reset();
 		}
 
 		pbody->body->SetLinearVelocity(vel);
@@ -98,7 +143,7 @@ bool Player::Update(float dt)
 		//pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
 	}
 
-	app->render->DrawTexture(texture,position.x,position.y);
+	app->render->DrawTexture(texture,position.x,position.y,&currentAnimation->GetCurrentFrame());
 
 	return true;
 }
