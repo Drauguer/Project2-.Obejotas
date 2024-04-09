@@ -11,7 +11,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="768" scale="1"/>
+    <resolution width="1280" height="720" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -36,7 +36,9 @@
 		<dialogue text="dialogue 3"/>
 		<dialogue text="dialogue 4"/>
 	</npc>
-	<enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
+	<ally x="100" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
+	<ally x="109" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
+  <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
 	<enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
   </scene>
   

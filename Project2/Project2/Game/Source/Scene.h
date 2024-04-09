@@ -76,6 +76,9 @@ public:
 
 	bool isOnCombat = false;
 
+	//Fullscreen
+	bool isFullScreen = false;
+
 };
 
 #endif // __SCENE_H__

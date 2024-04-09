@@ -113,6 +113,23 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		if (!isFullScreen) {
+			SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
+			isFullScreen = true;
+		}
+		else
+		{
+			uint height = 0;
+			uint width = 0;
+			app->win->GetWindowSize(width, height);
+			SDL_SetWindowSize(app->win->window, width, height);
+			SDL_SetWindowFullscreen(app->win->window, 0);
+			isFullScreen = false;
+		}
+	}
+
+
 	//L02 DONE 3: Make the camera movement independent of framerate
 	float camSpeed = 1; 
 	if (!isOnCombat) {

@@ -32,6 +32,7 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\BattleScene.cpp" />
     <ClCompile Include="Source\BaseEnemy.cpp" />
+    <ClCompile Include="Source\BaseAlly.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\BattleScene.h" />
     <ClInclude Include="Source\BaseEnemy.h" />
+    <ClInclude Include="Source\BaseAlly.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
