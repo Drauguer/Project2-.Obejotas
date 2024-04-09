@@ -7,6 +7,7 @@
 #include "BaseAlly.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include <string>
 
 
 struct SDL_Texture;
@@ -50,6 +51,8 @@ public:
 	// Disable Module
 	void Disable();
 
+	pugi::xml_node scene_parameter;
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
@@ -72,6 +75,9 @@ public:
 	BaseAlly* playerInCombat;
 	BaseAlly* allyInCombat1;
 	List<BaseAlly*> allies;
+
+	//Audio
+	uint encounterFx;
 
 
 	//List of enemies (reemplazar porque no son players xd) 

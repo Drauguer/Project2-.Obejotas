@@ -18,6 +18,8 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "DialogueManager.h"
+#include <string>
+#include "SDL_mixer/include/SDL_mixer.h"
 
 Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
@@ -43,6 +45,8 @@ bool Scene::Awake(pugi::xml_node config)
 	//Get the map name from the config file and assigns the value in the module
 	app->map->name = config.child("map").attribute("name").as_string();
 	app->map->path = config.child("map").attribute("path").as_string();
+
+	
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
@@ -85,7 +89,7 @@ bool Scene::Start()
 	img = app->tex->Load("Assets/Textures/test.png");
 	
 	//Music is commented so that you can add your own music
-	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
+	app->audio->PlayMusic("Assets/Audio/Music/Wilderness-Daytime-1-_loop_.ogg");
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -107,6 +111,12 @@ bool Scene::Start()
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 
+	//audio loading
+	encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());
+	
+	
+
+
 	return true;
 }
 
@@ -119,6 +129,11 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+	{
+		app->audio->PlayFx(encounterFx);
+	}
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		if (!isFullScreen) {
 			SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
@@ -155,7 +170,7 @@ bool Scene::Update(float dt)
 	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
-		
+		app->audio->PlayFx(encounterFx);
 		isOnCombat = !isOnCombat;
 		this->Disable();
 		app->battleScene->Enable();

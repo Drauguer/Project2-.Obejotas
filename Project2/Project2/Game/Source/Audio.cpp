@@ -55,6 +55,8 @@ bool Audio::Awake(pugi::xml_node config)
 		ret = true;
 	}
 
+	Mix_Volume(-1, 50);
+
 	return ret;
 }
 

@@ -22,17 +22,23 @@
     <music volume="70"/>
 	<fx volume="128"/>
 
+	
   </audio>
 
   <scene>
-    <player x="150" y="672" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg" life="30" attack="10"/>
+	  
+	<encounterFx audiopath ="Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.wav"   />
+
+	<player x="150" y="672" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="10"/>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
     <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-
+	  
+	  
+	 
     <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png">
       <dialogue text="visca catalunya"/>
       <dialogue text="dialogue 2"/>

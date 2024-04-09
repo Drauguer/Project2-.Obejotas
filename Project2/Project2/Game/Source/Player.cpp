@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "BattleScene.h"
+#include "SDL_mixer/include/SDL_mixer.h"
 
 Player::Player() : BaseAlly()
 {
@@ -113,6 +114,7 @@ bool Player::Update(float dt)
 			isFlipped = true;
 			currentAnimation = &sideWalk;
 			sideWalk.Update();
+			
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			vel.x += 0.2 * dt;
