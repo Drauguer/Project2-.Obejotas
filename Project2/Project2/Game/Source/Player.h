@@ -2,13 +2,14 @@
 #define __PLAYER_H__
 
 #include "Entity.h"
+#include "BaseAlly.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 
 struct SDL_Texture;
 
-class Player : public Entity
+class Player : public BaseAlly
 {
 public:
 

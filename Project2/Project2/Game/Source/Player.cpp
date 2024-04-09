@@ -10,7 +10,7 @@
 #include "Physics.h"
 #include "BattleScene.h"
 
-Player::Player() : Entity(EntityType::PLAYER)
+Player::Player() : BaseAlly()
 {
 	name.Create("Player");
 
