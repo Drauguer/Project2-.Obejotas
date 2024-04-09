@@ -21,6 +21,8 @@
 #include <string>
 #include "SDL_mixer/include/SDL_mixer.h"
 
+#include <iostream>
+
 Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
@@ -89,11 +91,12 @@ bool Scene::Start()
 	img = app->tex->Load("Assets/Textures/test.png");
 	
 	//Music is commented so that you can add your own music
-	app->audio->PlayMusic("Assets/Audio/Music/WAVs/Music Loops/Wilderness-Daytime-1-_loop_.ogg");
+	/*app->audio->PlayMusic("Assets/Audio/Music/WAVs/Music Loops/Wilderness-Daytime-1-_loop_.ogg", 2.0f);*/
 
-	//audio loading
+	//SFX loading
 	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
-	encounterFx = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.wav");
+	encounterFx = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg");
+	/*walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/08Steprock02.wav");*/
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -131,10 +134,17 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	if (SDL_Init(SDL_INIT_TIMER) != 0) {
+		std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+		return 1;
+	}
+
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
-		app->audio->PlayFx(encounterFx);
+		/*app->audio->PlayFx(walkingRockFx);*/
+		
+
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {

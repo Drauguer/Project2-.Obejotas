@@ -69,7 +69,7 @@ bool Player::Start() {
 
 	//initialize audio effect
 	//pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
-
+	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/08Steprock02.wav");
 	/*life = parameters.attribute("life").as_int();
 	attack = parameters.attribute("attack").as_int();*/
 
@@ -114,6 +114,7 @@ bool Player::Update(float dt)
 			isFlipped = true;
 			currentAnimation = &sideWalk;
 			sideWalk.Update();
+			app->audio->PlayFx(walkingRockFx);
 			
 		}
 		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {

@@ -40,7 +40,7 @@ public:
 
 	//Audio fx
 	int pickCoinFxId;
-
+	unsigned int walkingRockFx;
 	//Player Propierties
 	int life = 30;
 	int attack = 10;

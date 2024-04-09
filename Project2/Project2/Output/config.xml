@@ -20,14 +20,14 @@
 
   <audio>
     <music volume="70"/>
-	<fx volume="128"/>
+	<fx volume="200"/>
 
 	
   </audio>
 
   <scene>
 	  
-	<encounterFx audiopath ="Assets/Audio/Fx/55_Encounter_02.ogg"   />
+	<encounterFx audiopath ="Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg"   />
 
 	<player x="150" y="672" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="10"/>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
