@@ -35,6 +35,7 @@ bool MainMenu::Awake(pugi::xml_node config)
 
 bool MainMenu::Start()
 {
+	
 	return true;
 }
 
