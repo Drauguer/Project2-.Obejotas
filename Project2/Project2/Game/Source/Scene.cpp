@@ -91,6 +91,10 @@ bool Scene::Start()
 	//Music is commented so that you can add your own music
 	app->audio->PlayMusic("Assets/Audio/Music/WAVs/Music Loops/Wilderness-Daytime-1-_loop_.ogg");
 
+	//audio loading
+	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
+	encounterFx = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.wav");
+
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -111,8 +115,6 @@ bool Scene::Start()
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 
-	//audio loading
-	encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());
 	
 	
 
@@ -134,6 +136,7 @@ bool Scene::Update(float dt)
 	{
 		app->audio->PlayFx(encounterFx);
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		if (!isFullScreen) {
 			SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);

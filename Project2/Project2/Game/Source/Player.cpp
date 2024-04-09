@@ -68,7 +68,7 @@ bool Player::Start() {
 	
 
 	//initialize audio effect
-	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
+	//pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 
 	/*life = parameters.attribute("life").as_int();
 	attack = parameters.attribute("attack").as_int();*/
