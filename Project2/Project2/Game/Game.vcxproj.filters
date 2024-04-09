@@ -94,6 +94,9 @@
     <ClInclude Include="Source\BattleScene.h" />
     <ClInclude Include="Source\BaseEnemy.h" />
     <ClInclude Include="Source\BaseAlly.h" />
+    <ClInclude Include="Source\Animation.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
