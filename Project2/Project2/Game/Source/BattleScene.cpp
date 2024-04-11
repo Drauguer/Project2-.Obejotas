@@ -58,6 +58,9 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
+
+	int scale = app->win->GetScale();
+
 	if (app->scene->isOnCombat && !hasStartedCombat) 
 	{
 		CheckState();
@@ -107,7 +110,7 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		app->render->DrawCircle(app->scene->allies[currentPlayerInCombatIndex]->position.x - 20, app->scene->allies[currentPlayerInCombatIndex]->position.y + 20, 5, 255, 0, 0, 255);
+		app->render->DrawCircle((app->scene->allies[currentPlayerInCombatIndex]->position.x - 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y + 20) / scale, 5, 255, 0, 0, 255);
 
 		break;
 	case CombatState::SELECT_ACTION:
@@ -116,10 +119,10 @@ bool BattleScene::Update(float dt)
 
 		for (int i = 0; i < 2; ++i)
 		{
-			app->render->DrawRectangle({ 400 + 100 * i, 600, 70, 70 }, 0, 255, 0, 255);
+			app->render->DrawRectangle({ (400 + 100 * i) / scale, 600 / scale, 70 / scale, 70 / scale }, 0, 255, 0, 255);
 		}
 
-		app->render->DrawCircle(430 + 100 * selectAttackIndex, 575, 15, 255, 0, 0, 255);
+		app->render->DrawCircle((430 + 100 * selectAttackIndex) / scale, 575 / scale, 15, 255, 0, 0, 255);
 
 		//Navigate in the selection attack menu
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
@@ -212,7 +215,7 @@ bool BattleScene::Update(float dt)
 		}
 
 		CheckState();
-		app->render->DrawCircle(app->scene->enemies[currentEnemySelectedIndex]->position.x + 75, app->scene->enemies[currentEnemySelectedIndex]->position.y + 40, 5, 255, 0, 0, 255);
+		app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 75) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
 
 
 		break;

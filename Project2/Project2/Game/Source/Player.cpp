@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "BattleScene.h"
 #include "SDL_mixer/include/SDL_mixer.h"
+#include "Window.h"
 
 Player::Player() : BaseAlly()
 {
@@ -101,6 +102,9 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+
+	int scale = app->win->GetScale();
+
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 	if (app->scene->isOnCombat) 
 	{
@@ -156,8 +160,8 @@ bool Player::Update(float dt)
 
 		pbody->body->SetLinearVelocity(vel);
 
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 5);
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 7);
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 5) / scale;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 7) / scale;
 
 		//pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
 

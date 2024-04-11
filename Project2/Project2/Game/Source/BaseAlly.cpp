@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "BattleScene.h"
+#include "Window.h"
 
 BaseAlly::BaseAlly() : Entity(EntityType::ALLY)
 {
@@ -88,9 +89,12 @@ bool BaseAlly::Start() {
 
 bool BaseAlly::Update(float dt)
 {
+
+	int scale = app->win->GetScale();
+
 	if (life > 0) {
-		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
-		app->render->DrawTexture(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
+		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
+		app->render->DrawTexture(texture, position.x / scale, position.y / scale, &currentAnim->GetCurrentFrame());
 	}
 	
 
