@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "Mago.h"
 #include "NPC.h"
 #include "BaseAlly.h"
 #include "GuiControl.h"
@@ -72,6 +73,8 @@ private:
 public:
 	//L03: DONE 3b: Declare a Player attribute
 	Player* player;
+	Mago* mago;
+
 	BaseAlly* playerInCombat;
 	BaseAlly* allyInCombat1;
 	List<BaseAlly*> allies;

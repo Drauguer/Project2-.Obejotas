@@ -74,7 +74,7 @@ bool BattleScene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{
 			if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count() && 
-				app->scene->allies[currentPlayerInCombatIndex+1]->life >0 &&
+				app->scene->allies[currentPlayerInCombatIndex+1]->life > 0 &&
 				!app->scene->allies[currentPlayerInCombatIndex+1]->hasAttacked)
 			{
 				app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;

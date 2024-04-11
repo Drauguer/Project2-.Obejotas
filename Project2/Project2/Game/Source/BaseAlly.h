@@ -26,21 +26,21 @@ public:
 	BaseAlly();
 	virtual ~BaseAlly();
 
-	bool Awake();
+	virtual bool Awake();
 
-	bool Start();
+	virtual bool Start();
 
-	bool Update(float dt);
+	virtual bool Update(float dt);
 
-	bool CleanUp();
+	virtual bool CleanUp();
 
-	void OnCollision(PhysBody* physA, PhysBody* physB);
+	virtual void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	bool OnCollisionStay(PhysBody* physA, PhysBody* physB);
+	virtual bool OnCollisionStay(PhysBody* physA, PhysBody* physB);
 
-	void InitDialogues();
+	virtual void InitDialogues();
 
-	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
+	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
 public:
 
@@ -57,8 +57,6 @@ public:
 
 	bool hasAttacked = false;
 
-private:
-
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
@@ -73,6 +71,10 @@ private:
 	int abilityId;
 	const char* abilityName;
 	SString abilityString;
+
+private:
+
+	
 
 
 

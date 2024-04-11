@@ -33,8 +33,8 @@ bool BaseAlly::Awake()
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	life = parameters.attribute("life").as_int();
-	attack = parameters.attribute("attack").as_int();
+	/*life = parameters.attribute("life").as_int();
+	attack = parameters.attribute("attack").as_int();*/
 
 	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability")) 
 	{

@@ -9,6 +9,7 @@
 enum class EntityType
 {
 	PLAYER,
+	MAGO,
 	ITEM,
 	NPC,
 	ALLY,
@@ -95,7 +96,7 @@ public:
 	iPoint position;       
 	bool renderable = true;
 
-	int life;
+	int life = 10;
 	int attack;
 	bool isHighlighted;
 };

@@ -1,5 +1,5 @@
-#ifndef __PLAYER_H__
-#define __PLAYER_H__
+#ifndef __MAGO_H__
+#define __MAGO_H__
 
 #include "Entity.h"
 #include "BaseAlly.h"
@@ -9,13 +9,13 @@
 
 struct SDL_Texture;
 
-class Player : public BaseAlly
+class Mago : public BaseAlly
 {
 public:
 
-	Player();
-	
-	virtual ~Player();
+	Mago();
+
+	virtual ~Mago();
 
 	bool Awake();
 
@@ -28,25 +28,23 @@ public:
 	// Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
-
 
 public:
 
-	//L02: DONE 2: Declare player parameters
+	// Declare mago parameters
 	float speed = 0.2f;
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
-	
+
 
 	//Audio fx
 	int pickCoinFxId;
 	unsigned int walkingRockFx;
-	//Player Propierties
+	//Mago Propierties
 	int life = 30;
-	int attack = 10;
-	
+	int attack = 20;
+
 
 	//Attack features
 	bool isHighlighted;
@@ -61,4 +59,4 @@ public:
 	bool isFlipped = false;
 };
 
-#endif // __PLAYER_H__
+#endif // __MAGO_H__

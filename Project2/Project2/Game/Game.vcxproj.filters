@@ -32,6 +32,7 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\BattleScene.cpp" />
     <ClCompile Include="Source\BaseEnemy.cpp" />
+    <ClCompile Include="Source\Mago.cpp" />
     <ClCompile Include="Source\BaseAlly.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +98,7 @@
     <ClInclude Include="Source\Animation.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Mago.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

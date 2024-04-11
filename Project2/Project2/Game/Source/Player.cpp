@@ -55,8 +55,19 @@ Player::~Player() {
 
 bool Player::Awake() {
 
-	//L03: DONE 2: Initialize Player parameters
-	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+	texturePath = parameters.attribute("texturepath").as_string();
+	//life = parameters.attribute("life").as_int();
+	//attack = parameters.attribute("attack").as_int();
+
+	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability"))
+	{
+		abilityId = node.attribute("id").as_int();
+		abilityName = node.attribute("name").as_string();
+		char* abilityString = const_cast<char*>(abilityName);
+		abilities.Add({ abilityId, abilityString });
+	}
 	
 
 	return true;
@@ -66,12 +77,8 @@ bool Player::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 	
-
-	//initialize audio effect
-	//pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/08Steprock02.wav");
-	/*life = parameters.attribute("life").as_int();
-	attack = parameters.attribute("attack").as_int();*/
+	
 
 	int player[8] = {
 		0, 0,
@@ -175,6 +182,34 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision NPC");
 		break;
 	default:
+		break;
+	}
+}
+
+// Mira que ataque tiene que hacer el personaje
+void Player::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
+{
+	//Here we check if we have to select an enemy or just make the effect 
+
+	switch (selectAttackIndex)
+	{
+	case 0:
+		printf("Bola de Fuego\n");
+		hasAttacked = true;
+		app->battleScene->combatState = CombatState::SELECT_ENEMY;
+		break;
+	case 1:
+		hasAttacked = true;
+		printf("Curación +10 de vida\n");
+		app->scene->allies[currentPlayerIndex]->life += 10;
+		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		}
+		else
+		{
+			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+		}
 		break;
 	}
 }
