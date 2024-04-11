@@ -7,6 +7,7 @@
 #include "SString.h"
 #include "List.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 class SString;
@@ -40,6 +41,8 @@ public:
 
 	virtual void InitDialogues();
 
+	virtual void InitAnims();
+
 	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
 public:
@@ -65,6 +68,11 @@ public:
 	SString dialogueString;
 	PhysBody* rangeDialogue;
 	bool hasTalked = false;
+
+	// ANIMATIONS
+	Animation* currentAnim;
+
+	Animation Idle;
 
 
 	//Loading abilities

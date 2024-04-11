@@ -28,13 +28,27 @@ void BaseAlly::InitDialogues()
 
 }
 
+void BaseAlly::InitAnims()
+{
+	// Idle
+	for (pugi::xml_node node = parameters.child("Idle").child("pushback"); node; node = node.next_sibling("pushback")) {
+		Idle.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	Idle.speed = parameters.child("Idle").attribute("animspeed").as_float();
+	Idle.loop = parameters.child("Idle").attribute("loop").as_bool();
+
+}
+
 bool BaseAlly::Awake() 
 {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	/*life = parameters.attribute("life").as_int();
-	attack = parameters.attribute("attack").as_int();*/
+	life = parameters.attribute("life").as_int();
+	attack = parameters.attribute("attack").as_int();
 
 	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability")) 
 	{
@@ -46,6 +60,7 @@ bool BaseAlly::Awake()
 	
 
 	//InitDialogues();
+	InitAnims();
 
 	return true;
 }
@@ -66,6 +81,8 @@ bool BaseAlly::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
+	currentAnim = &Idle;
+
 	return true;
 }
 
@@ -73,7 +90,7 @@ bool BaseAlly::Update(float dt)
 {
 	if (life > 0) {
 		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
-		app->render->DrawTexture(texture, position.x, position.y);
+		app->render->DrawTexture(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
 	}
 	
 

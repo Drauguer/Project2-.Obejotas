@@ -15,41 +15,45 @@ Player::Player() : BaseAlly()
 {
 	name.Create("Player");
 
-	//sideWalk
-
-	sideWalk.PushBack({ 0,0,32,32 });
-	sideWalk.PushBack({ 32,0,32,32 });
-	sideWalk.PushBack({ 64,0,32,32 });
-	sideWalk.PushBack({ 96,0,32,32 });
-	sideWalk.PushBack({ 128,0,32,32 });
-	sideWalk.PushBack({ 160,0,32,32 });
-	sideWalk.loop = true;
-	sideWalk.speed = 0.2f;
 	
-	//frontWalk
-	frontWalk.PushBack({ 0,32,32,32 });
-	frontWalk.PushBack({ 32,32,32,32 });
-	frontWalk.PushBack({ 64,32,32,32 });
-	frontWalk.PushBack({ 96,32,32,32 });
-	frontWalk.PushBack({ 128,32,32,32 });
-	frontWalk.PushBack({ 160,32,32,32 });
-	frontWalk.loop = true;
-	frontWalk.speed = 0.2f;
-
-
-	//backWalk
-	backWalk.PushBack({ 0,64,32,32 });
-	backWalk.PushBack({ 32,64,32,32 });
-	backWalk.PushBack({ 64,64,32,32 });
-	backWalk.PushBack({ 96,64,32,32 });
-	backWalk.PushBack({ 128,64,32,32 });
-	backWalk.PushBack({ 160,64,32,32 });
-	backWalk.loop = true;
-	backWalk.speed = 0.2f;
 
 }
 
 Player::~Player() {
+
+}
+
+void Player::InitAnims()
+{
+	// frontWalk
+	for (pugi::xml_node node = parameters.child("frontWalk").child("pushback"); node; node = node.next_sibling("pushback")) {
+		frontWalk.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	frontWalk.speed = parameters.child("frontWalk").attribute("animspeed").as_float();
+	frontWalk.loop = parameters.child("frontWalk").attribute("loop").as_bool();
+
+	// backWalk
+	for (pugi::xml_node node = parameters.child("backWalk").child("pushback"); node; node = node.next_sibling("pushback")) {
+		backWalk.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	backWalk.speed = parameters.child("backWalk").attribute("animspeed").as_float();
+	backWalk.loop = parameters.child("backWalk").attribute("loop").as_bool();
+
+	// sideWalk
+	for (pugi::xml_node node = parameters.child("sideWalk").child("pushback"); node; node = node.next_sibling("pushback")) {
+		sideWalk.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	sideWalk.speed = parameters.child("sideWalk").attribute("animspeed").as_float();
+	sideWalk.loop = parameters.child("sideWalk").attribute("loop").as_bool();
 
 }
 
@@ -69,6 +73,7 @@ bool Player::Awake() {
 		abilities.Add({ abilityId, abilityString });
 	}
 	
+	InitAnims();
 
 	return true;
 }
@@ -155,9 +160,11 @@ bool Player::Update(float dt)
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 7);
 
 		//pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
+
+		app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), isFlipped);
 	}
 
-	app->render->DrawTexture(texture,position.x,position.y,&currentAnimation->GetCurrentFrame(), isFlipped);
+	
 
 	return true;
 }

@@ -42,6 +42,7 @@ bool Scene::Awake(pugi::xml_node config)
 	//L04 DONE 7: Get player paremeters
 	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
 	//Assigns the XML node to a member in player
+	player->parameters = config.child("player");
 	player->config = config.child("player");
 
 	//Get the map name from the config file and assigns the value in the module

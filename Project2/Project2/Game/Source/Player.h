@@ -30,6 +30,8 @@ public:
 
 	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
+	void InitAnims();
+
 
 public:
 
