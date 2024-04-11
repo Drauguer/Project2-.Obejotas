@@ -9,6 +9,9 @@
  <tileset firstgid="641" source="Tiles/.xml/TX Props.tsx"/>
  <tileset firstgid="897" source="Tiles/.xml/TX Struct.tsx"/>
  <tileset firstgid="1153" source="Tiles/.xml/MapMetadata.tsx"/>
+ <tileset firstgid="1155" name="Mapa1" tilewidth="32" tileheight="32" tilecount="1800" columns="60">
+  <image source="Mapa1.tmx" width="1920" height="960"/>
+ </tileset>
  <layer id="2" name="Suelo" width="60" height="30">
   <data encoding="csv">
 321,321,321,321,321,321,321,321,321,321,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,266,321,321,321,335,335,321,321,321,321,321,
