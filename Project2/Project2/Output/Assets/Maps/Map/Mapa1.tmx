@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
- <tileset firstgid="1" source="Tiles/.xml/TX Tileset Wall.tsx"/>
+ <tileset firstgid="1" name="TX Tileset Wall" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="Tiles/TX Tileset Wall.png" width="512" height="512"/>
+ </tileset>
  <tileset firstgid="257" source="Tiles/.xml/TX Tileset Stone Ground.tsx"/>
  <tileset firstgid="321" source="Tiles/.xml/TX Tileset Grass.tsx"/>
  <tileset firstgid="385" source="Tiles/.xml/TX Plant.tsx"/>
