@@ -29,7 +29,7 @@
 	  
 	<encounterFx audiopath ="Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg"   />
 
-	  <player x="150" y="672" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="10">
+	  <player x="150" y="672" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
 		  <sideWalk animspeed="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
 			  <pushback x="32" y="0" width="32" height="32"/>
@@ -76,14 +76,15 @@
       <dialogue text="dialogue 4"/>
     </npc>
 
-    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMago.png" life="30" attack="10">
+    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMago.png" life="30" attack="20" defense="10" magicPower="5" dexerity="20" charName="Eldrin">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="32" width="32" height="32"/>
 		</Idle>
 	    <ability id="0" name="fireBall"/>
         <ability id="1" name="curation"/>
+		<ability id="2" name="sword attack"/>
     </ally>
-    <ally x="100" y="250" texturepath="Assets/Textures/SpriteSheetMago.png" life="30" attack="20">
+    <ally x="100" y="250" texturepath="Assets/Textures/SpriteSheetMago.png" life="25" attack="5" defense="10" magicPower="25" dexerity="10" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="32" width="32" height="32"/>
 		</Idle>
@@ -91,7 +92,7 @@
         <ability id="1" name="curation"/>
     </ally>
 
-    <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="20" attack="5"/>
-    <enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="5"/>
+    <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="20" attack="10" defense="10" magicPower="15" dexerity="10"/>
+    <enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="10" defense="10" magicPower="15" dexerity="10"/>
   </scene>
 </config>

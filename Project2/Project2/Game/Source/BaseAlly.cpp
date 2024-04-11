@@ -50,6 +50,11 @@ bool BaseAlly::Awake()
 	texturePath = parameters.attribute("texturepath").as_string();
 	life = parameters.attribute("life").as_int();
 	attack = parameters.attribute("attack").as_int();
+	defense = parameters.attribute("defense").as_int();
+	magicPower = parameters.attribute("magicPower").as_int();
+	dexerity = parameters.attribute("dexerity").as_int();
+	charName = parameters.attribute("charName").as_string();
+
 
 	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability")) 
 	{
@@ -57,6 +62,7 @@ bool BaseAlly::Awake()
 		abilityName = node.attribute("name").as_string();
 		char* abilityString = const_cast<char*>(abilityName);
 		abilities.Add({ abilityId, abilityString });
+		numAttacks++;
 	}
 	
 
@@ -150,6 +156,11 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
 			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
 		}
+		break;
+	case 2:
+		hasAttacked = true;
+		printf("Sword Attack!!\n");
+		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 		break;
 	}
 }

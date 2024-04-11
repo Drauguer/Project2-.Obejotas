@@ -52,7 +52,7 @@ public:
 
 	//Attack Features
 	bool isHighlighted;
-	int numAttacks = 2;
+	int numAttacks = 0;
 
 	List<Ability> abilities;
 
@@ -79,6 +79,15 @@ public:
 	int abilityId;
 	const char* abilityName;
 	SString abilityString;
+
+	// Stats of each character
+	int life;
+	int attack;
+	int defense;
+	int magicPower;
+	int dexerity;
+
+	SString charName;
 
 private:
 

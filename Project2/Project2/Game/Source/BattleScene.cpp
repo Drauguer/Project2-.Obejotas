@@ -117,7 +117,7 @@ bool BattleScene::Update(float dt)
 
 		// Codigo provisional para los "iconos" de los ataques
 
-		for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < app->scene->allies[currentPlayerInCombatIndex]->numAttacks; ++i)
 		{
 			app->render->DrawRectangle({ (400 + 100 * i) / scale, 600 / scale, 70 / scale, 70 / scale }, 0, 255, 0, 255);
 		}
@@ -186,9 +186,12 @@ bool BattleScene::Update(float dt)
 				switch (selectAttackIndex)
 				{
 				case 0:
-					app->scene->enemies[currentEnemySelectedIndex]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
+					app->scene->enemies[currentEnemySelectedIndex]->life -= app->scene->allies[currentPlayerInCombatIndex]->magicPower;
 					break;
 				case 1:
+					break;
+				case 2:
+					app->scene->enemies[currentEnemySelectedIndex]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
 					break;
 				}
 
@@ -199,11 +202,13 @@ bool BattleScene::Update(float dt)
 			}
 			if (CheckAllPlayersAttacked()) {
 				app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+				selectAttackIndex = 0;
 			}
 			else
 			{
 				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
 				app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+				selectAttackIndex = 0;
 			}
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)

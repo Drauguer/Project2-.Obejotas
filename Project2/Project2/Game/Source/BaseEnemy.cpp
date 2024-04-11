@@ -35,6 +35,9 @@ bool BaseEnemy::Awake() {
 	texturePath = parameters.attribute("texturepath").as_string();
 	life = parameters.attribute("life").as_int();
 	attack = parameters.attribute("attack").as_int();
+	defense = parameters.attribute("defense").as_int();
+	magicPower = parameters.attribute("magicPower").as_int();
+	dexerity = parameters.attribute("dexerity").as_int();
 
 	//InitDialogues();
 

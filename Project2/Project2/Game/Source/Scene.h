@@ -6,6 +6,7 @@
 #include "Mago.h"
 #include "NPC.h"
 #include "BaseAlly.h"
+#include "BaseEnemy.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include <string>
@@ -84,7 +85,7 @@ public:
 
 
 	//List of enemies (reemplazar porque no son players xd) 
-	List<Entity*> enemies;
+	List<BaseEnemy*> enemies;
 
 
 	bool isOnCombat = false;
