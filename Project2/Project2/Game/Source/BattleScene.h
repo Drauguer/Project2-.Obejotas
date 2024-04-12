@@ -100,6 +100,9 @@ public:
 	int timerEnemy = 0;
 
 	float damage;
+
+	//Cooldown for selecting abilities
+	//float selectionCooldown = 1;
 	
 };
 

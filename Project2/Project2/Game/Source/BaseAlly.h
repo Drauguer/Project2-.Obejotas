@@ -45,6 +45,8 @@ public:
 
 	virtual void SetAttackAnimation();
 
+	virtual void SetIdleAnimation();
+
 
 
 	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
@@ -77,7 +79,10 @@ public:
 	Animation* currentAnim;
 
 	Animation Idle;
-	Animation Attack;
+	Animation AttackAnim;
+
+	//Counters for animation 
+	int attackCounter = 0;
 
 
 	//Loading abilities

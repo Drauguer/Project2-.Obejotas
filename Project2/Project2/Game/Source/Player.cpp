@@ -103,6 +103,9 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 
+	GamePad& pad = app->input->pads[0];
+
+
 	int scale = app->win->GetScale();
 
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
@@ -125,7 +128,7 @@ bool Player::Update(float dt)
 	
 		b2Vec2 vel = b2Vec2(0, 0);
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && isOnPause ==false) {
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0 && isOnPause ==false) {
 			vel.x += -0.2 * dt;
 			isFlipped = true;
 			currentAnimation = &sideWalk;
@@ -133,20 +136,20 @@ bool Player::Update(float dt)
 			app->audio->PlayFx(walkingRockFx);
 			
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && isOnPause == false) {
+		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0 && isOnPause == false) {
 			vel.x += 0.2 * dt;
 			currentAnimation = &sideWalk;
 			sideWalk.Update();	
 			isFlipped = false;
 			app->audio->PlayFx(walkingRockFx);
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && isOnPause == false) {
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0 && isOnPause == false) {
 			vel.y += -0.2 * dt;
 			currentAnimation = &backWalk;
 			backWalk.Update();
 			app->audio->PlayFx(walkingRockFx);
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && isOnPause == false) {
+		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0  && isOnPause == false) {
 			vel.y += 0.2 * dt;
 			currentAnimation = &frontWalk;
 			frontWalk.Update();

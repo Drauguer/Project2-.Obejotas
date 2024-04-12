@@ -66,6 +66,8 @@ bool NPC::Update(float dt)
 
 	int scale = app->win->GetScale();
 
+	GamePad& pad = app->input->pads[0];
+
 	if (triggerInRange)
 	{
 		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->dialogueManager->isTalking == false && hasTalked == false)
@@ -92,7 +94,7 @@ bool NPC::Update(float dt)
 	}
 	else if (!triggerInRange)
 	{
-		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && app->dialogueManager->isTalking == false)
+		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN || pad.y && app->dialogueManager->isTalking == false)
 		{
 
 			app->dialogueManager->isTalking = true;

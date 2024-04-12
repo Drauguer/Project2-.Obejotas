@@ -45,6 +45,8 @@ bool DialogueManager::Update(float dt)
 {
 	bool ret = true;
 
+	GamePad& pad = app->input->pads[0];
+
 	int scale = app->win->GetScale();
 
 	if (testDialogue)
@@ -59,7 +61,7 @@ bool DialogueManager::Update(float dt)
 			app->fonts->BlitText(dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, Font,item->data->text.GetString());
 			LOG("Write Text");
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a)
 			{
 				dialogueList.Del(item);
 				item = item->next;

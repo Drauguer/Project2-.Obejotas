@@ -45,13 +45,13 @@ void BaseAlly::InitAnims()
 	Idle.loop = parameters.child("Idle").attribute("loop").as_bool();
 
 	for (pugi::xml_node node = parameters.child("Attack").child("pushback"); node; node = node.next_sibling("pushback")) {
-		Attack.PushBack({ node.attribute("x").as_int(),
+		AttackAnim.PushBack({ node.attribute("x").as_int(),
 						node.attribute("y").as_int(),
 						node.attribute("width").as_int(),
 						node.attribute("height").as_int() });
 	}
-	Attack.speed = parameters.child("Attack").attribute("animspeed").as_float();
-	Attack.loop = parameters.child("Attack").attribute("loop").as_bool();
+	AttackAnim.speed = parameters.child("Attack").attribute("animspeed").as_float();
+	AttackAnim.loop = parameters.child("Attack").attribute("loop").as_bool();
 
 }
 
@@ -116,6 +116,10 @@ bool BaseAlly::Update(float dt)
 
 	int scale = app->win->GetScale();
 
+	
+	if (AttackAnim.HasFinished()) {
+		currentAnim = &Idle;
+	}
 
 
 
@@ -150,7 +154,11 @@ void BaseAlly::OnCollision(PhysBody* physA, PhysBody* physB)
 }
 
 void BaseAlly::SetAttackAnimation() {
-	currentAnim = &Attack;
+	currentAnim = &AttackAnim;
+}
+
+void BaseAlly::SetIdleAnimation() {
+	currentAnim = &Idle;
 }
 
 bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)
