@@ -62,7 +62,7 @@
  </layer>
  <layer id="3" name="Prop" width="20" height="20">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
   </properties>
   <data encoding="csv">
 0,14,15,0,0,61,63,0,0,14,15,0,0,40,42,0,0,14,15,0,
@@ -88,6 +88,9 @@
 </data>
  </layer>
  <layer id="6" name="Pared2" width="20" height="20">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
 151,171,171,171,171,171,171,171,171,171,171,171,171,171,171,171,171,171,171,149,
 131,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,127,
