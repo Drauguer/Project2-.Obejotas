@@ -37,6 +37,11 @@ public:
 	bool isPicked = false;
 	List<SString> dialoguesNPC;
 
+	bool hasCombat;
+	bool triggerInRange;
+	int mapID;
+	bool hasTalked = false;
+
 private:
 
 	SDL_Texture* texture;
@@ -45,7 +50,7 @@ private:
 	const char* dialogueChar;
 	SString dialogueString;
 	PhysBody* rangeDialogue;
-	bool hasTalked = false;
+	
 	
 	
 };

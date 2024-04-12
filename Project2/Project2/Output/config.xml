@@ -65,11 +65,11 @@
 	  
 	  
 	 
-    <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png">
+    <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="false" mapID="0">
       <dialogue text="visca catalunya"/>
       <dialogue text="dialogue 2"/>
     </npc>
-    <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png">
+    <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="true" mapID="0">
       <dialogue text="viva espanya"/>
       <dialogue text="dialogue 2"/>
       <dialogue text="dialogue 3"/>

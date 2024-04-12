@@ -210,6 +210,7 @@ bool BattleScene::Update(float dt)
 				printf("that enemy is dead, please select another\n");
 			}
 			if (CheckAllPlayersAttacked()) {
+				CheckState();
 				app->battleScene->combatState = CombatState::ENEMY_ATTACK;
 				idAttack = 0;
 				selectAttackIndex = 0;
@@ -217,6 +218,7 @@ bool BattleScene::Update(float dt)
 			else
 			{
 				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
+				CheckState();
 				app->battleScene->combatState = CombatState::SELECT_CHARACTER;
 				idAttack = 0;
 				selectAttackIndex = 0;

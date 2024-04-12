@@ -6,6 +6,8 @@
 #include "Scene.h"
 #include "Window.h"
 #include "ModuleFonts.h"
+#include "BattleScene.h"
+#include "Audio.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -68,6 +70,15 @@ bool DialogueManager::Update(float dt)
 					testDialogue = false;
 					isTalking = false;
 					item = dialogueList.start;
+					
+					if (activateCombat)
+					{
+						app->scene->isOnCombat = !app->scene->isOnCombat;
+						app->scene->Disable();
+						app->battleScene->Enable();
+						app->audio->PlayFx(app->scene->encounterFx);
+						activateCombat = false;
+					}
 				}
 			}
 		}

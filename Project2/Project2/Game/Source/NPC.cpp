@@ -33,6 +33,10 @@ bool NPC::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	hasCombat = parameters.attribute("hasCombat").as_bool();
+	triggerInRange = parameters.attribute("triggerInRange").as_bool();
+	mapID = parameters.attribute("mapID").as_int();
+
 	InitDialogues();
 
 	return true;
@@ -62,21 +66,55 @@ bool NPC::Update(float dt)
 
 	int scale = app->win->GetScale();
 
-	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && app->dialogueManager->isTalking == false)
+	if (triggerInRange)
 	{
-		
-		app->dialogueManager->isTalking = true;
-		app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
-		LOG("Dialogue Start");
-
-		ListItem<SString>* item;
-
-		for (item = dialoguesNPC.start; item != NULL; item = item->next)
+		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->dialogueManager->isTalking == false && hasTalked == false)
 		{
-			app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
+
+			app->dialogueManager->isTalking = true;
+			hasTalked = true;
+			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
+			LOG("Dialogue Start");
+
+			ListItem<SString>* item;
+
+			for (item = dialoguesNPC.start; item != NULL; item = item->next)
+			{
+				app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
+			}
+
+			if (hasCombat)
+			{
+				app->dialogueManager->activateCombat = true;
+			}
+
 		}
-		
 	}
+	else if (!triggerInRange)
+	{
+		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && app->dialogueManager->isTalking == false)
+		{
+
+			app->dialogueManager->isTalking = true;
+			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
+			LOG("Dialogue Start");
+
+			ListItem<SString>* item;
+
+			for (item = dialoguesNPC.start; item != NULL; item = item->next)
+			{
+				app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
+			}
+
+			if (hasCombat)
+			{
+				app->dialogueManager->activateCombat = true;
+			}
+
+		}
+	}
+
+	
 
 	
 

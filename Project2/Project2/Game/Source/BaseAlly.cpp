@@ -187,11 +187,13 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		app->battleScene->idAttack = 1;
 		app->scene->allies[currentPlayerIndex]->attack *= 1.5f;
 		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
 		}
 		else
 		{
 			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
 		}
 		break;
@@ -213,11 +215,13 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		}
 		
 		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
 		}
 		else
 		{
 			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
 		}
 		break;
@@ -234,11 +238,13 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		}
 
 		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
 		}
 		else
 		{
 			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
 		}
 		break;
@@ -261,11 +267,13 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		}
 
 		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
 		}
 		else
 		{
 			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
 		}
 		break;
