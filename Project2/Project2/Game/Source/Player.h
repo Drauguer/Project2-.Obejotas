@@ -52,6 +52,7 @@ public:
 
 	//Attack features
 	bool isHighlighted;
+	bool isOnPause = false;
 	int numAttacks = 2;
 
 	//Animation overwolrd

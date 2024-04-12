@@ -116,6 +116,9 @@ bool Scene::Start()
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
+	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 + 120, 240, 80 };
+	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Pause", ExitButton, this);
+	exitScene->state = GuiControlState::DISABLED;
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 
@@ -174,6 +177,11 @@ bool Scene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+		app->scene->player->isOnPause = true;
+		
+		app->scene->exitScene->state = GuiControlState::NORMAL;
+	}
 	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
