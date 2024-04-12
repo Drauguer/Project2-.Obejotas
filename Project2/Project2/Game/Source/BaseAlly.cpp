@@ -36,22 +36,22 @@ void BaseAlly::InitAnims()
 {
 	// Idle
 	for (pugi::xml_node node = parameters.child("Idle").child("pushback"); node; node = node.next_sibling("pushback")) {
-		Idle.PushBack({ node.attribute("x").as_int(),
+		idleAnim.PushBack({ node.attribute("x").as_int(),
 						node.attribute("y").as_int(),
 						node.attribute("width").as_int(),
 						node.attribute("height").as_int() });
 	}
-	Idle.speed = parameters.child("Idle").attribute("animspeed").as_float();
-	Idle.loop = parameters.child("Idle").attribute("loop").as_bool();
+	idleAnim.speed = parameters.child("Idle").attribute("animspeed").as_float();
+	idleAnim.loop = parameters.child("Idle").attribute("loop").as_bool();
 
 	for (pugi::xml_node node = parameters.child("Attack").child("pushback"); node; node = node.next_sibling("pushback")) {
-		AttackAnim.PushBack({ node.attribute("x").as_int(),
+		attackAnim.PushBack({ node.attribute("x").as_int(),
 						node.attribute("y").as_int(),
 						node.attribute("width").as_int(),
 						node.attribute("height").as_int() });
 	}
-	AttackAnim.speed = parameters.child("Attack").attribute("animspeed").as_float();
-	AttackAnim.loop = parameters.child("Attack").attribute("loop").as_bool();
+	attackAnim.speed = parameters.child("Attack").attribute("animspeed").as_float();
+	attackAnim.loop = parameters.child("Attack").attribute("loop").as_bool();
 
 }
 
@@ -106,7 +106,7 @@ bool BaseAlly::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
-	currentAnim = &Idle;
+	currentAnim = &idleAnim;
 
 	return true;
 }
@@ -117,8 +117,8 @@ bool BaseAlly::Update(float dt)
 	int scale = app->win->GetScale();
 
 	
-	if (AttackAnim.HasFinished()) {
-		currentAnim = &Idle;
+	if (attackAnim.HasFinished()) {
+		currentAnim = &idleAnim;		
 	}
 
 
@@ -154,11 +154,12 @@ void BaseAlly::OnCollision(PhysBody* physA, PhysBody* physB)
 }
 
 void BaseAlly::SetAttackAnimation() {
-	currentAnim = &AttackAnim;
+	attackAnim.ResetLoop();
+	currentAnim = &attackAnim;
 }
 
 void BaseAlly::SetIdleAnimation() {
-	currentAnim = &Idle;
+	currentAnim = &idleAnim;
 }
 
 bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)

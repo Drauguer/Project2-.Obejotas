@@ -78,8 +78,8 @@ public:
 	// ANIMATIONS
 	Animation* currentAnim;
 
-	Animation Idle;
-	Animation AttackAnim;
+	Animation idleAnim;
+	Animation attackAnim;
 
 	//Counters for animation 
 	int attackCounter = 0;
