@@ -239,6 +239,7 @@ bool Scene::PostUpdate()
 	return ret;
 }
 
+
 // Called before quitting
 bool Scene::CleanUp()
 {
@@ -255,7 +256,15 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
+	bool ret = true;
 
+	if (control->id == 1) {
+
+	}
+	if (control->id == 2) {
+		app->scene->player->isOnPause = false;
+		exitScene->state = GuiControlState::DISABLED;
+	}
 	return true;
 }
 
