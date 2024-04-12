@@ -43,6 +43,10 @@ public:
 
 	virtual void InitAnims();
 
+	virtual void SetAttackAnimation();
+
+
+
 	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
 public:
@@ -73,6 +77,7 @@ public:
 	Animation* currentAnim;
 
 	Animation Idle;
+	Animation Attack;
 
 
 	//Loading abilities
@@ -96,13 +101,6 @@ public:
 	float damage;
 
 private:
-
-	
-
-
-
-
-	
 
 
 };

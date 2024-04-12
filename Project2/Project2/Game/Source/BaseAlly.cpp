@@ -44,6 +44,15 @@ void BaseAlly::InitAnims()
 	Idle.speed = parameters.child("Idle").attribute("animspeed").as_float();
 	Idle.loop = parameters.child("Idle").attribute("loop").as_bool();
 
+	for (pugi::xml_node node = parameters.child("Attack").child("pushback"); node; node = node.next_sibling("pushback")) {
+		Attack.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	Attack.speed = parameters.child("Attack").attribute("animspeed").as_float();
+	Attack.loop = parameters.child("Attack").attribute("loop").as_bool();
+
 }
 
 bool BaseAlly::Awake() 
@@ -107,10 +116,17 @@ bool BaseAlly::Update(float dt)
 
 	int scale = app->win->GetScale();
 
+
+
+
+	currentAnim->Update();
+
 	if (life > 0) {
 		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
 		app->render->DrawTexture(texture, position.x / scale, position.y / scale, &currentAnim->GetCurrentFrame());
 	}
+
+
 
 	int lifeW = (life / maxHP) * 100;
 	if (lifeW <= 0)
@@ -131,6 +147,10 @@ bool BaseAlly::CleanUp()
 void BaseAlly::OnCollision(PhysBody* physA, PhysBody* physB)
 {
 
+}
+
+void BaseAlly::SetAttackAnimation() {
+	currentAnim = &Attack;
 }
 
 bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)

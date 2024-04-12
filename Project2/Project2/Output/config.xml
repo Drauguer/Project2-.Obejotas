@@ -76,10 +76,19 @@
       <dialogue text="dialogue 4"/>
     </npc>
 
-    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMago.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
+    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
 		<Idle animspeed="0.1f" loop="true">
-			<pushback x="0" y="32" width="32" height="32"/>
+			<pushback x="0" y="0" width="64" height="64"/>
+			<pushback x="64" y="0" width="64" height="64"/>
+			<pushback x="128" y="0" width="64" height="64"/>
+			<pushback x="192" y="0" width="64" height="64"/>
 		</Idle>
+		<Attack animspeed="0.1f" loop="true">
+			<pushback x="64" y="0" width="64" height="64"/>
+			<pushback x="0" y="0" width="64" height="64"/>
+			<pushback x="64" y="0" width="64" height="64"/>
+			<pushback x="0" y="0" width="64" height="64"/>
+		</Attack>
 	    <ability id="0" name="Sable Laser"/>
         <ability id="1" name="Grito de Guerra"/>
 		<ability id="2" name="Pistola Laser"/>
