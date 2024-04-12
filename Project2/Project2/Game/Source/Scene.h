@@ -6,6 +6,7 @@
 #include "Mago.h"
 #include "NPC.h"
 #include "BaseAlly.h"
+#include "BaseEnemy.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include <string>
@@ -65,6 +66,7 @@ private:
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
+	GuiControlButton* exitScene;
 
 	// Test Dialogue
 	Dialogue* testDialogue;
@@ -84,7 +86,7 @@ public:
 
 
 	//List of enemies (reemplazar porque no son players xd) 
-	List<Entity*> enemies;
+	List<BaseEnemy*> enemies;
 
 
 	bool isOnCombat = false;

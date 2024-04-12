@@ -42,6 +42,7 @@ bool Scene::Awake(pugi::xml_node config)
 	//L04 DONE 7: Get player paremeters
 	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
 	//Assigns the XML node to a member in player
+	player->parameters = config.child("player");
 	player->config = config.child("player");
 
 	//Get the map name from the config file and assigns the value in the module
@@ -115,6 +116,9 @@ bool Scene::Start()
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20};
 	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
+	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 + 120, 240, 80 };
+	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Pause", ExitButton, this);
+	exitScene->state = GuiControlState::DISABLED;
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 
@@ -173,6 +177,11 @@ bool Scene::Update(float dt)
 			app->render->camera.x += (int)ceil(camSpeed * dt);
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
+		app->scene->player->isOnPause = true;
+		
+		app->scene->exitScene->state = GuiControlState::NORMAL;
+	}
 	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
@@ -230,6 +239,7 @@ bool Scene::PostUpdate()
 	return ret;
 }
 
+
 // Called before quitting
 bool Scene::CleanUp()
 {
@@ -246,7 +256,15 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
+	bool ret = true;
 
+	if (control->id == 1) {
+
+	}
+	if (control->id == 2) {
+		app->scene->player->isOnPause = false;
+		exitScene->state = GuiControlState::DISABLED;
+	}
 	return true;
 }
 

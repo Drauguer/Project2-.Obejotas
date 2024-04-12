@@ -10,46 +10,51 @@
 #include "Physics.h"
 #include "BattleScene.h"
 #include "SDL_mixer/include/SDL_mixer.h"
+#include "Window.h"
 
 Player::Player() : BaseAlly()
 {
 	name.Create("Player");
 
-	//sideWalk
-
-	sideWalk.PushBack({ 0,0,32,32 });
-	sideWalk.PushBack({ 32,0,32,32 });
-	sideWalk.PushBack({ 64,0,32,32 });
-	sideWalk.PushBack({ 96,0,32,32 });
-	sideWalk.PushBack({ 128,0,32,32 });
-	sideWalk.PushBack({ 160,0,32,32 });
-	sideWalk.loop = true;
-	sideWalk.speed = 0.2f;
 	
-	//frontWalk
-	frontWalk.PushBack({ 0,32,32,32 });
-	frontWalk.PushBack({ 32,32,32,32 });
-	frontWalk.PushBack({ 64,32,32,32 });
-	frontWalk.PushBack({ 96,32,32,32 });
-	frontWalk.PushBack({ 128,32,32,32 });
-	frontWalk.PushBack({ 160,32,32,32 });
-	frontWalk.loop = true;
-	frontWalk.speed = 0.2f;
-
-
-	//backWalk
-	backWalk.PushBack({ 0,64,32,32 });
-	backWalk.PushBack({ 32,64,32,32 });
-	backWalk.PushBack({ 64,64,32,32 });
-	backWalk.PushBack({ 96,64,32,32 });
-	backWalk.PushBack({ 128,64,32,32 });
-	backWalk.PushBack({ 160,64,32,32 });
-	backWalk.loop = true;
-	backWalk.speed = 0.2f;
 
 }
 
 Player::~Player() {
+
+}
+
+void Player::InitAnims()
+{
+	// frontWalk
+	for (pugi::xml_node node = parameters.child("frontWalk").child("pushback"); node; node = node.next_sibling("pushback")) {
+		frontWalk.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	frontWalk.speed = parameters.child("frontWalk").attribute("animspeed").as_float();
+	frontWalk.loop = parameters.child("frontWalk").attribute("loop").as_bool();
+
+	// backWalk
+	for (pugi::xml_node node = parameters.child("backWalk").child("pushback"); node; node = node.next_sibling("pushback")) {
+		backWalk.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	backWalk.speed = parameters.child("backWalk").attribute("animspeed").as_float();
+	backWalk.loop = parameters.child("backWalk").attribute("loop").as_bool();
+
+	// sideWalk
+	for (pugi::xml_node node = parameters.child("sideWalk").child("pushback"); node; node = node.next_sibling("pushback")) {
+		sideWalk.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	sideWalk.speed = parameters.child("sideWalk").attribute("animspeed").as_float();
+	sideWalk.loop = parameters.child("sideWalk").attribute("loop").as_bool();
 
 }
 
@@ -69,6 +74,7 @@ bool Player::Awake() {
 		abilities.Add({ abilityId, abilityString });
 	}
 	
+	InitAnims();
 
 	return true;
 }
@@ -87,7 +93,7 @@ bool Player::Start() {
 		0, 16,
 	};
 
-	pbody = app->physics->CreateChain(position.x, position.y, player, 8, bodyType::DYNAMIC);
+	pbody = app->physics->CreateChain(position.x / 2, position.y / 2, player, 8, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	currentAnimation = &frontWalk;
@@ -96,6 +102,9 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+
+	int scale = app->win->GetScale();
+
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 	if (app->scene->isOnCombat) 
 	{
@@ -116,7 +125,7 @@ bool Player::Update(float dt)
 	
 		b2Vec2 vel = b2Vec2(0, 0);
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && isOnPause ==false) {
 			vel.x += -0.2 * dt;
 			isFlipped = true;
 			currentAnimation = &sideWalk;
@@ -124,20 +133,20 @@ bool Player::Update(float dt)
 			app->audio->PlayFx(walkingRockFx);
 			
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && isOnPause == false) {
 			vel.x += 0.2 * dt;
 			currentAnimation = &sideWalk;
 			sideWalk.Update();	
 			isFlipped = false;
 			app->audio->PlayFx(walkingRockFx);
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && isOnPause == false) {
 			vel.y += -0.2 * dt;
 			currentAnimation = &backWalk;
 			backWalk.Update();
 			app->audio->PlayFx(walkingRockFx);
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && isOnPause == false) {
 			vel.y += 0.2 * dt;
 			currentAnimation = &frontWalk;
 			frontWalk.Update();
@@ -151,13 +160,15 @@ bool Player::Update(float dt)
 
 		pbody->body->SetLinearVelocity(vel);
 
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 5);
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 7);
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x);
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
 
-		//pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
+		//pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
+
+		app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), isFlipped);
 	}
 
-	app->render->DrawTexture(texture,position.x,position.y,&currentAnimation->GetCurrentFrame(), isFlipped);
+	
 
 	return true;
 }

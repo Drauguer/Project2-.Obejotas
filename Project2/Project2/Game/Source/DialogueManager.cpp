@@ -6,6 +6,8 @@
 #include "Scene.h"
 #include "Window.h"
 #include "ModuleFonts.h"
+#include "BattleScene.h"
+#include "Audio.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,12 +45,7 @@ bool DialogueManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && isTalking == false)
-	{
-		testDialogue = !testDialogue;
-		isTalking = true;
-		LOG("Dialogue Start");
-	}
+	int scale = app->win->GetScale();
 
 	if (testDialogue)
 	{
@@ -57,7 +54,7 @@ bool DialogueManager::Update(float dt)
 
 		if (item != NULL && ret == true)
 		{
-			SDL_Rect dialogueBoxPos = { windowW / 2 - 600, windowH / 2 + 120, 1200, 250 };
+			SDL_Rect dialogueBoxPos = { (windowW / 2 - 600) / scale, (windowH / 2 + 120) / scale, 1200 / scale, 250 / scale };
 			app->render->DrawRectangle(dialogueBoxPos, 0, 50, 255, 255);
 			app->fonts->BlitText(dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, Font,item->data->text.GetString());
 			LOG("Write Text");
@@ -73,6 +70,15 @@ bool DialogueManager::Update(float dt)
 					testDialogue = false;
 					isTalking = false;
 					item = dialogueList.start;
+					
+					if (activateCombat)
+					{
+						app->scene->isOnCombat = !app->scene->isOnCombat;
+						app->scene->Disable();
+						app->battleScene->Enable();
+						app->audio->PlayFx(app->scene->encounterFx);
+						activateCombat = false;
+					}
 				}
 			}
 		}

@@ -30,6 +30,8 @@ public:
 
 	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
+	void InitAnims();
+
 
 public:
 
@@ -50,6 +52,7 @@ public:
 
 	//Attack features
 	bool isHighlighted;
+	bool isOnPause = false;
 	int numAttacks = 2;
 
 	//Animation overwolrd

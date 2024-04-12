@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Window.h"
 
 BaseEnemy::BaseEnemy() : Entity(EntityType::ENEMY)
 {
@@ -32,10 +33,19 @@ bool BaseEnemy::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	life = parameters.attribute("life").as_int();
-	attack = parameters.attribute("attack").as_int();
+	life = parameters.attribute("life").as_float();
+	attack = parameters.attribute("attack").as_float();
+	defense = parameters.attribute("defense").as_float();
+	magicPower = parameters.attribute("magicPower").as_float();
+	dexerity = parameters.attribute("dexerity").as_float();
+	maxHP = life;
 
-	//InitDialogues();
+	healthBar.x = position.x / 2 - 10;
+	healthBar.y = position.y / 2 + 30;
+	healthBar.w = 100;
+	healthBar.h = 5;
+
+	
 
 	return true;
 }
@@ -62,12 +72,22 @@ bool BaseEnemy::Start() {
 bool BaseEnemy::Update(float dt)
 {
 
+	int scale = app->win->GetScale();
 
 	if (life > 0) {
-		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
-		app->render->DrawTexture(texture, position.x, position.y);
+		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
+		app->render->DrawTexture(texture, position.x / scale, position.y / scale);
 	}
 	
+
+	float lifeW = (life / maxHP) * 100;
+	if (lifeW <= 0)
+	{
+		lifeW = 0;
+	}
+	healthBar.w = lifeW;
+
+	app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
 
 	return true;
 }

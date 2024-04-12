@@ -58,6 +58,9 @@ bool BattleScene::PreUpdate()
 // Called each loop iteration
 bool BattleScene::Update(float dt)
 {
+
+	int scale = app->win->GetScale();
+
 	if (app->scene->isOnCombat && !hasStartedCombat) 
 	{
 		CheckState();
@@ -107,19 +110,19 @@ bool BattleScene::Update(float dt)
 			}
 		}
 
-		app->render->DrawCircle(app->scene->allies[currentPlayerInCombatIndex]->position.x - 20, app->scene->allies[currentPlayerInCombatIndex]->position.y + 20, 5, 255, 0, 0, 255);
+		app->render->DrawCircle((app->scene->allies[currentPlayerInCombatIndex]->position.x - 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y + 20) / scale, 5, 255, 0, 0, 255);
 
 		break;
 	case CombatState::SELECT_ACTION:
 
 		// Codigo provisional para los "iconos" de los ataques
 
-		for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < app->scene->allies[currentPlayerInCombatIndex]->numAttacks; ++i)
 		{
-			app->render->DrawRectangle({ 400 + 100 * i, 600, 70, 70 }, 0, 255, 0, 255);
+			app->render->DrawRectangle({ (400 + 100 * i) / scale, 600 / scale, 70 / scale, 70 / scale }, 0, 255, 0, 255);
 		}
 
-		app->render->DrawCircle(430 + 100 * selectAttackIndex, 575, 15, 255, 0, 0, 255);
+		app->render->DrawCircle((430 + 100 * selectAttackIndex) / scale, 575 / scale, 15, 255, 0, 0, 255);
 
 		//Navigate in the selection attack menu
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
@@ -180,12 +183,24 @@ bool BattleScene::Update(float dt)
 			{
 				app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
 
-				switch (selectAttackIndex)
+				switch (idAttack)
 				{
 				case 0:
-					app->scene->enemies[currentEnemySelectedIndex]->life -= app->scene->allies[currentPlayerInCombatIndex]->attack;
+					damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
+					app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
 					break;
 				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.75f;
+					printf("El Cañon laser ha hecho %f de daño\n", damage);
+					app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
 					break;
 				}
 
@@ -195,12 +210,18 @@ bool BattleScene::Update(float dt)
 				printf("that enemy is dead, please select another\n");
 			}
 			if (CheckAllPlayersAttacked()) {
+				CheckState();
 				app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+				idAttack = 0;
+				selectAttackIndex = 0;
 			}
 			else
 			{
 				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
+				CheckState();
 				app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+				idAttack = 0;
+				selectAttackIndex = 0;
 			}
 		}
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -212,7 +233,7 @@ bool BattleScene::Update(float dt)
 		}
 
 		CheckState();
-		app->render->DrawCircle(app->scene->enemies[currentEnemySelectedIndex]->position.x + 75, app->scene->enemies[currentEnemySelectedIndex]->position.y + 40, 5, 255, 0, 0, 255);
+		app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 75) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
 
 
 		break;
@@ -229,9 +250,10 @@ bool BattleScene::Update(float dt)
 		
 		if (timerEnemy >= 120)
 		{
-			printf("ataque de enemigo\n");
-			app->scene->allies[indexAttack]->life -= app->scene->enemies[currentEnemyInCombatIndex]->attack;
-			printf("%d", app->scene->allies[indexAttack]->life);
+			damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexAttack]->defense * 20;
+			app->scene->allies[indexAttack]->life -= damage;
+			printf("Ataque de enemigo a %s y le ha hecho %f de daño\n", app->scene->allies[indexAttack]->charName.GetString(), damage);
+			printf("La vida de %s es: %f\n", app->scene->allies[indexAttack]->charName.GetString(), app->scene->allies[indexAttack]->life);
 			timerEnemy = 0;
 			currentEnemyInCombatIndex++;
 		}

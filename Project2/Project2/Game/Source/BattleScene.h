@@ -95,10 +95,11 @@ public:
 	int currentEnemyInCombatIndex = 0;
 	int currentEnemySelectedIndex = 0;
 	int selectAttackIndex = 0;
+	int idAttack = 0;
 
 	int timerEnemy = 0;
 
-	
+	float damage;
 	
 };
 

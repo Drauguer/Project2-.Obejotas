@@ -37,6 +37,17 @@ public:
 	bool isPicked = false;
 	List<SString> dialoguesNPC;
 
+	// Stats de los enemigos
+	float life;
+	float attack;
+	float defense;
+	float magicPower;
+	float dexerity;
+	float maxHP;
+
+	// Debug Life
+	SDL_Rect healthBar;
+
 private:
 
 	SDL_Texture* texture;

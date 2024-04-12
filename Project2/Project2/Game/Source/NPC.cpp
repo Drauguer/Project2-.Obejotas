@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Window.h"
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -32,6 +33,10 @@ bool NPC::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	hasCombat = parameters.attribute("hasCombat").as_bool();
+	triggerInRange = parameters.attribute("triggerInRange").as_bool();
+	mapID = parameters.attribute("mapID").as_int();
+
 	InitDialogues();
 
 	return true;
@@ -49,7 +54,7 @@ bool NPC::Start() {
 		-60, 60,
 	};
 
-	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 60, 60, bodyType::STATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x / 2, position.y / 2, 80, 80, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
@@ -59,22 +64,62 @@ bool NPC::Start() {
 bool NPC::Update(float dt)
 {
 
-	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && app->dialogueManager->isTalking == false)
-	{
-		
-		ListItem<SString>* item;
+	int scale = app->win->GetScale();
 
-		for (item = dialoguesNPC.start; item != NULL; item = item->next)
+	if (triggerInRange)
+	{
+		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->dialogueManager->isTalking == false && hasTalked == false)
 		{
-			app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
+
+			app->dialogueManager->isTalking = true;
+			hasTalked = true;
+			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
+			LOG("Dialogue Start");
+
+			ListItem<SString>* item;
+
+			for (item = dialoguesNPC.start; item != NULL; item = item->next)
+			{
+				app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
+			}
+
+			if (hasCombat)
+			{
+				app->dialogueManager->activateCombat = true;
+			}
+
 		}
-		
+	}
+	else if (!triggerInRange)
+	{
+		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && app->dialogueManager->isTalking == false)
+		{
+
+			app->dialogueManager->isTalking = true;
+			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
+			LOG("Dialogue Start");
+
+			ListItem<SString>* item;
+
+			for (item = dialoguesNPC.start; item != NULL; item = item->next)
+			{
+				app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
+			}
+
+			if (hasCombat)
+			{
+				app->dialogueManager->activateCombat = true;
+			}
+
+		}
 	}
 
 	
 
-	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x)), PIXEL_TO_METERS((float32)(position.y)) }, 0);
-	app->render->DrawTexture(texture, position.x, position.y);
+	
+
+	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x + 130) / scale)), PIXEL_TO_METERS((float32)((position.y + 130) / scale)) }, 0);
+	app->render->DrawTexture(texture, position.x / scale, position.y / scale);
 
 	return true;
 }
@@ -91,12 +136,14 @@ void NPC::OnCollision(PhysBody* physA, PhysBody* physB)
 
 bool NPC::OnCollisionStay(PhysBody* physA, PhysBody* physB) 
 {
+	int scale = app->win->GetScale();
+
 	int xA, yA, xB, yB;
 
 	physA->GetPosition(xA, yA);
 	physB->GetPosition(xB, yB);
 
-	if (xB <= xA + (physA->width * 2) && xB >= xA && yB >= yA && yB <= yA + (physA->height * 2))
+	if (xB <= xA + (physA->width) && xB >= xA && yB >= yA && yB <= yA + (physA->height))
 	{
 		return true;
 	}

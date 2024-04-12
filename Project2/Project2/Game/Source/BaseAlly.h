@@ -7,6 +7,7 @@
 #include "SString.h"
 #include "List.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 class SString;
@@ -40,6 +41,12 @@ public:
 
 	virtual void InitDialogues();
 
+	virtual void InitAnims();
+
+	virtual void SetAttackAnimation();
+
+
+
 	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
 public:
@@ -49,7 +56,7 @@ public:
 
 	//Attack Features
 	bool isHighlighted;
-	int numAttacks = 2;
+	int numAttacks = 0;
 
 	List<Ability> abilities;
 
@@ -66,20 +73,34 @@ public:
 	PhysBody* rangeDialogue;
 	bool hasTalked = false;
 
+	// ANIMATIONS
+	Animation* currentAnim;
+
+	Animation Idle;
+	Animation Attack;
+
 
 	//Loading abilities
 	int abilityId;
 	const char* abilityName;
 	SString abilityString;
 
+	// Stats of each character
+	float life;
+	float attack;
+	float defense;
+	float magicPower;
+	float dexerity;
+	float maxHP;
+
+	SString charName;
+
+	// Debug Life
+	SDL_Rect healthBar;
+
+	float damage;
+
 private:
-
-	
-
-
-
-
-	
 
 
 };

@@ -44,6 +44,8 @@ public:
 
 	int Font = -1;
 
+	bool activateCombat = false;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__
