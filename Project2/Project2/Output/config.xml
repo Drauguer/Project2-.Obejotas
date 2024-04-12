@@ -76,23 +76,25 @@
       <dialogue text="dialogue 4"/>
     </npc>
 
-    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMago.png" life="30" attack="20" defense="10" magicPower="5" dexerity="20" charName="Eldrin">
+    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMago.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="32" width="32" height="32"/>
 		</Idle>
-	    <ability id="0" name="fireBall"/>
-        <ability id="1" name="curation"/>
-		<ability id="2" name="sword attack"/>
+	    <ability id="0" name="Sable Laser"/>
+        <ability id="1" name="Grito de Guerra"/>
+		<ability id="2" name="Pistola Laser"/>
+		
     </ally>
-    <ally x="100" y="250" texturepath="Assets/Textures/SpriteSheetMago.png" life="25" attack="5" defense="10" magicPower="25" dexerity="10" charName="Gale el Mago">
+    <ally x="100" y="250" texturepath="Assets/Textures/SpriteSheetMago.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="32" width="32" height="32"/>
 		</Idle>
-        <ability id="0" name="fireBall"/>
-        <ability id="1" name="curation"/>
+        <ability id="3" name="FireBall"/>
+        <ability id="4" name="Healing magic"/>
+		<ability id="5" name="Cañón Laser"/>
     </ally>
 
-    <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="20" attack="10" defense="10" magicPower="15" dexerity="10"/>
-    <enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="10" attack="10" defense="10" magicPower="15" dexerity="10"/>
+    <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="80" attack="30" defense="40" magicPower="15" dexerity="50"/>
+    <enemy x="300" y="250" texturepath="Assets/Textures/item64x64.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50"/>
   </scene>
 </config>

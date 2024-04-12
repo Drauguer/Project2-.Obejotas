@@ -81,13 +81,19 @@ public:
 	SString abilityString;
 
 	// Stats of each character
-	int life;
-	int attack;
-	int defense;
-	int magicPower;
-	int dexerity;
+	float life;
+	float attack;
+	float defense;
+	float magicPower;
+	float dexerity;
+	float maxHP;
 
 	SString charName;
+
+	// Debug Life
+	SDL_Rect healthBar;
+
+	float damage;
 
 private:
 

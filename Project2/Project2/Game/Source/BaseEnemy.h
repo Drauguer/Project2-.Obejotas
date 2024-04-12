@@ -38,11 +38,15 @@ public:
 	List<SString> dialoguesNPC;
 
 	// Stats de los enemigos
-	int life;
-	int attack;
-	int defense;
-	int magicPower;
-	int dexerity;
+	float life;
+	float attack;
+	float defense;
+	float magicPower;
+	float dexerity;
+	float maxHP;
+
+	// Debug Life
+	SDL_Rect healthBar;
 
 private:
 
