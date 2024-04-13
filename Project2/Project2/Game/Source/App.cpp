@@ -445,8 +445,12 @@ bool App::SaveFromFile() {
 
 	while (item != NULL && ret == true)
 	{
-		pugi::xml_node module = gameState.append_child(item->data->name.GetString());
-		ret = item->data->SaveState(module);
+		if (item->data->name.GetCapacity() > 1)
+		{
+			pugi::xml_node module = gameState.append_child(item->data->name.GetString());
+			ret = item->data->SaveState(module);
+		}
+
 		item = item->next;
 	}
 

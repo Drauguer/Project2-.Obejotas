@@ -202,7 +202,41 @@ bool Player::SaveState(pugi::xml_node node, int num)
 
 
 	pugi::xml_node player = node.append_child(childName.GetString());
+
+	pugi::xml_node pos = player.append_child("Position");
+	pugi::xml_attribute x = pos.append_attribute("x");
+	pugi::xml_attribute y = pos.append_attribute("y");
+	pugi::xml_node stats = player.append_child("Stats");
+	pugi::xml_attribute hp = stats.append_attribute("Life");
+	pugi::xml_attribute atk = stats.append_attribute("Attack");
+
+
+	x.set_value(pbody->body->GetPosition().x);
+	y.set_value(pbody->body->GetPosition().y);
+	hp.set_value(life);
+	atk.set_value(attack);
 	
-	
+	return true;
+}
+
+bool Player::LoadState(pugi::xml_node node, int num)
+{
+	SString childName("player%d", num);
+
+
+	pugi::xml_node player = node.child(childName.GetString());
+
+
+	pugi::xml_node pos = player.child("Position");
+	float32 x = pos.attribute("x").as_float();
+	float32 y = pos.attribute("y").as_float();
+	pugi::xml_node stats = player.child("Stats");
+
+
+	pbody->body->SetTransform(b2Vec2(x, y), 0);
+	life = stats.attribute("Life").as_int();
+	attack = stats.attribute("Attack").as_int();
+
+
 	return true;
 }

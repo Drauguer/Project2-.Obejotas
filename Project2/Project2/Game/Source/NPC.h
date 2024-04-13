@@ -32,6 +32,8 @@ public:
 
 	bool SaveState(pugi::xml_node node, int num);
 
+	bool LoadState(pugi::xml_node node, int num);
+
 	void InitDialogues();
 
 public:

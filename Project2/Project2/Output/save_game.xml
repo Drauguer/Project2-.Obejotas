@@ -4,31 +4,30 @@
 	<input />
 	<textures />
 	<audio />
-	<:anonymous />
-	<:anonymous />
 	<battleScene />
 	<scene />
 	<mainmenu />
 	<entitymanager>
-		<Player />
+		<Player>
+			<player1>
+				<Position x="4.1894145" y="8.4112072" />
+				<Stats Life="30" Attack="10" />
+			</player1>
+		</Player>
 		<NPCs>
 			<NPC1>
 				<Position x="4.29999971" y="5.29999971" />
+				<State Has_Combat="true" Has_Talked="false" />
 			</NPC1>
 			<NPC2>
 				<Position x="6.29999971" y="5.29999971" />
+				<State Has_Combat="true" Has_Talked="false" />
 			</NPC2>
 		</NPCs>
 		<Enemies />
-		<Allies>
-			<player1 />
-		</Allies>
+		<Allies />
 	</entitymanager>
 	<guiManager />
 	<dialoguemanager />
-	<:anonymous />
-	<:anonymous />
-	<renderer>
-		<camera x="0" y="0" />
-	</renderer>
+	<renderer />
 </game_state>
