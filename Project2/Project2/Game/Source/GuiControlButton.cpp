@@ -2,6 +2,7 @@
 #include "Render.h"
 #include "App.h"
 #include "Audio.h"
+#include "Window.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -19,13 +20,15 @@ GuiControlButton::~GuiControlButton()
 
 bool GuiControlButton::Update(float dt)
 {
+	int scale = app->win->GetScale();
+
 	if (state != GuiControlState::DISABLED)
 	{
 		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
 		app->input->GetMousePosition(mouseX, mouseY);
 
 		//If the position of the mouse if inside the bounds of the button 
-		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
+		if (mouseX/scale > bounds.x && mouseX/scale < bounds.x + bounds.w && mouseY/scale > bounds.y && mouseY/scale < bounds.y + bounds.h) {
 		
 			state = GuiControlState::FOCUSED;
 
