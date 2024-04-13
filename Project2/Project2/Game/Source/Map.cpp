@@ -82,7 +82,6 @@ bool Map::Update(float dt)
 
                     // L06: DONE 9: Complete the draw function
                     app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
-
                 }
             }
         }

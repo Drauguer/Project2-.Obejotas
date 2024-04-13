@@ -56,9 +56,10 @@ bool DialogueManager::Update(float dt)
 
 		if (item != NULL && ret == true)
 		{
-			SDL_Rect dialogueBoxPos = { (windowW / 2 - 600) / scale, (windowH / 2 + 120) / scale, 1200 / scale, 250 / scale };
+			SDL_Rect dialogueBoxPos = { (windowW / 2 - 600 - app->render->camera.x) / scale, (windowH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
+			SDL_Rect dialogueBoxPos2 = { (windowW / 2 - 600) / scale, (windowH / 2 + 120) / scale, 1200 / scale, 250 / scale };
 			app->render->DrawRectangle(dialogueBoxPos, 0, 50, 255, 255);
-			app->fonts->BlitText(dialogueBoxPos.x + 15, dialogueBoxPos.y + 15, Font,item->data->text.GetString());
+			app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, Font,item->data->text.GetString());
 			LOG("Write Text");
 
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a)

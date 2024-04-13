@@ -163,9 +163,11 @@ public:
     SString path;
     PathFinding* pathfinding;
 
+    MapData mapData;
+
+
 private:
     // L05: DONE 1: Declare a variable data of the struct MapData
-    MapData mapData;
     bool mapLoaded;
     MapLayer* navigationLayer;
     int blockedGid = 1217; //!!!! make sure that you assign blockedGid according to your map
