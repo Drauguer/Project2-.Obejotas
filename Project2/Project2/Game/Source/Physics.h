@@ -27,6 +27,9 @@ enum class ColliderType {
 	PLAYER,
 	ITEM,
 	PLATFORM,
+	TOMAP1,
+	TOMAP2,
+	TOINTERIOR,
 	NPC,
 	UNKNOWN
 	// ..
@@ -81,11 +84,13 @@ public:
 
 	void Disable();
 
+	// Box2D World
+	b2World* world;
+
 private:
 
 	// Debug mode
 	bool debug;
 
-	// Box2D World
-	b2World* world;
+	
 };

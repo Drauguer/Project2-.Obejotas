@@ -11,6 +11,7 @@
 #include "BattleScene.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "Window.h"
+#include "Map.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -189,6 +190,24 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::NPC:
 		LOG("Collision NPC");
+		break;
+	case ColliderType::TOMAP1:
+		app->scene->mapID = 0;
+		app->map->CleanUp();
+		app->AwakeScene();
+		app->map->Start();
+		break;
+	case ColliderType::TOMAP2:
+		app->scene->mapID = 1;
+		app->map->CleanUp();
+		app->AwakeScene();
+		app->map->Start();
+		break;
+	case ColliderType::TOINTERIOR:
+		app->scene->mapID = 2;
+		app->map->CleanUp();
+		app->AwakeScene();
+		app->map->Start();
 		break;
 	default:
 		break;

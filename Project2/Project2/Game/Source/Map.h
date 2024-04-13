@@ -150,6 +150,9 @@ public:
     // L13: Create navigation map for pathfinding
     void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
+    // Load Colliders
+    bool LoadObjectGroups(pugi::xml_node mapNode);
+
     int GetTileWidth();
     int GetTileHeight();
 

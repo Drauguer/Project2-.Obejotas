@@ -52,8 +52,8 @@ bool MainMenu::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.start)
 	{
-		app->map->Enable();
 		app->physics->Enable();
+		app->map->Enable();
 		app->entityManager->Enable();
 		app->scene->Enable();
 		this->Disable();

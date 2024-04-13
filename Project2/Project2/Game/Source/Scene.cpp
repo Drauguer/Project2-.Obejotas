@@ -46,8 +46,23 @@ bool Scene::Awake(pugi::xml_node config)
 	player->config = config.child("player");
 
 	//Get the map name from the config file and assigns the value in the module
-	app->map->name = config.child("map").attribute("name").as_string();
-	app->map->path = config.child("map").attribute("path").as_string();
+
+	switch (mapID)
+	{
+	case 0:
+		app->map->name = config.child("map").attribute("name").as_string();
+		app->map->path = config.child("map").attribute("path").as_string();
+		break;
+	case 1:
+		app->map->name = config.child("map2").attribute("name").as_string();
+		app->map->path = config.child("map2").attribute("path").as_string();
+		break;
+	case 2:
+		app->map->name = config.child("mapInterior").attribute("name").as_string();
+		app->map->path = config.child("mapInterior").attribute("path").as_string();
+		break;
+	}
+	
 
 	
 
@@ -62,8 +77,12 @@ bool Scene::Awake(pugi::xml_node config)
 	// iterate NPCs in scene
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
-		NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
-		npc->parameters = npcNode;
+		if (npcNode.attribute("mapID").as_int() == mapID)
+		{
+			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+			npc->parameters = npcNode;
+		}
+		
 	}
 
 	// iterate Enemies in scene
@@ -112,9 +131,6 @@ bool Scene::Start()
 	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
 
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene
-
-	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20};
-	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
 	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 + 120, 240, 80 };
 	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Pause", ExitButton, this);
