@@ -45,6 +45,11 @@ bool BattleScene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool BattleScene::Start()
 {
+	hoverFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/001Hover01.wav");
+	clickFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/013Confirm03.wav");
+	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
+	deniedFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/033Denied03.wav");
+
 	combatState = CombatState::NONE;
 	return true;
 }
@@ -84,7 +89,10 @@ bool BattleScene::Update(float dt)
 					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
 					currentPlayerInCombatIndex += 1;
 					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+
+					app->audio->PlayFx(hoverFx);
 				}
+				
 			}
 			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0)
 			{
@@ -95,7 +103,10 @@ bool BattleScene::Update(float dt)
 					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
 					currentPlayerInCombatIndex -= 1;
 					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+
+					app->audio->PlayFx(hoverFx);
 				}
+				
 			}
 			//Selected character, waiting for action
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || pad.a  )
@@ -104,11 +115,16 @@ bool BattleScene::Update(float dt)
 				{
 					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
 					combatState = CombatState::SELECT_ACTION;
+
+					app->audio->PlayFx(clickFx);
 				}
 				else
 				{
 					printf("that character is dead, please select another\n");
+
+					app->audio->PlayFx(deniedFx);
 				}
+				
 			}
 
 			app->render->DrawCircle((app->scene->allies[currentPlayerInCombatIndex]->position.x - 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y + 20) / scale, 5, 255, 0, 0, 255);
@@ -132,7 +148,9 @@ bool BattleScene::Update(float dt)
 				{
 					selectAttackIndex += 1;
 
+					app->audio->PlayFx(hoverFx);
 				}
+				
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0)
 			{
@@ -140,13 +158,17 @@ bool BattleScene::Update(float dt)
 				{
 					selectAttackIndex -= 1;
 
+					app->audio->PlayFx(hoverFx);
 				}
+				
 			}
 			//Selected action
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || pad.a )
 			{
 				currentEnemySelectedIndex = FindFirstEnemyIndex();
 				app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(app->scene->allies[currentPlayerInCombatIndex]->abilities[selectAttackIndex].id, currentPlayerInCombatIndex);
+
+				app->audio->PlayFx(clickFx);
 			}
 			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 			{
@@ -154,6 +176,7 @@ bool BattleScene::Update(float dt)
 				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
 				combatState = CombatState::SELECT_CHARACTER;
 
+				app->audio->PlayFx(declineFx);
 			}
 			break;
 		case CombatState::SELECT_ENEMY:
@@ -166,7 +189,10 @@ bool BattleScene::Update(float dt)
 					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
 					currentEnemySelectedIndex += 1;
 					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
+
+					app->audio->PlayFx(hoverFx);
 				}
+				
 			}
 			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0)
 			{
@@ -175,7 +201,10 @@ bool BattleScene::Update(float dt)
 					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
 					currentEnemySelectedIndex -= 1;
 					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
+
+					app->audio->PlayFx(hoverFx);
 				}
+				
 			}
 			//Selected character, waiting for action
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || pad.a )
@@ -209,6 +238,8 @@ bool BattleScene::Update(float dt)
 				else
 				{
 					printf("that enemy is dead, please select another\n");
+
+					app->audio->PlayFx(deniedFx);
 				}
 				if (CheckAllPlayersAttacked()) {
 					CheckState();
@@ -224,12 +255,16 @@ bool BattleScene::Update(float dt)
 					idAttack = 0;
 					selectAttackIndex = 0;
 				}
+
+				app->audio->PlayFx(clickFx);
 			}
 			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 			{
 				printf("vuelves a la seleccion de personaje\n");
 				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
 				combatState = CombatState::SELECT_CHARACTER;
+
+				app->audio->PlayFx(declineFx);
 
 			}
 

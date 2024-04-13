@@ -103,6 +103,11 @@ public:
 
 	//Cooldown for selecting abilities
 	//float selectionCooldown = 1;
+
+	unsigned int hoverFx;
+	unsigned int clickFx;
+	unsigned int declineFx;
+	unsigned int deniedFx;
 	
 };
 

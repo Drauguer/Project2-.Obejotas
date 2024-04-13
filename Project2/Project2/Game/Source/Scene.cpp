@@ -115,8 +115,8 @@ bool Scene::Start()
 
 	//SFX loading
 	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
-	encounterFx = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg");
-	/*walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/08Steprock02.wav");*/
+	encounterFx = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/55Encounter02.wav");
+	
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

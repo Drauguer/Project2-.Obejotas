@@ -52,6 +52,10 @@ bool BaseEnemy::Awake() {
 
 bool BaseEnemy::Start() {
 
+	//load Audio
+
+
+
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 

@@ -190,6 +190,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::NPC:
 		LOG("Collision NPC");
+		//app->audio->PlayFx(app->scene->encounterFx);
 		break;
 	case ColliderType::TOMAP1:
 		app->scene->mapID = 0;
