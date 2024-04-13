@@ -30,6 +30,8 @@ public:
 
 	bool OnCollisionStay(PhysBody* physA, PhysBody* physB);
 
+	bool SaveState(pugi::xml_node node, int num);
+
 	void InitDialogues();
 
 public:

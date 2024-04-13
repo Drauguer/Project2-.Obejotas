@@ -11,9 +11,18 @@
 	<mainmenu />
 	<entitymanager>
 		<Player />
-		<NPCs />
+		<NPCs>
+			<NPC1>
+				<Position x="4.29999971" y="5.29999971" />
+			</NPC1>
+			<NPC2>
+				<Position x="6.29999971" y="5.29999971" />
+			</NPC2>
+		</NPCs>
 		<Enemies />
-		<Allies />
+		<Allies>
+			<player1 />
+		</Allies>
 	</entitymanager>
 	<guiManager />
 	<dialoguemanager />

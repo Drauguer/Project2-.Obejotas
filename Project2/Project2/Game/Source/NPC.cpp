@@ -152,3 +152,21 @@ bool NPC::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 
 	return false;
 }
+
+
+bool NPC::SaveState(pugi::xml_node node, int num)
+{
+	SString childName("NPC%d", num);
+
+
+	pugi::xml_node NPC = node.append_child(childName.GetString());
+
+	pugi::xml_node pos = NPC.append_child("Position");
+	pugi::xml_attribute x = pos.append_attribute("x");
+	pugi::xml_attribute y = pos.append_attribute("y");
+
+	x.set_value(pbody->body->GetPosition().x);
+	y.set_value(pbody->body->GetPosition().y);
+
+	return true;
+}
