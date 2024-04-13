@@ -181,8 +181,8 @@ bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 
 // Mira que ataque tiene que hacer el personaje
 void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
-{
 	//Here we check if we have to select an enemy or just make the effect 
+{
 
 	switch (selectAttackIndex)
 	{
@@ -211,7 +211,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		break;
 	case 2:
 		hasAttacked = true;
-		printf("Pium Pium!! Pistola Laser!\n");
+		printf("Pium Pium!! Visión Laser!\n");
 		app->battleScene->idAttack = 2;
 		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
 

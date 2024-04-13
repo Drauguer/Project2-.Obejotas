@@ -78,7 +78,7 @@
       <dialogue text="dialogue 4"/>
     </npc>
 
-    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
+    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
@@ -105,12 +105,12 @@
         <pushback x="1280" y="64" width="80" height="64"/>
         <pushback x="1360" y="64" width="80" height="64"/>
       </Attack>
-	    <ability id="0" name="Sable Laser"/>
-        <ability id="1" name="Grito de Guerra"/>
-		<ability id="2" name="Pistola Laser"/>
+		<ability id="3" name="FireBall"/>
+		<ability id="4" name="Healing magic"/>
+		<ability id="5" name="Cañón Laser"/>
 		
     </ally>
-    <ally x="100" y="250" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
+    <ally x="100" y="250" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
@@ -145,9 +145,9 @@
 			<pushback x="1400" y="64" width="100" height="64"/>
 	
 		</Attack>
-        <ability id="3" name="FireBall"/>
-        <ability id="4" name="Healing magic"/>
-		<ability id="5" name="Cañón Laser"/>
+        <ability id="0" name="Sable Laser"/>
+        <ability id="1" name="Grito de Guerra"/>
+		<ability id="2" name="Visión Laser"/>
     </ally>
 
     <enemy x="300" y="150" texturepath="Assets/Textures/item64x64.png" life="80" attack="30" defense="40" magicPower="15" dexerity="50"/>
