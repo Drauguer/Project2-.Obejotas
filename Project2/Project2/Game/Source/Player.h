@@ -9,7 +9,7 @@
 
 struct SDL_Texture;
 
-class Player : public BaseAlly
+class Player : public Entity
 {
 public:
 
@@ -28,8 +28,6 @@ public:
 	// Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
-
 	void InitAnims();
 
 	bool SaveState(pugi::xml_node node, int num);
@@ -39,6 +37,7 @@ public:
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
 	SDL_Texture* texture = NULL;
+	const char* texturePath;
 	pugi::xml_node config;
 	uint texW, texH;
 	
