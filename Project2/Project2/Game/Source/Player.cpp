@@ -113,6 +113,7 @@ bool Player::Update(float dt)
 	{
 		position.x = 100;
 		position.y = 150;
+		b2Vec2 vel = b2Vec2(0, 0);
 
 		//AttackScene
 		if (isHighlighted) {
