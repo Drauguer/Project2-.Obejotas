@@ -37,6 +37,8 @@ public:
 
 	void Disable();
 
+	bool SaveState(pugi::xml_node node);
+
 public:
 
 	List<Entity*> entities;

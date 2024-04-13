@@ -165,3 +165,49 @@ void EntityManager::Disable()
 		CleanUp();
 	}
 }
+
+bool EntityManager::SaveState(pugi::xml_node node)
+{
+	bool ret = true;
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	pugi::xml_node player = node.append_child("Player");
+	pugi::xml_node npcs = node.append_child("NPCs");
+	pugi::xml_node enemies = node.append_child("Enemies");
+	pugi::xml_node allies = node.append_child("Allies");
+
+	int playerNo = 1;
+	int npcNo = 1;
+	int enemyNo = 1;
+	int allyNo = 1;
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+		EntityType type = item->data->type;
+		switch (type)
+		{
+		case EntityType::PLAYER:
+			ret = pEntity->SaveState(player, playerNo);
+			playerNo++;
+			break;
+		case EntityType::NPC:
+			ret = pEntity->SaveState(npcs, npcNo);
+			npcNo++;
+			break;
+		case EntityType::ENEMY:
+			ret = pEntity->SaveState(enemies, enemyNo);
+			enemyNo++;
+			break;
+		case EntityType::ALLY:
+			ret = pEntity->SaveState(allies, allyNo);
+			allyNo++;
+			break;
+		default:
+			break;
+		}
+	}
+
+	return ret;
+}

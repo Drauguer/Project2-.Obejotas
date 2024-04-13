@@ -229,3 +229,14 @@ void Player::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	}
 }
 
+
+bool Player::SaveState(pugi::xml_node node, int num)
+{
+	SString childName("player%d", num);
+
+
+	pugi::xml_node player = node.append_child(childName.GetString());
+	
+	
+	return true;
+}

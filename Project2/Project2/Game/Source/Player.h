@@ -32,6 +32,7 @@ public:
 
 	void InitAnims();
 
+	bool SaveState(pugi::xml_node node, int num);
 
 public:
 

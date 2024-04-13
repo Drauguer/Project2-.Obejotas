@@ -5,11 +5,19 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<scene />
 	<:anonymous />
-	<entitymanager />
+	<battleScene />
+	<scene />
+	<mainmenu />
+	<entitymanager>
+		<Player />
+		<NPCs />
+		<Enemies />
+		<Allies />
+	</entitymanager>
 	<guiManager />
 	<dialoguemanager />
+	<:anonymous />
 	<:anonymous />
 	<renderer>
 		<camera x="0" y="0" />
