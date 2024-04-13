@@ -195,6 +195,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		printf("Aumenta el ataque x1,5 WROAAAAR\n");
 		app->battleScene->idAttack = 1;
 		app->scene->allies[currentPlayerIndex]->attack *= 1.5f;
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
 		if (app->battleScene->CheckAllPlayersAttacked()) {
 			app->battleScene->CheckState();
 			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
@@ -210,6 +211,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		hasAttacked = true;
 		printf("Pium Pium!! Pistola Laser!\n");
 		app->battleScene->idAttack = 2;
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
 
 		for (int i = 0; i < app->scene->enemies.Count(); ++i)
 		{
@@ -237,6 +239,8 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 3:
 		hasAttacked = true;
 		printf("FIREBALL!!!\n");
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
+
 		app->battleScene->idAttack = 3;
 		damage = app->scene->allies[currentPlayerIndex]->magicPower / 2;
 
@@ -260,6 +264,8 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 4:
 		hasAttacked = true;
 		printf("DIOSA CURAME!!!\n");
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
+
 		app->battleScene->idAttack = 4;
 
 		for (int i = 0; i < app->scene->allies.Count(); ++i)
