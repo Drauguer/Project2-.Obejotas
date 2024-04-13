@@ -30,6 +30,13 @@ void NPC::InitDialogues()
 
 bool NPC::Awake() {
 
+	
+
+	return true;
+}
+
+bool NPC::Start() {
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -38,11 +45,6 @@ bool NPC::Awake() {
 	mapID = parameters.attribute("mapID").as_int();
 
 	InitDialogues();
-
-	return true;
-}
-
-bool NPC::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);

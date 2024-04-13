@@ -132,7 +132,7 @@ private:
 	// L04: DONE 2 - Create a variable to load and store the XML file in memory
 	// xml_document to store the config file
 	pugi::xml_document configFile;
-	pugi::xml_document configNode;
+	pugi::xml_node configNode;
 	
 	uint frames;
 	float dt;

@@ -335,7 +335,7 @@ bool Map::LoadObjectGroups(pugi::xml_node mapNode)
 
     for (pugi::xml_node objectNode = mapNode.child("objectgroup"); objectNode && ret; objectNode = objectNode.next_sibling("objectgroup")) {
 
-        if (strcmp(objectNode.attribute("name").as_string(), "collider"))
+        if (strcmp(objectNode.attribute("name").as_string(), "collider") == 0)
         {
             for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
 
@@ -354,7 +354,7 @@ bool Map::LoadObjectGroups(pugi::xml_node mapNode)
 
             }
         }
-        else if (strcmp(objectNode.attribute("name").as_string(), "toMap1"))
+        else if (strcmp(objectNode.attribute("name").as_string(), "toMap1Left") == 0)
         {
             for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
 
@@ -369,11 +369,11 @@ bool Map::LoadObjectGroups(pugi::xml_node mapNode)
                 PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
 
 
-                c1->ctype = ColliderType::TOMAP1;
+                c1->ctype = ColliderType::TOMAP1_LEFT;
 
             }
         }
-        else if (strcmp(objectNode.attribute("name").as_string(), "toMap2"))
+        else if (strcmp(objectNode.attribute("name").as_string(), "toMap1Right") == 0)
         {
             for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
 
@@ -388,11 +388,68 @@ bool Map::LoadObjectGroups(pugi::xml_node mapNode)
                 PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
 
 
-                c1->ctype = ColliderType::TOMAP2;
+                c1->ctype = ColliderType::TOMAP1_RIGHT;
 
             }
         }
-        else if (strcmp(objectNode.attribute("name").as_string(), "toInterior"))
+        else if (strcmp(objectNode.attribute("name").as_string(), "toMap1Center") == 0)
+        {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+                c1->ctype = ColliderType::TOMAP1_CENTER;
+
+            }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toMap2Left") == 0)
+        {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+                c1->ctype = ColliderType::TOMAP2_LEFT;
+
+            }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toMap2Right") == 0)
+        {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+                c1->ctype = ColliderType::TOMAP2_RIGHT;
+
+            }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toInterior") == 0)
         {
             for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
 

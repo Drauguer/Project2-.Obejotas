@@ -55,6 +55,14 @@ Mago::~Mago() {
 
 bool Mago::Awake() {
 
+	
+
+
+	return true;
+}
+
+bool Mago::Start() {
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -68,12 +76,6 @@ bool Mago::Awake() {
 		char* abilityString = const_cast<char*>(abilityName);
 		abilities.Add({ abilityId, abilityString });
 	}
-
-
-	return true;
-}
-
-bool Mago::Start() {
 
 	texture = app->tex->Load(texturePath);
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="51">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="52">
  <tileset firstgid="1" name="TX Tileset Grass" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="Tiles/TX Tileset Grass.png" width="256" height="256"/>
  </tileset>
@@ -7298,9 +7298,11 @@
   <object id="47" x="1920" y="0" width="32" height="640"/>
   <object id="48" x="-32" y="0" width="32" height="640"/>
  </objectgroup>
- <objectgroup id="7" name="toMap2">
+ <objectgroup id="7" name="toMap2Left">
   <object id="45" x="0" y="0" width="320" height="32"/>
-  <object id="46" x="1600" y="0" width="320" height="32"/>
+ </objectgroup>
+ <objectgroup id="9" name="toMap2Right">
+  <object id="51" x="1600" y="0" width="320" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="toInterior">
   <object id="49" x="928" y="480" width="64" height="32"/>

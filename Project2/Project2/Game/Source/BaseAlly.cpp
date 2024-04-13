@@ -57,6 +57,13 @@ void BaseAlly::InitAnims()
 
 bool BaseAlly::Awake() 
 {
+	
+
+	return true;
+}
+
+bool BaseAlly::Start() {
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -74,7 +81,7 @@ bool BaseAlly::Awake()
 	healthBar.h = 5;
 
 
-	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability")) 
+	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability"))
 	{
 		abilityId = node.attribute("id").as_int();
 		abilityName = node.attribute("name").as_string();
@@ -82,15 +89,10 @@ bool BaseAlly::Awake()
 		abilities.Add({ abilityId, abilityString });
 		numAttacks++;
 	}
-	
+
 
 	//InitDialogues();
 	InitAnims();
-
-	return true;
-}
-
-bool BaseAlly::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);

@@ -2067,7 +2067,7 @@
   <object id="21" x="96" y="192" width="96" height="32"/>
   <object id="22" x="288" y="128" width="64" height="128"/>
  </objectgroup>
- <objectgroup id="8" name="toMap1">
+ <objectgroup id="8" name="toMap1Center">
   <object id="23" x="288" y="608" width="64" height="32"/>
  </objectgroup>
 </map>

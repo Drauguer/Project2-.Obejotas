@@ -103,6 +103,7 @@ public:
 
 	// ID for Load map
 	int mapID = 0;
+	int playerMapID = 0;
 
 };
 

@@ -30,6 +30,15 @@ void BaseEnemy::InitDialogues()
 
 bool BaseEnemy::Awake() {
 
+	
+
+	
+
+	return true;
+}
+
+bool BaseEnemy::Start() {
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -44,13 +53,6 @@ bool BaseEnemy::Awake() {
 	healthBar.y = position.y / 2 + 30;
 	healthBar.w = 100;
 	healthBar.h = 5;
-
-	
-
-	return true;
-}
-
-bool BaseEnemy::Start() {
 
 	//load Audio
 

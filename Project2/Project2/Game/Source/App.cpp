@@ -198,6 +198,7 @@ bool App::LoadConfig()
 	if (result)
 	{
 		LOG("config.xml parsed without errors");
+		configNode = configFile.child("config");
 	}
 	else
 	{

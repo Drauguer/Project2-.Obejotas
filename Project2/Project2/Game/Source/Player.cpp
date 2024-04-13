@@ -61,22 +61,55 @@ void Player::InitAnims()
 
 bool Player::Awake() {
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	
 	//life = parameters.attribute("life").as_int();
 	//attack = parameters.attribute("attack").as_int();
 
 	
 	
-	InitAnims();
+	
 
 	return true;
 }
 
 bool Player::Start() {
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	int scale = app->win->GetScale();
+
+	switch (app->scene->playerMapID)
+	{
+	case 0:
+		position.x = parameters.attribute("x").as_int() * scale;
+		position.y = parameters.attribute("y").as_int() * scale;
+		break;
+	case 1:
+		position.x = parameters.attribute("x1").as_int() * scale;
+		position.y = parameters.attribute("y1").as_int() * scale;
+		break;
+	case 2:
+		position.x = parameters.attribute("x2").as_int() * scale;
+		position.y = parameters.attribute("y2").as_int() * scale;
+		break;
+	case 3:
+		position.x = parameters.attribute("x3").as_int() * scale;
+		position.y = parameters.attribute("y3").as_int() * scale;
+		break;
+	case 4:
+		position.x = parameters.attribute("x4").as_int() * scale;
+		position.y = parameters.attribute("y4").as_int() * scale;
+		break;
+	case 5:
+		position.x = parameters.attribute("x5").as_int() * scale;
+		position.y = parameters.attribute("y5").as_int() * scale;
+		break;
+	}
+
+	
+	texturePath = parameters.attribute("texturePath").as_string();
+
+	texture = app->tex->Load(texturePath);
+
+	InitAnims();
 	
 	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/08Steprock02.wav");
 	
@@ -192,23 +225,65 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision NPC");
 		//app->audio->PlayFx(app->scene->encounterFx);
 		break;
-	case ColliderType::TOMAP1:
+	case ColliderType::TOMAP1_LEFT:
 		app->scene->mapID = 0;
 		app->map->CleanUp();
+		app->entityManager->Disable();
 		app->AwakeScene();
+		app->physics->Start();
+		app->entityManager->Enable();
 		app->map->Start();
+		app->scene->playerMapID = 0;
 		break;
-	case ColliderType::TOMAP2:
+	case ColliderType::TOMAP1_RIGHT:
+		app->scene->mapID = 0;
+		app->map->CleanUp();
+		app->entityManager->Disable();
+		app->AwakeScene();
+		app->physics->Start();
+		app->entityManager->Enable();
+		app->map->Start();
+		app->scene->playerMapID = 1;
+		break;
+	case ColliderType::TOMAP1_CENTER:
+		app->scene->mapID = 0;
+		app->map->CleanUp();
+		app->entityManager->Disable();
+		app->AwakeScene();
+		app->physics->Start();
+		app->entityManager->Enable();
+		app->map->Start();
+		app->scene->playerMapID = 5;
+		break;
+	case ColliderType::TOMAP2_LEFT:
 		app->scene->mapID = 1;
 		app->map->CleanUp();
+		app->entityManager->Disable();
 		app->AwakeScene();
+		app->physics->Start();
+		app->entityManager->Enable();
 		app->map->Start();
+		app->scene->playerMapID = 2;
+		break;
+	case ColliderType::TOMAP2_RIGHT:
+		app->scene->mapID = 1;
+		app->map->CleanUp();
+		app->entityManager->Disable();
+		app->AwakeScene();
+		app->physics->Start();
+		app->entityManager->Enable();
+		app->map->Start();
+		app->scene->playerMapID = 3;
 		break;
 	case ColliderType::TOINTERIOR:
 		app->scene->mapID = 2;
 		app->map->CleanUp();
+		app->entityManager->Disable();
 		app->AwakeScene();
+		app->physics->Start();
+		app->entityManager->Enable();
 		app->map->Start();
+		app->scene->playerMapID = 4;
 		break;
 	default:
 		break;
