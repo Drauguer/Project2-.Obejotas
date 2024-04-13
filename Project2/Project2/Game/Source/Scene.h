@@ -94,6 +94,13 @@ public:
 	//Fullscreen
 	bool isFullScreen = false;
 
+	//DebugMode
+	bool isOnDebugMode = false;
+
+	//limit of the map 
+	int mapLimitX = 1600;
+	int mapLimitY = 780;
+
 };
 
 #endif // __SCENE_H__
