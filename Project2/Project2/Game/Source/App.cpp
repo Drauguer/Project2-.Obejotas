@@ -116,13 +116,23 @@ bool App::Awake()
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
-
+			pugi::xml_node node = configNode.child(item->data->name.GetString());
 			ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
 			item = item->next;
 		}
 	}
 
 	LOG("Timer App Awake(): %f", timer.ReadMSec());
+
+	return ret;
+}
+
+bool App::AwakeScene()
+{
+	bool ret = true;
+
+	pugi::xml_node node = configNode.child("scene");
+	ret = app->scene->Awake(node);
 
 	return ret;
 }
@@ -445,8 +455,12 @@ bool App::SaveFromFile() {
 
 	while (item != NULL && ret == true)
 	{
-		pugi::xml_node module = gameState.append_child(item->data->name.GetString());
-		ret = item->data->SaveState(module);
+		if (item->data->name.GetCapacity() > 1)
+		{
+			pugi::xml_node module = gameState.append_child(item->data->name.GetString());
+			ret = item->data->SaveState(module);
+		}
+
 		item = item->next;
 	}
 

@@ -35,7 +35,9 @@ bool MainMenu::Awake(pugi::xml_node config)
 
 bool MainMenu::Start()
 {
-	
+	app->win->GetWindowSize(windowW, windowH);
+	img = app->tex->Load("Assets/Textures/main_screen.png");
+
 	return true;
 }
 
@@ -48,12 +50,13 @@ bool MainMenu::Update(float dt)
 {
 	GamePad& pad = app->input->pads[0];
 
+	app->render->DrawTexture(img, textPosX, textPosY, false);
 	app->render->DrawCircle(300, 300, 50, 0, 255, 0, 255);
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.start)
 	{
-		app->map->Enable();
 		app->physics->Enable();
+		app->map->Enable();
 		app->entityManager->Enable();
 		app->scene->Enable();
 		this->Disable();

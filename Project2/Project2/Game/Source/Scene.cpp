@@ -46,8 +46,23 @@ bool Scene::Awake(pugi::xml_node config)
 	player->config = config.child("player");
 
 	//Get the map name from the config file and assigns the value in the module
-	app->map->name = config.child("map").attribute("name").as_string();
-	app->map->path = config.child("map").attribute("path").as_string();
+
+	switch (mapID)
+	{
+	case 0:
+		app->map->name = config.child("map").attribute("name").as_string();
+		app->map->path = config.child("map").attribute("path").as_string();
+		break;
+	case 1:
+		app->map->name = config.child("map2").attribute("name").as_string();
+		app->map->path = config.child("map2").attribute("path").as_string();
+		break;
+	case 2:
+		app->map->name = config.child("mapInterior").attribute("name").as_string();
+		app->map->path = config.child("mapInterior").attribute("path").as_string();
+		break;
+	}
+	
 
 	
 
@@ -62,8 +77,12 @@ bool Scene::Awake(pugi::xml_node config)
 	// iterate NPCs in scene
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
-		NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
-		npc->parameters = npcNode;
+		if (npcNode.attribute("mapID").as_int() == mapID)
+		{
+			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+			npc->parameters = npcNode;
+		}
+		
 	}
 
 	// iterate Enemies in scene
@@ -113,9 +132,6 @@ bool Scene::Start()
 
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene
 
-	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20};
-	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
-
 	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 + 120, 240, 80 };
 	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Pause", ExitButton, this);
 	exitScene->state = GuiControlState::DISABLED;
@@ -159,23 +175,54 @@ bool Scene::Update(float dt)
 			isFullScreen = false;
 		}
 	}
-
+	int scale = app->win->GetScale();
 
 	//L02 DONE 3: Make the camera movement independent of framerate
 	float camSpeed = 1; 
-	if (!isOnCombat) {
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-			app->render->camera.y -= (int)ceil(camSpeed * dt);
 
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if (isOnDebugMode)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 			app->render->camera.y += (int)ceil(camSpeed * dt);
 
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			app->render->camera.y -= (int)ceil(camSpeed * dt);
+
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-			app->render->camera.x -= (int)ceil(camSpeed * dt);
+			app->render->camera.x += (int)ceil(camSpeed * dt);
 
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-			app->render->camera.x += (int)ceil(camSpeed * dt);
+			app->render->camera.x -= (int)ceil(camSpeed * dt);
 	}
+	else
+	{
+		mapLimitX = app->map->mapData.width * app->map->mapData.tilewidth - app->win->screenSurface->w / (2 * scale);
+		mapLimitY = app->map->mapData.height * app->map->mapData.tileheight - app->win->screenSurface->h / (2 * scale);
+
+		//Moving camera function
+		if (player->position.x > app->win->screenSurface->w / (2 * scale)) {
+			if (player->position.x > mapLimitX) {
+				app->render->camera.x = (-mapLimitX * scale) + app->win->screenSurface->w / 2;
+			}
+			else
+			{
+				app->render->camera.x = (-player->position.x * scale) + app->win->screenSurface->w / 2;
+
+			}
+		}
+		if (player->position.y > app->win->screenSurface->h / (2 * scale)) {
+			if (player->position.y > mapLimitY) {
+				app->render->camera.y = (-mapLimitY * scale) + app->win->screenSurface->h / 2;
+			}
+			else
+			{
+				app->render->camera.y = (-player->position.y * scale) + app->win->screenSurface->h / 2;
+
+			}
+		}
+	}
+
+	
 	
 	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		app->scene->player->isOnPause = true;
@@ -187,6 +234,8 @@ bool Scene::Update(float dt)
 	{
 		
 		isOnCombat = !isOnCombat;
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
 		this->Disable();
 		app->battleScene->Enable();
 		app->audio->PlayFx(encounterFx);

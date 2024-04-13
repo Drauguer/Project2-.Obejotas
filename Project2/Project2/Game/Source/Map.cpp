@@ -82,7 +82,6 @@ bool Map::Update(float dt)
 
                     // L06: DONE 9: Complete the draw function
                     app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
-
                 }
             }
         }
@@ -136,6 +135,7 @@ bool Map::CleanUp()
         RELEASE(layerItem->data);
         layerItem = layerItem->next;
     }
+    mapData.layers.Clear();
 
     return true;
 }
@@ -157,6 +157,8 @@ bool Map::Load(SString mapFileName)
         ret = false;
     }
     else {
+
+        ret = LoadObjectGroups(mapFileXML.child("map"));
 
         //Fill mapData variable
         mapData.width = mapFileXML.child("map").attribute("width").as_int();
@@ -322,6 +324,97 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
         p->value = propertieNode.attribute("value").as_bool(); // (!!) I'm assuming that all values are bool !!
 
         properties.propertyList.Add(p);
+    }
+
+    return ret;
+}
+
+bool Map::LoadObjectGroups(pugi::xml_node mapNode)
+{
+    bool ret = true;
+
+    for (pugi::xml_node objectNode = mapNode.child("objectgroup"); objectNode && ret; objectNode = objectNode.next_sibling("objectgroup")) {
+
+        if (strcmp(objectNode.attribute("name").as_string(), "collider"))
+        {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangle(x, y, width, height, STATIC);
+
+
+                c1->ctype = ColliderType::PLATFORM;
+
+            }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toMap1"))
+        {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+                c1->ctype = ColliderType::TOMAP1;
+
+            }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toMap2"))
+        {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+                c1->ctype = ColliderType::TOMAP2;
+
+            }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toInterior"))
+        {
+            for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+                int x = objectIt.attribute("x").as_int();
+                int y = objectIt.attribute("y").as_int();
+                int width = objectIt.attribute("width").as_int();
+                int height = objectIt.attribute("height").as_int();
+
+                x += width / 2;
+                y += height / 2;
+
+                PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+                c1->ctype = ColliderType::TOINTERIOR;
+
+            }
+        }
+
+        
+
+        
     }
 
     return ret;

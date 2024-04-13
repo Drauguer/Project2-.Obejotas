@@ -152,3 +152,47 @@ bool NPC::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 
 	return false;
 }
+
+
+bool NPC::SaveState(pugi::xml_node node, int num)
+{
+	SString childName("NPC%d", num);
+
+
+	pugi::xml_node npc = node.append_child(childName.GetString());
+
+	pugi::xml_node pos = npc.append_child("Position");
+	pugi::xml_attribute x = pos.append_attribute("x");
+	pugi::xml_attribute y = pos.append_attribute("y");
+	pugi::xml_node state = npc.append_child("State");
+	pugi::xml_attribute combat = state.append_attribute("Has_Combat");
+	pugi::xml_attribute talked = state.append_attribute("Has_Talked");
+
+
+	x.set_value(pbody->body->GetPosition().x);
+	y.set_value(pbody->body->GetPosition().y);
+	combat.set_value(hasCombat);
+	talked.set_value(hasTalked);
+	return true;
+}
+
+
+bool NPC::LoadState(pugi::xml_node node, int num)
+{
+	SString childName("NPC%d", num);
+
+
+	pugi::xml_node npc = node.child(childName.GetString());
+	pugi::xml_node pos = npc.child("Position");
+	float32 x = pos.attribute("x").as_float();
+	float32 y = pos.attribute("y").as_float();
+	pugi::xml_node state = npc.child("State");
+	
+	pbody->body->SetTransform(b2Vec2(x, y), 0);
+	hasCombat = state.attribute("Has_Combat").as_bool();
+	hasTalked = state.attribute("Has_Talked").as_bool();
+
+	return true;
+
+
+}

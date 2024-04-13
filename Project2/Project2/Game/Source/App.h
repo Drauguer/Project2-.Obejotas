@@ -69,6 +69,8 @@ public:
 	// Request to load data from XML file 
 	bool SaveRequest();
 
+	bool AwakeScene();
+
 private:
 
 	// Load config file
@@ -130,6 +132,7 @@ private:
 	// L04: DONE 2 - Create a variable to load and store the XML file in memory
 	// xml_document to store the config file
 	pugi::xml_document configFile;
+	pugi::xml_document configNode;
 	
 	uint frames;
 	float dt;

@@ -94,6 +94,16 @@ public:
 	//Fullscreen
 	bool isFullScreen = false;
 
+	//DebugMode
+	bool isOnDebugMode = false;
+
+	//limit of the map 
+	int mapLimitX = 1600;
+	int mapLimitY = 780;
+
+	// ID for Load map
+	int mapID = 0;
+
 };
 
 #endif // __SCENE_H__

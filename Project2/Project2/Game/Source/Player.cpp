@@ -11,8 +11,9 @@
 #include "BattleScene.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "Window.h"
+#include "Map.h"
 
-Player::Player() : BaseAlly()
+Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
@@ -66,13 +67,7 @@ bool Player::Awake() {
 	//life = parameters.attribute("life").as_int();
 	//attack = parameters.attribute("attack").as_int();
 
-	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability"))
-	{
-		abilityId = node.attribute("id").as_int();
-		abilityName = node.attribute("name").as_string();
-		char* abilityString = const_cast<char*>(abilityName);
-		abilities.Add({ abilityId, abilityString });
-	}
+	
 	
 	InitAnims();
 
@@ -196,35 +191,25 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::NPC:
 		LOG("Collision NPC");
 		break;
+	case ColliderType::TOMAP1:
+		app->scene->mapID = 0;
+		app->map->CleanUp();
+		app->AwakeScene();
+		app->map->Start();
+		break;
+	case ColliderType::TOMAP2:
+		app->scene->mapID = 1;
+		app->map->CleanUp();
+		app->AwakeScene();
+		app->map->Start();
+		break;
+	case ColliderType::TOINTERIOR:
+		app->scene->mapID = 2;
+		app->map->CleanUp();
+		app->AwakeScene();
+		app->map->Start();
+		break;
 	default:
-		break;
-	}
-}
-
-// Mira que ataque tiene que hacer el personaje
-void Player::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
-{
-	//Here we check if we have to select an enemy or just make the effect 
-
-	switch (selectAttackIndex)
-	{
-	case 0:
-		printf("Bola de Fuego\n");
-		hasAttacked = true;
-		app->battleScene->combatState = CombatState::SELECT_ENEMY;
-		break;
-	case 1:
-		hasAttacked = true;
-		printf("Curación +10 de vida\n");
-		app->scene->allies[currentPlayerIndex]->life += 10;
-		if (app->battleScene->CheckAllPlayersAttacked()) {
-			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
-		}
-		else
-		{
-			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
-			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
-		}
 		break;
 	}
 }
@@ -236,7 +221,41 @@ bool Player::SaveState(pugi::xml_node node, int num)
 
 
 	pugi::xml_node player = node.append_child(childName.GetString());
+
+	pugi::xml_node pos = player.append_child("Position");
+	pugi::xml_attribute x = pos.append_attribute("x");
+	pugi::xml_attribute y = pos.append_attribute("y");
+	pugi::xml_node stats = player.append_child("Stats");
+	pugi::xml_attribute hp = stats.append_attribute("Life");
+	pugi::xml_attribute atk = stats.append_attribute("Attack");
+
+
+	x.set_value(pbody->body->GetPosition().x);
+	y.set_value(pbody->body->GetPosition().y);
+	hp.set_value(life);
+	atk.set_value(attack);
 	
-	
+	return true;
+}
+
+bool Player::LoadState(pugi::xml_node node, int num)
+{
+	SString childName("player%d", num);
+
+
+	pugi::xml_node player = node.child(childName.GetString());
+
+
+	pugi::xml_node pos = player.child("Position");
+	float32 x = pos.attribute("x").as_float();
+	float32 y = pos.attribute("y").as_float();
+	pugi::xml_node stats = player.child("Stats");
+
+
+	pbody->body->SetTransform(b2Vec2(x, y), 0);
+	life = stats.attribute("Life").as_int();
+	attack = stats.attribute("Attack").as_int();
+
+
 	return true;
 }
