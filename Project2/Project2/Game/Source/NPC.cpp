@@ -118,7 +118,7 @@ bool NPC::Update(float dt)
 	}
 	else if (!triggerInRange)
 	{
-		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN || pad.y && app->dialogueManager->isTalking == false)
+		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || pad.y && app->dialogueManager->isTalking == false)
 		{
 
 			app->dialogueManager->isTalking = true;
@@ -141,7 +141,7 @@ bool NPC::Update(float dt)
 	}
 
 
-	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x) / scale)), PIXEL_TO_METERS((float32)((position.y) / scale)) }, 0);
+	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x + 40) / scale)), PIXEL_TO_METERS((float32)((position.y + 40) / scale)) }, 0);
 	if (!app->scene->isOnCombat) {
 		app->render->DrawTexture(texture, (position.x - 25) / scale, (position.y - 25) / scale, &currentAnimation->GetCurrentFrame());
 	}
