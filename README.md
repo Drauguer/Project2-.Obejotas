@@ -6,10 +6,10 @@
 
 ## Key Features
 
- - {Feature01}
- - {Feature02}
- - {Feature03}
- - {Feature04}
+ - {Turn Based combat}
+ - {Multiple characters}
+ - {Different areas}
+ - {Fun conversations}
  
 ## Controls
 
@@ -18,6 +18,10 @@
  - WASD to move the player
  - ESCAPE to pause the game
  - ARROWS to move in the menu while in combat
+ - F5 to save game
+ - F6 to load game
+ - F10 to enter god mode
+ - F1 to enter fullscreen
 
 ## Developers
 
