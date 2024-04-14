@@ -60,6 +60,8 @@ public:
 
 	List<Ability> abilities;
 
+	uint windowW, windowH;
+
 	pugi::xml_node config;
 
 	bool hasAttacked = false;
@@ -82,6 +84,8 @@ public:
 	//Counters for animation 
 	int attackCounter = 0;
 
+	SDL_Rect dialogueBoxPos;
+	SDL_Rect dialogueBoxPos2;
 
 	//Loading abilities
 	int abilityId;

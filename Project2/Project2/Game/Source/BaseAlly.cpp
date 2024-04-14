@@ -10,6 +10,8 @@
 #include "Physics.h"
 #include "BattleScene.h"
 #include "Window.h"
+#include "DialogueManager.h"
+#include "ModuleFonts.h"
 
 #include<iostream>
 #include<cstdlib>
@@ -79,6 +81,11 @@ bool BaseAlly::Start() {
 	healthBar.w = 36;
 	healthBar.h = 6;
 
+	//Get the size of the window
+	app->win->GetWindowSize(windowW, windowH);
+
+	
+
 
 	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability"))
 	{
@@ -122,8 +129,6 @@ bool BaseAlly::Update(float dt)
 		currentAnim = &idleAnim;		
 	}
 
-
-
 	currentAnim->Update();
 
 	int lifeW = (life / maxHP) * 36;
@@ -139,7 +144,11 @@ bool BaseAlly::Update(float dt)
 		
 	}
 
+	int winW = windowW;
+	int winH = windowH;
 
+	dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
+	dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
 
 	
 
@@ -187,6 +196,7 @@ bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	//Here we check if we have to select an enemy or just make the effect 
 {
+	int scale = app->win->GetScale();
 
 	switch (selectAttackIndex)
 	{
@@ -198,6 +208,8 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 1:
 		hasAttacked = true;
 		printf("Aumenta el ataque x1,5 WROAAAAR\n");
+		
+
 		app->battleScene->idAttack = 1;
 		app->scene->allies[currentPlayerIndex]->attack *= 1.5f;
 		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
@@ -215,6 +227,9 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 2:
 		hasAttacked = true;
 		printf("Pium Pium!! Visión Laser!\n");
+
+		app->battleScene->isText = true;
+
 		app->battleScene->idAttack = 2;
 		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
 
@@ -244,6 +259,9 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 3:
 		hasAttacked = true;
 		printf("FIREBALL!!!\n");
+
+		app->battleScene->isText = true;
+
 		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
 
 		app->battleScene->idAttack = 3;
@@ -269,6 +287,9 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 4:
 		hasAttacked = true;
 		printf("DIOSA CURAME!!!\n");
+
+		app->battleScene->isText = true;
+
 		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
 
 		app->battleScene->idAttack = 4;

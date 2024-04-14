@@ -67,6 +67,8 @@ public:
 
 	int FindFirstPlayerToAttackIndex();
 
+	void TextAttack(int attackIndex);
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
@@ -78,6 +80,9 @@ private:
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
+
+	SDL_Rect dialogueBoxPos;
+	SDL_Rect dialogueBoxPos2;
 
 	// Test Dialogue
 	Dialogue* testDialogue;
@@ -136,6 +141,10 @@ public:
 
 	// NPC ID para detectar que NPC ha empezado el combate
 	int npcIDbattle = 0;
+
+	// Timer para textbox
+	bool isText = false;
+	int timerText = 0;
 	
 };
 
