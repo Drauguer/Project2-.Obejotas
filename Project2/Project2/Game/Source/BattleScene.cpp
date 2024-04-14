@@ -186,7 +186,7 @@ bool BattleScene::Update(float dt)
 				
 			}
 			//Selected character, waiting for action
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || pad.a && selectActionCooldown == 0)
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
 			{
 				selectActionCooldown = 10;
 				if (app->scene->allies[currentPlayerInCombatIndex]->life > 0)
@@ -273,7 +273,7 @@ bool BattleScene::Update(float dt)
 				
 			}
 			//Selected action
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || pad.a && selectActionCooldown == 0)
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
 			{
 				selectActionCooldown = 10;
 
@@ -322,7 +322,7 @@ bool BattleScene::Update(float dt)
 				
 			}
 			//Selected character, waiting for action
-			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || pad.a && selectActionCooldown == 0)
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
 			{
 				selectActionCooldown = 10;
 				if (app->scene->enemies[currentEnemySelectedIndex]->life > 0)

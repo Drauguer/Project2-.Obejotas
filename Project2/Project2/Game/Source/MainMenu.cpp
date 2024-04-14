@@ -153,7 +153,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		continue_->state = GuiControlState::DISABLED;
 	}
 	if (control->id == 11) {
-		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
 		FullScreenOff->state = GuiControlState::NORMAL;
 		FullScreen->state = GuiControlState::DISABLED;
 	}
