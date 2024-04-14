@@ -31,6 +31,11 @@
  - {Yiwei Ye} - {Vfx artist and designer}
  - {Salvador Bernadés} - {Artist}
 
+## Audio
+
+ - This vertical slice included Audio for basic player movement
+ - Included self-composed Music for logo screen, title screen, and in-game scene screen
+ - as well as some combat SFX 
 
 ## License
 ###Audio License information
@@ -41,7 +46,7 @@ Super Cool Adventure Vertical Slice OST © 2024 by Yiwei Ye is licensed under CC
 
 Sound effects are either created by us or from royalty-free licensed assets, which have licensing information included inside the project file.
 
-Detailed information about third party audio asset go to our audio bible: https://docs.google.com/document/d/1DEDv9oiou2sYwnFzZ-8nnZFfwstBlLLBktnHtKa_J44/edit?usp=sharing
+For detailed information about third-party audio assets go to our audio bible: https://docs.google.com/document/d/1DEDv9oiou2sYwnFzZ-8nnZFfwstBlLLBktnHtKa_J44/edit?usp=sharing
 
 
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
