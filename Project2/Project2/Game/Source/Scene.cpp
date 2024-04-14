@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "Scene.h"
+#include "MainMenu.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Item.h"
@@ -179,7 +180,7 @@ bool Scene::Start()
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 	
-	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 +120, 240, 80 };
+	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 +240, 240, 80 };
 	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton, this);
 	exitScene->state = GuiControlState::DISABLED;
 
@@ -187,7 +188,7 @@ bool Scene::Start()
 	settingsScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Settings", SettingsSceneButton, this);
 	settingsScene->state = GuiControlState::DISABLED;
 
-	SDL_Rect Return_Initial = { windowW / 2 - 60,windowH / 2 - 240, 340, 80 };
+	SDL_Rect Return_Initial = { windowW / 2 - 60,windowH / 2 + 120, 340, 80 };
 	Initial_Screen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Return to inicial screen", Return_Initial, this);
 	Initial_Screen->state = GuiControlState::DISABLED;
 
@@ -298,6 +299,7 @@ bool Scene::Update(float dt)
 		app->scene->ResumeScene->state = GuiControlState::NORMAL;
 		app->scene->exitScene->state = GuiControlState::NORMAL;
 		app->scene->settingsScene->state = GuiControlState::NORMAL;
+		
 		Mix_PauseMusic();
 	}
 	
@@ -414,6 +416,24 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		ResumeScene->state = GuiControlState::NORMAL;
 		exitScene->state = GuiControlState::NORMAL;
 		settingsScene->state = GuiControlState::NORMAL;
+	}
+	if (control->id == 11) {
+		app->scene->player->isOnPause = false;
+		app->entityManager->Disable();
+		
+		app->scene->exitScene->state = GuiControlState::DISABLED;
+		app->scene->ResumeScene->state = GuiControlState::DISABLED;
+		app->scene->Initial_Screen->state = GuiControlState::DISABLED;
+		app->scene->settingsScene->state = GuiControlState::DISABLED;
+		app->scene->Disable();
+		app->physics->Disable();
+		app->map->Disable();
+		app->audio->CleanUp();
+		app->AwakeAudio();
+		app->mainMenu->Enable();
+		app->mainMenu->Start();
+		
+	
 	}
 	return true;
 }

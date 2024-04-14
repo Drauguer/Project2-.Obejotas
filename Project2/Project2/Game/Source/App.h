@@ -72,6 +72,8 @@ public:
 
 	bool AwakeScene();
 
+	bool AwakeAudio();
+
 private:
 
 	// Load config file

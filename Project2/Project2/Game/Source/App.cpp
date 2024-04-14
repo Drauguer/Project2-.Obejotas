@@ -140,6 +140,16 @@ bool App::AwakeScene()
 	return ret;
 }
 
+bool App::AwakeAudio()
+{
+	bool ret = true;
+
+	pugi::xml_node node = configNode.child("audio");
+	ret = app->scene->Awake(node);
+
+	return ret;
+}
+
 // Called before the first frame
 bool App::Start()
 {
