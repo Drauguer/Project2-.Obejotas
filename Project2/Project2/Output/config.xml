@@ -71,7 +71,7 @@
 
     <npc x="300" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="0" npcID="0">
       <idleAnim animspeed="0.2f" loop="true">
-        <pushback x="0" y="64" width="32" height="32"/>
+        <pushback x="0" y="32" width="32" height="32"/>
       </idleAnim>
 		<dialogue text="this neighbourhood is not for you buddy"/>
 		<dialogue text="what is that? you want to overthrow the goverment?"/>
@@ -87,15 +87,24 @@
       <dialogue text="alright geezer, you asked for this"/>
 	<dialogue text="hey dudes! this grandpa wants to fight!"/>
     </npc>
-	  <npc x="50" y="50" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="1" npcID="2">
+	  <npc x="500" y="500" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="2" npcID="2">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="0" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="have you met my twin in the front door?"/>
+		  <dialogue text="he did what?!"/>
+		  <dialogue text="yeah he can be a bit violent and dramatic"/>
+		  <dialogue text="i hope it doesn't stop you from ordering something"/>
+	  </npc>
+
+	  <npc x="1350" y="150" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="1" npcID="2">
 		  <idleAnim animspeed="0.2f" loop="true">
 			  <pushback x="0" y="64" width="32" height="32"/>
 		  </idleAnim>
-		  <dialogue text="this neighbourhood is not for you buddy"/>
-		  <dialogue text="what is that? you want to overthrow the goverment?"/>
-		  <dialogue text="good luck wizard, put your fist in the air"/>
+		  <dialogue text="hey psst, want some drugs? i have some in my jug"/>
+		  <dialogue text="no? well i also have yugi-ho cards"/>
+		  <dialogue text="you have no money? then stop wasting my time!"/>
 	  </npc>
-	  
 
     <ally x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
