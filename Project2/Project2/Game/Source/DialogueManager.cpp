@@ -83,6 +83,17 @@ bool DialogueManager::Update(float dt)
 					if (activateCombat)
 					{
 						app->scene->isOnCombat = !app->scene->isOnCombat;
+						app->battleScene->npcIDbattle = npcIDcombat;
+						if (firstCombat)
+						{
+							app->scene->LoadAllies();
+							firstCombat = false;
+						}
+						if (!playerHasLosed)
+						{
+							app->scene->LoadEnemies();
+							playerHasLosed = false;
+						}
 						app->scene->Disable();
 						app->battleScene->Enable();
 						app->audio->PlayFx(app->scene->encounterFx);

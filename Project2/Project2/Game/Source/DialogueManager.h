@@ -48,6 +48,11 @@ public:
 
 	bool activateCombat = false;
 
+	int npcIDcombat = 0;
+
+	bool firstCombat = true;
+	bool playerHasLosed = false;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__

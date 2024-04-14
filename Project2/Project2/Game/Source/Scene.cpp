@@ -82,6 +82,7 @@ bool Scene::Awake(pugi::xml_node config)
 		if (npcNode.attribute("mapID").as_int() == mapID)
 		{
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+			npcs.Add(npc);
 			npc->parameters = npcNode;
 		}
 		

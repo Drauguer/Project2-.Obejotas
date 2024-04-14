@@ -45,6 +45,7 @@ public:
 	bool triggerInRange;
 	int mapID;
 	bool hasTalked = false;
+	int npcID;
 
 private:
 

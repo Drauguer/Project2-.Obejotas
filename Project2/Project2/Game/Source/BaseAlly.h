@@ -55,7 +55,7 @@ public:
 	List<SString> dialoguesNPC;
 
 	//Attack Features
-	bool isHighlighted;
+	bool isHighlighted = false;
 	int numAttacks = 0;
 
 	List<Ability> abilities;

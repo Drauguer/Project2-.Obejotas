@@ -133,6 +133,9 @@ public:
 	unsigned int clickFx;
 	unsigned int declineFx;
 	unsigned int deniedFx;
+
+	// NPC ID para detectar que NPC ha empezado el combate
+	int npcIDbattle = 0;
 	
 };
 

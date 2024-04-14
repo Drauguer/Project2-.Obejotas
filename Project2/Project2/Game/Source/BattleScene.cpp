@@ -474,6 +474,7 @@ void BattleScene::Disable()
 
 void BattleScene::CheckState()
 {
+
 	playerLose = true;
 	playerWin = true;
 	for (int i = 0; i < app->scene->allies.Count(); i++)
@@ -486,9 +487,25 @@ void BattleScene::CheckState()
 	}
 	if (playerLose) {
 		printf("Has perdido el combate");
+		app->dialogueManager->playerHasLosed = true;
 		app->scene->Enable();
+		for (int i = 0; i < app->scene->npcs.Count(); ++i)
+		{
+			if (app->scene->npcs[i]->npcID == npcIDbattle)
+			{
+				app->scene->npcs[i]->hasTalked = false;
+			}
+		}
 		Disable();
 		app->scene->isOnCombat = false;
+		for (int i = 0; i < app->scene->allies.Count(); i++)
+		{
+			app->scene->allies[i]->life = app->scene->allies[i]->maxHP;
+		}
+		for (int i = 0; i < app->scene->enemies.Count(); i++)
+		{
+			app->scene->enemies[i]->life = app->scene->enemies[i]->maxHP;
+		}
 		hasStartedCombat = false;
 		return;
 	}
@@ -503,6 +520,14 @@ void BattleScene::CheckState()
 	if (playerWin) {
 		printf("Has ganado el combate");
 		app->scene->Enable();
+		for (int i = 0; i < app->scene->npcs.Count(); ++i)
+		{
+			if (app->scene->npcs[i]->npcID == npcIDbattle)
+			{
+				app->scene->npcs[i]->hasCombat = false;
+				app->scene->npcs[i]->hasTalked = true;
+			}
+		}
 		Disable();
 		app->scene->isOnCombat = false;
 		hasStartedCombat = false;

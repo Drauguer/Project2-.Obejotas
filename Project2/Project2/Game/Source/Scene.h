@@ -87,6 +87,9 @@ public:
 	BaseAlly* allyInCombat1;
 	List<BaseAlly*> allies;
 
+	// List of all NPC
+	List<NPC*> npcs;
+
 	//Audio
 	uint encounterFx;
 

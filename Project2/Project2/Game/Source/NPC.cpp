@@ -43,6 +43,7 @@ bool NPC::Start() {
 	hasCombat = parameters.attribute("hasCombat").as_bool();
 	triggerInRange = parameters.attribute("triggerInRange").as_bool();
 	mapID = parameters.attribute("mapID").as_int();
+	npcID = parameters.attribute("npcID").as_int();
 
 	InitDialogues();
 
@@ -90,6 +91,7 @@ bool NPC::Update(float dt)
 			if (hasCombat)
 			{
 				app->dialogueManager->activateCombat = true;
+				app->dialogueManager->npcIDcombat = npcID;
 			}
 
 		}
@@ -118,9 +120,6 @@ bool NPC::Update(float dt)
 		}
 	}
 
-	
-
-	
 
 	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x + 130) / scale)), PIXEL_TO_METERS((float32)((position.y + 130) / scale)) }, 0);
 	app->render->DrawTexture(texture, position.x / scale, position.y / scale);

@@ -69,11 +69,11 @@
 	<map2 path="Assets/Maps/Map/" name="Mapa2Bueno.tmx"/>
 	<mapInterior path="Assets/Maps/Map/" name="MapaInteriorBueno.tmx"/>
 	 
-    <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="false" mapID="0">
+    <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="false" mapID="0" npcID="0">
       <dialogue text="visca catalunya"/>
       <dialogue text="dialogue 2"/>
     </npc>
-    <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="true" mapID="0">
+    <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1">
       <dialogue text="viva espanya"/>
       <dialogue text="dialogue 2"/>
       <dialogue text="dialogue 3"/>
@@ -152,7 +152,7 @@
 		<ability id="2" name="Visión Laser"/>
     </ally>
     
-    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="30" defense="40" magicPower="15" dexerity="50" combatID="0">
+    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="300" defense="40" magicPower="15" dexerity="50" combatID="0">
       <Idle animspeed="0.1f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
         <pushback x="64" y="0" width="64" height="64"/>
