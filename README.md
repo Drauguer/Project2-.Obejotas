@@ -52,3 +52,11 @@ For detailed information about third-party audio assets go to our audio bible: h
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
 {AdditionalLicenses}
+
+###Tiles License information
+
+We used 2 predpne tiles:
+
+ - https://livingtheindie.itch.io/pixel-cyberpunk-interior
+
+ - https://cainos.itch.io/pixel-art-top-down-basic
