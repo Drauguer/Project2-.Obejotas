@@ -132,8 +132,8 @@ bool NPC::Update(float dt)
 	}
 
 
-	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x)*2 / scale)), PIXEL_TO_METERS((float32)((position.y)*2 / scale)) }, 0);
-	app->render->DrawTexture(texture, position.x-12, position.y-12, &currentAnimation->GetCurrentFrame());
+	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x) / scale)), PIXEL_TO_METERS((float32)((position.y) / scale)) }, 0);
+	app->render->DrawTexture(texture, (position.x-25) / scale, (position.y-25) / scale, &currentAnimation->GetCurrentFrame());
 
 
 	return true;

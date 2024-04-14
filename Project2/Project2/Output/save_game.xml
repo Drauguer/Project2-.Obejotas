@@ -10,7 +10,7 @@
 	<entitymanager>
 		<Player>
 			<player1>
-				<Position x="6.23903799" y="6.15171051" Map_ID="2" Player_Map_ID="4" />
+				<Position x="6.00137329" y="9.95859718" Map_ID="2" Player_Map_ID="4" />
 				<Stats Life="30" Attack="10" />
 			</player1>
 		</Player>
