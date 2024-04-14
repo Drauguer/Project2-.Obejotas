@@ -49,6 +49,17 @@ public:
 
 private:
 	SDL_Texture* img;
+	GuiControlButton* start;
+	GuiControlButton* exit;
+	GuiControlButton* setting;
+	GuiControlButton* continue_;
+	GuiControlButton* VsincOff;
+	GuiControlButton* Vsinc;
+	GuiControlButton* turnBack;
+	GuiControlButton* FullScreen;
+	GuiControlButton* FullScreenOff;
+	
+
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
