@@ -283,7 +283,9 @@ bool Scene::Update(float dt)
 			}
 		}
 		if (player->position.y > app->win->screenSurface->h / (2 * scale)) {
-			if (player->position.y > mapLimitY) {
+			
+			if (player->position.y > mapLimitY) 
+			{
 				app->render->camera.y = (-mapLimitY * scale) + app->win->screenSurface->h / 2;
 			}
 			else

@@ -288,6 +288,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void Player::LoadNewMap(int mapID_, int playerMapID_)
 {
+	int scale = app->win->GetScale();
+
 	app->scene->mapID = mapID_;
 	app->scene->playerMapID = playerMapID_;
 	app->map->CleanUp();
@@ -296,6 +298,7 @@ void Player::LoadNewMap(int mapID_, int playerMapID_)
 	app->physics->Start();
 	app->entityManager->Enable();
 	app->map->Start();
+	app->render->camera.y = (-app->scene->player->position.y * scale) + app->win->screenSurface->h / 2 - 100;
 }
 
 

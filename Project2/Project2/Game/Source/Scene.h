@@ -130,6 +130,7 @@ public:
 	// ID for combats
 	int combatID = 0;
 
+	bool changedMap;
 };
 
 #endif // __SCENE_H__

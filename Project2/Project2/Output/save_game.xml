@@ -7,22 +7,19 @@
 	<battleScene />
 	<scene />
 	<mainmenu />
+	<mainmenu />
 	<entitymanager>
 		<Player>
 			<player1>
-				<Position x="18.173727" y="12.5310583" Map_ID="0" Player_Map_ID="5" />
+				<Position x="3.32197857" y="16.4499302" Map_ID="1" Player_Map_ID="2" />
 				<Stats Life="30" Attack="10" />
 			</player1>
 		</Player>
 		<NPCs>
 			<NPC1>
-				<Position x="3" y="4" />
-				<State Has_Combat="true" Has_Talked="false" />
+				<Position x="13.8999996" y="1.89999998" />
+				<State Has_Combat="false" Has_Talked="false" />
 			</NPC1>
-			<NPC2>
-				<Position x="5" y="4" />
-				<State Has_Combat="true" Has_Talked="false" />
-			</NPC2>
 		</NPCs>
 		<Enemies />
 		<Allies />
