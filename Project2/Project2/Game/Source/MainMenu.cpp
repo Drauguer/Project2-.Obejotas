@@ -63,11 +63,11 @@ bool MainMenu::Start()
 	FullScreenOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect VsincCheck = { windowW / 2 - 450,windowH / 2 - 120 , 240, 80 };
-	Vsinc = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "Vsinc", VsincCheck, this);
+	Vsinc = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "Vsync", VsincCheck, this);
 	Vsinc->state = GuiControlState::DISABLED;
 
 	SDL_Rect VsincCheckOff = { windowW / 2 - 210,windowH / 2 - 120 , 240, 80 };
-	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Vsinc Off", VsincCheckOff, this);
+	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Vsync Off", VsincCheckOff, this);
 	VsincOff->state = GuiControlState::DISABLED;
 
 	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);
