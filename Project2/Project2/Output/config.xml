@@ -9,6 +9,8 @@
   <renderer>
     <vsync value="false"/>
   </renderer>
+  
+  
 
   <window>
     <resolution width="1280" height="720" scale="2"/>
@@ -25,6 +27,13 @@
 	
   </audio>
 
+  <battleScene texturePath="Assets/Textures/SelectionArrow.png">
+    <arrow animspeed="0.05f" loop="true">
+      <pushback x="0" y="0" width="64" height="64"/>
+      <pushback x="64" y="0" width="64" height="64"/>
+    </arrow>
+  </battleScene>
+  
   <scene>
 	  
 	<encounterFx audiopath ="Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg"   />
