@@ -70,7 +70,7 @@ bool MainMenu::Start()
 	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Vsinc Off", VsincCheckOff, this);
 	VsincOff->state = GuiControlState::DISABLED;
 
-	//app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);
+	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);
 
 	return true;
 }
