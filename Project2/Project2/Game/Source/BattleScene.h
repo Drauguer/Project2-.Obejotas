@@ -93,6 +93,12 @@ private:
 	SDL_Texture* martillazo;
 
 public:
+	SDL_Texture* arrowTexture = NULL;
+	const char* arrowTexturePath;
+	Animation* currentArrowAnim;
+
+	Animation idleArrowAnim;
+
 	CombatState combatState;
 
 	bool playerWin = false;

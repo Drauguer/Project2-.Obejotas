@@ -36,6 +36,22 @@ BattleScene::~BattleScene()
 bool BattleScene::Awake(pugi::xml_node config)
 {
 	LOG("Loading Scene");
+
+
+	arrowTexturePath = config.attribute("texturePath").as_string();
+
+
+
+
+	for (pugi::xml_node node = config.child("arrow").child("pushback"); node; node = node.next_sibling("pushback")) {
+		idleArrowAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	idleArrowAnim.speed = config.child("arrow").attribute("animspeed").as_float();
+	idleArrowAnim.loop = config.child("arrow").attribute("loop").as_bool();
+
 	bool ret = true;
 
 
@@ -58,6 +74,8 @@ bool BattleScene::Start()
 	laserCannon = app->tex->Load("Assets/Textures/laserbeam_Icon.png");
 	martillazo = app->tex->Load("Assets/Textures/RedMace.png");
 
+	arrowTexture = app->tex->Load(arrowTexturePath);
+
 	combatState = CombatState::NONE;
 	return true;
 }
@@ -76,6 +94,7 @@ bool BattleScene::Update(float dt)
 	int scale = app->win->GetScale();
 	if (app->scene->isOnCombat) 
 	{
+		currentArrowAnim = &idleArrowAnim;
 		//Timer for waiting to select action
 		if (selectActionCooldown > 0) {
 			selectActionCooldown--;
@@ -144,7 +163,10 @@ bool BattleScene::Update(float dt)
 				
 			}
 
-			app->render->DrawCircle((app->scene->allies[currentPlayerInCombatIndex]->position.x - 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y + 20) / scale, 5, 255, 0, 0, 255);
+			//app->render->DrawCircle((app->scene->allies[currentPlayerInCombatIndex]->position.x - 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y + 20) / scale, 5, 255, 0, 0, 255);
+			currentArrowAnim->Update();
+			app->render->DrawTexture(arrowTexture, (app->scene->allies[currentPlayerInCombatIndex]->position.x + 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y ) / scale, &currentArrowAnim->GetCurrentFrame());
+
 
 			break;
 		case CombatState::SELECT_ACTION:
@@ -181,7 +203,9 @@ bool BattleScene::Update(float dt)
 
 			}
 
-			app->render->DrawCircle((430 + 200 * selectAttackIndex) / scale, 500 / scale, 15, 255, 0, 0, 255);
+			currentArrowAnim->Update();
+			app->render->DrawTexture(arrowTexture, (350 + 100 * selectAttackIndex) / scale, 550 / scale, &currentArrowAnim->GetCurrentFrame());
+
 
 			//Navigate in the selection attack menu
 			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && selectActionCooldown == 0)
@@ -281,7 +305,7 @@ bool BattleScene::Update(float dt)
 					case 5:
 						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
 						damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.75f;
-						printf("El Cañon laser ha hecho %f de daño\n", damage);
+						printf("El Caï¿½on laser ha hecho %f de daï¿½o\n", damage);
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
 						break;
 					case 6:
@@ -327,7 +351,9 @@ bool BattleScene::Update(float dt)
 			}
 
 			CheckState();
-			app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 100) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
+			//app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 100) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
+			currentArrowAnim->Update();
+			app->render->DrawTexture(arrowTexture, (app->scene->enemies[currentEnemySelectedIndex]->position.x + 30) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y) / scale, &currentArrowAnim->GetCurrentFrame());
 
 
 			break;
@@ -347,7 +373,7 @@ bool BattleScene::Update(float dt)
 				app->scene->enemies[currentEnemyInCombatIndex]->SetAttackAnimation();
 				damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexAttack]->defense * 20;
 				app->scene->allies[indexAttack]->life -= damage;
-				printf("Ataque de enemigo a %s y le ha hecho %f de daño\n", app->scene->allies[indexAttack]->charName.GetString(), damage);
+				printf("Ataque de enemigo a %s y le ha hecho %f de daï¿½o\n", app->scene->allies[indexAttack]->charName.GetString(), damage);
 				printf("La vida de %s es: %f\n", app->scene->allies[indexAttack]->charName.GetString(), app->scene->allies[indexAttack]->life);
 				timerEnemy = 0;
 				currentEnemyInCombatIndex++;
