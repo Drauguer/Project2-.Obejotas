@@ -65,7 +65,7 @@ private:
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
 
-
+	bool isExiting = false;
 
 	
 public:
