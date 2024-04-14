@@ -34,6 +34,8 @@ public:
 
 	bool LoadState(pugi::xml_node node, int num);
 
+	void LoadNewMap(int mapID, int playerMapID);
+
 public:
 
 	//L02: DONE 2: Declare player parameters
