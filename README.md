@@ -14,7 +14,7 @@
 ## Controls
 
  - E to talk to NPC
- - SPACE to skip dialoge and to select attacks
+ - SPACE to skip dialogue and to select attacks
  - WASD to move the player
  - ESCAPE to pause the game
  - ARROWS to move in the menu while in combat
@@ -33,6 +33,16 @@
 
 
 ## License
+###Audio License information
+In this vertical slice, All music is created by team member Yiwei Ye.
+
+Super Cool Adventure Vertical Slice OST © 2024 by Yiwei Ye is licensed under CC BY-NC-ND 4.0
+
+
+Sound effects are either created by us or from royalty-free licensed assets, which have licensing information included inside the project file.
+
+Detailed information about third party audio asset go to our audio bible: https://docs.google.com/document/d/1DEDv9oiou2sYwnFzZ-8nnZFfwstBlLLBktnHtKa_J44/edit?usp=sharing
+
 
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
