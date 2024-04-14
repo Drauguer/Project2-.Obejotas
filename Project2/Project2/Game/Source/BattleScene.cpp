@@ -622,31 +622,31 @@ void BattleScene::TextAttack(int indexAttack)
 	{
 	case 0:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "comete mi sable!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "comete mi sable!!");
 		break;
 	case 1:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "aumenta mi ataque WROAAAAR!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "aumenta mi ataque WROAAAAR!!");
 		break;
 	case 2:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "pium pium!! Visión Laser!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "pium pium!! Visión Laser!!");
 		break;
 	case 3:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "fireball!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "fireball!!");
 		break;
 	case 4:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "diosa curame!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "diosa curame!!");
 		break;
 	case 5:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "bomba laseeer!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "bomba laseeer!!");
 		break;
 	case 6:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "ja ja ja martillo vaa!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "ja ja ja martillo vaa!!");
 		break;
 	}
 }
