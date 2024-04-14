@@ -1,4 +1,4 @@
-# {Project Name}
+# {Super Cool Adventures}
 
 ## Description
 
@@ -17,10 +17,15 @@
 
 ## Developers
 
- - {Dev01} - {Role(s)}
- - {Dev02} - {Role(s)}
- - {Dev03} - {Role(s)}
- - {Dev04} - {Role(s)}
+ - {David Lastra} - {Programmer and designer}
+ - {Àlex Becerra} - {Designer and artist}
+ - {Biel Liñán} - {Designer and artist}
+ - {Samuel Martínez} - {Programmer}
+ - {Oliver Santos} - {Artist}
+ - {Noel Colón} - {Programmer and designer}
+ - {Yiwei Ye} - {Vfx artist and designer}
+ - {Salvador Bernadés} - {Artist}
+
 
 ## License
 
