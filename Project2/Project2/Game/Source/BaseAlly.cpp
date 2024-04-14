@@ -185,7 +185,6 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	{
 	case 0:
 		printf("Sable Laser attack\n");
-		hasAttacked = true;
 		app->battleScene->idAttack = 0;
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 		break;
@@ -292,14 +291,12 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		}
 		break;
 	case 5:
-		hasAttacked = true;
 		printf("BOMBAZO!!!\n");
 		app->battleScene->idAttack = 5;
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 
 		break;
 	case 6:
-		hasAttacked = true;
 		printf("MARTILLAZO!!!\n");
 		app->battleScene->idAttack = 6;
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;

@@ -266,6 +266,7 @@ bool BattleScene::Update(float dt)
 					switch (idAttack)
 					{
 					case 0:
+						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
 						damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
 						break;
@@ -278,11 +279,13 @@ bool BattleScene::Update(float dt)
 					case 4:
 						break;
 					case 5:
+						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
 						damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.75f;
 						printf("El Cañon laser ha hecho %f de daño\n", damage);
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
 						break;
 					case 6:
+						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
 						damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
 						break;
