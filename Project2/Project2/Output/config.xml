@@ -13,7 +13,7 @@
   
 
   <window>
-    <resolution width="1280" height="720" scale="2"/>
+    <resolution width="1280" height="720" scale="2"	/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
