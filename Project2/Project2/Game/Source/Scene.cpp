@@ -150,7 +150,7 @@ bool Scene::Start()
 	img = app->tex->Load("Assets/Textures/test.png");
 	
 	//Music is commented so that you can add your own music
-	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Wilderness-Daytime-1-_loop_.ogg", 2.0f);
+	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
 
 	//SFX loading
 	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
