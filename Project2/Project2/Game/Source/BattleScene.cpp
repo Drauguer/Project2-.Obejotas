@@ -75,6 +75,7 @@ bool BattleScene::Start()
 	martillazo = app->tex->Load("Assets/Textures/RedMace.png");
 	lifeMago = app->tex->Load("Assets/Textures/LifeMago.png");
 	lifeEnano = app->tex->Load("Assets/Textures/LifeEnano.png");
+	lifeEnemy = app->tex->Load("Assets/Textures/LifeEnemy.png");
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
 
@@ -112,6 +113,12 @@ bool BattleScene::Update(float dt)
 				app->render->DrawTexture(lifeEnano, (app->scene->allies[i]->position.x - 150) / scale, app->scene->allies[i]->position.y / scale);
 				
 			}
+		}
+
+		for (int i = 0; i < app->scene->enemies.Count(); ++i)
+		{
+			app->render->DrawRectangle(app->scene->enemies[i]->healthBar, 0, 255, 0, 255);
+			app->render->DrawTexture(lifeEnemy, (app->scene->enemies[i]->position.x + 100) / scale, app->scene->enemies[i]->position.y / scale);
 		}
 
 		currentArrowAnim = &idleArrowAnim;

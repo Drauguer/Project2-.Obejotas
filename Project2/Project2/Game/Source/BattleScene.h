@@ -95,6 +95,7 @@ private:
 	// Vidas Personajes
 	SDL_Texture* lifeMago;
 	SDL_Texture* lifeEnano;
+	SDL_Texture* lifeEnemy;
 
 public:
 	SDL_Texture* arrowTexture = NULL;

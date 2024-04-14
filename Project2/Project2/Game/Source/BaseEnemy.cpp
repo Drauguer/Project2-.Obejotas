@@ -69,10 +69,10 @@ bool BaseEnemy::Start() {
 	dexerity = parameters.attribute("dexerity").as_float();
 	maxHP = life;
 
-	healthBar.x = position.x / 2 - 10;
-	healthBar.y = position.y / 2 + 30;
-	healthBar.w = 100;
-	healthBar.h = 5;
+	healthBar.x = (position.x + 138) / 2;
+	healthBar.y = position.y / 2 + 44;
+	healthBar.w = 36;
+	healthBar.h = 6;
 
 	//load Audio
 
@@ -122,7 +122,7 @@ bool BaseEnemy::Update(float dt)
 
  	currentAnim->Update();
 
-	float lifeW = (life / maxHP) * 100;
+	float lifeW = (life / maxHP) * 36;
 	if (lifeW <= 0)
 	{
 		lifeW = 0;
@@ -133,7 +133,7 @@ bool BaseEnemy::Update(float dt)
 	if (life > 0 && app->scene->isOnCombat) {
 		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
 		app->render->DrawTexture(texture, position.x / scale, position.y / scale, &currentAnim->GetCurrentFrame(), true);
-		app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+		
 
 
 	}
