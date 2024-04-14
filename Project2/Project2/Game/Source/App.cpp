@@ -11,6 +11,7 @@
 #include "GuiManager.h"
 #include "ModuleFonts.h"
 #include "MainMenu.h"
+#include "LogoScene.h"
 #include "ModuleFadeToBlack.h"
 
 #include "Defs.h"
@@ -45,7 +46,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	guiManager = new GuiManager(true);
 	dialogueManager = new DialogueManager(true);
 	fonts = new ModuleFonts(true);
-	mainMenu = new MainMenu(true);
+	mainMenu = new MainMenu(false);
+	logoScene = new LogoScene(true);
 	fadeToBlack = new ModuleFadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -60,6 +62,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(battleScene);
 	AddModule(scene);
 	AddModule(mainMenu);
+	AddModule(logoScene);
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogueManager);

@@ -1,5 +1,7 @@
-#ifndef __MAINMENU_H__
-#define __MAINMENU_H__
+#pragma once
+
+
+
 
 #include "Module.h"
 #include "Player.h"
@@ -9,14 +11,14 @@
 
 struct SDL_Texture;
 
-class MainMenu : public Module
+class LogoScene : public Module
 {
 public:
 
-	MainMenu(bool startEnabled);
+	LogoScene(bool startEnabled);
 
 	// Destructor
-	virtual ~MainMenu();
+	virtual ~LogoScene();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node config);
@@ -49,16 +51,8 @@ public:
 
 private:
 	SDL_Texture* img;
-	GuiControlButton* start;
-	GuiControlButton* exit;
-	GuiControlButton* setting;
-	GuiControlButton* continue_;
-	GuiControlButton* VsincOff;
-	GuiControlButton* Vsinc;
-	GuiControlButton* turnBack;
-	GuiControlButton* FullScreen;
-	GuiControlButton* FullScreenOff;
-	
+	float timer;
+
 
 	float textPosX, textPosY = 0;
 	uint texW, texH;
@@ -67,9 +61,7 @@ private:
 
 
 
-	
-public:
-	
-};
 
-#endif // __MAINMENU_H__
+public:
+
+};

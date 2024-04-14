@@ -66,7 +66,7 @@ bool NPC::Start() {
 		-60, 60,
 	};
 
-	pbody = app->physics->CreateRectangleSensor(position.x / 2, position.y / 2, 30, 30, bodyType::STATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x / 2 + 40, position.y / 2 + 40, 50, 50, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 

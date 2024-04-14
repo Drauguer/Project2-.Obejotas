@@ -60,11 +60,12 @@ public:
 	void LoadAllies();
 
 	pugi::xml_node scene_parameter;
+	bool IsExiting = false;
 
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
-	bool IsExiting = false;
+	
 	bool IsVsyncActive = false;
 	uint texW, texH;
 	uint windowW, windowH;

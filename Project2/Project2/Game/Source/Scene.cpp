@@ -150,7 +150,7 @@ bool Scene::Start()
 	img = app->tex->Load("Assets/Textures/test.png");
 	
 	//Music is commented so that you can add your own music
-	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Wilderness-Daytime-1-_loop_.ogg", 2.0f);
+	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
 
 	//SFX loading
 	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
@@ -298,9 +298,16 @@ bool Scene::Update(float dt)
 		app->scene->ResumeScene->state = GuiControlState::NORMAL;
 		app->scene->exitScene->state = GuiControlState::NORMAL;
 		app->scene->settingsScene->state = GuiControlState::NORMAL;
+		Mix_PauseMusic();
 	}
 	
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	if (app->scene->player->isOnPause == false)
+	{
+		Mix_ResumeMusic();
+	}
+	
+	
+	/*if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		
 		isOnCombat = !isOnCombat;
@@ -311,7 +318,7 @@ bool Scene::Update(float dt)
 		this->Disable();
 		app->battleScene->Enable();
 		app->audio->PlayFx(encounterFx);
-	}
+	}*/
 
 
 
@@ -388,12 +395,12 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		FullScreenOff->state = GuiControlState::DISABLED;
 	}
 	if (control->id == 6) {
-		app->IsVsincActive = true;
+		app->IsVsincActive = false;
 		Vsinc->state = GuiControlState::DISABLED;
 		VsincOff->state = GuiControlState::NORMAL;
 	}
 	if (control->id == 7) {
-		app->IsVsincActive = false;
+		app->IsVsincActive = true;
 		Vsinc->state = GuiControlState::NORMAL;
 		VsincOff->state = GuiControlState::DISABLED;
 	}

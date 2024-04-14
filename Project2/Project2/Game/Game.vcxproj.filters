@@ -34,6 +34,7 @@
     <ClCompile Include="Source\BaseEnemy.cpp" />
     <ClCompile Include="Source\Mago.cpp" />
     <ClCompile Include="Source\BaseAlly.cpp" />
+    <ClCompile Include="Source\LogoScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -99,6 +100,7 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\Mago.h" />
+    <ClInclude Include="Source\LogoScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

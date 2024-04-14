@@ -28,6 +28,7 @@ class GuiManager;
 class DialogueManager;
 class ModuleFonts;
 class MainMenu;
+class LogoScene;
 class ModuleFadeToBlack;
 
 class App
@@ -118,8 +119,9 @@ public:
 	DialogueManager* dialogueManager;
 	ModuleFonts* fonts;
 	MainMenu* mainMenu;
+	LogoScene* logoScene;
 	ModuleFadeToBlack* fadeToBlack;
-	bool IsVsincActive = false;
+	bool IsVsincActive = true;
 
 private:
 
