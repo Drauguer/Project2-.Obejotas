@@ -87,7 +87,7 @@
       <dialogue text="dialogue 4"/>
     </npc>
 
-    <ally x="150" y="150" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
+    <ally x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
@@ -119,7 +119,7 @@
 		<ability id="5" name="Cañón Laser"/>
 		
     </ally>
-    <ally x="100" y="250" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
+    <ally x="200" y="250" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
@@ -154,12 +154,12 @@
 			<pushback x="1400" y="64" width="100" height="64"/>
 	
 		</Attack>
-        <ability id="0" name="Sable Laser"/>
+        <ability id="6" name="Martillazo"/>
         <ability id="1" name="Grito de Guerra"/>
 		<ability id="2" name="Visión Laser"/>
     </ally>
     
-    <enemy x="300" y="150" texturepath="Assets/Textures/enemigo3.png" life="80" attack="30" defense="40" magicPower="15" dexerity="50" combatID="0">
+    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="30" defense="40" magicPower="15" dexerity="50" combatID="0">
       <Idle animspeed="0.1f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
         <pushback x="64" y="0" width="64" height="64"/>
@@ -176,7 +176,7 @@
       <ability id="1" name="Grito de Guerra"/>
       <ability id="2" name="Visión Laser"/>
     </enemy>
-    <enemy x="300" y="350" texturepath="Assets/Textures/enemigo1.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50" combatID="0">
+    <enemy x="900" y="250" texturepath="Assets/Textures/enemigo1.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50" combatID="0">
 	  <Idle animspeed="0.1f" loop="true">
 		  <pushback x="0" y="0" width="64" height="64"/>
 		  <pushback x="64" y="0" width="64" height="64"/>
@@ -198,7 +198,7 @@
 	  <ability id="1" name="Grito de Guerra"/>
 	  <ability id="2" name="Visión Laser"/>
 	  </enemy>
-	  <enemy x="300" y="450" texturepath="Assets/Textures/enemigo2.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50">
+	  <enemy x="900" y="400" texturepath="Assets/Textures/enemigo2.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>

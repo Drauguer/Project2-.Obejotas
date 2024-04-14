@@ -92,6 +92,10 @@ private:
 	SDL_Texture* laserCannon;
 	SDL_Texture* martillazo;
 
+	// Vidas Personajes
+	SDL_Texture* lifeMago;
+	SDL_Texture* lifeEnano;
+
 public:
 	SDL_Texture* arrowTexture = NULL;
 	const char* arrowTexturePath;

@@ -73,6 +73,8 @@ bool BattleScene::Start()
 	healingMagic = app->tex->Load("Assets/Textures/MagicHealth_Icon.png");
 	laserCannon = app->tex->Load("Assets/Textures/laserbeam_Icon.png");
 	martillazo = app->tex->Load("Assets/Textures/RedMace.png");
+	lifeMago = app->tex->Load("Assets/Textures/LifeMago.png");
+	lifeEnano = app->tex->Load("Assets/Textures/LifeEnano.png");
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
 
@@ -94,6 +96,24 @@ bool BattleScene::Update(float dt)
 	int scale = app->win->GetScale();
 	if (app->scene->isOnCombat) 
 	{
+
+		for (int i = 0; i < app->scene->allies.Count(); ++i)
+		{
+
+			if (strcmp(app->scene->allies[i]->charName.GetString(), "Gale el Mago") == 0)
+			{
+				app->render->DrawRectangle(app->scene->allies[i]->healthBar, 0, 255, 0, 255);
+				app->render->DrawTexture(lifeMago, (app->scene->allies[i]->position.x - 150) / scale, app->scene->allies[i]->position.y / scale);
+				
+			}
+			else if (strcmp(app->scene->allies[i]->charName.GetString(), "David el Enano") == 0)
+			{
+				app->render->DrawRectangle(app->scene->allies[i]->healthBar, 0, 255, 0, 255);
+				app->render->DrawTexture(lifeEnano, (app->scene->allies[i]->position.x - 150) / scale, app->scene->allies[i]->position.y / scale);
+				
+			}
+		}
+
 		currentArrowAnim = &idleArrowAnim;
 		//Timer for waiting to select action
 		if (selectActionCooldown > 0) {
@@ -204,7 +224,7 @@ bool BattleScene::Update(float dt)
 			}
 
 			currentArrowAnim->Update();
-			app->render->DrawTexture(arrowTexture, (350 + 100 * selectAttackIndex) / scale, 550 / scale, &currentArrowAnim->GetCurrentFrame());
+			app->render->DrawTexture(arrowTexture, (450 + 200 * selectAttackIndex) / scale, 500 / scale, &currentArrowAnim->GetCurrentFrame());
 
 
 			//Navigate in the selection attack menu

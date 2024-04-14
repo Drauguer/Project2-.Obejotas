@@ -33,6 +33,8 @@ public:
 
 	virtual bool Update(float dt);
 
+	virtual bool PostUpdate();
+
 	virtual bool CleanUp();
 
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB);

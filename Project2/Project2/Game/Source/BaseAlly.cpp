@@ -74,10 +74,10 @@ bool BaseAlly::Start() {
 	charName = parameters.attribute("charName").as_string();
 	maxHP = life;
 
-	healthBar.x = position.x / 2 - 50;
-	healthBar.y = position.y / 2 + 30;
-	healthBar.w = 100;
-	healthBar.h = 5;
+	healthBar.x = (position.x - 110) / 2;
+	healthBar.y = position.y / 2 + 44;
+	healthBar.w = 36;
+	healthBar.h = 6;
 
 
 	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability"))
@@ -126,7 +126,7 @@ bool BaseAlly::Update(float dt)
 
 	currentAnim->Update();
 
-	int lifeW = (life / maxHP) * 100;
+	int lifeW = (life / maxHP) * 36;
 	if (lifeW <= 0)
 	{
 		lifeW = 0;
@@ -136,11 +136,18 @@ bool BaseAlly::Update(float dt)
 	if (life > 0 && app->scene->isOnCombat) {
 		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
 		app->render->DrawTexture(texture, position.x / scale, position.y / scale, &currentAnim->GetCurrentFrame());
-		app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+		
 	}
 
 
 
+	
+
+	return true;
+}
+
+bool BaseAlly::PostUpdate()
+{
 	
 
 	return true;
