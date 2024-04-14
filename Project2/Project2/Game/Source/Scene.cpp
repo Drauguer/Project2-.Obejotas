@@ -38,6 +38,8 @@ bool Scene::Awake(pugi::xml_node config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	scene_parameter = config;
+
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
 	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
@@ -85,23 +87,45 @@ bool Scene::Awake(pugi::xml_node config)
 		
 	}
 
-	// iterate Enemies in scene
-	for (pugi::xml_node enemyNode = config.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
-	{
-		BaseEnemy* enemy = (BaseEnemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemies.Add(enemy);
-		enemy->parameters = enemyNode;
-	}
 	
-	for (pugi::xml_node allyNode = config.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))
+	
+	
+
+	return ret;
+}
+
+void Scene::LoadEnemies()
+{
+
+	enemies.Clear();
+
+	// iterate Enemies in combat
+	for (pugi::xml_node enemyNode = scene_parameter.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		if (enemyNode.attribute("combatID").as_int() == combatID)
+		{
+			BaseEnemy* enemy = (BaseEnemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+			enemies.Add(enemy);
+			enemy->parameters = enemyNode;
+			enemy->Start();
+		}
+		
+	}
+}
+
+void Scene::LoadAllies()
+{
+	allies.Clear();
+
+	// iterate Allies in combat
+	for (pugi::xml_node allyNode = scene_parameter.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))
 	{
 		BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 		allies.Add(ally);
 		ally->parameters = allyNode;
-		
-	}
+		ally->Start();
 
-	return ret;
+	}
 }
 
 // Called before the first frame
@@ -234,6 +258,8 @@ bool Scene::Update(float dt)
 	{
 		
 		isOnCombat = !isOnCombat;
+		LoadEnemies();
+		LoadAllies();
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 		this->Disable();

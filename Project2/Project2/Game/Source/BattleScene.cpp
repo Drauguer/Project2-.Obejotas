@@ -287,7 +287,7 @@ bool BattleScene::Update(float dt)
 			}
 
 			CheckState();
-			app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 75) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
+			app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 100) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
 
 
 			break;
