@@ -133,8 +133,9 @@ bool NPC::Update(float dt)
 
 
 	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x) / scale)), PIXEL_TO_METERS((float32)((position.y) / scale)) }, 0);
-	app->render->DrawTexture(texture, (position.x-25) / scale, (position.y-25) / scale, &currentAnimation->GetCurrentFrame());
-
+	if (!app->scene->isOnCombat) {
+		app->render->DrawTexture(texture, (position.x - 25) / scale, (position.y - 25) / scale, &currentAnimation->GetCurrentFrame());
+	}
 
 	return true;
 }
