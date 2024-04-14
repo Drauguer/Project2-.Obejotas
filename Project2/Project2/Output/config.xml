@@ -68,9 +68,6 @@
     <map path="Assets/Maps/Map/" name="Mapa1Bueno.tmx"/>
 	<map2 path="Assets/Maps/Map/" name="Mapa2Bueno.tmx"/>
 	<mapInterior path="Assets/Maps/Map/" name="MapaInteriorBueno.tmx"/>
-   
-	  
-	  
 	 
     <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="false" mapID="0">
       <dialogue text="visca catalunya"/>

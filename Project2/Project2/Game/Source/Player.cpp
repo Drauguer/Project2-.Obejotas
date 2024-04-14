@@ -230,68 +230,74 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//app->audio->PlayFx(app->scene->encounterFx);
 		break;
 	case ColliderType::TOMAP1_LEFT:
-		app->scene->mapID = 0;
-		app->map->CleanUp();
-		app->entityManager->Disable();
-		app->AwakeScene();
-		app->physics->Start();
-		app->entityManager->Enable();
-		app->map->Start();
-		app->scene->playerMapID = 0;
+
+		if (app->scene->mapID != 0)
+		{
+			
+			LoadNewMap(0, 0);
+			
+		}
+		
 		break;
 	case ColliderType::TOMAP1_RIGHT:
-		app->scene->mapID = 0;
-		app->map->CleanUp();
-		app->entityManager->Disable();
-		app->AwakeScene();
-		app->physics->Start();
-		app->entityManager->Enable();
-		app->map->Start();
-		app->scene->playerMapID = 1;
+		if (app->scene->mapID != 0)
+		{
+			
+			LoadNewMap(0, 1);
+
+		}
 		break;
 	case ColliderType::TOMAP1_CENTER:
-		app->scene->mapID = 0;
-		app->map->CleanUp();
-		app->entityManager->Disable();
-		app->AwakeScene();
-		app->physics->Start();
-		app->entityManager->Enable();
-		app->map->Start();
-		app->scene->playerMapID = 5;
+		if (app->scene->mapID != 0)
+		{
+			
+			LoadNewMap(0, 5);
+
+		}
 		break;
 	case ColliderType::TOMAP2_LEFT:
-		app->scene->mapID = 1;
-		app->map->CleanUp();
-		app->entityManager->Disable();
-		app->AwakeScene();
-		app->physics->Start();
-		app->entityManager->Enable();
-		app->map->Start();
-		app->scene->playerMapID = 2;
+
+		if (app->scene->mapID != 1)
+		{
+			
+			LoadNewMap(1, 2);
+			
+		}
+		
 		break;
 	case ColliderType::TOMAP2_RIGHT:
-		app->scene->mapID = 1;
-		app->map->CleanUp();
-		app->entityManager->Disable();
-		app->AwakeScene();
-		app->physics->Start();
-		app->entityManager->Enable();
-		app->map->Start();
-		app->scene->playerMapID = 3;
+		
+		if (app->scene->mapID != 1)
+		{
+			
+			LoadNewMap(1, 3);
+		}
+		
+		
 		break;
 	case ColliderType::TOINTERIOR:
-		app->scene->mapID = 2;
-		app->map->CleanUp();
-		app->entityManager->Disable();
-		app->AwakeScene();
-		app->physics->Start();
-		app->entityManager->Enable();
-		app->map->Start();
-		app->scene->playerMapID = 4;
+		if (app->scene->mapID != 2)
+		{
+			
+			LoadNewMap(2, 4);
+
+		}
 		break;
 	default:
 		break;
 	}
+}
+
+void Player::LoadNewMap(int mapID_, int playerMapID_)
+{
+	app->scene->mapID = mapID_;
+	app->scene->playerMapID = playerMapID_;
+	app->map->CleanUp();
+	app->entityManager->Disable();
+	app->AwakeScene();
+	app->physics->Start();
+	app->entityManager->Enable();
+	app->map->Start();
 }
 
 
