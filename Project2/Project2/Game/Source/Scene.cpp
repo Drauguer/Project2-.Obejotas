@@ -307,7 +307,7 @@ bool Scene::Update(float dt)
 	}
 	
 	
-	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	/*if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		
 		isOnCombat = !isOnCombat;
@@ -318,7 +318,7 @@ bool Scene::Update(float dt)
 		this->Disable();
 		app->battleScene->Enable();
 		app->audio->PlayFx(encounterFx);
-	}
+	}*/
 
 
 
