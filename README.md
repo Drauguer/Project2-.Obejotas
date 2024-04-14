@@ -57,7 +57,7 @@ For detailed information about third-party audio assets go to our audio bible: h
 
 ### Tiles License information
 
-We used 2 predpne tiles:
+We used 2 predone tiles:
 
  - https://livingtheindie.itch.io/pixel-cyberpunk-interior
 
