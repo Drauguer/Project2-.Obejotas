@@ -68,12 +68,18 @@
     <map path="Assets/Maps/Map/" name="Mapa1Bueno.tmx"/>
 	<map2 path="Assets/Maps/Map/" name="Mapa2Bueno.tmx"/>
 	<mapInterior path="Assets/Maps/Map/" name="MapaInteriorBueno.tmx"/>
-	 
-    <npc x="300" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="false" mapID="0" npcID="0">
+
+    <npc x="300" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="false" mapID="0" npcID="0">
+      <idleAnim animspeed="0.2f" loop="true">
+        <pushback x="0" y="64" width="32" height="32"/>
+      </idleAnim>
       <dialogue text="visca catalunya"/>
       <dialogue text="dialogue 2"/>
     </npc>
-    <npc x="500" y="400" texturepath="Assets/Textures/Player64x64.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1">
+    <npc x="500" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1">
+      <idleAnim animspeed="0.2f" loop="true">
+        <pushback x="0" y="0" width="32" height="32"/>
+      </idleAnim>
       <dialogue text="viva espanya"/>
       <dialogue text="dialogue 2"/>
       <dialogue text="dialogue 3"/>
