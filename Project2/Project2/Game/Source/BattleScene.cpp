@@ -414,7 +414,11 @@ bool BattleScene::Update(float dt)
 			{
 				app->scene->enemies[currentEnemyInCombatIndex]->SetAttackAnimation();
 				damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexAttack]->defense * 20;
-				app->scene->allies[indexAttack]->life -= damage;
+				if (app->physics->debug == false)
+				{
+					app->scene->allies[indexAttack]->life -= damage;
+				}
+				
 				printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexAttack]->charName.GetString(), damage);
 				printf("La vida de %s es: %f\n", app->scene->allies[indexAttack]->charName.GetString(), app->scene->allies[indexAttack]->life);
 				timerEnemy = 0;
