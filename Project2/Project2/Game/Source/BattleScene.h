@@ -83,6 +83,15 @@ private:
 	Dialogue* testDialogue;
 	Dialogue* testDialogue2;
 
+	// Attack Icons textures
+	SDL_Texture* sableLaser;
+	SDL_Texture* gritoGuerra;
+	SDL_Texture* laserGun;
+	SDL_Texture* fireBall;
+	SDL_Texture* healingMagic;
+	SDL_Texture* laserCannon;
+	SDL_Texture* martillazo;
+
 public:
 	CombatState combatState;
 

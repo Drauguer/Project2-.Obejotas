@@ -50,6 +50,14 @@ bool BattleScene::Start()
 	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
 	deniedFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/033Denied03.wav");
 
+	sableLaser = app->tex->Load("Assets/Textures/LaserSwords.png");
+	gritoGuerra = app->tex->Load("Assets/Textures/Scream_Icon.png");
+	laserGun = app->tex->Load("Assets/Textures/lasergun_Icon.png");
+	fireBall = app->tex->Load("Assets/Textures/FireBall_Icon.png");
+	healingMagic = app->tex->Load("Assets/Textures/MagicHealth_Icon.png");
+	laserCannon = app->tex->Load("Assets/Textures/laserbeam_Icon.png");
+	martillazo = app->tex->Load("Assets/Textures/RedMace.png");
+
 	combatState = CombatState::NONE;
 	return true;
 }
@@ -145,10 +153,35 @@ bool BattleScene::Update(float dt)
 
 			for (int i = 0; i < app->scene->allies[currentPlayerInCombatIndex]->numAttacks; ++i)
 			{
-				app->render->DrawRectangle({ (400 + 100 * i) / scale, 600 / scale, 70 / scale, 70 / scale }, 0, 255, 0, 255);
+
+				switch (app->scene->allies[currentPlayerInCombatIndex]->abilities[i].id)
+				{
+				case 0:
+					app->render->DrawTexture(sableLaser, (400 + 200 * i) / scale, 525 / scale);
+					break;
+				case 1:
+					app->render->DrawTexture(gritoGuerra, (400 + 200 * i) / scale, 525 / scale);
+					break;
+				case 2:
+					app->render->DrawTexture(laserGun, (400 + 200 * i) / scale, 525 / scale);
+					break;
+				case 3:
+					app->render->DrawTexture(fireBall, (400 + 200 * i) / scale, 525 / scale);
+					break;
+				case 4:
+					app->render->DrawTexture(healingMagic, (400 + 200 * i) / scale, 525 / scale);
+					break;
+				case 5:
+					app->render->DrawTexture(laserCannon, (400 + 200 * i) / scale, 525 / scale);
+					break;
+				case 6:
+					app->render->DrawTexture(martillazo, (400 + 200 * i) / scale, 525 / scale);
+					break;
+				}
+
 			}
 
-			app->render->DrawCircle((430 + 100 * selectAttackIndex) / scale, 575 / scale, 15, 255, 0, 0, 255);
+			app->render->DrawCircle((430 + 200 * selectAttackIndex) / scale, 500 / scale, 15, 255, 0, 0, 255);
 
 			//Navigate in the selection attack menu
 			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && selectActionCooldown == 0)
@@ -247,6 +280,10 @@ bool BattleScene::Update(float dt)
 					case 5:
 						damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.75f;
 						printf("El Cañon laser ha hecho %f de daño\n", damage);
+						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+						break;
+					case 6:
+						damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
 						break;
 					}

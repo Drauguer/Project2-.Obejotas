@@ -298,5 +298,12 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 
 		break;
+	case 6:
+		hasAttacked = true;
+		printf("MARTILLAZO!!!\n");
+		app->battleScene->idAttack = 6;
+		app->battleScene->combatState = CombatState::SELECT_ENEMY;
+
+		break;
 	}
 }
