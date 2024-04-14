@@ -66,7 +66,7 @@ bool NPC::Start() {
 		-60, 60,
 	};
 
-	pbody = app->physics->CreateRectangleSensor(position.x / 2, position.y / 2, 30, 30, bodyType::STATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x / 2 + 40, position.y / 2 + 40, 50, 50, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
@@ -132,7 +132,7 @@ bool NPC::Update(float dt)
 	}
 
 
-	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x) / scale)), PIXEL_TO_METERS((float32)((position.y) / scale)) }, 0);
+	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x) / scale + 20)), PIXEL_TO_METERS((float32)((position.y) / scale + 20)) }, 0);
 	app->render->DrawTexture(texture, (position.x-25) / scale, (position.y-25) / scale, &currentAnimation->GetCurrentFrame());
 
 
