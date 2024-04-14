@@ -13,7 +13,11 @@
  
 ## Controls
 
- - {ControlsScheme}
+ - E to talk to NPC
+ - SPACE to skip dialoge and to select attacks
+ - WASD to move the player
+ - ESCAPE to pause the game
+ - ARROWS to move in the menu while in combat
 
 ## Developers
 
