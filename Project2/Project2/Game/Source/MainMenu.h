@@ -45,6 +45,8 @@ public:
 	// Disable Module
 	void Disable();
 
+	unsigned int TitleScreenMusic;
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;

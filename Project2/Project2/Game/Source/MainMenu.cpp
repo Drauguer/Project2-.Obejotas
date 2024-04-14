@@ -38,6 +38,8 @@ bool MainMenu::Start()
 	app->win->GetWindowSize(windowW, windowH);
 	img = app->tex->Load("Assets/Textures/main_screen.png");
 
+	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);
+
 	return true;
 }
 
