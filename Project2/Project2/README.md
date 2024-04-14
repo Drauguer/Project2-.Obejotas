@@ -21,6 +21,7 @@
 
 ## Developers
 
+ - {Dídac García} - {Programmer and designer}
  - {David Lastra} - {Programmer and designer}
  - {Àlex Becerra} - {Designer and artist}
  - {Biel Liñán} - {Designer and artist}
