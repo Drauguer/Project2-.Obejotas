@@ -298,7 +298,14 @@ bool Scene::Update(float dt)
 		app->scene->ResumeScene->state = GuiControlState::NORMAL;
 		app->scene->exitScene->state = GuiControlState::NORMAL;
 		app->scene->settingsScene->state = GuiControlState::NORMAL;
+		Mix_PauseMusic();
 	}
+	
+	if (app->scene->player->isOnPause == false)
+	{
+		Mix_ResumeMusic();
+	}
+	
 	
 	if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{

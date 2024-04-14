@@ -157,7 +157,7 @@ bool Player::Update(float dt)
 		b2Vec2 vel = b2Vec2(0, 0);
 		if (isOnPause == false) {
 
-			
+
 
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0) {
 				vel.x += -0.2 * dt;
