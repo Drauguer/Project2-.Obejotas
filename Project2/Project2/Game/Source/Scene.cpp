@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Physics.h"
 #include "Item.h"
 #include "NPC.h"
 #include "ModuleFonts.h"
@@ -97,7 +98,13 @@ bool Scene::Awake(pugi::xml_node config)
 
 void Scene::LoadEnemies()
 {
+	//Esto es provisional, en futuras entregas se guardara las estadisticas de los players/enemies
 
+	for (int i = 0; i < enemies.Count(); i++)
+	{
+		app->physics->DestroyObject(enemies[i]->pbody);
+		
+	}
 	enemies.Clear();
 
 	// iterate Enemies in combat
@@ -116,6 +123,13 @@ void Scene::LoadEnemies()
 
 void Scene::LoadAllies()
 {
+	//Esto es provisional, en futuras entregas se guardara las estadisticas de los players/enemies
+
+	for (int i = 0; i < allies.Count(); i++)
+	{
+		app->physics->DestroyObject(allies[i]->pbody);
+
+	}
 	allies.Clear();
 
 	// iterate Allies in combat

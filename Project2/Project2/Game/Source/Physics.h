@@ -87,6 +87,9 @@ public:
 
 	void Disable();
 
+
+	void DestroyObject(PhysBody* physBody);
+
 	// Box2D World
 	b2World* world;
 

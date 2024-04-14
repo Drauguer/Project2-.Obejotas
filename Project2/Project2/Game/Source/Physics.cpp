@@ -415,3 +415,9 @@ void Physics::Disable()
 		CleanUp();
 	}
 }
+
+
+void Physics::DestroyObject(PhysBody* physBody)
+{
+	world->DestroyBody(physBody->body);
+}
