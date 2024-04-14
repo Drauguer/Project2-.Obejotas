@@ -102,6 +102,8 @@ bool MainMenu::CleanUp()
 
 bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 {
+	
+
 	if (control->id == 1) {
 
 		app->physics->Enable();
@@ -117,7 +119,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	if (control->id == 2) {
-		app->scene->IsExiting == true;
+		app->scene->IsExiting = true;
 	}
 
 	if (control->id == 3) {

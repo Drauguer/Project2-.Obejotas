@@ -182,8 +182,8 @@ bool Scene::Start()
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 	
-	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 +240, 240, 80 };
-	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton, this);
+	SDL_Rect ExitButton_ = { windowW / 2 - 60,windowH / 2 +240, 240, 80 };
+	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this);
 	exitScene->state = GuiControlState::DISABLED;
 
 	SDL_Rect SettingsSceneButton = { windowW / 2 - 60,windowH / 2, 240, 80 };
