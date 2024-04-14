@@ -178,7 +178,7 @@
 		<ability id="2" name="Visión Laser"/>
     </ally>
     
-    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="30" defense="40" magicPower="15" dexerity="50" combatID="0">
+    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="0">
       <Idle animspeed="0.1f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
         <pushback x="64" y="0" width="64" height="64"/>
