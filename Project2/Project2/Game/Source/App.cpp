@@ -227,7 +227,10 @@ void App::FinishUpdate()
 		uint32 delay = (uint32) (maxFrameDuration - currentDt);
 
 		PerfTimer delayTimer = PerfTimer();
-		SDL_Delay(delay);
+		if (IsVsincActive == true) {
+			SDL_Delay(delay);
+		}
+		
 		//LOG("We waited for %I32u ms and got back in %f ms",delay,delayTimer.ReadMs());
 	}
 	

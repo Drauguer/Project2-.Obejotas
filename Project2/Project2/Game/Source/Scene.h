@@ -64,15 +64,26 @@ public:
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
+	bool IsExiting = false;
+	bool IsVsyncActive = false;
 	uint texW, texH;
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
+	GuiControlButton* exitScene;
+	GuiControlButton* ResumeScene;
+	GuiControlButton* settingsScene;
+	GuiControlButton* FullScreen;
+	GuiControlButton* FullScreenOff;
+	GuiControlButton* Vsinc;
+	GuiControlButton* VsincOff;
+	GuiControlButton* returned;
+	GuiControlButton* Initial_Screen;
 
 	
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
-	GuiControlButton* exitScene;
+	
 
 	// Test Dialogue
 	Dialogue* testDialogue;
