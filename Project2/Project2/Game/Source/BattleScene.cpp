@@ -103,6 +103,9 @@ bool BattleScene::Update(float dt)
 	if (app->scene->isOnCombat) 
 	{
 
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+
 		int winW = windowW;
 		int winH = windowH;
 		dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
