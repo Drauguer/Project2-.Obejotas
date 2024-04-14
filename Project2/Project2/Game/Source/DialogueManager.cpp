@@ -38,6 +38,8 @@ bool DialogueManager::Start()
 
 	item = dialogueList.start;
 
+	dialogueClickFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/001Hover01.wav");
+
 	return true;
 }
 
@@ -64,6 +66,8 @@ bool DialogueManager::Update(float dt)
 
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a)
 			{
+				app->audio->PlayFx(dialogueClickFx);
+				
 				dialogueList.Del(item);
 				item = item->next;
 				LOG("Next dialogue");
@@ -73,6 +77,8 @@ bool DialogueManager::Update(float dt)
 					testDialogue = false;
 					isTalking = false;
 					item = dialogueList.start;
+
+					
 					
 					if (activateCombat)
 					{

@@ -36,6 +36,8 @@ public:
 
 public:
 
+	unsigned int dialogueClickFx;
+
 	List<Dialogue*> dialogueList;
 	ListItem<Dialogue*>* item;
 	bool testDialogue = false;
