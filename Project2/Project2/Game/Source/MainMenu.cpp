@@ -86,6 +86,10 @@ bool MainMenu::Update(float dt)
 
 	app->render->DrawTexture(img, textPosX, textPosY, false);
 	
+	if (isExiting == true)
+	{
+		return false;
+	}
 
 	return true;
 }
@@ -119,7 +123,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	if (control->id == 2) {
-		app->scene->IsExiting = true;
+		isExiting = true;
 	}
 
 	if (control->id == 3) {
@@ -175,6 +179,9 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		Vsinc->state = GuiControlState::NORMAL;
 		VsincOff->state = GuiControlState::DISABLED;
 	}
+
+	
+
 	return true;
 }
 
