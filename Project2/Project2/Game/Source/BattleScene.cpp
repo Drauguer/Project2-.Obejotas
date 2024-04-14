@@ -76,6 +76,7 @@ bool BattleScene::Start()
 	lifeMago = app->tex->Load("Assets/Textures/LifeMago.png");
 	lifeEnano = app->tex->Load("Assets/Textures/LifeEnano.png");
 	lifeEnemy = app->tex->Load("Assets/Textures/LifeEnemy.png");
+	background = app->tex->Load("Assets/Maps/FondoCombate.png");
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
 
@@ -97,6 +98,8 @@ bool BattleScene::Update(float dt)
 	int scale = app->win->GetScale();
 	if (app->scene->isOnCombat) 
 	{
+
+		app->render->DrawTexture(background, 0, 0);
 
 		for (int i = 0; i < app->scene->allies.Count(); ++i)
 		{

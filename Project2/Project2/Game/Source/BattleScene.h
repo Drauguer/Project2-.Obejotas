@@ -97,6 +97,9 @@ private:
 	SDL_Texture* lifeEnano;
 	SDL_Texture* lifeEnemy;
 
+	// Fondo Mapa
+	SDL_Texture* background;
+
 public:
 	SDL_Texture* arrowTexture = NULL;
 	const char* arrowTexturePath;
