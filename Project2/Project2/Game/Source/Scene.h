@@ -53,6 +53,12 @@ public:
 	// Disable Module
 	void Disable();
 
+	// Load Enemies
+	void LoadEnemies();
+
+	// Load Allies
+	void LoadAllies();
+
 	pugi::xml_node scene_parameter;
 
 private:
@@ -104,6 +110,9 @@ public:
 	// ID for Load map
 	int mapID = 0;
 	int playerMapID = 0;
+
+	// ID for combats
+	int combatID = 0;
 
 };
 

@@ -111,7 +111,7 @@ bool Player::Start() {
 
 	InitAnims();
 	
-	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/08Steprock02.wav");
+	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/WalkingRock.ogg");
 	
 
 	int player[8] = {

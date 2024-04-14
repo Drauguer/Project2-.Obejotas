@@ -45,10 +45,6 @@ public:
 
 	virtual void SetAttackAnimation();
 
-	virtual void SetIdleAnimation();
-
-
-
 	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
 public:

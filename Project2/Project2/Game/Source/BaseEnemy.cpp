@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
+#include "List.h"
 
 BaseEnemy::BaseEnemy() : Entity(EntityType::ENEMY)
 {
@@ -28,11 +29,30 @@ void BaseEnemy::InitDialogues()
 
 }
 
+void BaseEnemy::InitAnims()
+{
+	// Idle
+	for (pugi::xml_node node = parameters.child("Idle").child("pushback"); node; node = node.next_sibling("pushback")) {
+		idleAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	idleAnim.speed = parameters.child("Idle").attribute("animspeed").as_float();
+	idleAnim.loop = parameters.child("Idle").attribute("loop").as_bool();
+
+	for (pugi::xml_node node = parameters.child("Attack").child("pushback"); node; node = node.next_sibling("pushback")) {
+		attackAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	attackAnim.speed = parameters.child("Attack").attribute("animspeed").as_float();
+	attackAnim.loop = parameters.child("Attack").attribute("loop").as_bool();
+
+}
+
 bool BaseEnemy::Awake() {
-
-	
-
-	
 
 	return true;
 }
@@ -57,6 +77,19 @@ bool BaseEnemy::Start() {
 	//load Audio
 
 
+	//Init Animations;
+	InitAnims();
+
+	//Load Abilities 
+	for (pugi::xml_node node = parameters.child("ability"); node; node = node.next_sibling("ability"))
+	{
+		abilityId = node.attribute("id").as_int();
+		abilityName = node.attribute("name").as_string();
+		char* abilityString = const_cast<char*>(abilityName);
+		abilities.Add({ abilityId, abilityString });
+		numAttacks++;
+	}
+
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
@@ -72,6 +105,9 @@ bool BaseEnemy::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
+	currentAnim = &idleAnim;
+
+
 	return true;
 }
 
@@ -80,11 +116,11 @@ bool BaseEnemy::Update(float dt)
 
 	int scale = app->win->GetScale();
 
-	if (life > 0) {
-		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
-		app->render->DrawTexture(texture, position.x / scale, position.y / scale);
+	if (attackAnim.HasFinished()) {
+		currentAnim = &idleAnim;
 	}
-	
+
+ 	currentAnim->Update();
 
 	float lifeW = (life / maxHP) * 100;
 	if (lifeW <= 0)
@@ -93,7 +129,18 @@ bool BaseEnemy::Update(float dt)
 	}
 	healthBar.w = lifeW;
 
-	app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+
+	if (life > 0 && app->scene->isOnCombat) {
+		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
+		app->render->DrawTexture(texture, position.x / scale, position.y / scale, &currentAnim->GetCurrentFrame(), true);
+		app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+
+
+	}
+	
+
+	
+
 
 	return true;
 }
@@ -101,6 +148,12 @@ bool BaseEnemy::Update(float dt)
 bool BaseEnemy::CleanUp()
 {
 	return true;
+}
+
+
+void BaseEnemy::SetAttackAnimation() {
+	attackAnim.ResetLoop();
+	currentAnim = &attackAnim;
 }
 
 void BaseEnemy::OnCollision(PhysBody* physA, PhysBody* physB)

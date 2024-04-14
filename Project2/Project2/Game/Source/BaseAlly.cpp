@@ -57,7 +57,6 @@ void BaseAlly::InitAnims()
 
 bool BaseAlly::Awake() 
 {
-	
 
 	return true;
 }
@@ -127,20 +126,22 @@ bool BaseAlly::Update(float dt)
 
 	currentAnim->Update();
 
-	if (life > 0) {
-		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
-		app->render->DrawTexture(texture, position.x / scale, position.y / scale, &currentAnim->GetCurrentFrame());
-	}
-
-
-
 	int lifeW = (life / maxHP) * 100;
 	if (lifeW <= 0)
 	{
 		lifeW = 0;
 	}
 	healthBar.w = lifeW;
-	app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+
+	if (life > 0 && app->scene->isOnCombat) {
+		pbody->body->SetTransform({ PIXEL_TO_METERS((float32)(position.x / scale)), PIXEL_TO_METERS((float32)(position.y / scale)) }, 0);
+		app->render->DrawTexture(texture, position.x / scale, position.y / scale, &currentAnim->GetCurrentFrame());
+		app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+	}
+
+
+
+	
 
 	return true;
 }
@@ -158,10 +159,6 @@ void BaseAlly::OnCollision(PhysBody* physA, PhysBody* physB)
 void BaseAlly::SetAttackAnimation() {
 	attackAnim.ResetLoop();
 	currentAnim = &attackAnim;
-}
-
-void BaseAlly::SetIdleAnimation() {
-	currentAnim = &idleAnim;
 }
 
 bool BaseAlly::OnCollisionStay(PhysBody* physA, PhysBody* physB)
