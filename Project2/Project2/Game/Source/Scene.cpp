@@ -172,18 +172,18 @@ bool Scene::Start()
 	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene
 
 	
-	SDL_Rect ResumeButton = { windowW / 2 - 60,windowH / 2 + 120, 240, 80 };
+	SDL_Rect ResumeButton = { windowW / 2 - 60,windowH / 2 - 120, 240, 80 };
 
 	ResumeScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Resume", ResumeButton, this);
 	ResumeScene->state = GuiControlState::DISABLED;
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 	
-	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 + 240, 240, 80 };
+	SDL_Rect ExitButton = { windowW / 2 - 60,windowH / 2 +120, 240, 80 };
 	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton, this);
 	exitScene->state = GuiControlState::DISABLED;
 
-	SDL_Rect SettingsSceneButton = { windowW / 2 - 60,windowH / 2 - 120, 240, 80 };
+	SDL_Rect SettingsSceneButton = { windowW / 2 - 60,windowH / 2, 240, 80 };
 	settingsScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Settings", SettingsSceneButton, this);
 	settingsScene->state = GuiControlState::DISABLED;
 
@@ -191,11 +191,11 @@ bool Scene::Start()
 	Initial_Screen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Return to inicial screen", Return_Initial, this);
 	Initial_Screen->state = GuiControlState::DISABLED;
 
-	SDL_Rect FullScreenCheck = { windowW / 2 - 60,windowH / 2 + 120, 240, 80 };
+	SDL_Rect FullScreenCheck = { windowW / 2 - 60,windowH / 2 + 60, 240, 80 };
 	FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Full Screen", FullScreenCheck, this);
 	FullScreen->state = GuiControlState::DISABLED;
 
-	SDL_Rect FullScreenCheckOff = { windowW / 2 + 60,windowH / 2, 240, 80 };
+	SDL_Rect FullScreenCheckOff = { windowW / 2 - 60,windowH / 2, 240, 80 };
 	FullScreenOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Full Screen Off", FullScreenCheckOff, this);
 	FullScreenOff->state = GuiControlState::DISABLED;
 
@@ -293,9 +293,8 @@ bool Scene::Update(float dt)
 
 	
 	
-	if (app->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN && app->scene->player->isOnPause == false) {
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->scene->player->isOnPause == false) {
 		app->scene->player->isOnPause = true;
-		
 		app->scene->ResumeScene->state = GuiControlState::NORMAL;
 		app->scene->exitScene->state = GuiControlState::NORMAL;
 		app->scene->settingsScene->state = GuiControlState::NORMAL;
