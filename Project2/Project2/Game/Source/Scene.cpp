@@ -395,12 +395,12 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		FullScreenOff->state = GuiControlState::DISABLED;
 	}
 	if (control->id == 6) {
-		app->IsVsincActive = true;
+		app->IsVsincActive = false;
 		Vsinc->state = GuiControlState::DISABLED;
 		VsincOff->state = GuiControlState::NORMAL;
 	}
 	if (control->id == 7) {
-		app->IsVsincActive = false;
+		app->IsVsincActive = true;
 		Vsinc->state = GuiControlState::NORMAL;
 		VsincOff->state = GuiControlState::DISABLED;
 	}

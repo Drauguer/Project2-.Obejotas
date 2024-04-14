@@ -119,7 +119,7 @@ public:
 	ModuleFonts* fonts;
 	MainMenu* mainMenu;
 	ModuleFadeToBlack* fadeToBlack;
-	bool IsVsincActive = false;
+	bool IsVsincActive = true;
 
 private:
 
