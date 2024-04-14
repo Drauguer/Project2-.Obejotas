@@ -2,7 +2,8 @@
 
 ## Description
 
-{project description}
+Explore a magical fantasy world mixed with some Cyberpunk elements! Battle in RPG turn-based combats against different enemies with your own party!!
+This is only a Vertical Slice, so there are many features that are going to be added in the future.
 
 ## Key Features
 
