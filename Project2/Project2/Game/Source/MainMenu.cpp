@@ -53,7 +53,7 @@ bool MainMenu::Update(float dt)
 	GamePad& pad = app->input->pads[0];
 
 	app->render->DrawTexture(img, textPosX, textPosY, false);
-	app->render->DrawCircle(300, 300, 50, 0, 255, 0, 255);
+	
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.start)
 	{

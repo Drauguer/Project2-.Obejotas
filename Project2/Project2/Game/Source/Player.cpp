@@ -154,43 +154,47 @@ bool Player::Update(float dt)
 	else
 	{
 		//Movement scene
-	
 		b2Vec2 vel = b2Vec2(0, 0);
+		if (isOnPause == false) {
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0 && isOnPause ==false) {
-			vel.x += -0.2 * dt;
-			isFlipped = true;
-			currentAnimation = &sideWalk;
-			sideWalk.Update();
-			app->audio->PlayFx(walkingRockFx);
 			
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0 && isOnPause == false) {
-			vel.x += 0.2 * dt;
-			currentAnimation = &sideWalk;
-			sideWalk.Update();	
-			isFlipped = false;
-			app->audio->PlayFx(walkingRockFx);
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0 && isOnPause == false) {
-			vel.y += -0.2 * dt;
-			currentAnimation = &backWalk;
-			backWalk.Update();
-			app->audio->PlayFx(walkingRockFx);
-		}
-		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0  && isOnPause == false) {
-			vel.y += 0.2 * dt;
-			currentAnimation = &frontWalk;
-			frontWalk.Update();
-			app->audio->PlayFx(walkingRockFx);
-		}
-		else {
-			sideWalk.Reset();
-			frontWalk.Reset();
-			backWalk.Reset();
-		}
 
-		pbody->body->SetLinearVelocity(vel);
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0) {
+				vel.x += -0.2 * dt;
+				isFlipped = true;
+				currentAnimation = &sideWalk;
+				sideWalk.Update();
+				app->audio->PlayFx(walkingRockFx);
+
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0) {
+				vel.x += 0.2 * dt;
+				currentAnimation = &sideWalk;
+				sideWalk.Update();
+				isFlipped = false;
+				app->audio->PlayFx(walkingRockFx);
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0) {
+				vel.y += -0.2 * dt;
+				currentAnimation = &backWalk;
+				backWalk.Update();
+				app->audio->PlayFx(walkingRockFx);
+			}
+			else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0) {
+				vel.y += 0.2 * dt;
+				currentAnimation = &frontWalk;
+				frontWalk.Update();
+				app->audio->PlayFx(walkingRockFx);
+			}
+			else {
+				sideWalk.Reset();
+				frontWalk.Reset();
+				backWalk.Reset();
+			}
+
+			pbody->body->SetLinearVelocity(vel);
+		}
+		
 
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x);
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y);
