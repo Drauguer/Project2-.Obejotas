@@ -103,6 +103,9 @@ bool BattleScene::Update(float dt)
 	if (app->scene->isOnCombat) 
 	{
 
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+
 		int winW = windowW;
 		int winH = windowH;
 		dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
@@ -414,7 +417,11 @@ bool BattleScene::Update(float dt)
 			{
 				app->scene->enemies[currentEnemyInCombatIndex]->SetAttackAnimation();
 				damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexAttack]->defense * 20;
-				app->scene->allies[indexAttack]->life -= damage;
+				if (app->physics->debug == false)
+				{
+					app->scene->allies[indexAttack]->life -= damage;
+				}
+				
 				printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexAttack]->charName.GetString(), damage);
 				printf("La vida de %s es: %f\n", app->scene->allies[indexAttack]->charName.GetString(), app->scene->allies[indexAttack]->life);
 				timerEnemy = 0;
