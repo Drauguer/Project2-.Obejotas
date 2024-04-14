@@ -6,6 +6,7 @@
 #include "Dialogue.h"
 #include "SString.h"
 #include "List.h"
+#include "Animation.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
@@ -46,6 +47,9 @@ public:
 	int mapID;
 	bool hasTalked = false;
 	int npcID;
+
+	Animation idleAnim;
+	Animation* currentAnimation = nullptr;
 
 private:
 

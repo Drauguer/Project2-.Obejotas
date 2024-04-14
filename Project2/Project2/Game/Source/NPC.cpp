@@ -45,6 +45,15 @@ bool NPC::Start() {
 	mapID = parameters.attribute("mapID").as_int();
 	npcID = parameters.attribute("npcID").as_int();
 
+	for (pugi::xml_node node = parameters.child("idleAnim").child("pushback"); node; node = node.next_sibling("pushback")) {
+		idleAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	idleAnim.speed = parameters.child("idleAnim").attribute("animspeed").as_float();
+	idleAnim.loop = parameters.child("idleAnim").attribute("loop").as_bool();
+
 	InitDialogues();
 
 	//initilize textures
@@ -57,7 +66,7 @@ bool NPC::Start() {
 		-60, 60,
 	};
 
-	pbody = app->physics->CreateRectangleSensor(position.x / 2, position.y / 2, 80, 80, bodyType::STATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x / 2, position.y / 2, 30, 30, bodyType::STATIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::NPC;
 
@@ -68,6 +77,8 @@ bool NPC::Update(float dt)
 {
 
 	int scale = app->win->GetScale();
+	currentAnimation = &idleAnim;
+	currentAnimation->Update();
 
 	GamePad& pad = app->input->pads[0];
 
@@ -121,8 +132,9 @@ bool NPC::Update(float dt)
 	}
 
 
-	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x + 130) / scale)), PIXEL_TO_METERS((float32)((position.y + 130) / scale)) }, 0);
-	app->render->DrawTexture(texture, position.x / scale, position.y / scale);
+	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x)*2 / scale)), PIXEL_TO_METERS((float32)((position.y)*2 / scale)) }, 0);
+	app->render->DrawTexture(texture, position.x-12, position.y-12, &currentAnimation->GetCurrentFrame());
+
 
 	return true;
 }
