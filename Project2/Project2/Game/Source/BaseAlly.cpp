@@ -12,6 +12,8 @@
 #include "Window.h"
 #include "DialogueManager.h"
 #include "ModuleFonts.h"
+#include "DialogueManager.h"
+#include "ModuleFonts.h"
 
 #include<iostream>
 #include<cstdlib>

@@ -53,6 +53,9 @@ public:
 	bool firstCombat = true;
 	bool playerHasLosed = false;
 
+	// ChatBox
+	SDL_Texture* chatbox;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__

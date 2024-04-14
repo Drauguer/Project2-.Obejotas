@@ -81,6 +81,9 @@ bool BattleScene::Start()
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
 
+	//Get the size of the window
+	app->win->GetWindowSize(windowW, windowH);
+
 	combatState = CombatState::NONE;
 	return true;
 }
@@ -99,6 +102,11 @@ bool BattleScene::Update(float dt)
 	int scale = app->win->GetScale();
 	if (app->scene->isOnCombat) 
 	{
+
+		int winW = windowW;
+		int winH = windowH;
+		dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
+		dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
 
 		app->render->DrawTexture(background, 0, 0);
 
@@ -324,6 +332,7 @@ bool BattleScene::Update(float dt)
 						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
 						damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+						isText = true;
 						break;
 					case 1:
 						break;
@@ -338,11 +347,13 @@ bool BattleScene::Update(float dt)
 						damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.75f;
 						printf("El Ca�on laser ha hecho %f de da�o\n", damage);
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+						isText = true;
 						break;
 					case 6:
 						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
 						damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
 						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+						isText = true;
 						break;
 					}
 
@@ -356,7 +367,7 @@ bool BattleScene::Update(float dt)
 				if (CheckAllPlayersAttacked()) {
 					CheckState();
 					app->battleScene->combatState = CombatState::ENEMY_ATTACK;
-					idAttack = 0;
+					
 					selectAttackIndex = 0;
 				}
 				else
@@ -364,7 +375,7 @@ bool BattleScene::Update(float dt)
 					currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
 					CheckState();
 					app->battleScene->combatState = CombatState::SELECT_CHARACTER;
-					idAttack = 0;
+					
 					selectAttackIndex = 0;
 				}
 
@@ -420,6 +431,22 @@ bool BattleScene::Update(float dt)
 			}
 
 			break;
+
+		}
+
+		if (isText)
+		{
+
+			if (timerText <= 120)
+			{
+				TextAttack(idAttack);
+				timerText++;
+			}
+			else {
+				timerText = 0;
+				idAttack = 0;
+				isText = false;
+			}
 
 		}
 	}
@@ -586,6 +613,41 @@ void BattleScene::SetAllPlayersAliveToAttack() {
 		if (app->scene->allies[i]->life>0) {
 			app->scene->allies[i]->hasAttacked = false;
 		}
+	}
+}
+
+void BattleScene::TextAttack(int indexAttack)
+{
+	switch (indexAttack)
+	{
+	case 0:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "comete mi sable!!");
+		break;
+	case 1:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "aumenta mi ataque WROAAAAR!!");
+		break;
+	case 2:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "pium pium!! Visión Laser!!");
+		break;
+	case 3:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "fireball!!");
+		break;
+	case 4:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "diosa curame!!");
+		break;
+	case 5:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "bomba laseeer!!");
+		break;
+	case 6:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 15, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "ja ja ja martillo vaa!!");
+		break;
 	}
 }
 
