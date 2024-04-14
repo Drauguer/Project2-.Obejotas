@@ -28,7 +28,7 @@
  - {Samuel Martínez} - {Programmer}
  - {Oliver Santos} - {Artist}
  - {Noel Colón} - {Programmer and designer}
- - {Yiwei Ye} - {Vfx artist and designer}
+ - {Yiwei Ye} - { Sound designer/composer and designer}
  - {Salvador Bernadés} - {Artist}
 
 ## Audio
