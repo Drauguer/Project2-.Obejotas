@@ -10,20 +10,11 @@
 	<entitymanager>
 		<Player>
 			<player1>
-				<Position x="1.82301438" y="7.28658628" />
+				<Position x="6.23903799" y="6.15171051" Map_ID="2" Player_Map_ID="4" />
 				<Stats Life="30" Attack="10" />
 			</player1>
 		</Player>
-		<NPCs>
-			<NPC1>
-				<Position x="4.29999971" y="5.29999971" />
-				<State Has_Combat="true" Has_Talked="false" />
-			</NPC1>
-			<NPC2>
-				<Position x="6.29999971" y="5.29999971" />
-				<State Has_Combat="true" Has_Talked="false" />
-			</NPC2>
-		</NPCs>
+		<NPCs />
 		<Enemies />
 		<Allies />
 	</entitymanager>

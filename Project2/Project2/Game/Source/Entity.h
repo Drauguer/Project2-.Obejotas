@@ -96,6 +96,8 @@ public:
 	pugi::xml_node parameters; 
 	PhysBody* pbody;
 
+
+
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;       
