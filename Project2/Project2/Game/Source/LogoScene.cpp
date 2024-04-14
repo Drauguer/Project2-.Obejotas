@@ -40,6 +40,7 @@ bool LogoScene::Start()
 	img = app->tex->Load("Assets/Textures/logo.png");
 	timer = 0;
 
+	app->audio->PlayMusic("Assets/Audio/Music/ScreenMusic/TeamLogoSFX.ogg", 1.0f);
 
 	return true;
 }

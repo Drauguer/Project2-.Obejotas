@@ -47,7 +47,7 @@ public:
 	// Disable Module
 	void Disable();
 
-	unsigned int TitleScreenMusic;
+	unsigned int logoScreenMusic;
 
 private:
 	SDL_Texture* img;
