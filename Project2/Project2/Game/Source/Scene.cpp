@@ -85,6 +85,8 @@ bool Scene::Awake(pugi::xml_node config)
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
 			npcs.Add(npc);
 			npc->parameters = npcNode;
+
+			
 		}
 		
 	}

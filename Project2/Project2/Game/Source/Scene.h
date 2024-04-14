@@ -101,6 +101,7 @@ public:
 
 	// List of all NPC
 	List<NPC*> npcs;
+	List<int> npcIDcombatFinished;
 
 	//Audio
 	uint encounterFx;

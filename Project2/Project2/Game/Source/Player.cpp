@@ -276,7 +276,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TOINTERIOR:
 		if (app->scene->mapID != 2)
 		{
-			
+
 			LoadNewMap(2, 4);
 
 		}

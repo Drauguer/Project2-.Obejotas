@@ -54,6 +54,15 @@ bool NPC::Start() {
 	idleAnim.speed = parameters.child("idleAnim").attribute("animspeed").as_float();
 	idleAnim.loop = parameters.child("idleAnim").attribute("loop").as_bool();
 
+	for (int i = 0; i < app->scene->npcIDcombatFinished.Count(); ++i)
+	{
+		if (app->scene->npcIDcombatFinished[i] == npcID)
+		{
+			hasCombat = false;
+			hasTalked = true;
+		}
+	}
+
 	InitDialogues();
 
 	//initilize textures

@@ -395,7 +395,7 @@ bool BattleScene::Update(float dt)
 
 			}
 
-			CheckState();
+			//CheckState();
 			//app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 100) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
 			currentArrowAnim->Update();
 			app->render->DrawTexture(arrowTexture, (app->scene->enemies[currentEnemySelectedIndex]->position.x + 30) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y) / scale, &currentArrowAnim->GetCurrentFrame());
@@ -529,6 +529,7 @@ void BattleScene::CheckState()
 			if (app->scene->npcs[i]->npcID == npcIDbattle)
 			{
 				app->scene->npcs[i]->hasTalked = false;
+				app->scene->npcIDcombatFinished.Add(npcIDbattle);
 			}
 		}
 		Disable();
@@ -561,6 +562,7 @@ void BattleScene::CheckState()
 			{
 				app->scene->npcs[i]->hasCombat = false;
 				app->scene->npcs[i]->hasTalked = true;
+				app->scene->npcIDcombatFinished.Add(app->scene->npcs[i]->npcID);
 			}
 		}
 		for (int i = 0; i < app->scene->allies.Count(); i++)
