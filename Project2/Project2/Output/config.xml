@@ -247,6 +247,19 @@
 		  <ability id="1" name="Grito de Guerra"/>
 		  <ability id="2" name="Visión Laser"/>
 	  </enemy>
+	  <item1 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="1"/>
+	  <item2 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="2"/>
+	  <item3 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="3"/>
+	  <item4 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="3"/>
+	  <item5 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="1"/>
 
   </scene>
+
+	<inventory texturePath="Assets/Textures/SelectionArrow.png">
+		<arrow animspeed="0.05f" loop="true">
+			<pushback x="0" y="0" width="64" height="64"/>
+			<pushback x="64" y="0" width="64" height="64"/>
+		</arrow>
+	</inventory>
+
 </config>

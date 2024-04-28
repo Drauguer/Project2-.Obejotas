@@ -72,11 +72,34 @@ bool Scene::Awake(pugi::xml_node config)
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+
+
+	/*for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
-	}
+	}*/
+
+	pugi::xml_node item1Node = config.child("item1");
+	item1 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item1->parameters = item1Node;
+
+	pugi::xml_node item2Node = config.child("item2");
+	item2 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item2->parameters = item2Node;
+
+	pugi::xml_node item3Node = config.child("item3");
+	item3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item3->parameters = item3Node;
+
+	pugi::xml_node item14Node = config.child("item4");
+	item4 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item4->parameters = item14Node;
+
+	pugi::xml_node item15Node = config.child("item5");
+	item5 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item5->parameters = item15Node;
+
 
 	// iterate NPCs in scene
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
@@ -144,6 +167,13 @@ void Scene::LoadAllies()
 		ally->Start();
 
 	}
+
+	// Testing inventory, will be deleted
+	allies[0]->inventoryChar.Add(item1);
+	allies[0]->inventoryChar.Add(item2);
+	allies[0]->inventoryChar.Add(item3);
+	allies[0]->inventoryChar.Add(item4);
+	allies[0]->inventoryChar.Add(item5);
 }
 
 // Called before the first frame

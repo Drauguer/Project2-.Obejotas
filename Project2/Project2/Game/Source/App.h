@@ -30,6 +30,7 @@ class ModuleFonts;
 class MainMenu;
 class LogoScene;
 class ModuleFadeToBlack;
+class Inventory;
 
 class App
 {
@@ -123,6 +124,7 @@ public:
 	MainMenu* mainMenu;
 	LogoScene* logoScene;
 	ModuleFadeToBlack* fadeToBlack;
+	Inventory* inventory;
 	bool IsVsincActive = true;
 
 private:

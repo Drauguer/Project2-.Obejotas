@@ -8,6 +8,7 @@
 #include "List.h"
 #include "SDL/include/SDL.h"
 #include "Animation.h"
+#include "Item.h"
 
 struct SDL_Texture;
 class SString;
@@ -104,6 +105,16 @@ public:
 
 	// Debug Life
 	SDL_Rect healthBar;
+
+	// Items equipped by characters
+	Item* helmetItem;
+	bool isHelmetEquipped = false;
+	Item* armorItem;
+	bool isArmorEquipped = false;
+	Item* weaponItem;
+	bool isWeaponEquipped = false;
+
+	List<Item*> inventoryChar;
 
 	float damage;
 

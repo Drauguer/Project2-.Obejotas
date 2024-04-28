@@ -41,9 +41,6 @@ bool BattleScene::Awake(pugi::xml_node config)
 
 	arrowTexturePath = config.attribute("texturePath").as_string();
 
-
-
-
 	for (pugi::xml_node node = config.child("arrow").child("pushback"); node; node = node.next_sibling("pushback")) {
 		idleArrowAnim.PushBack({ node.attribute("x").as_int(),
 						node.attribute("y").as_int(),

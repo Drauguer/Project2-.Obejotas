@@ -28,6 +28,20 @@ bool Item::Start() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	typeId = parameters.attribute("type").as_int();
+
+	if (typeId == 1)
+	{
+		itemType = ItemType::HELMET;
+	} 
+	else if (typeId == 2)
+	{
+		itemType = ItemType::ARMOR;
+	}
+	else if (typeId == 3)
+	{
+		itemType = ItemType::WEAPON;
+	}
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);

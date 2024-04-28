@@ -13,6 +13,7 @@
 #include "MainMenu.h"
 #include "LogoScene.h"
 #include "ModuleFadeToBlack.h"
+#include "Inventory.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -49,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	mainMenu = new MainMenu(false);
 	logoScene = new LogoScene(true);
 	fadeToBlack = new ModuleFadeToBlack(true);
+	inventory = new Inventory(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -68,6 +70,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialogueManager);
 	AddModule(fonts);
 	AddModule(fadeToBlack);
+	AddModule(inventory);
 
 	// Render last to swap buffer
 	AddModule(render);

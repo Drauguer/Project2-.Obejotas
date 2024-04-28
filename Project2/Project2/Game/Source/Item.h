@@ -7,6 +7,13 @@
 
 struct SDL_Texture;
 
+enum class ItemType
+{
+	HELMET,
+	ARMOR,
+	WEAPON,
+};
+
 class Item : public Entity
 {
 public:
@@ -25,6 +32,10 @@ public:
 public:
 
 	bool isPicked = false;
+	bool isEquipped = false;
+
+	int typeId = 0;
+	ItemType itemType;
 
 private:
 

@@ -12,6 +12,7 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "Window.h"
 #include "Map.h"
+#include "Inventory.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -157,8 +158,6 @@ bool Player::Update(float dt)
 		b2Vec2 vel = b2Vec2(0, 0);
 		if (isOnPause == false) {
 
-
-
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0) {
 				vel.x += -0.2 * dt;
 				isFlipped = true;
@@ -193,6 +192,19 @@ bool Player::Update(float dt)
 			}
 
 			pbody->body->SetLinearVelocity(vel);
+
+			if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+			{
+				if (app->inventory->active)
+				{
+					app->inventory->Disable();
+				}
+				else if (app->inventory->active == false)
+				{
+					app->inventory->Enable();
+				}
+				
+			}
 		}
 		
 

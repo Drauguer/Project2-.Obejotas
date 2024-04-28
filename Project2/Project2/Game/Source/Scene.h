@@ -131,6 +131,13 @@ public:
 	int combatID = 0;
 
 	bool changedMap;
+
+	// Testing items
+	Item* item1;
+	Item* item2;
+	Item* item3;
+	Item* item4;
+	Item* item5;
 };
 
 #endif // __SCENE_H__
