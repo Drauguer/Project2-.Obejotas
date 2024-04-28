@@ -274,6 +274,24 @@ bool Inventory::Update(float dt)
 		}
 	}
 
+	
+	
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+				if (inventorySelectedIndex + 1 < app->scene->allies.Count())
+				{
+					inventorySelectedIndex += 1;
+					itemSelectedIndex = 0;
+				}
+				else
+				{
+					inventorySelectedIndex = 0;
+					itemSelectedIndex = 0;
+				}
+			
+		}
+	
+
 	currentArrowAnim = &idleArrowAnim;
 	currentArrowAnim->Update();
 
