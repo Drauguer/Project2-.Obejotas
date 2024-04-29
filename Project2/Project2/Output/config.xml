@@ -177,6 +177,72 @@
         <ability id="1" name="Grito de Guerra"/>
 		<ability id="2" name="Visión Laser"/>
     </ally>
+
+	  <ally x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+			  <pushback x="0" y="64" width="80" height="64"/>
+			  <pushback x="80" y="64" width="80" height="64"/>
+			  <pushback x="160" y="64" width="80" height="64"/>
+			  <pushback x="240" y="64" width="80" height="64"/>
+			  <pushback x="320" y="64" width="80" height="64"/>
+			  <pushback x="400" y="64" width="80" height="64"/>
+			  <pushback x="480" y="64" width="80" height="64"/>
+			  <pushback x="560" y="64" width="80" height="64"/>
+			  <pushback x="640" y="64" width="80" height="64"/>
+			  <pushback x="720" y="64" width="80" height="64"/>
+			  <pushback x="800" y="64" width="80" height="64"/>
+			  <pushback x="880" y="64" width="80" height="64"/>
+			  <pushback x="960" y="64" width="80" height="64"/>
+			  <pushback x="1040" y="64" width="80" height="64"/>
+			  <pushback x="1120" y="64" width="80" height="64"/>
+			  <pushback x="1200" y="64" width="80" height="64"/>
+			  <pushback x="1280" y="64" width="80" height="64"/>
+			  <pushback x="1360" y="64" width="80" height="64"/>
+		  </Attack>
+		  <ability id="3" name="FireBall"/>
+		  <ability id="4" name="Healing magic"/>
+		  <ability id="5" name="Cañón Laser"/>
+
+	  </ally>
+
+	  <ally x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+			  <pushback x="0" y="64" width="80" height="64"/>
+			  <pushback x="80" y="64" width="80" height="64"/>
+			  <pushback x="160" y="64" width="80" height="64"/>
+			  <pushback x="240" y="64" width="80" height="64"/>
+			  <pushback x="320" y="64" width="80" height="64"/>
+			  <pushback x="400" y="64" width="80" height="64"/>
+			  <pushback x="480" y="64" width="80" height="64"/>
+			  <pushback x="560" y="64" width="80" height="64"/>
+			  <pushback x="640" y="64" width="80" height="64"/>
+			  <pushback x="720" y="64" width="80" height="64"/>
+			  <pushback x="800" y="64" width="80" height="64"/>
+			  <pushback x="880" y="64" width="80" height="64"/>
+			  <pushback x="960" y="64" width="80" height="64"/>
+			  <pushback x="1040" y="64" width="80" height="64"/>
+			  <pushback x="1120" y="64" width="80" height="64"/>
+			  <pushback x="1200" y="64" width="80" height="64"/>
+			  <pushback x="1280" y="64" width="80" height="64"/>
+			  <pushback x="1360" y="64" width="80" height="64"/>
+		  </Attack>
+		  <ability id="3" name="FireBall"/>
+		  <ability id="4" name="Healing magic"/>
+		  <ability id="5" name="Cañón Laser"/>
+
+	  </ally>
     
     <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="0">
       <Idle animspeed="0.1f" loop="true">

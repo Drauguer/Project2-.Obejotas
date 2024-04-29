@@ -278,16 +278,37 @@ bool Inventory::Update(float dt)
 	
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
+
+			if (inventorySelectedIndex + 1 >= app->scene->allies.Count())
+			{
+				inventorySelectedIndex = 0;
+				itemSelectedIndex = 0;
+			}
+			else if (app->scene->allies[inventorySelectedIndex + 1]->inventoryChar.start != NULL)
+			{
 				if (inventorySelectedIndex + 1 < app->scene->allies.Count())
 				{
 					inventorySelectedIndex += 1;
 					itemSelectedIndex = 0;
 				}
-				else
+			}
+			else if (app->scene->allies[inventorySelectedIndex + 2]->inventoryChar.start != NULL)
+			{
+				if (inventorySelectedIndex + 2 < app->scene->allies.Count())
 				{
-					inventorySelectedIndex = 0;
+					inventorySelectedIndex += 2;
 					itemSelectedIndex = 0;
 				}
+			}
+			else if (app->scene->allies[inventorySelectedIndex + 3]->inventoryChar.start != NULL)
+			{
+				if (inventorySelectedIndex + 3 < app->scene->allies.Count())
+				{
+					inventorySelectedIndex += 3;
+					itemSelectedIndex = 0;
+				}
+			}
+				
 			
 		}
 	
