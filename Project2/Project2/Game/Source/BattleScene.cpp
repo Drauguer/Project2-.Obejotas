@@ -401,9 +401,13 @@ bool BattleScene::Update(float dt)
 			break;
 		case CombatState::ENEMY_ATTACK:
 			//Aqui va el ataque del enemigo y despues un check State
+			
+			//Aqui se podria hacer una animacion para seleccionar al player al que va a atacar, 
+			//por ejemplo la flechita moviendose rapidamente entre players hasta que selecciona a uno 
 			timerEnemy++;
 			srand((unsigned)time(NULL));
-			int indexAttack = rand() % app->scene->allies.Count();
+			int indexPlayerToAttack = rand() % app->scene->allies.Count();
+			int indexAbility = rand() % app->scene->enemies[currentEnemyInCombatIndex]->abilities.Count();
 
 			if (app->scene->enemies[currentEnemyInCombatIndex]->life <= 0)
 			{
@@ -413,14 +417,7 @@ bool BattleScene::Update(float dt)
 			if (timerEnemy >= 120)
 			{
 				app->scene->enemies[currentEnemyInCombatIndex]->SetAttackAnimation();
-				damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexAttack]->defense * 20;
-				if (app->physics->debug == false)
-				{
-					app->scene->allies[indexAttack]->life -= damage;
-				}
-				
-				printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexAttack]->charName.GetString(), damage);
-				printf("La vida de %s es: %f\n", app->scene->allies[indexAttack]->charName.GetString(), app->scene->allies[indexAttack]->life);
+				CheckEnemyAbility(indexAbility, indexPlayerToAttack);			
 				timerEnemy = 0;
 				currentEnemyInCombatIndex++;
 			}
@@ -656,6 +653,34 @@ void BattleScene::TextAttack(int indexAttack)
 		break;
 	}
 }
+
+//Function to check the enemy hability based on the id 
+void BattleScene::CheckEnemyAbility(int abilityId, int indexPlayerToAttack) {
+	switch (abilityId)
+	{
+	case 0:
+		damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexPlayerToAttack]->defense * 20;
+		printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+		printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+		if (app->physics->debug == false)
+		{
+			app->scene->allies[indexPlayerToAttack]->life -= damage;
+		}
+		break;
+	case 1:
+		printf("No hace nada de da�o\n");
+		break;
+	case 2:
+		printf("Wtf amigo\n");
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	}
+}
+
+
 
 
 

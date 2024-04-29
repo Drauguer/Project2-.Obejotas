@@ -69,6 +69,8 @@ public:
 
 	void TextAttack(int attackIndex);
 
+	void CheckEnemyAbility(int abilityId, int playerToAttackIndex = -1);
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
