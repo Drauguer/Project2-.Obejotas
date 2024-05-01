@@ -8,6 +8,7 @@
 #include "ModuleFonts.h"
 #include "BattleScene.h"
 #include "Audio.h"
+#include "ModuleFadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -96,8 +97,7 @@ bool DialogueManager::Update(float dt)
 							app->scene->LoadEnemies();
 							playerHasLosed = false;
 						}
-						app->scene->Disable();
-						app->battleScene->Enable();
+						app->fadeToBlack->FadeToBlack(app->scene, app->battleScene, 20);
 						app->audio->PlayFx(app->scene->encounterFx);
 						activateCombat = false;
 					}

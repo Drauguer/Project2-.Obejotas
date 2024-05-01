@@ -47,8 +47,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	guiManager = new GuiManager(true);
 	dialogueManager = new DialogueManager(true);
 	fonts = new ModuleFonts(true);
-	mainMenu = new MainMenu(false);
 	logoScene = new LogoScene(true);
+	mainMenu = new MainMenu(false);
 	fadeToBlack = new ModuleFadeToBlack(true);
 	inventory = new Inventory(false);
 
@@ -59,17 +59,26 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	//L07 DONE 2: Add Physics module
+	AddModule(fadeToBlack);
+
 	AddModule(physics);
 	AddModule(map);
 	AddModule(battleScene);
 	AddModule(scene);
+
+
+	AddModule(entityManager);
+
+
+	//Scenes
 	AddModule(mainMenu);
 	AddModule(logoScene);
-	AddModule(entityManager);
+
+	//Fonts and UI
 	AddModule(guiManager);
 	AddModule(dialogueManager);
 	AddModule(fonts);
-	AddModule(fadeToBlack);
+	
 	AddModule(inventory);
 
 	// Render last to swap buffer

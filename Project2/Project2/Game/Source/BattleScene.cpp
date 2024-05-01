@@ -12,6 +12,7 @@
 #include "BaseAlly.h"
 #include "ModuleFonts.h"
 #include "Physics.h"
+#include "ModuleFadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -549,7 +550,7 @@ void BattleScene::CheckState()
 	}
 	if (playerWin) {
 		printf("Has ganado el combate");
-		app->scene->Enable();
+		app->fadeToBlack->FadeToBlack( app->battleScene, app->scene, 20);
 		for (int i = 0; i < app->scene->npcs.Count(); ++i)
 		{
 			if (app->scene->npcs[i]->npcID == npcIDbattle)
@@ -567,7 +568,6 @@ void BattleScene::CheckState()
 		{
 			app->scene->enemies[i]->life = 0;
 		}
-		Disable();
 		app->scene->isOnCombat = false;
 		hasStartedCombat = false;
 		return;

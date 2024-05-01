@@ -110,11 +110,11 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 	if (control->id == 1) {
 
+		app->fadeToBlack->FadeToBlack(this, app->scene, 30);
+
 		app->physics->Enable();
 		app->map->Enable();
 		app->entityManager->Enable();
-		app->scene->Enable();
-		this->Disable();
 		start->state = GuiControlState::DISABLED;
 		continue_->state = GuiControlState::DISABLED;
 		setting->state = GuiControlState::DISABLED;

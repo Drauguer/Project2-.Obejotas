@@ -64,4 +64,6 @@ private:
 
 public:
 
+	bool fadeTriggered = false;
+
 };

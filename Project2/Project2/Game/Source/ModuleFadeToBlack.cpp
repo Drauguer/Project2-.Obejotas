@@ -9,7 +9,6 @@
 
 ModuleFadeToBlack::ModuleFadeToBlack(bool startEnabled) : Module(startEnabled)
 {
-
 }
 
 ModuleFadeToBlack::~ModuleFadeToBlack()
@@ -19,22 +18,15 @@ ModuleFadeToBlack::~ModuleFadeToBlack()
 
 bool ModuleFadeToBlack::Start()
 {
-
 	LOG("Preparing Fade Screen");
-
-	uint scale = app->win->GetScale();
-	//Get the size of the window
-	app->win->GetWindowSize(winW, winH);
-	int rectW = winW * scale;
-	int rectH = winH * scale;
-	screenRect = { 0, 0, rectW, rectH };
+	screenRect = { 0, 0, (int)app->win->width, (int)app->win->height };
 
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 	return true;
 }
 
-bool ModuleFadeToBlack::Update()
+bool ModuleFadeToBlack::Update(float dt)
 {
 	// Exit this function if we are not performing a fade
 	if (currentStep == Fade_Step::NONE) return true;

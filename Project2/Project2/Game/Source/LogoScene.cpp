@@ -22,7 +22,7 @@
 
 LogoScene::LogoScene(bool startEnabled) : Module(startEnabled)
 {
-	name.Create("mainmenu");
+	name.Create("logoScene");
 }
 
 // Destructor
@@ -53,13 +53,16 @@ bool LogoScene::PreUpdate()
 bool LogoScene::Update(float dt)
 {
 
-
-	timer += dt;
 	app->render->DrawTexture(img, textPosX, textPosY, false);
-	if (timer > 3000 || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+
+	// Increment timer based on delta time (frame rate independent)
+	timer += dt;
+
+	// Check if it's time to trigger the fade effect
+	if (timer > 200 )
 	{
-		app->mainMenu->Enable();
-		this->Disable();
+		// Trigger fade effect
+		app->fadeToBlack->FadeToBlack(this, app->mainMenu, 30);
 	}
 
 	return true;
