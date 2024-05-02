@@ -272,6 +272,12 @@ bool Inventory::Update(float dt)
 		else {
 			itemSelectedIndex += 1;
 		}
+
+		if (app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() <= 1)
+		{
+			inventorySelectedIndex = 0;
+			itemSelectedIndex = 0;
+		}
 	}
 
 	
@@ -309,6 +315,7 @@ bool Inventory::Update(float dt)
 				}
 			}
 				
+			
 			
 		}
 	

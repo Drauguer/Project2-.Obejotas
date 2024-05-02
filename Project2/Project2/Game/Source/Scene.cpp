@@ -173,7 +173,7 @@ void Scene::LoadAllies()
 	allies[0]->inventoryChar.Add(item2);
 	allies[1]->inventoryChar.Add(item3);
 	allies[0]->inventoryChar.Add(item4);
-	allies[3]->inventoryChar.Add(item5);
+	allies[0]->inventoryChar.Add(item5);
 }
 
 // Called before the first frame
