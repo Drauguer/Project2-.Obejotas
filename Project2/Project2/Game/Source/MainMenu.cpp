@@ -70,6 +70,22 @@ bool MainMenu::Start()
 	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Vsync Off", VsincCheckOff, this);
 	VsincOff->state = GuiControlState::DISABLED;
 
+	SDL_Rect SoundOff = { windowW / 2 - 210,windowH / 2 - 180,240,80 };
+	AudioOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Audio Off", SoundOff, this);
+	AudioOff->state = GuiControlState::DISABLED;
+
+	SDL_Rect SoundOn = { windowW / 2 - 210,windowH / 2 - 220,240,80 };
+	AudioOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Audio On", SoundOn, this);
+	AudioOn->state = GuiControlState::DISABLED;
+
+	SDL_Rect EffectOff = { windowW / 2 - 650,windowH / 2 - 180,240,80 };
+	FxOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "Fx Off", EffectOff, this);
+	FxOff->state = GuiControlState::DISABLED;
+
+	SDL_Rect EffectOn = { windowW / 2 - 650,windowH / 2 - 220,240,80 };
+	FxOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, "Fx On", EffectOn, this);
+	FxOn->state = GuiControlState::DISABLED;
+
 	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);
 
 	return true;
@@ -133,6 +149,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		turnBack->state = GuiControlState::NORMAL;
 		Vsinc->state = GuiControlState::NORMAL;
 		FullScreen->state = GuiControlState::NORMAL;
+		AudioOff->state = GuiControlState::NORMAL;
+		FxOff->state = GuiControlState::NORMAL;
 	}
 	if (control->id == 6) {
 		start->state = GuiControlState::NORMAL;
@@ -141,6 +159,13 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		turnBack->state = GuiControlState::DISABLED;
 		VsincOff->state = GuiControlState::DISABLED;
 		Vsinc->state = GuiControlState::DISABLED;
+		FullScreen->state = GuiControlState::DISABLED;
+		FullScreenOff->state = GuiControlState::DISABLED;
+		AudioOff->state = GuiControlState::DISABLED;
+		AudioOn->state = GuiControlState::DISABLED;
+		FxOff->state = GuiControlState::DISABLED;
+		FxOn->state = GuiControlState::DISABLED;
+
 	}
 	if (control->id == 10) {
 
@@ -179,7 +204,27 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		Vsinc->state = GuiControlState::NORMAL;
 		VsincOff->state = GuiControlState::DISABLED;
 	}
+	if (control->id == 15) {
+		AudioOff->state = GuiControlState::DISABLED;
+		AudioOn->state = GuiControlState::NORMAL;
+		app->audio->SetMusicVolume(0.0f);
+	}
+	if (control->id == 16) {
+		AudioOff->state = GuiControlState::NORMAL;
+		AudioOn->state = GuiControlState::DISABLED;
+		app->audio->SetMusicVolume(100);
+	}
+	if (control->id == 17) {
+		FxOff->state = GuiControlState::DISABLED;
+		FxOn->state = GuiControlState::NORMAL;
+		app->audio->SetFxVolume(0.0f);
 
+	}
+	if (control->id == 18) {
+		FxOff->state = GuiControlState::NORMAL;
+		FxOn->state = GuiControlState::DISABLED;
+		app->audio->SetFxVolume(100);
+	}
 	
 
 	return true;

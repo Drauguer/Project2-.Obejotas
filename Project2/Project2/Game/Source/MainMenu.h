@@ -54,6 +54,10 @@ private:
 	GuiControlButton* setting;
 	GuiControlButton* continue_;
 	GuiControlButton* VsincOff;
+	GuiControlButton* AudioOff;
+	GuiControlButton* AudioOn;
+	GuiControlButton* FxOff;
+	GuiControlButton* FxOn;
 	GuiControlButton* Vsinc;
 	GuiControlButton* turnBack;
 	GuiControlButton* FullScreen;

@@ -178,3 +178,30 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	return ret;
 }
+
+void Audio::StopFx(int effect) {
+
+	Mix_HaltChannel(effect);
+}
+
+int Audio::SetMusicVolume(int volume)
+{
+	Mix_VolumeMusic(volume);
+	return musicVolume = volume;
+}
+
+int Audio::GetMusicVolume()
+{
+	return musicVolume;
+}
+
+int Audio::SetFxVolume(int volume)
+{
+	Mix_Volume(-1, volume);
+	return fxVolume = volume;
+}
+
+int Audio::GetFxVolume()
+{
+	return fxVolume;
+}
