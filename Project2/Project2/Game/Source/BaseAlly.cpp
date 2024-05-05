@@ -70,13 +70,13 @@ bool BaseAlly::Start() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	life = parameters.attribute("life").as_float();
-	attack = parameters.attribute("attack").as_float();
-	defense = parameters.attribute("defense").as_float();
-	magicPower = parameters.attribute("magicPower").as_float();
-	dexerity = parameters.attribute("dexerity").as_float();
+	baseLife = parameters.attribute("life").as_float();
+	baseAttack = parameters.attribute("attack").as_float();
+	baseDefense = parameters.attribute("defense").as_float();
+	baseMagicPower = parameters.attribute("magicPower").as_float();
+	baseDexerity = parameters.attribute("dexerity").as_float();
 	charName = parameters.attribute("charName").as_string();
-	maxHP = life;
+	maxHP = baseLife;
 
 	healthBar.x = (position.x - 110) / 2;
 	healthBar.y = position.y / 2 + 44;
@@ -125,6 +125,10 @@ bool BaseAlly::Update(float dt)
 {
 
 	int scale = app->win->GetScale();
+
+	SetHelmetStats();
+	SetArmorStats();
+	SetWeaponStats();
 
 	
 	if (attackAnim.HasFinished()) {
@@ -333,4 +337,31 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 
 		break;
 	}
+}
+
+void BaseAlly::SetHelmetStats()
+{
+	life = baseLife + helmetItem->bonusHP;
+	attack = baseAttack + helmetItem->bonusATK;
+	defense = baseDefense + helmetItem->bonusDEF;
+	magicPower = baseMagicPower + helmetItem->bonusMP;
+	dexerity = baseDexerity + helmetItem->bonusDEX;
+}
+
+void BaseAlly::SetArmorStats()
+{
+	life = baseLife + armorItem->bonusHP;
+	attack = baseAttack + armorItem->bonusATK;
+	defense = baseDefense + armorItem->bonusDEF;
+	magicPower = baseMagicPower + armorItem->bonusMP;
+	dexerity = baseDexerity + armorItem->bonusDEX;
+}
+
+void BaseAlly::SetWeaponStats()
+{
+	life = baseLife + weaponItem->bonusHP;
+	attack = baseAttack + weaponItem->bonusATK;
+	defense = baseDefense + weaponItem->bonusDEF;
+	magicPower = baseMagicPower + weaponItem->bonusMP;
+	dexerity = baseDexerity + weaponItem->bonusDEX;
 }

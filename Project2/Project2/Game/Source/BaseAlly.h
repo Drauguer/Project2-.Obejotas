@@ -50,6 +50,12 @@ public:
 
 	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
+	virtual void SetHelmetStats();
+
+	virtual void SetArmorStats();
+
+	virtual void SetWeaponStats();
+
 public:
 
 	bool isPicked = false;
@@ -93,13 +99,20 @@ public:
 	const char* abilityName;
 	SString abilityString;
 
-	// Stats of each character
+	// Current stats of each character
 	float life;
 	float attack;
 	float defense;
 	float magicPower;
 	float dexerity;
 	float maxHP;
+
+	// Base stats of each character
+	float baseLife;
+	float baseAttack;
+	float baseDefense;
+	float baseMagicPower;
+	float baseDexerity;
 
 	SString charName;
 
