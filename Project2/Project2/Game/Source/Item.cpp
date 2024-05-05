@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Inventory.h"
 
 Item::Item() : Entity(EntityType::ITEM)
 {
@@ -29,6 +30,11 @@ bool Item::Start() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	typeId = parameters.attribute("type").as_int();
+	bonusATK = parameters.attribute("bonusATK").as_float();
+	bonusDEF = parameters.attribute("bonusDEF").as_float();
+	bonusMP = parameters.attribute("bonusMP").as_float();
+	bonusDEX = parameters.attribute("bonusDEX").as_float();
+	bonusHP = parameters.attribute("bonusHP").as_float();
 
 	if (typeId == 1)
 	{
@@ -51,7 +57,12 @@ bool Item::Start() {
 
 bool Item::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+
+	if (app->inventory->isInventory)
+	{
+		app->render->DrawTexture(texture, position.x, position.y);
+	}
+	
 
 	return true;
 }

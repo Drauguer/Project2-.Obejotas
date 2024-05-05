@@ -60,6 +60,8 @@ public:
 	// Item for changing
 	Item* changeItem = NULL;
 
+	bool isInventory = false;
+
 };
 
 #endif // __DIALOGUEMANAGER_H__

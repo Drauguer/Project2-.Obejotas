@@ -195,6 +195,7 @@ bool Player::Update(float dt)
 
 			if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
 			{
+				app->inventory->isInventory = !app->inventory->isInventory;
 				if (app->inventory->active)
 				{
 					app->inventory->Disable();

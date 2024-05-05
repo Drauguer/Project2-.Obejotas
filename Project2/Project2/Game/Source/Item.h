@@ -37,6 +37,12 @@ public:
 	int typeId = 0;
 	ItemType itemType;
 
+	float bonusATK = 0;
+	float bonusDEF = 0;
+	float bonusMP = 0;
+	float bonusDEX = 0;
+	float bonusHP = 0;
+
 private:
 
 	SDL_Texture* texture;
