@@ -78,6 +78,8 @@ bool BaseAlly::Start() {
 	charName = parameters.attribute("charName").as_string();
 	maxHP = baseLife;
 
+	SetStats();
+
 	healthBar.x = (position.x - 110) / 2;
 	healthBar.y = position.y / 2 + 44;
 	healthBar.w = 36;
@@ -349,6 +351,15 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 
 		break;
 	}
+}
+
+void BaseAlly::SetStats()
+{
+	life = baseLife;
+	attack = baseAttack;
+	defense = baseDefense;
+	magicPower = baseMagicPower;
+	dexerity = baseDexerity;
 }
 
 void BaseAlly::SetHelmetStats()

@@ -80,25 +80,7 @@ bool Scene::Awake(pugi::xml_node config)
 		item->parameters = itemNode;
 	}*/
 
-	pugi::xml_node item1Node = config.child("item1");
-	item1 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item1->parameters = item1Node;
-
-	pugi::xml_node item2Node = config.child("item2");
-	item2 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item2->parameters = item2Node;
-
-	pugi::xml_node item3Node = config.child("item3");
-	item3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item3->parameters = item3Node;
-
-	pugi::xml_node item14Node = config.child("item4");
-	item4 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item4->parameters = item14Node;
-
-	pugi::xml_node item15Node = config.child("item5");
-	item5 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item5->parameters = item15Node;
+	
 
 
 	// iterate NPCs in scene
@@ -115,7 +97,12 @@ bool Scene::Awake(pugi::xml_node config)
 		
 	}
 
-	
+	if (loadAllies)
+	{
+		
+		LoadItems();
+		
+	}
 	
 	
 
@@ -171,9 +158,36 @@ void Scene::LoadAllies()
 	// Testing inventory, will be deleted
 	allies[0]->inventoryChar.Add(item1);
 	allies[0]->inventoryChar.Add(item2);
-	allies[1]->inventoryChar.Add(item3);
+	allies[0]->inventoryChar.Add(item3);
 	allies[0]->inventoryChar.Add(item4);
 	allies[0]->inventoryChar.Add(item5);
+}
+
+void Scene::LoadItems()
+{
+	pugi::xml_node item1Node = scene_parameter.child("item1");
+	item1 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item1->parameters = item1Node;
+
+	pugi::xml_node item2Node = scene_parameter.child("item2");
+	item2 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item2->parameters = item2Node;
+
+	pugi::xml_node item3Node = scene_parameter.child("item3");
+	item3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item3->parameters = item3Node;
+
+	pugi::xml_node item14Node = scene_parameter.child("item4");
+	item4 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item4->parameters = item14Node;
+
+	pugi::xml_node item15Node = scene_parameter.child("item5");
+	item5 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	item5->parameters = item15Node;
+
+	pugi::xml_node itemMageNode = scene_parameter.child("itemMage");
+	itemMage = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	itemMage->parameters = itemMageNode;
 }
 
 // Called before the first frame
@@ -244,8 +258,13 @@ bool Scene::Start()
 	returned = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Go Back", Go_Back, this);
 	returned->state = GuiControlState::DISABLED;
 
-	// Instantiate Allies
-	LoadAllies();
+	if (loadAllies)
+	{
+		// Instantiate Allies
+		LoadAllies();
+		//LoadItems();
+		loadAllies = false;
+	}
 
 	return true;
 }

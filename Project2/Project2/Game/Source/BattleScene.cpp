@@ -558,6 +558,7 @@ void BattleScene::CheckState()
 				app->scene->npcs[i]->hasCombat = false;
 				app->scene->npcs[i]->hasTalked = true;
 				app->scene->npcIDcombatFinished.Add(app->scene->npcs[i]->npcID);
+				GiveReward(app->scene->npcs[i]->npcID);
 			}
 		}
 		for (int i = 0; i < app->scene->allies.Count(); i++)
@@ -676,6 +677,16 @@ void BattleScene::CheckEnemyAbility(int abilityId, int indexPlayerToAttack) {
 	case 3:
 		break;
 	case 4:
+		break;
+	}
+}
+
+void BattleScene::GiveReward(int npcID)
+{
+	switch (npcID)
+	{
+	case 5:
+		app->scene->allies[0]->inventoryChar.Add(app->scene->itemMage);
 		break;
 	}
 }

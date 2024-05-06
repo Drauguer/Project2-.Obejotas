@@ -87,13 +87,15 @@ bool DialogueManager::Update(float dt)
 					{
 						app->scene->isOnCombat = !app->scene->isOnCombat;
 						app->battleScene->npcIDbattle = npcIDcombat;
+						app->scene->combatID = npcIDcombat;
 						if (firstCombat)
 						{
-							app->scene->LoadAllies();
+							//app->scene->LoadAllies();
 							firstCombat = false;
 						}
 						if (!playerHasLosed)
 						{
+							
 							app->scene->LoadEnemies();
 							playerHasLosed = false;
 						}

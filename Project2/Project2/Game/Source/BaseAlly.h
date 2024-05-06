@@ -50,6 +50,8 @@ public:
 
 	virtual void CheckAttack(int selectAttackIndex, int currentPlayerIndex);
 
+	virtual void SetStats();
+
 	virtual void SetHelmetStats();
 
 	virtual void SetArmorStats();

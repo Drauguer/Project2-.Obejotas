@@ -36,6 +36,7 @@ public:
 
 	int typeId = 0;
 	ItemType itemType;
+	SString itemName;
 
 	float bonusATK = 0;
 	float bonusDEF = 0;

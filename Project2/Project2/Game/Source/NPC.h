@@ -37,6 +37,8 @@ public:
 
 	void InitDialogues();
 
+	void CheckQuest(int questID);
+
 public:
 
 	bool isPicked = false;
@@ -47,6 +49,9 @@ public:
 	int mapID;
 	bool hasTalked = false;
 	int npcID;
+	bool hasQuest;
+	int QuestID = 999;
+	int itemRewardID = 999;
 
 	Animation idleAnim;
 	Animation* currentAnimation = nullptr;

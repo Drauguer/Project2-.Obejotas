@@ -59,6 +59,9 @@ public:
 	// Load Allies
 	void LoadAllies();
 
+	// Load Items
+	void LoadItems();
+
 	pugi::xml_node scene_parameter;
 	bool IsExiting = false;
 
@@ -138,6 +141,10 @@ public:
 	Item* item3;
 	Item* item4;
 	Item* item5;
+	Item* itemMage;
+
+	//
+	bool loadAllies = true;
 };
 
 #endif // __SCENE_H__

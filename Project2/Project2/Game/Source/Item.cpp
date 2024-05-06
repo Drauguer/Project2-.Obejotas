@@ -35,6 +35,7 @@ bool Item::Start() {
 	bonusMP = parameters.attribute("bonusMP").as_float();
 	bonusDEX = parameters.attribute("bonusDEX").as_float();
 	bonusHP = parameters.attribute("bonusHP").as_float();
+	itemName = parameters.attribute("itemName").as_string();
 
 	if (typeId == 1)
 	{

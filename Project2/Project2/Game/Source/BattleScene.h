@@ -71,6 +71,8 @@ public:
 
 	void CheckEnemyAbility(int abilityId, int playerToAttackIndex = -1);
 
+	void GiveReward(int npcID);
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
