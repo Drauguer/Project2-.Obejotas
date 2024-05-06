@@ -129,6 +129,11 @@ bool NPC::Update(float dt)
 			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
 			LOG("Dialogue Start");
 
+			if (hasQuest)
+			{
+				CheckQuest(QuestID);
+			}
+
 			ListItem<SString>* item;
 
 			for (item = dialoguesNPC.start; item != NULL; item = item->next)
@@ -142,10 +147,7 @@ bool NPC::Update(float dt)
 				app->dialogueManager->npcIDcombat = npcID;
 			}
 
-			if (hasQuest)
-			{
-				CheckQuest(QuestID);
-			}
+			
 
 		}
 
