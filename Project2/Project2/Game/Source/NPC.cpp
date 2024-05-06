@@ -268,7 +268,7 @@ void NPC::CheckQuest(int questID)
 					{
 						if (strcmp(app->scene->allies[k]->charName.GetString(), "Gale el Mago"))
 						{
-							app->scene->allies[k]->inventoryChar[0] = app->scene->allies[i]->inventoryChar[j];
+							//app->scene->allies[k]->inventoryChar.Add(app->scene->allies[i]->inventoryChar[j]);
 							ListItem<Item*>* item = app->scene->allies[i]->inventoryChar.start;
 
 							for (int h = 0; h < app->scene->allies[i]->inventoryChar.Count(); ++h)
