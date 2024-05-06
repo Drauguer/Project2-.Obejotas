@@ -244,6 +244,9 @@ bool Scene::Start()
 	returned = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Go Back", Go_Back, this);
 	returned->state = GuiControlState::DISABLED;
 
+	// Instantiate Allies
+	LoadAllies();
+
 	return true;
 }
 
@@ -259,6 +262,19 @@ bool Scene::Update(float dt)
 	if (SDL_Init(SDL_INIT_TIMER) != 0) {
 		std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return 1;
+	}
+
+	// Prueba para añadir allies
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		for (pugi::xml_node allyNode = scene_parameter.child("ally2"); allyNode; allyNode = allyNode.next_sibling("ally2"))
+		{
+			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+			allies.Add(ally);
+			ally->parameters = allyNode;
+			ally->Start();
+
+		}
 	}
 
 

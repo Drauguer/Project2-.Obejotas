@@ -178,7 +178,7 @@
 		<ability id="2" name="Visión Laser"/>
     </ally>
 
-	  <ally x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
+	  <ally2 x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -209,9 +209,9 @@
 		  <ability id="4" name="Healing magic"/>
 		  <ability id="5" name="Cañón Laser"/>
 
-	  </ally>
+	  </ally2>
 
-	  <ally x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
+	  <ally2 x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -242,7 +242,7 @@
 		  <ability id="4" name="Healing magic"/>
 		  <ability id="5" name="Cañón Laser"/>
 
-	  </ally>
+	  </ally2>
     
     <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="0">
       <Idle animspeed="0.1f" loop="true">

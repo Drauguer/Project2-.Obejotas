@@ -37,12 +37,14 @@ bool Inventory::Awake(pugi::xml_node config)
 	idleArrowAnim.speed = config.child("arrow").attribute("animspeed").as_float();
 	idleArrowAnim.loop = config.child("arrow").attribute("loop").as_bool();
 
+	
+
 	return true;
 }
 
 bool Inventory::Start()
 {
-	app->scene->LoadAllies();
+	
 
 	Mago = app->tex->Load("Assets/Textures/MagoPortrait.png");
 	Enano = app->tex->Load("Assets/Textures/EnanoPortrait.png");

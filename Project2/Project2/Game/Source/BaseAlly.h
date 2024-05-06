@@ -120,11 +120,11 @@ public:
 	SDL_Rect healthBar;
 
 	// Items equipped by characters
-	Item* helmetItem;
+	Item* helmetItem = NULL;
 	bool isHelmetEquipped = false;
-	Item* armorItem;
+	Item* armorItem = NULL;
 	bool isArmorEquipped = false;
-	Item* weaponItem;
+	Item* weaponItem = NULL;
 	bool isWeaponEquipped = false;
 
 	List<Item*> inventoryChar;

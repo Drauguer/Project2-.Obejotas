@@ -126,9 +126,21 @@ bool BaseAlly::Update(float dt)
 
 	int scale = app->win->GetScale();
 
-	SetHelmetStats();
-	SetArmorStats();
-	SetWeaponStats();
+	if (helmetItem != NULL)
+	{
+		SetHelmetStats();
+	}
+		
+	if (armorItem != NULL)
+	{
+		SetArmorStats();
+	}
+
+	if (weaponItem != NULL)
+	{
+		SetWeaponStats();
+	}
+
 
 	
 	if (attackAnim.HasFinished()) {
