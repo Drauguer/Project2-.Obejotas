@@ -151,7 +151,7 @@ bool PuzlePilar::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 	int distanceY = fabs(yA - yB);
 
 	// Si la distancia entre los objetos es menor o igual a 20 píxeles en ambas dimensiones
-	if (distanceX <= 20 && distanceY <= 20)
+	if (distanceX <= 30 && distanceY <= 30)
 	{
 		return true;
 	}
