@@ -112,13 +112,17 @@ bool Scene::Awake(pugi::xml_node config)
 void Scene::LoadEnemies()
 {
 	//Esto es provisional, en futuras entregas se guardara las estadisticas de los players/enemies
-
-	for (int i = 0; i < enemies.Count(); i++)
+	if (enemies.start != NULL)
 	{
-		app->physics->DestroyObject(enemies[i]->pbody);
-		
+		for (int i = 0; i < enemies.Count(); i++)
+		{
+			app->physics->DestroyObject(enemies[i]->pbody);
+
+		}
+		enemies.Clear();
 	}
-	enemies.Clear();
+	
+	
 
 	// iterate Enemies in combat
 	for (pugi::xml_node enemyNode = scene_parameter.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
@@ -262,7 +266,6 @@ bool Scene::Start()
 	{
 		// Instantiate Allies
 		LoadAllies();
-		//LoadItems();
 		loadAllies = false;
 	}
 

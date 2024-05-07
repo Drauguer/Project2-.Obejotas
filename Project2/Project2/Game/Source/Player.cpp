@@ -155,7 +155,7 @@ bool Player::Update(float dt)
 	else
 	{
 		//Movement scene
-		b2Vec2 vel = b2Vec2(0, 0);
+		vel = b2Vec2(0, 0);
 		if (isOnPause == false) {
 
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0) {
@@ -315,6 +315,10 @@ void Player::LoadNewMap(int mapID_, int playerMapID_)
 	app->physics->Start();
 	app->entityManager->Enable();
 	app->map->Start();
+	for (int i = 0; i < app->scene->allies.Count(); ++i)
+	{
+		app->entityManager->entities.Add(app->scene->allies[i]);
+	}
 	app->render->camera.y = (-app->scene->player->position.y * scale) + app->win->screenSurface->h / 2 - 100;
 }
 

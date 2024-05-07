@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Animation.h"
+#include "Physics.h"
 
 struct SDL_Texture;
 
@@ -67,6 +68,9 @@ public:
 	Animation sideWalk;
 	Animation* currentAnimation = nullptr;
 	bool isFlipped = false;
+
+	// Velocity
+	b2Vec2 vel;
 };
 
 #endif // __PLAYER_H__
