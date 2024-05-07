@@ -50,6 +50,7 @@ public:
 	bool hasTalked = false;
 	int npcID;
 	bool hasQuest;
+	bool QuestCompleted = false;
 	int QuestID = 999;
 	int itemRewardID = 999;
 

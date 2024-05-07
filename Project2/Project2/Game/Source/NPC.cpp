@@ -129,7 +129,7 @@ bool NPC::Update(float dt)
 			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
 			LOG("Dialogue Start");
 
-			if (hasQuest)
+			if (hasQuest && QuestCompleted == false)
 			{
 				CheckQuest(QuestID);
 			}
@@ -240,12 +240,11 @@ void NPC::CheckQuest(int questID)
 	switch (questID)
 	{
 	case 0:
-		for (int i = 0; i < app->scene->allies.Count(); ++i)
-		{
-			for (int j = 0; j < app->scene->allies[i]->inventoryChar.Count(); ++j)
+			for (int j = 0; j < app->scene->allies[0]->inventoryChar.Count(); ++j)
 			{
-				if (strcmp(app->scene->allies[i]->inventoryChar[j]->itemName.GetString(), "Mage Item Quest") == 0)
+				if (strcmp(app->scene->allies[0]->inventoryChar[j]->itemName.GetString(), "Mage Item Quest") == 0)
 				{
+					QuestCompleted = true;
 					// Add Mage to the allies
 					for (pugi::xml_node allyNode = app->scene->scene_parameter.child("mage"); allyNode; allyNode = allyNode.next_sibling("mage"))
 					{
@@ -268,23 +267,24 @@ void NPC::CheckQuest(int questID)
 					{
 						if (strcmp(app->scene->allies[k]->charName.GetString(), "Gale el Mago"))
 						{
-							//app->scene->allies[k]->inventoryChar.Add(app->scene->allies[i]->inventoryChar[j]);
-							ListItem<Item*>* item = app->scene->allies[i]->inventoryChar.start;
+							app->scene->allies[1]->inventoryChar.Add(app->scene->allies[0]->inventoryChar[j]);
+							
+							ListItem<Item*>* item = app->scene->allies[0]->inventoryChar.start;
 
-							for (int h = 0; h < app->scene->allies[i]->inventoryChar.Count(); ++h)
+							for (int h = 0; h < app->scene->allies[0]->inventoryChar.Count(); ++h)
 							{
 								if (strcmp(item->data->itemName.GetString(), "Mage Item Quest") != 0)
 								{
 									item = item->next;
 								}
 							}
-							app->scene->allies[i]->inventoryChar.Del(item);
+							app->scene->allies[0]->inventoryChar.Del(item);
 						}
 					}
+					
 
 				}
 			}
-		}
 		break;
 	}
 }
