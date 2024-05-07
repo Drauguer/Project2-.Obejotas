@@ -131,6 +131,23 @@
 		  <dialogue text="you're searching fight? lets get it!"/>
 	  </npc>
 
+	  <npc x="832" y="1088" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="1" npcID="6" hasQuest="true" QuestID="1">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="0" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="h-hey, will you help me?"/>
+		  <dialogue text="i was battling against some brats out there"/>
+		  <dialogue text="please find someone capable of healing me..."/>
+		  <dialogue text="i will reward you, trust me please..."/>
+
+		  <dialogueQuest text="oh thank god! thanks mate for helping me"/>
+		  <dialogueQuest text="thank you to mage, your powers are incredible"/>
+		  <dialogueQuest text="i was battling against the royalty...grr"/>
+		  <dialogueQuest text="they are a bunch of useless tyrants"/>
+		  <dialogueQuest text="huh? you want to defeat the king too?!"/>
+		  <dialogueQuest text="let me join you, together we will be stronger!"/>
+	  </npc>
+
     <mage x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
@@ -163,6 +180,47 @@
 		<ability id="5" name="Cañón Laser"/>
 		
     </mage>
+
+	  <enano x="200" y="250" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="256" y="0" width="64" height="64"/>
+			  <pushback x="320" y="0" width="64" height="64"/>
+			  <pushback x="384" y="0" width="64" height="64"/>
+			  <pushback x="448" y="0" width="64" height="64"/>
+			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+			  <pushback x="832" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+			  <pushback x="0" y="64" width="100" height="64"/>
+			  <pushback x="100" y="64" width="100" height="64"/>
+			  <pushback x="200" y="64" width="100" height="64"/>
+			  <pushback x="300" y="64" width="100" height="64"/>
+			  <pushback x="400" y="64" width="100" height="64"/>
+			  <pushback x="500" y="64" width="100" height="64"/>
+			  <pushback x="600" y="64" width="100" height="64"/>
+			  <pushback x="700" y="64" width="100" height="64"/>
+			  <pushback x="800" y="64" width="100" height="64"/>
+			  <pushback x="900" y="64" width="100" height="64"/>
+			  <pushback x="1000" y="64" width="100" height="64"/>
+			  <pushback x="1100" y="64" width="100" height="64"/>
+			  <pushback x="1200" y="64" width="100" height="64"/>
+			  <pushback x="1300" y="64" width="100" height="64"/>
+			  <pushback x="1400" y="64" width="100" height="64"/>
+
+		  </Attack>
+		  <ability id="6" name="Martillazo"/>
+		  <ability id="1" name="Grito de Guerra"/>
+		  <ability id="2" name="Visión Laser"/>
+	  </enano>
+	  
     <ally x="200" y="250" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>

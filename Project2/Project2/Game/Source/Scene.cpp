@@ -141,13 +141,16 @@ void Scene::LoadEnemies()
 void Scene::LoadAllies()
 {
 	//Esto es provisional, en futuras entregas se guardara las estadisticas de los players/enemies
-
-	for (int i = 0; i < allies.Count(); i++)
+	if (allies.start != NULL)
 	{
-		app->physics->DestroyObject(allies[i]->pbody);
+		for (int i = 0; i < allies.Count(); i++)
+		{
+			app->physics->DestroyObject(allies[i]->pbody);
 
+		}
+		allies.Clear();
 	}
-	allies.Clear();
+	
 
 	// iterate Allies in combat
 	for (pugi::xml_node allyNode = scene_parameter.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))

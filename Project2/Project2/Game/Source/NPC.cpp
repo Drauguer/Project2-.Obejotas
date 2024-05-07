@@ -265,7 +265,7 @@ void NPC::CheckQuest(int questID)
 					// Add the item to the mage inventory
 					for (int k = 0; k < app->scene->allies.Count(); ++k)
 					{
-						if (strcmp(app->scene->allies[k]->charName.GetString(), "Gale el Mago"))
+						if (strcmp(app->scene->allies[k]->charName.GetString(), "Gale el Mago") == 0)
 						{
 							app->scene->allies[1]->inventoryChar.Add(app->scene->allies[0]->inventoryChar[j]);
 							
@@ -285,6 +285,32 @@ void NPC::CheckQuest(int questID)
 
 				}
 			}
+		break;
+	case 1:
+		for (int k = 0; k < app->scene->allies.Count(); ++k)
+		{
+			if (strcmp(app->scene->allies[k]->charName.GetString(), "Gale el Mago") == 0)
+			{
+				QuestCompleted = true;
+
+				// Load the dialogues after completing the quest
+				for (pugi::xml_node node = parameters.child("dialogueQuest"); node; node = node.next_sibling("dialogueQuest")) {
+					dialogueChar = node.attribute("text").as_string();
+					dialogueString = dialogueChar;
+					dialoguesNPC.Add(dialogueString);
+				}
+
+				// Add Enano to the allies
+				for (pugi::xml_node allyNode = app->scene->scene_parameter.child("enano"); allyNode; allyNode = allyNode.next_sibling("enano"))
+				{
+					BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+					app->scene->allies.Add(ally);
+					ally->parameters = allyNode;
+					ally->Start();
+
+				}
+			}
+		}
 		break;
 	}
 }
