@@ -561,10 +561,10 @@ void BattleScene::CheckState()
 				GiveReward(app->scene->npcs[i]->npcID);
 			}
 		}
-		for (int i = 0; i < app->scene->allies.Count(); i++)
+		/*for (int i = 0; i < app->scene->allies.Count(); i++)
 		{
 			app->scene->allies[i]->life = 0;
-		}
+		}*/
 		for (int i = 0; i < app->scene->enemies.Count(); i++)
 		{
 			app->scene->enemies[i]->life = 0;
