@@ -71,6 +71,9 @@ public:
 
 	// Velocity
 	b2Vec2 vel;
+
+	// Is Talking
+	bool isTalking = false;
 };
 
 #endif // __PLAYER_H__

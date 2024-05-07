@@ -65,7 +65,7 @@
 		  </triggerAnim>
 	  </puzlePilar>
 
-	  <player x="150" y="70" x1="1750" y1="70" x2="158" y2="900" x3="1750" y3="900" x4="320" y4="544" x5="960" y5="544" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
+	  <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
 		  <sideWalk animspeed="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
 			  <pushback x="32" y="0" width="32" height="32"/>
@@ -92,8 +92,8 @@
 		  </backWalk>
 	  </player>
 	  
-    <map path="Assets/Maps/Map/" name="Mapa1Bueno.tmx"/>
-	<map2 path="Assets/Maps/Map/" name="Mapa2Bueno.tmx"/>
+    <map path="Assets/Maps/Map/" name="Mapa1BuenoFr.tmx"/>
+	<map2 path="Assets/Maps/Map/" name="Mapa2BuenoFr.tmx"/>
 	<mapInterior path="Assets/Maps/Map/" name="MapaInteriorBueno.tmx"/>
 
     <npc x="300" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="0" npcID="0" hasQuest="false">
@@ -104,7 +104,7 @@
 		<dialogue text="what is that? you want to overthrow the goverment?"/>
 		<dialogue text="good luck wizard, put your fist in the air"/>
     </npc>
-    <npc x="1900" y="1100" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1" hasQuest="false">
+    <npc x="2048" y="1176" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1" hasQuest="false">
       <idleAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="0" width="32" height="32"/>
       </idleAnim>
@@ -124,7 +124,7 @@
 		  <dialogue text="i hope it doesn't stop you from ordering something"/>
 	  </npc>
 
-	  <npc x="1350" y="150" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="1" npcID="3" hasQuest="false">
+	  <npc x="4160" y="320" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="1" npcID="3" hasQuest="false">
 		  <idleAnim animspeed="0.2f" loop="true">
 			  <pushback x="0" y="64" width="32" height="32"/>
 		  </idleAnim>
@@ -148,7 +148,7 @@
 		  <dialogueQuest text="we are going to defeat that useless king hehe"/>
 	  </npc>
 
-	  <npc x="3260" y="1260" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="false" mapID="0" npcID="5" itemRewardID="0">
+	  <npc x="3008" y="1984" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="false" mapID="0" npcID="5" itemRewardID="0">
 		  <idleAnim animspeed="0.2f" loop="true">
 			  <pushback x="0" y="64" width="32" height="32"/>
 		  </idleAnim>
@@ -158,7 +158,7 @@
 		  <dialogue text="you're searching fight? lets get it!"/>
 	  </npc>
 
-	  <npc x="832" y="1088" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="1" npcID="6" hasQuest="true" QuestID="1">
+	  <npc x="1168" y="192" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="1" npcID="6" hasQuest="true" QuestID="1">
 		  <idleAnim animspeed="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
 		  </idleAnim>

@@ -99,6 +99,8 @@ bool NPC::Update(float dt)
 		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->dialogueManager->isTalking == false && hasTalked == false)
 		{
 
+			app->scene->player->isTalking = true;
+
 			app->dialogueManager->isTalking = true;
 			hasTalked = true;
 			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
@@ -124,6 +126,8 @@ bool NPC::Update(float dt)
 	{
 		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || pad.y && app->dialogueManager->isTalking == false)
 		{
+
+			app->scene->player->isTalking = true;
 
 			app->dialogueManager->isTalking = true;
 			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;

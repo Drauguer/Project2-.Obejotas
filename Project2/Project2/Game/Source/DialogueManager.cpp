@@ -79,6 +79,7 @@ bool DialogueManager::Update(float dt)
 				{
 					testDialogue = false;
 					isTalking = false;
+					app->scene->player->isTalking = false;
 					item = dialogueList.start;
 
 					

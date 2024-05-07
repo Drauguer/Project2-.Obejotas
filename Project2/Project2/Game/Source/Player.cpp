@@ -154,63 +154,67 @@ bool Player::Update(float dt)
 	}
 	else
 	{
-		//Movement scene
-		vel = b2Vec2(0, 0);
-		if (isOnPause == false) {
+		if (!isTalking)
+		{
+			//Movement scene
+			vel = b2Vec2(0, 0);
+			if (isOnPause == false) {
 
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0) {
-				vel.x += -0.2 * dt;
-				isFlipped = true;
-				currentAnimation = &sideWalk;
-				sideWalk.Update();
-				app->audio->PlayFx(walkingRockFx);
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0) {
+					vel.x += -0.2 * dt;
+					isFlipped = true;
+					currentAnimation = &sideWalk;
+					sideWalk.Update();
+					app->audio->PlayFx(walkingRockFx);
 
-			}
-			else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0) {
-				vel.x += 0.2 * dt;
-				currentAnimation = &sideWalk;
-				sideWalk.Update();
-				isFlipped = false;
-				app->audio->PlayFx(walkingRockFx);
-			}
-			else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0) {
-				vel.y += -0.2 * dt;
-				currentAnimation = &backWalk;
-				backWalk.Update();
-				app->audio->PlayFx(walkingRockFx);
-			}
-			else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0) {
-				vel.y += 0.2 * dt;
-				currentAnimation = &frontWalk;
-				frontWalk.Update();
-				app->audio->PlayFx(walkingRockFx);
-			}
-			else {
-				sideWalk.Reset();
-				frontWalk.Reset();
-				backWalk.Reset();
-			}
-
-			pbody->body->SetLinearVelocity(vel);
-
-			if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
-			{
-				app->inventory->isInventory = !app->inventory->isInventory;
-				if (app->inventory->active)
-				{
-					app->inventory->Disable();
 				}
-				else if (app->inventory->active == false)
-				{
-					app->inventory->Enable();
+				else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0) {
+					vel.x += 0.2 * dt;
+					currentAnimation = &sideWalk;
+					sideWalk.Update();
+					isFlipped = false;
+					app->audio->PlayFx(walkingRockFx);
 				}
-				
+				else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0) {
+					vel.y += -0.2 * dt;
+					currentAnimation = &backWalk;
+					backWalk.Update();
+					app->audio->PlayFx(walkingRockFx);
+				}
+				else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0) {
+					vel.y += 0.2 * dt;
+					currentAnimation = &frontWalk;
+					frontWalk.Update();
+					app->audio->PlayFx(walkingRockFx);
+				}
+				else {
+					sideWalk.Reset();
+					frontWalk.Reset();
+					backWalk.Reset();
+				}
+
+				pbody->body->SetLinearVelocity(vel);
+
+				if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+				{
+					app->inventory->isInventory = !app->inventory->isInventory;
+					if (app->inventory->active)
+					{
+						app->inventory->Disable();
+					}
+					else if (app->inventory->active == false)
+					{
+						app->inventory->Enable();
+					}
+
+				}
+
+
+
+
 			}
-
-			
-
-
 		}
+		
 		
 
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
