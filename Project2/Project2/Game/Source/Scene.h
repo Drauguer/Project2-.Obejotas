@@ -9,6 +9,7 @@
 #include "BaseEnemy.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "PuzlePilar.h"
 #include <string>
 
 
@@ -38,7 +39,7 @@ public:
 	// Called before all Updates
 	bool PostUpdate();
 
-	// Called before quitting
+	// Called before quittingr
 	bool CleanUp();
 
 	// Return the player position
@@ -61,6 +62,12 @@ public:
 
 	// Load Items
 	void LoadItems();
+
+	void CheckPilarPuzleResult();
+
+	void PilarPuzleSuccess();
+
+	bool CheckAllPilars();
 
 	pugi::xml_node scene_parameter;
 	bool IsExiting = false;
@@ -94,9 +101,13 @@ private:
 	Dialogue* testDialogue2;
 
 public:
+
 	//L03: DONE 3b: Declare a Player attribute
 	Player* player;
 	Mago* mago;
+
+	List<PuzlePilar*> puzlePilars;
+	List<int> combination;
 
 	BaseAlly* playerInCombat;
 	BaseAlly* allyInCombat1;
@@ -115,6 +126,8 @@ public:
 
 
 	bool isOnCombat = false;
+
+	bool hasPressedE;
 
 	//Fullscreen
 	bool isFullScreen = false;

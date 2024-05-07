@@ -14,6 +14,7 @@
 #include "BattleScene.h"
 #include "BaseEnemy.h"
 #include "BaseAlly.h"
+#include "PuzlePilar.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -95,6 +96,18 @@ bool Scene::Awake(pugi::xml_node config)
 			
 		}
 		
+	}
+	for (pugi::xml_node pilarNode = config.child("puzlePilar"); pilarNode; pilarNode = pilarNode.next_sibling("puzlePilar"))
+	{
+		if (pilarNode.attribute("mapID").as_int() == mapID)
+		{
+			PuzlePilar* pilar = (PuzlePilar*)app->entityManager->CreateEntity(EntityType::PUZLEPILAR);
+			puzlePilars.Add(pilar);
+			pilar->parameters = pilarNode;
+
+
+		}
+
 	}
 
 	if (loadAllies)
@@ -530,6 +543,39 @@ void Scene::Disable()
 		active = false;
 		CleanUp();
 	}
+}
+
+
+void Scene::CheckPilarPuzleResult()
+{
+	for (int i = 0; i < puzlePilars.Count(); i++)
+	{
+		if (puzlePilars[i]->id != combination[i])
+		{
+			combination.Clear();
+			for (int j = 0; j < puzlePilars.Count(); j++)
+			{
+				puzlePilars[j]->isTriggered = false;
+			}
+			break;
+		}
+	}
+	PilarPuzleSuccess();
+}
+
+void Scene::PilarPuzleSuccess() {
+
+}
+
+bool Scene::CheckAllPilars()
+{
+	for (int j = 0; j < puzlePilars.Count(); j++)
+	{
+		if (!puzlePilars[j]->isTriggered) {
+			return false;
+		}
+	}
+	return true;
 }
 
 

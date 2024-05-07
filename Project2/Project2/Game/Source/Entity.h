@@ -14,6 +14,7 @@ enum class EntityType
 	NPC,
 	ALLY,
 	ENEMY,
+	PUZLEPILAR,
 	UNKNOWN
 };
 

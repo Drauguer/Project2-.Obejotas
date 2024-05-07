@@ -8,6 +8,7 @@
 #include "BaseEnemy.h"
 #include "NPC.h"
 #include "BaseAlly.h"
+#include "PuzlePilar.h"
 
 
 #include "Defs.h"
@@ -105,6 +106,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ALLY:
 		entity = new BaseAlly();
+		break;
+	case EntityType::PUZLEPILAR:
+		entity = new PuzlePilar();
 		break;
 	default:
 		break;

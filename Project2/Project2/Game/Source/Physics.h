@@ -34,6 +34,7 @@ enum class ColliderType {
 	TOMAP2_RIGHT,
 	TOINTERIOR,
 	NPC,
+	PUZLE,
 	UNKNOWN
 	// ..
 };
