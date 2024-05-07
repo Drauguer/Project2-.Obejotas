@@ -37,9 +37,10 @@ void BaseEnemy::InitAnims()
 						node.attribute("y").as_int(),
 						node.attribute("width").as_int(),
 						node.attribute("height").as_int() });
-	}
+	} 
+	 
 	idleAnim.speed = parameters.child("Idle").attribute("animspeed").as_float();
-	idleAnim.loop = parameters.child("Idle").attribute("loop").as_bool();
+	idleAnim.loop = parameters.child("Idle").attribute("loop").as_bool(); 
 
 	for (pugi::xml_node node = parameters.child("Attack").child("pushback"); node; node = node.next_sibling("pushback")) {
 		attackAnim.PushBack({ node.attribute("x").as_int(),

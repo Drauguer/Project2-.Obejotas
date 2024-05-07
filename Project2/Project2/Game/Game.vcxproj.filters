@@ -36,6 +36,7 @@
     <ClCompile Include="Source\BaseAlly.cpp" />
     <ClCompile Include="Source\LogoScene.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\PuzlePilar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="Source\Mago.h" />
     <ClInclude Include="Source\LogoScene.h" />
     <ClInclude Include="Source\Inventory.h" />
+    <ClInclude Include="Source\PuzlePilar.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
