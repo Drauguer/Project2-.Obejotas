@@ -133,6 +133,12 @@ public:
 
 	float damage;
 
+	unsigned int attackSFX;
+	unsigned int fireMagicAttackSFX;
+	unsigned int hpRecoverSFX;
+	unsigned int attackUpSFX;
+
+
 private:
 
 

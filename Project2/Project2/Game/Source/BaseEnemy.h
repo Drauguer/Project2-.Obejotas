@@ -76,6 +76,7 @@ public:
 	Animation idleAnim;
 	Animation attackAnim;
 
+	
 
 private:
 

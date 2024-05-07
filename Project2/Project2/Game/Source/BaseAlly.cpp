@@ -67,6 +67,11 @@ bool BaseAlly::Awake()
 
 bool BaseAlly::Start() {
 
+	attackSFX = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/03Claw03.wav");
+	fireMagicAttackSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Atk_Magic_SFX/04Fireexplosion04medium.wav");
+	attackUpSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Buffs_Heals_SFX/16Atkbuff04.wav");
+	hpRecoverSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Buffs_Heals_SFX/02Heal02.wav");
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -224,12 +229,13 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		printf("Sable Laser attack\n");
 		app->battleScene->idAttack = 0;
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
+		app->audio->PlayFx(attackSFX);
 		break;
 	case 1:
 		hasAttacked = true;
 		printf("Aumenta el ataque x1,5 WROAAAAR\n");
 		
-
+		app->audio->PlayFx(attackUpSFX);
 		app->battleScene->idAttack = 1;
 		app->scene->allies[currentPlayerIndex]->attack *= 1.5f;
 		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
@@ -247,6 +253,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 2:
 		hasAttacked = true;
 		printf("Pium Pium!! Visión Laser!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
 
 		app->battleScene->isText = true;
 
@@ -279,6 +286,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 3:
 		hasAttacked = true;
 		printf("FIREBALL!!!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
 
 		app->battleScene->isText = true;
 
@@ -307,6 +315,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 4:
 		hasAttacked = true;
 		printf("DIOSA CURAME!!!\n");
+		app->audio->PlayFx(hpRecoverSFX);
 
 		app->battleScene->isText = true;
 
@@ -340,12 +349,16 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		break;
 	case 5:
 		printf("BOMBAZO!!!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
+
 		app->battleScene->idAttack = 5;
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 
 		break;
 	case 6:
 		printf("MARTILLAZO!!!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
+
 		app->battleScene->idAttack = 6;
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 
