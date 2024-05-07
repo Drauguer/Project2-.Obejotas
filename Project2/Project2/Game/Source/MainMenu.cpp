@@ -35,6 +35,12 @@ bool MainMenu::Awake(pugi::xml_node config)
 
 bool MainMenu::Start()
 {
+	hoverFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/001Hover01.wav");
+	clickFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/013Confirm03.wav");
+	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
+	deniedFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/033Denied03.wav");
+
+
 	app->win->GetWindowSize(windowW, windowH);
 	img = app->tex->Load("Assets/Textures/main_screen.png");
 
@@ -136,6 +142,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		setting->state = GuiControlState::DISABLED;
 		FullScreen->state = GuiControlState::DISABLED;
 		exit->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 
 	if (control->id == 2) {
@@ -151,6 +159,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		FullScreen->state = GuiControlState::NORMAL;
 		AudioOff->state = GuiControlState::NORMAL;
 		FxOff->state = GuiControlState::NORMAL;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 6) {
 		start->state = GuiControlState::NORMAL;
@@ -166,6 +176,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		FxOff->state = GuiControlState::DISABLED;
 		FxOn->state = GuiControlState::DISABLED;
 
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 10) {
 
@@ -180,11 +191,15 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		start->state = GuiControlState::DISABLED;
 		setting->state = GuiControlState::DISABLED;
 		continue_->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 11) {
 		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
 		FullScreenOff->state = GuiControlState::NORMAL;
 		FullScreen->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 12) {
 		app->win->GetWindowSize(windowW, windowH);
@@ -193,16 +208,22 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 		FullScreen->state = GuiControlState::NORMAL;
 		FullScreenOff->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 13) {
 		app->IsVsincActive = false;
 		Vsinc->state = GuiControlState::DISABLED;
 		VsincOff->state = GuiControlState::NORMAL;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 14) {
 		app->IsVsincActive = true;
 		Vsinc->state = GuiControlState::NORMAL;
 		VsincOff->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 15) {
 		AudioOff->state = GuiControlState::DISABLED;
@@ -213,17 +234,23 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		AudioOff->state = GuiControlState::NORMAL;
 		AudioOn->state = GuiControlState::DISABLED;
 		app->audio->SetMusicVolume(100);
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 17) {
 		FxOff->state = GuiControlState::DISABLED;
 		FxOn->state = GuiControlState::NORMAL;
 		app->audio->SetFxVolume(0.0f);
 
+		app->audio->PlayFx(clickFx);
+
 	}
 	if (control->id == 18) {
 		FxOff->state = GuiControlState::NORMAL;
 		FxOn->state = GuiControlState::DISABLED;
 		app->audio->SetFxVolume(100);
+
+		app->audio->PlayFx(clickFx);
 	}
 	
 

@@ -73,7 +73,11 @@ private:
 
 	
 public:
-	
+	unsigned int hoverFx;
+	unsigned int clickFx;
+	unsigned int declineFx;
+	unsigned int deniedFx;
+
 };
 
 #endif // __MAINMENU_H__
