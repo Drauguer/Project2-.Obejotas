@@ -214,6 +214,11 @@ bool Player::Update(float dt)
 
 			}
 		}
+		else
+		{
+			vel = b2Vec2(0, 0);
+			pbody->body->SetLinearVelocity(vel);
+		}
 		
 		
 

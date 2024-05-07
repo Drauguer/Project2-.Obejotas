@@ -104,7 +104,7 @@
 		<dialogue text="what is that? you want to overthrow the goverment?"/>
 		<dialogue text="good luck wizard, put your fist in the air"/>
     </npc>
-    <npc x="2048" y="1176" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1" hasQuest="false">
+    <npc x="2048" y="1198" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1" hasQuest="false">
       <idleAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="0" width="32" height="32"/>
       </idleAnim>
