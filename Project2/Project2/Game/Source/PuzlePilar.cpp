@@ -18,6 +18,7 @@
 
 #include<iostream>
 #include<cstdlib>
+#include <cmath> 
 
 PuzlePilar::PuzlePilar() : Entity(EntityType::PUZLEPILAR)
 {
@@ -86,11 +87,10 @@ bool PuzlePilar::Start() {
 
 bool PuzlePilar::Update(float dt)
 {
-	if (canInteract) 
+	if (OnCollisionStay(this->pbody, app->scene->player->pbody))
 	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && !hasPressedE) 
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN ) 
 		{
-			hasPressedE = true;
 			isTriggered = true;
 			app->scene->combination.Add(id);
 			if (app->scene->CheckAllPilars()) {
@@ -134,27 +134,24 @@ bool PuzlePilar::CleanUp()
 
 void PuzlePilar::OnCollision(PhysBody* physA, PhysBody* physB)
 {
-	canInteract = false;
-
-	switch (physB->ctype)
-	{
-	case ColliderType::PLAYER:
-		if (!isTriggered) {
-			canInteract = true;
-			hasPressedE = false;
-		}
-		break;
-	}
+	
 }
 
 bool PuzlePilar::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 {
+	int scale = app->win->GetScale();
+
 	int xA, yA, xB, yB;
 
 	physA->GetPosition(xA, yA);
 	physB->GetPosition(xB, yB);
 
-	if (xB <= xA + (physA->width * 2) && xB >= xA && yB >= yA && yB <= yA + (physA->height * 2))
+	// Calculamos la distancia entre los objetos en el eje x e y
+	int distanceX = fabs(xA - xB);
+	int distanceY = fabs(yA - yB);
+
+	// Si la distancia entre los objetos es menor o igual a 20 píxeles en ambas dimensiones
+	if (distanceX <= 20 && distanceY <= 20)
 	{
 		return true;
 	}
