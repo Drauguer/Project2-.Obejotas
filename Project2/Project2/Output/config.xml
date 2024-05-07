@@ -37,6 +37,33 @@
   <scene>
 	  
 	<encounterFx audiopath ="Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg"   />
+	  <puzlePilar x="400" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" id="0" mapID="0" >
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="32" width="32" height="32"/>
+		  </idleAnim>
+		  <triggerAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="32" width="32" height="32"/>
+			  <pushback x="32" y="32" width="32" height="32"/>
+		  </triggerAnim>
+	  </puzlePilar>
+	  <puzlePilar x="250" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" id="1" mapID="0" >
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="32" width="32" height="32"/>
+		  </idleAnim>
+		  <triggerAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="32" width="32" height="32"/>
+			  <pushback x="32" y="32" width="32" height="32"/>
+		  </triggerAnim>
+	  </puzlePilar>
+	  <puzlePilar x="100" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" id="2" mapID="0">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="32" width="32" height="32"/>
+		  </idleAnim>
+		  <triggerAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="32" width="32" height="32"/>
+			  <pushback x="32" y="32" width="32" height="32"/>
+		  </triggerAnim>
+	  </puzlePilar>
 
 	  <player x="150" y="70" x1="1750" y1="70" x2="158" y2="900" x3="1750" y3="900" x4="320" y4="544" x5="960" y5="544" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
 		  <sideWalk animspeed="0.2f" loop="true">
