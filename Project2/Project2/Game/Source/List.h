@@ -77,6 +77,46 @@ public:
 		return(dataItem);
 	}
 
+	bool RemoveAt(unsigned int index)
+	{
+		// Verificar si el índice está dentro del rango válido
+		if (index >= size)
+			return false;
+
+		ListItem<tdata>* itemToRemove = At(index);
+
+		if (itemToRemove == NULL)
+			return false;
+
+		// Actualizar los punteros next y prev para eliminar el elemento de la lista
+		if (itemToRemove->prev != NULL)
+		{
+			itemToRemove->prev->next = itemToRemove->next;
+
+			if (itemToRemove->next != NULL)
+				itemToRemove->next->prev = itemToRemove->prev;
+			else
+				end = itemToRemove->prev;
+		}
+		else
+		{
+			if (itemToRemove->next != NULL)
+			{
+				itemToRemove->next->prev = NULL;
+				start = itemToRemove->next;
+			}
+			else
+			{
+				start = end = NULL;
+			}
+		}
+
+		// Liberar la memoria del elemento eliminado y actualizar el tamaño de la lista
+		delete itemToRemove;
+		--size;
+		return true;
+	}
+
 	// Deletes an item from the list
 	bool Del(ListItem<tdata>* item)
 	{

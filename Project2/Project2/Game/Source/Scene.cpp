@@ -15,6 +15,7 @@
 #include "BaseEnemy.h"
 #include "BaseAlly.h"
 #include "PuzlePilar.h"
+#include "PuzlePassword.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -101,9 +102,20 @@ bool Scene::Awake(pugi::xml_node config)
 	{
 		if (pilarNode.attribute("mapID").as_int() == mapID)
 		{
-			PuzlePilar* pilar = (PuzlePilar*)app->entityManager->CreateEntity(EntityType::PUZLEPILAR);
+			PuzlePilar* pilar = (PuzlePilar*)app->entityManager->CreateEntity(EntityType::PUZLE_PILAR);
 			puzlePilars.Add(pilar);
 			pilar->parameters = pilarNode;
+
+
+		}
+
+	}
+	for (pugi::xml_node passwordNode = config.child("puzlePassword"); passwordNode; passwordNode = passwordNode.next_sibling("puzlePassword"))
+	{
+		if (passwordNode.attribute("mapID").as_int() == mapID)
+		{
+			PuzlePassword* passwordPuzle = (PuzlePassword*)app->entityManager->CreateEntity(EntityType::PUZLE_PASSWORD);
+			passwordPuzle->parameters = passwordNode;
 
 
 		}

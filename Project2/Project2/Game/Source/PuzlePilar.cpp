@@ -20,7 +20,7 @@
 #include<cstdlib>
 #include <cmath> 
 
-PuzlePilar::PuzlePilar() : Entity(EntityType::PUZLEPILAR)
+PuzlePilar::PuzlePilar() : Entity(EntityType::PUZLE_PILAR)
 {
 	name.Create("base pilar");
 	
