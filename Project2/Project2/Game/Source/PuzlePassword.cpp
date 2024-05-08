@@ -233,6 +233,10 @@ void PuzlePassword::GeneratePassword() {
 	solutionIds.Add(4);
 	solutionIds.Add(4);
 	solutionIds.Add(2);
+	solutionIds.Add(3);
+	solutionIds.Add(2);
+	solutionIds.Add(4);
+	solutionIds.Add(1);
 	hasCreatedPassword = true;
 	
 }
