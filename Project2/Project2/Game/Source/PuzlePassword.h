@@ -43,7 +43,21 @@ public:
 
 	int RandomNumber(int min, int max);
 
+	// Función para dibujar la barra de tiempo
+	void DrawProgressBar();
+
 public:
+	int sequenceCounter = 2;
+	SDL_Rect barRect; // Rectángulo para la barra de tiempo
+	float progress = 400;   // Progreso de la barra de tiempo
+
+	int barWidth;
+
+	bool  hasLost = false;
+
+	const int MAX_BAR_WIDTH = 400; // Ancho máximo de la barra de tiempo
+	const float MAX_PROGRESS = 100.0f; // Progreso máximo de la barra de tiempo
+
 	bool hasCreatedPassword = false;
 
 	bool canInteract;
