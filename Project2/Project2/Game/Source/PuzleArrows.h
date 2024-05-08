@@ -1,5 +1,5 @@
-#ifndef __PUZLEPASSWORD_H__
-#define __PUZLEPASSWORD_H__
+#ifndef __PUZLEARROWS_H__
+#define __PUZLEARROWS_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -13,12 +13,12 @@
 struct SDL_Texture;
 class SString;
 
-class PuzlePassword : public Entity
+class PuzleArrows : public Entity
 {
 public:
 
-	PuzlePassword();
-	virtual ~PuzlePassword();
+	PuzleArrows();
+	virtual ~PuzleArrows();
 
 	virtual bool Awake();
 
@@ -40,12 +40,6 @@ public:
 	
 	void CheckResult();
 
-	void SetCombinations();
-
-	void DrawNumbers();
-	
-	bool IsCombinationCorrect();
-
 
 	int RandomNumber(int min, int max);
 
@@ -53,29 +47,35 @@ public:
 	void DrawProgressBar();
 
 public:
+	int sequenceCounter = 2;
+	SDL_Rect barRect; // Rectángulo para la barra de tiempo
+	float progress = 400;   // Progreso de la barra de tiempo
 
-
-	SDL_Texture* arrowTexture = NULL;
-	const char* arrowTexturePath;
-	Animation* currentArrowAnim;
-
-	Animation idleArrowAnim;
+	int barWidth;
 
 	bool  hasLost = false;
+
+	const int MAX_BAR_WIDTH = 400; // Ancho máximo de la barra de tiempo
+	const float MAX_PROGRESS = 100.0f; // Progreso máximo de la barra de tiempo
+
+	bool hasCreatedPassword = false;
 
 	bool canInteract;
 	bool isActive = true;
 	bool isTriggered = false;
+	bool hasPressedE =  false;
 
 	int id;
 
 	bool isPicked = false;
 
-	int Font = -1;
+	//Attack Features
 
 	uint windowW, windowH;
 
 	pugi::xml_node config;
+
+	bool hasAttacked = false;
 
 	SDL_Texture* texture;
 	const char* texturePath;
@@ -85,18 +85,19 @@ public:
 	// ANIMATIONS
 	Animation* currentAnim;
 
+	Animation leftArrow;
+	Animation upArrow;
+	Animation rightArrow;
+	Animation downArrow;
+
+
 	List<int> solutionIds;
 
-	SString text;
-
-	int currentIndex = 0;
-
-	List<int> currentCombination;
-	List<int> finalCombination;
+	SString charName;
 
 private:
 
 
 };
 
-#endif // __PUZLEPASSWORD_H__
+#endif // __PUZLEARROWS_H__

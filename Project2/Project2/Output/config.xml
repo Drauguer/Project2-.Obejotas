@@ -64,7 +64,8 @@
 			  <pushback x="32" y="32" width="32" height="32"/>
 		  </triggerAnim>
 	  </puzlePilar>
-    <puzlePassword x="100" y="200" texturepath="Assets/Textures/Arrow.png" mapID="0">
+    
+    <puzleArrows x="100" y="200" texturepath="Assets/Textures/Arrow.png" mapID="0">
       <leftAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="190" width="188" height="190"/>
       </leftAnim>
@@ -77,6 +78,13 @@
       <rightAnim animspeed="0.2f" loop="true">
         <pushback x="376" y="190" width="188" height="190"/>
       </rightAnim>
+    </puzleArrows>
+    
+    <puzlePassword x="400" y="200" texturepath="Assets/Textures/Arrow.png" mapID="0" texturePath="Assets/Textures/SelectionArrow.png">
+      <arrow animspeed="0.05f" loop="true">
+        <pushback x="0" y="0" width="64" height="64"/>
+        <pushback x="64" y="0" width="64" height="64"/>
+      </arrow>
     </puzlePassword>
 
 	  <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" texturePath="Assets/Textures/SpriteSheetMago.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
