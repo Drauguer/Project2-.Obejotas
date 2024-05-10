@@ -160,17 +160,26 @@ bool PuzleArrows::Update(float dt)
 			}
 			else
 			{
-				if (!hasLost)
-				{
 					sequenceCounter--;
-					hasCreatedPassword = false;
-				}
+					//Codigo de victoria
+					if (sequenceCounter <= 0) {
+						hasCreatedPassword = true;
+
+					}		
+					else
+					{
+						hasCreatedPassword = false;
+
+					}
 
 			}
 
 			if (progress <= 0.0f) {
 				hasLost = true;
 				solutionIds.Clear();
+				hasCreatedPassword = false;
+				progress = 400;
+				sequenceCounter = 2;
 			}
 			else
 			{

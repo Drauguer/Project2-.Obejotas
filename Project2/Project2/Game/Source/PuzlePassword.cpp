@@ -132,6 +132,10 @@ bool PuzlePassword::Update(float dt)
 		DrawNumbers();
 		
 	}
+	else
+	{
+
+	}
 
 	
 	int scale = app->win->GetScale();
