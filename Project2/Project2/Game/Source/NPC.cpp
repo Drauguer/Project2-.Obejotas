@@ -106,6 +106,11 @@ bool NPC::Update(float dt)
 			app->dialogueManager->testDialogue = !app->dialogueManager->testDialogue;
 			LOG("Dialogue Start");
 
+			if (hasQuest && QuestCompleted == false && cantTalk == false)
+			{
+				CheckQuest(QuestID);
+			}
+
 			ListItem<SString>* item;
 
 			for (item = dialoguesNPC.start; item != NULL; item = item->next)
@@ -120,6 +125,19 @@ bool NPC::Update(float dt)
 
 			}
 
+			
+		}
+
+		if (cantTalk && app->scene->player->isTalking == false)
+		{
+			timerTalk++;
+
+			if (timerTalk > 20)
+			{
+				cantTalk = false;
+				hasTalked = false;
+				timerTalk = 0;
+			}
 		}
 	}
 	else if (!triggerInRange)
@@ -314,6 +332,25 @@ void NPC::CheckQuest(int questID)
 
 				}
 			}
+		}
+		break;
+	case 2:
+		if (app->scene->allies.Count() == 4)
+		{
+			hasCombat = true;
+
+			QuestCompleted = true;
+
+			// Load the dialogues after completing the quest
+			for (pugi::xml_node node = parameters.child("dialogueQuest"); node; node = node.next_sibling("dialogueQuest")) {
+				dialogueChar = node.attribute("text").as_string();
+				dialogueString = dialogueChar;
+				dialoguesNPC.Add(dialogueString);
+			}
+		}
+		else
+		{
+			cantTalk = true;
 		}
 		break;
 	}
