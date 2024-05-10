@@ -57,6 +57,9 @@ public:
 	Animation idleAnim;
 	Animation* currentAnimation = nullptr;
 
+	bool cantTalk = false;
+	int timerTalk = 0;
+
 private:
 
 	SDL_Texture* texture;

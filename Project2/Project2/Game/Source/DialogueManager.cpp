@@ -80,6 +80,7 @@ bool DialogueManager::Update(float dt)
 					testDialogue = false;
 					isTalking = false;
 					app->scene->player->isTalking = false;
+					app->scene->player->pbody->body->SetTransform(b2Vec2(app->scene->player->pbody->body->GetTransform().p.x, app->scene->player->pbody->body->GetTransform().p.y + 0.5f), 0);
 					item = dialogueList.start;
 
 					

@@ -329,7 +329,7 @@ bool Scene::Update(float dt)
 	// Prueba para añadir allies
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
-		for (pugi::xml_node allyNode = scene_parameter.child("ally2"); allyNode; allyNode = allyNode.next_sibling("ally2"))
+		for (pugi::xml_node allyNode = scene_parameter.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))
 		{
 			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 			allies.Add(ally);
