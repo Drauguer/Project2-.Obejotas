@@ -199,11 +199,20 @@ void Scene::LoadAllies()
 
 	}
 
+	for (pugi::xml_node allyNode = scene_parameter.child("ally2"); allyNode; allyNode = allyNode.next_sibling("ally2"))
+	{
+		BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+		allies.Add(ally);
+		ally->parameters = allyNode;
+		ally->Start();
+
+	}
+
 	// Testing inventory, will be deleted
 	allies[0]->inventoryChar.Add(item1);
 	allies[0]->inventoryChar.Add(item2);
-	allies[0]->inventoryChar.Add(item3);
-	allies[0]->inventoryChar.Add(item4);
+	allies[1]->inventoryChar.Add(item3);
+	allies[1]->inventoryChar.Add(item4);
 	allies[0]->inventoryChar.Add(item5);
 }
 
@@ -232,6 +241,10 @@ void Scene::LoadItems()
 	pugi::xml_node itemMageNode = scene_parameter.child("itemMage");
 	itemMage = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 	itemMage->parameters = itemMageNode;
+
+	pugi::xml_node itemQuest3Node = scene_parameter.child("itemQuest3");
+	itemQuest3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	itemQuest3->parameters = itemQuest3Node;
 }
 
 // Called before the first frame

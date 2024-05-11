@@ -66,7 +66,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(battleScene);
 	AddModule(scene);
 
-
+	AddModule(inventory);
 	AddModule(entityManager);
 
 
@@ -79,7 +79,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialogueManager);
 	AddModule(fonts);
 	
-	AddModule(inventory);
+	
 
 	// Render last to swap buffer
 	AddModule(render);

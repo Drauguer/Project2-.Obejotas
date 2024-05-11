@@ -561,10 +561,6 @@ void BattleScene::CheckState()
 				GiveReward(app->scene->npcs[i]->npcID);
 			}
 		}
-		/*for (int i = 0; i < app->scene->allies.Count(); i++)
-		{
-			app->scene->allies[i]->life = 0;
-		}*/
 		for (int i = 0; i < app->scene->enemies.Count(); i++)
 		{
 			app->scene->enemies[i]->life = 0;
@@ -687,6 +683,9 @@ void BattleScene::GiveReward(int npcID)
 	{
 	case 5:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemMage);
+		break;
+	case 8:
+		app->scene->allies[0]->inventoryChar.Add(app->scene->itemQuest3);
 		break;
 	}
 }
