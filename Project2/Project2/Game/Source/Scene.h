@@ -155,6 +155,7 @@ public:
 	Item* item4;
 	Item* item5;
 	Item* itemMage;
+	Item* itemQuest3;
 
 	//
 	bool loadAllies = true;

@@ -292,7 +292,7 @@ bool Inventory::Update(float dt)
 				inventorySelectedIndex = 0;
 				itemSelectedIndex = 0;
 			}
-			else if (app->scene->allies[inventorySelectedIndex + 1]->inventoryChar.start != NULL)
+			else 
 			{
 				if (inventorySelectedIndex + 1 < app->scene->allies.Count())
 				{
@@ -300,22 +300,7 @@ bool Inventory::Update(float dt)
 					itemSelectedIndex = 0;
 				}
 			}
-			else if (app->scene->allies[inventorySelectedIndex + 2]->inventoryChar.start != NULL)
-			{
-				if (inventorySelectedIndex + 2 < app->scene->allies.Count())
-				{
-					inventorySelectedIndex += 2;
-					itemSelectedIndex = 0;
-				}
-			}
-			else if (app->scene->allies[inventorySelectedIndex + 3]->inventoryChar.start != NULL)
-			{
-				if (inventorySelectedIndex + 3 < app->scene->allies.Count())
-				{
-					inventorySelectedIndex += 3;
-					itemSelectedIndex = 0;
-				}
-			}
+			
 				
 			
 			
@@ -325,8 +310,11 @@ bool Inventory::Update(float dt)
 	currentArrowAnim = &idleArrowAnim;
 	currentArrowAnim->Update();
 
-	app->render->DrawTexture(arrowTexture, app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->position.x - 10, app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->position.y - 15, &currentArrowAnim->GetCurrentFrame());
-
+	if (app->scene->allies[inventorySelectedIndex]->inventoryChar.start != NULL)
+	{
+		app->render->DrawTexture(arrowTexture, app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->position.x - 10, app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->position.y - 15, &currentArrowAnim->GetCurrentFrame());
+	}
+	
 	return true;
 }
 

@@ -38,6 +38,7 @@
     <ClCompile Include="Source\Inventory.cpp" />
     <ClCompile Include="Source\PuzlePilar.cpp" />
     <ClCompile Include="Source\PuzlePassword.cpp" />
+    <ClCompile Include="Source\PuzleArrows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -107,6 +108,7 @@
     <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\PuzlePilar.h" />
     <ClInclude Include="Source\PuzlePassword.h" />
+    <ClInclude Include="Source\PuzleArrows.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

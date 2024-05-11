@@ -119,6 +119,7 @@
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PuzleArrows.cpp" />
     <ClCompile Include="Source\PuzlePassword.cpp" />
     <ClCompile Include="Source\PuzlePilar.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PQueue.h" />
+    <ClInclude Include="Source\PuzleArrows.h" />
     <ClInclude Include="Source\PuzlePassword.h" />
     <ClInclude Include="Source\PuzlePilar.h" />
     <ClInclude Include="Source\Queue.h" />

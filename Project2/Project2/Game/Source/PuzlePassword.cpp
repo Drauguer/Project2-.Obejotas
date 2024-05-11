@@ -24,49 +24,13 @@
 PuzlePassword::PuzlePassword() : Entity(EntityType::PUZLE_PASSWORD)
 {
 	name.Create("password");
-	
+
 }
 
 PuzlePassword::~PuzlePassword() {}
 
 void PuzlePassword::InitAnims()
 {
-	// Idle
-	for (pugi::xml_node node = parameters.child("upAnim").child("pushback"); node; node = node.next_sibling("pushback")) {
-		upArrow.PushBack({ node.attribute("x").as_int(),
-						node.attribute("y").as_int(),
-						node.attribute("width").as_int(),
-						node.attribute("height").as_int() });
-	}
-	upArrow.speed = parameters.child("upAnim").attribute("animspeed").as_float();
-	upArrow.loop = parameters.child("upAnim").attribute("loop").as_bool();
-	
-	for (pugi::xml_node node = parameters.child("downAnim").child("pushback"); node; node = node.next_sibling("pushback")) {
-		downArrow.PushBack({ node.attribute("x").as_int(),
-						node.attribute("y").as_int(),
-						node.attribute("width").as_int(),
-						node.attribute("height").as_int() });
-	}
-	downArrow.speed = parameters.child("downAnim").attribute("animspeed").as_float();
-	downArrow.loop = parameters.child("downAnim").attribute("loop").as_bool();
-	
-	for (pugi::xml_node node = parameters.child("leftAnim").child("pushback"); node; node = node.next_sibling("pushback")) {
-		leftArrow.PushBack({ node.attribute("x").as_int(),
-						node.attribute("y").as_int(),
-						node.attribute("width").as_int(),
-						node.attribute("height").as_int() });
-	}
-	leftArrow.speed = parameters.child("leftAnim").attribute("animspeed").as_float();
-	leftArrow.loop = parameters.child("leftAnim").attribute("loop").as_bool();
-
-	for (pugi::xml_node node = parameters.child("rightAnim").child("pushback"); node; node = node.next_sibling("pushback")) {
-		rightArrow.PushBack({ node.attribute("x").as_int(),
-						node.attribute("y").as_int(),
-						node.attribute("width").as_int(),
-						node.attribute("height").as_int() });
-	}
-	rightArrow.speed = parameters.child("rightAnim").attribute("animspeed").as_float();
-	rightArrow.loop = parameters.child("rightAnim").attribute("loop").as_bool();
 
 }
 
@@ -78,12 +42,26 @@ bool PuzlePassword::Awake()
 
 bool PuzlePassword::Start() {
 
+	arrowTexturePath = config.attribute("texturePath").as_string();
+
+	for (pugi::xml_node node = config.child("arrow").child("pushback"); node; node = node.next_sibling("pushback")) {
+		idleArrowAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	idleArrowAnim.speed = config.child("arrow").attribute("animspeed").as_float();
+	idleArrowAnim.loop = config.child("arrow").attribute("loop").as_bool();
+
 	position.x = parameters.attribute("x").as_int();
 	id = parameters.attribute("id").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	charName = parameters.attribute("charName").as_string();
 
+	arrowTexture = app->tex->Load(arrowTexturePath);
+
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz 1234567890.,'=(?!)+-*/      " };
+	Font = app->fonts->Load("Assets/Fonts/typography.png", lookupTable, 2);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -99,80 +77,77 @@ bool PuzlePassword::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PUZLE;
 
+	
+	SetCombinations();
+	
+	currentArrowAnim = &idleArrowAnim;
+
 	return true;
 }
 
 bool PuzlePassword::Update(float dt)
 {
-	if (OnCollisionStay(this->pbody, app->scene->player->pbody))
+	if (OnCollisionStay(this->pbody, app->scene->player->pbody)) 
 	{
-		if (!hasCreatedPassword) 
-		{
-			GeneratePassword();
-		}
-		if (solutionIds.Count() > 0) 
-		{
-			if (solutionIds.Count() > 0)
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+			if (currentCombination[currentIndex] < 9) 
 			{
-				for (int i = 0; i < solutionIds.Count(); i++)
-				{
-					switch (solutionIds[i])
-					{
-					case 1:
-						currentAnim = &leftArrow;
-						break;
-					case 2:
-						currentAnim = &rightArrow;
-						break;
-					case 3:
-						currentAnim = &upArrow;
-						break;
-					case 4:
-						currentAnim = &downArrow;
-						break;
-					default:
-						break;
-					}
-					//El 200 se cambia mas adelante cuando tenga un sprite mas pequeño 
-					app->render->DrawTexture(texture, position.x + i * 200, position.y, &currentAnim->GetCurrentFrame());
-				}
-			}
-
-			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
-				if (solutionIds[0] == 3) {
-					solutionIds.RemoveAt(0);
-				}
-			}
-			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
-				if (solutionIds[0] == 4) {
-					solutionIds.RemoveAt(0);
-				}
-			}
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
-				if (solutionIds[0] == 1) {
-					solutionIds.RemoveAt(0);
-				}
-			}
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
-				if (solutionIds[0] == 2) {
-					solutionIds.RemoveAt(0);
+				currentCombination[currentIndex]++;
+				if (IsCombinationCorrect()) {
+					//Aqui va el codigo de victoria 
+					return false;
 				}
 			}
 		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+			if (currentCombination[currentIndex] >0)
+			{
+				currentCombination[currentIndex]--;
+				if (IsCombinationCorrect()) {
+					//Aqui va el codigo de victoria 
+					return false;
+				}
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+			if (currentIndex < 1)
+			{
+				currentIndex = 2;
+			}
+			else
+			{
+				currentIndex--;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+			if (currentIndex > 1)
+			{
+				currentIndex = 0;
+			}
+			else
+			{
+				currentIndex++;
+			}
+		}
+		DrawNumbers();
 		
-		
-
+	}
+	else
+	{
 
 	}
-	
 
-	int scale = app->win->GetScale();
 	
+	int scale = app->win->GetScale();
+
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
 
+	app->render->DrawTexture(arrowTexture, (position.x + 20) / scale,
+		(position.y) / scale, &currentArrowAnim->GetCurrentFrame());
 
-	
+
+
 
 	return true;
 }
@@ -190,7 +165,7 @@ bool PuzlePassword::CleanUp()
 
 void PuzlePassword::OnCollision(PhysBody* physA, PhysBody* physB)
 {
-	
+
 }
 
 bool PuzlePassword::OnCollisionStay(PhysBody* physA, PhysBody* physB)
@@ -215,29 +190,46 @@ bool PuzlePassword::OnCollisionStay(PhysBody* physA, PhysBody* physB)
 	return false;
 }
 
-void PuzlePassword::GeneratePassword() {
-	//La forma random esta bug asi que demomento es hardcoded 
-	//El 7 es la cantidad de flechas para hacer 
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	srand(clock());
+void PuzlePassword::CheckResult()
+{
 
-	//	// Generar un número aleatorio en el rango [min, max]
-	//	int min = 1;
-	//	int max = 4;
-	//	int randomNumber = rand() % (max - min + 1) + min;
-	//	solutionIds.Add(randomNumber);
-	//}
-
-	solutionIds.Add(1);
-	solutionIds.Add(4);
-	solutionIds.Add(4);
-	solutionIds.Add(2);
-	hasCreatedPassword = true;
-	
 }
 
-void PuzlePassword::CheckResult() 
+void PuzlePassword::DrawNumbers()
 {
-	
+	std::string cadena = std::to_string(currentCombination[0]);
+	const char* puntero = cadena.c_str();
+	app->fonts->BlitText(position.x, position.y, Font, puntero);
+
+	cadena = std::to_string(currentCombination[1]);
+	puntero = cadena.c_str();
+	app->fonts->BlitText(position.x + 20, position.y, Font, puntero);
+
+	cadena = std::to_string(currentCombination[2]);
+	puntero = cadena.c_str();
+	app->fonts->BlitText(position.x + 40, position.y, Font, puntero);
+}
+
+bool PuzlePassword::IsCombinationCorrect()
+{
+
+	for (int i = 0; i < currentCombination.Count(); i++)
+	{
+		if (currentCombination[i] != finalCombination[i]) 
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void PuzlePassword::SetCombinations() 
+{
+	currentCombination.Add(0);
+	currentCombination.Add(0);
+	currentCombination.Add(0);
+
+	finalCombination.Add(5);
+	finalCombination.Add(8);
+	finalCombination.Add(4);
 }

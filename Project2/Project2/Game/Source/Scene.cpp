@@ -15,6 +15,7 @@
 #include "BaseEnemy.h"
 #include "BaseAlly.h"
 #include "PuzlePilar.h"
+#include "PuzleArrows.h"
 #include "PuzlePassword.h"
 
 #include "Defs.h"
@@ -110,6 +111,17 @@ bool Scene::Awake(pugi::xml_node config)
 		}
 
 	}
+	for (pugi::xml_node arrowsNode = config.child("puzleArrows"); arrowsNode; arrowsNode = arrowsNode.next_sibling("puzleArrows"))
+	{
+		if (arrowsNode.attribute("mapID").as_int() == mapID)
+		{
+			PuzleArrows* passwordPuzle = (PuzleArrows*)app->entityManager->CreateEntity(EntityType::PUZLE_ARROWS);
+			passwordPuzle->parameters = arrowsNode;
+
+
+		}
+
+	}
 	for (pugi::xml_node passwordNode = config.child("puzlePassword"); passwordNode; passwordNode = passwordNode.next_sibling("puzlePassword"))
 	{
 		if (passwordNode.attribute("mapID").as_int() == mapID)
@@ -187,11 +199,20 @@ void Scene::LoadAllies()
 
 	}
 
+	for (pugi::xml_node allyNode = scene_parameter.child("ally2"); allyNode; allyNode = allyNode.next_sibling("ally2"))
+	{
+		BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+		allies.Add(ally);
+		ally->parameters = allyNode;
+		ally->Start();
+
+	}
+
 	// Testing inventory, will be deleted
 	allies[0]->inventoryChar.Add(item1);
 	allies[0]->inventoryChar.Add(item2);
-	allies[0]->inventoryChar.Add(item3);
-	allies[0]->inventoryChar.Add(item4);
+	allies[1]->inventoryChar.Add(item3);
+	allies[1]->inventoryChar.Add(item4);
 	allies[0]->inventoryChar.Add(item5);
 }
 
@@ -220,6 +241,10 @@ void Scene::LoadItems()
 	pugi::xml_node itemMageNode = scene_parameter.child("itemMage");
 	itemMage = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 	itemMage->parameters = itemMageNode;
+
+	pugi::xml_node itemQuest3Node = scene_parameter.child("itemQuest3");
+	itemQuest3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	itemQuest3->parameters = itemQuest3Node;
 }
 
 // Called before the first frame
@@ -317,7 +342,7 @@ bool Scene::Update(float dt)
 	// Prueba para añadir allies
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
-		for (pugi::xml_node allyNode = scene_parameter.child("ally2"); allyNode; allyNode = allyNode.next_sibling("ally2"))
+		for (pugi::xml_node allyNode = scene_parameter.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))
 		{
 			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 			allies.Add(ally);
