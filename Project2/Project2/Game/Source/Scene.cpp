@@ -199,21 +199,21 @@ void Scene::LoadAllies()
 
 	}
 
-	for (pugi::xml_node allyNode = scene_parameter.child("ally2"); allyNode; allyNode = allyNode.next_sibling("ally2"))
+	/*for (pugi::xml_node allyNode = scene_parameter.child("ally2"); allyNode; allyNode = allyNode.next_sibling("ally2"))
 	{
 		BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 		allies.Add(ally);
 		ally->parameters = allyNode;
 		ally->Start();
 
-	}
+	}*/
 
 	// Testing inventory, will be deleted
-	allies[0]->inventoryChar.Add(item1);
+	/*allies[0]->inventoryChar.Add(item1);
 	allies[0]->inventoryChar.Add(item2);
 	allies[1]->inventoryChar.Add(item3);
 	allies[1]->inventoryChar.Add(item4);
-	allies[0]->inventoryChar.Add(item5);
+	allies[0]->inventoryChar.Add(item5);*/
 }
 
 void Scene::LoadItems()
