@@ -13,39 +13,39 @@
 
 Mago::Mago() : BaseAlly()
 {
-	name.Create("Mago");
+	//name.Create("Mago");
 
-	//sideWalk
+	////sideWalk
 
-	sideWalk.PushBack({ 0,0,32,32 });
-	sideWalk.PushBack({ 32,0,32,32 });
-	sideWalk.PushBack({ 64,0,32,32 });
-	sideWalk.PushBack({ 96,0,32,32 });
-	sideWalk.PushBack({ 128,0,32,32 });
-	sideWalk.PushBack({ 160,0,32,32 });
-	sideWalk.loop = true;
-	sideWalk.speed = 0.2f;
+	//sideWalk.PushBack({ 0,0,32,32 });
+	//sideWalk.PushBack({ 32,0,32,32 });
+	//sideWalk.PushBack({ 64,0,32,32 });
+	//sideWalk.PushBack({ 96,0,32,32 });
+	//sideWalk.PushBack({ 128,0,32,32 });
+	//sideWalk.PushBack({ 160,0,32,32 });
+	//sideWalk.loop = true;
+	//sideWalk.speed = 0.2f;
 
-	//frontWalk
-	frontWalk.PushBack({ 0,32,32,32 });
-	frontWalk.PushBack({ 32,32,32,32 });
-	frontWalk.PushBack({ 64,32,32,32 });
-	frontWalk.PushBack({ 96,32,32,32 });
-	frontWalk.PushBack({ 128,32,32,32 });
-	frontWalk.PushBack({ 160,32,32,32 });
-	frontWalk.loop = true;
-	frontWalk.speed = 0.2f;
+	////frontWalk
+	//frontWalk.PushBack({ 0,32,32,32 });
+	//frontWalk.PushBack({ 32,32,32,32 });
+	//frontWalk.PushBack({ 64,32,32,32 });
+	//frontWalk.PushBack({ 96,32,32,32 });
+	//frontWalk.PushBack({ 128,32,32,32 });
+	//frontWalk.PushBack({ 160,32,32,32 });
+	//frontWalk.loop = true;
+	//frontWalk.speed = 0.2f;
 
 
-	//backWalk
-	backWalk.PushBack({ 0,64,32,32 });
-	backWalk.PushBack({ 32,64,32,32 });
-	backWalk.PushBack({ 64,64,32,32 });
-	backWalk.PushBack({ 96,64,32,32 });
-	backWalk.PushBack({ 128,64,32,32 });
-	backWalk.PushBack({ 160,64,32,32 });
-	backWalk.loop = true;
-	backWalk.speed = 0.2f;
+	////backWalk
+	//backWalk.PushBack({ 0,64,32,32 });
+	//backWalk.PushBack({ 32,64,32,32 });
+	//backWalk.PushBack({ 64,64,32,32 });
+	//backWalk.PushBack({ 96,64,32,32 });
+	//backWalk.PushBack({ 128,64,32,32 });
+	//backWalk.PushBack({ 160,64,32,32 });
+	//backWalk.loop = true;
+	//backWalk.speed = 0.2f;
 
 }
 
