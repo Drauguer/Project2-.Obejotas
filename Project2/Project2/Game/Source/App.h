@@ -127,6 +127,10 @@ public:
 	Inventory* inventory;
 	bool IsVsincActive = true;
 
+	bool hasSolvedArrowPuzzle = false;
+	bool hasSolvedPasswordPuzzle = false;
+	bool hasSolvedPilarPuzzle = false;
+
 private:
 
 	int argc;

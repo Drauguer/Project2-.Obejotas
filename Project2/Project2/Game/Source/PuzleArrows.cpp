@@ -115,7 +115,7 @@ bool PuzleArrows::Start() {
 
 bool PuzleArrows::Update(float dt)
 {
-	if (OnCollisionStay(this->pbody, app->scene->player->pbody))
+	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedArrowPuzzle)
 	{
 
 		if (sequenceCounter > 0)
@@ -174,8 +174,7 @@ bool PuzleArrows::Update(float dt)
 					sequenceCounter--;
 					//Codigo de victoria
 					if (sequenceCounter <= 0) {
-						hasCreatedPassword = true;
-
+						app->hasSolvedArrowPuzzle = true;
 					}		
 					else
 					{
