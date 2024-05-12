@@ -15,14 +15,20 @@ This is only a Vertical Slice, so there are many features that are going to be a
 ## Controls
 
  - E to talk to NPC
+ - X to open/close inventory
+ - SPACE to equip item
+ - ENTER to change player selected in the inventory
  - SPACE to skip dialogue and to select attacks
  - WASD to move the player
  - ESCAPE to pause the game
  - ARROWS to move in the menu while in combat
  - F5 to save game
  - F6 to load game
+
+## Debug Controls
  - F10 to enter god mode
  - F1 to enter fullscreen
+ - K to add allies automatically
 
 ## Developers
 
