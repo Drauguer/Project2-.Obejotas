@@ -13,6 +13,7 @@
 #include "Window.h"
 #include "Map.h"
 #include "Inventory.h"
+#include "ModuleFonts.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -103,6 +104,51 @@ bool Player::Start() {
 		position.x = parameters.attribute("x5").as_int() * scale;
 		position.y = parameters.attribute("y5").as_int() * scale;
 		break;
+	case 6:
+		position.x = parameters.attribute("x6").as_int() * scale;
+		position.y = parameters.attribute("y6").as_int() * scale;
+		break;
+	case 7:
+		position.x = parameters.attribute("x7").as_int() * scale;
+		position.y = parameters.attribute("y7").as_int() * scale;
+		break;
+	case 8:
+		position.x = parameters.attribute("x8").as_int() * scale;
+		position.y = parameters.attribute("y8").as_int() * scale;
+		break;
+	case 9:
+		position.x = parameters.attribute("x9").as_int() * scale;
+		position.y = parameters.attribute("y9").as_int() * scale;
+		break;
+	case 10:
+		position.x = parameters.attribute("x10").as_int() * scale;
+		position.y = parameters.attribute("y10").as_int() * scale;
+		break;
+	case 11:
+		position.x = parameters.attribute("x11").as_int() * scale;
+		position.y = parameters.attribute("y11").as_int() * scale;
+		break;
+	case 12:
+		position.x = parameters.attribute("x12").as_int() * scale;
+		position.y = parameters.attribute("y12").as_int() * scale;
+		break;
+	case 13:
+		position.x = parameters.attribute("x13").as_int() * scale;
+		position.y = parameters.attribute("y13").as_int() * scale;
+		break;
+	case 14:
+		position.x = parameters.attribute("x14").as_int() * scale;
+		position.y = parameters.attribute("y14").as_int() * scale;
+		break;
+	case 15:
+		position.x = parameters.attribute("x15").as_int() * scale;
+		position.y = parameters.attribute("y15").as_int() * scale;
+		break;
+	case 16:
+		position.x = parameters.attribute("x16").as_int() * scale;
+		position.y = parameters.attribute("y16").as_int() * scale;
+		break;
+	
 	}
 
 	
@@ -114,6 +160,8 @@ bool Player::Start() {
 	
 	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/WalkingRock.ogg");
 	
+	//Get the size of the window
+	app->win->GetWindowSize(windowW, windowH);
 
 	int player[8] = {
 		0, 0,
@@ -136,6 +184,11 @@ bool Player::Update(float dt)
 
 
 	int scale = app->win->GetScale();
+
+	int winW = windowW;
+	int winH = windowH;
+	dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
+	dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
 
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 	if (app->scene->isOnCombat) 
@@ -220,7 +273,21 @@ bool Player::Update(float dt)
 			pbody->body->SetLinearVelocity(vel);
 		}
 		
-		
+		if (showDoorLocked)
+		{
+			if (doorLockedTimer <= 120)
+			{
+				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+				app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "it's not the time to bother the neighbours!");
+				doorLockedTimer++;
+			}
+			else
+			{
+				doorLockedTimer = 0;
+				showDoorLocked = false;
+				isTalking = false;
+			}
+		}
 
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
@@ -306,6 +373,98 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			LoadNewMap(2, 4);
 
 		}
+		break;
+	case ColliderType::TOINTERIOR2:
+		if (app->scene->mapID != 3)
+		{
+
+			LoadNewMap(3, 6);
+
+		}
+		break;
+	case ColliderType::TOINTERIOR3:
+		if (app->scene->mapID != 4)
+		{
+
+			LoadNewMap(4, 7);
+
+		}
+		break;
+	case ColliderType::TOZONE2:
+		if (app->scene->mapID != 5)
+		{
+
+			LoadNewMap(5, 8);
+
+		}
+		break;
+	case ColliderType::TOZONE3:
+		if (app->scene->mapID != 6)
+		{
+
+			LoadNewMap(6, 9);
+
+		}
+		break;
+	case ColliderType::TOPUZZLE1:
+		if (app->scene->mapID != 7)
+		{
+
+			LoadNewMap(7, 10);
+
+		}
+		break;
+	case ColliderType::TOPUZZLE2:
+		if (app->scene->mapID != 8)
+		{
+
+			LoadNewMap(8, 11);
+
+		}
+		break;
+	case ColliderType::TOZ3_P1:
+		if (app->scene->mapID != 6)
+		{
+
+			LoadNewMap(6, 12);
+
+		}
+		break;
+	case ColliderType::TOZ3_P2:
+		if (app->scene->mapID != 6)
+		{
+
+			LoadNewMap(6, 13);
+
+		}
+		break;
+	case ColliderType::TO_OUT2:
+		if (app->scene->mapID != 1)
+		{
+
+			LoadNewMap(1, 14);
+
+		}
+		break;
+	case ColliderType::TO_OUT3:
+		if (app->scene->mapID != 5)
+		{
+
+			LoadNewMap(5, 15);
+
+		}
+		break;
+	case ColliderType::TO_ZONE2_OUT:
+		if (app->scene->mapID != 5)
+		{
+
+			LoadNewMap(5, 16);
+
+		}
+		break;
+	case ColliderType::DOOR_LOCKED:
+		showDoorLocked = true;
+		isTalking = true;
 		break;
 	default:
 		break;

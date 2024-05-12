@@ -68,6 +68,31 @@ bool Scene::Awake(pugi::xml_node config)
 		app->map->name = config.child("mapInterior").attribute("name").as_string();
 		app->map->path = config.child("mapInterior").attribute("path").as_string();
 		break;
+	case 3:
+		app->map->name = config.child("mapInterior2").attribute("name").as_string();
+		app->map->path = config.child("mapInterior2").attribute("path").as_string();
+		break;
+	case 4:
+		app->map->name = config.child("mapInterior3").attribute("name").as_string();
+		app->map->path = config.child("mapInterior3").attribute("path").as_string();
+		break;
+	case 5:
+		app->map->name = config.child("mapZona2").attribute("name").as_string();
+		app->map->path = config.child("mapZona2").attribute("path").as_string();
+		break;
+	case 6:
+		app->map->name = config.child("mapZona3").attribute("name").as_string();
+		app->map->path = config.child("mapZona3").attribute("path").as_string();
+		break;
+	case 7:
+		app->map->name = config.child("mapPuzzle1").attribute("name").as_string();
+		app->map->path = config.child("mapPuzzle1").attribute("path").as_string();
+		break;
+	case 8:
+		app->map->name = config.child("mapPuzzle2").attribute("name").as_string();
+		app->map->path = config.child("mapPuzzle2").attribute("path").as_string();
+		break;
+
 	}
 	
 

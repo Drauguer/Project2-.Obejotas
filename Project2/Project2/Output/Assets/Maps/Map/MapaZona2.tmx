@@ -14503,7 +14503,7 @@
  <objectgroup id="28" name="toZone3">
   <object id="175" x="1248" y="32" width="64" height="32"/>
  </objectgroup>
- <objectgroup id="26" name="toInterior">
+ <objectgroup id="26" name="toInterior3">
   <object id="172" x="1376" y="352" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="27" name="DoorLocked">

@@ -87,7 +87,8 @@
       </arrow>
     </puzlePassword>
 
-	  <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" texturePath="Assets/Textures/PrincipalOverworld.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
+	  <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" x6="336" y6="576" x7="336" y7="576" x8="1264" y8="1024" x9="304" y9="1792" x10="864" y10="304" x11="64" y11="304" x12="32" y12="144" x13="576" y13="144" x14="928" y14="448" x15="1376" y15="416" x16="1248" y16="96"
+			  texturePath="Assets/Textures/PrincipalOverworld.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
 		  <sideWalk animspeed="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
 			  <pushback x="32" y="0" width="32" height="32"/>
@@ -116,7 +117,13 @@
 	  
     <map path="Assets/Maps/Map/" name="Mapa1BuenoFr.tmx"/>
 	<map2 path="Assets/Maps/Map/" name="Mapa2BuenoFr.tmx"/>
+	<mapZona2 path="Assets/Maps/Map/" name="MapaZona2.tmx"/>
+	<mapZona3 path="Assets/Maps/Map/" name="MapaZona3.tmx"/>
+	<mapPuzzle1 path="Assets/Maps/Map/" name="MapaPuzzle1.tmx"/>
+	<mapPuzzle2 path="Assets/Maps/Map/" name="MapaPuzzle2.tmx"/>
 	<mapInterior path="Assets/Maps/Map/" name="MapaInteriorBueno.tmx"/>
+	<mapInterior2 path="Assets/Maps/Map/" name="MapaInterior2.tmx"/>
+	<mapInterior3 path="Assets/Maps/Map/" name="MapaInterior.tmx"/>
 
     <npc x="300" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="0" npcID="0" hasQuest="false">
       <idleAnim animspeed="0.2f" loop="true">

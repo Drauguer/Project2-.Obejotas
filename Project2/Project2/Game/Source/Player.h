@@ -74,6 +74,15 @@ public:
 
 	// Is Talking
 	bool isTalking = false;
+
+	// DoorLocked Textbox
+	uint windowW, windowH;
+	SDL_Rect dialogueBoxPos;
+	SDL_Rect dialogueBoxPos2;
+	bool showDoorLocked = false;
+	int doorLockedTimer = 0;
+
+	
 };
 
 #endif // __PLAYER_H__

@@ -468,6 +468,253 @@ bool Map::LoadObjectGroups(pugi::xml_node mapNode)
 
             }
         }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toInterior2") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOINTERIOR2;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toInterior3") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOINTERIOR3;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "DoorLocked") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::DOOR_LOCKED;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toZone1") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOZONE1;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toZone2") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOZONE2;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toZone3") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOZONE3;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toPuzzle1") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOPUZZLE1;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toPuzzle2") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOPUZZLE2;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toZone3P1") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOZ3_P1;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toZone3P2") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TOZ3_P2;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toOut2") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TO_OUT2;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toOut3") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TO_OUT3;
+
+        }
+        }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toZone2_Out") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TO_ZONE2_OUT;
+
+        }
+        }
 
         
 
