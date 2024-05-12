@@ -7,6 +7,9 @@
   <image source="Tiles/pixel-cyberpunk-interior.png" width="672" height="352"/>
  </tileset>
  <layer id="1" name="Suelo" width="22" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -495,6 +498,9 @@
   </data>
  </layer>
  <layer id="3" name="Pared2" width="22" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -983,6 +989,9 @@
   </data>
  </layer>
  <layer id="4" name="Props" width="22" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -1471,6 +1480,9 @@
   </data>
  </layer>
  <layer id="2" name="Pared" width="22" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
