@@ -284,6 +284,7 @@ bool Scene::Start()
 	//SFX loading
 	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
 	encounterFx = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/55Encounter02.wav");
+	clickFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/013Confirm03.wav");
 	
 
 	//Get the size of the window
@@ -536,8 +537,11 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		exitScene->state = GuiControlState::DISABLED;
 		settingsScene->state = GuiControlState::DISABLED;
 		ResumeScene->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 2) {
+		app->audio->PlayFx(clickFx);
 		IsExiting = true;
 	}
 	if (control->id == 3) {
@@ -550,11 +554,15 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		AudioSceneOff->state = GuiControlState::NORMAL;
 		FxSceneOff->state = GuiControlState::NORMAL;
 		exitScene->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 4) {
 		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
 		FullScreenOff->state = GuiControlState::NORMAL;
 		FullScreen->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 5) {
 		app->win->GetWindowSize(windowW, windowH);
@@ -563,16 +571,22 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 		FullScreen->state = GuiControlState::NORMAL;
 		FullScreenOff->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 6) {
 		app->IsVsincActive = false;
 		Vsinc->state = GuiControlState::DISABLED;
 		VsincOff->state = GuiControlState::NORMAL;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 7) {
 		app->IsVsincActive = true;
 		Vsinc->state = GuiControlState::NORMAL;
 		VsincOff->state = GuiControlState::DISABLED;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 8) {
 		FullScreen->state = GuiControlState::DISABLED;
@@ -588,16 +602,24 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		ResumeScene->state = GuiControlState::NORMAL;
 		exitScene->state = GuiControlState::NORMAL;
 		settingsScene->state = GuiControlState::NORMAL;
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 9) {
 		AudioSceneOff->state = GuiControlState::DISABLED;
 		AudioSceneOn->state = GuiControlState::NORMAL;
 		app->audio->SetMusicVolume(0.0f);
+
+		app->audio->PlayFx(clickFx);
+
+		
 	}
 	if (control->id == 10) {
 		AudioSceneOff->state = GuiControlState::NORMAL;
 		AudioSceneOn->state = GuiControlState::DISABLED;
 		app->audio->SetMusicVolume(100.0f);
+
+		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 11) {
 		app->scene->player->isOnPause = false;
@@ -620,12 +642,16 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		FxSceneOff->state = GuiControlState::DISABLED;
 		FxSceneOn->state = GuiControlState::NORMAL;
 		app->audio->SetFxVolume(0.0f);
+
+		app->audio->PlayFx(clickFx);
 	}
 
 	if (control->id == 13) {
 		FxSceneOff->state = GuiControlState::NORMAL;
 		FxSceneOn->state = GuiControlState::DISABLED;
 		app->audio->SetFxVolume(100.0f);
+
+		app->audio->PlayFx(clickFx);
 	}
 
 	return true;

@@ -123,7 +123,7 @@ public:
 
 	//Audio
 	uint encounterFx;
-
+	uint clickFx;
 
 	//List of enemies (reemplazar porque no son players xd) 
 	List<BaseEnemy*> enemies;
