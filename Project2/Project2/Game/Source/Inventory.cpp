@@ -77,7 +77,6 @@ bool Inventory::Update(float dt)
 				for (int k = 0; k < 3; ++k)
 				{
 					app->render->DrawRectangle({ 42 + i * 150 + k * 45, 180 + j * 45, 35, 35 }, 0, 255, 0, 255);
-
 					
 					if (t < app->scene->allies[i]->inventoryChar.Count())
 					{

@@ -67,6 +67,8 @@ public:
 	bool isActive = true;
 	bool isTriggered = false;
 
+	bool hasSolvedPuzle = false;
+
 	int id;
 
 	bool isPicked = false;
@@ -78,9 +80,12 @@ public:
 	pugi::xml_node config;
 
 	SDL_Texture* texture;
+	SDL_Texture* solutionTexture;
 	const char* texturePath;
 	uint texW, texH;
 	const char* dialogueChar;
+
+
 
 	// ANIMATIONS
 	Animation* currentAnim;

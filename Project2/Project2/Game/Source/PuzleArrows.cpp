@@ -68,6 +68,9 @@ void PuzleArrows::InitAnims()
 	rightArrow.speed = parameters.child("rightAnim").attribute("animspeed").as_float();
 	rightArrow.loop = parameters.child("rightAnim").attribute("loop").as_bool();
 
+
+	
+
 }
 
 bool PuzleArrows::Awake()
@@ -88,11 +91,19 @@ bool PuzleArrows::Start() {
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	//InitAnims();
-	InitAnims();
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+
+	texturePath = parameters.attribute("arrowTexturepath").as_string();
+
+	arrowsTexture = app->tex->Load(texturePath);
+
+
+	//InitAnims();
+	InitAnims();
+
+
 
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::STATIC);
@@ -135,7 +146,7 @@ bool PuzleArrows::Update(float dt)
 						break;
 					}
 					//El 200 se cambia mas adelante cuando tenga un sprite mas pequeño 
-					app->render->DrawTexture(texture, position.x + i * 200, position.y, &currentAnim->GetCurrentFrame());
+					app->render->DrawTexture(arrowsTexture, (position.x + i*80) , position.y, &currentAnim->GetCurrentFrame());
 				}
 				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 					if (solutionIds[0] == 3) {
@@ -178,17 +189,17 @@ bool PuzleArrows::Update(float dt)
 				hasLost = true;
 				solutionIds.Clear();
 				hasCreatedPassword = false;
-				progress = 400;
+				progress = 200;
 				sequenceCounter = 2;
 			}
 			else
 			{
-				progress -= (dt / (dt - 1));
+				progress -= (dt / (dt - 1)) / 2;
 			}
 
 
 			barWidth = static_cast<int>((MAX_BAR_WIDTH * (progress / MAX_PROGRESS)));
-			barRect = { position.x, position.y - 20, barWidth, 10 };
+			barRect = { (position.x-50) / 4, (position.y - 20), barWidth, 10 };
 
 			DrawProgressBar();
 		}
@@ -204,6 +215,9 @@ bool PuzleArrows::Update(float dt)
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
+
+	app->render->DrawTexture(texture, position.x, position.y);
+
 
 
 

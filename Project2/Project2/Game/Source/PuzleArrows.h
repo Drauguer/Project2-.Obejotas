@@ -49,7 +49,7 @@ public:
 public:
 	int sequenceCounter = 2;
 	SDL_Rect barRect; // Rectángulo para la barra de tiempo
-	float progress = 400;   // Progreso de la barra de tiempo
+	float progress = 200;   // Progreso de la barra de tiempo
 
 	int barWidth;
 
@@ -77,6 +77,7 @@ public:
 
 	bool hasAttacked = false;
 
+	SDL_Texture* arrowsTexture;
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;

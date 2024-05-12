@@ -42,23 +42,19 @@ bool PuzlePassword::Awake()
 
 bool PuzlePassword::Start() {
 
-	arrowTexturePath = config.attribute("texturePath").as_string();
+	arrowTexturePath = parameters.attribute("arrowTexturePath").as_string();
 
-	for (pugi::xml_node node = config.child("arrow").child("pushback"); node; node = node.next_sibling("pushback")) {
+	for (pugi::xml_node node = parameters.child("arrow").child("pushback"); node; node = node.next_sibling("pushback")) {
 		idleArrowAnim.PushBack({ node.attribute("x").as_int(),
 						node.attribute("y").as_int(),
 						node.attribute("width").as_int(),
 						node.attribute("height").as_int() });
 	}
-	idleArrowAnim.speed = config.child("arrow").attribute("animspeed").as_float();
-	idleArrowAnim.loop = config.child("arrow").attribute("loop").as_bool();
-
-	position.x = parameters.attribute("x").as_int();
-	id = parameters.attribute("id").as_int();
-	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	idleArrowAnim.speed = parameters.child("arrow").attribute("animspeed").as_float();
+	idleArrowAnim.loop = parameters.child("arrow").attribute("loop").as_bool();
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
+
 
 	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz 1234567890.,'=(?!)+-*/      " };
 	Font = app->fonts->Load("Assets/Fonts/typography.png", lookupTable, 2);
@@ -66,11 +62,17 @@ bool PuzlePassword::Start() {
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
-	//InitAnims();
-	InitAnims();
-
 	//initilize textures
+	position.x = parameters.attribute("x").as_int();
+	id = parameters.attribute("id").as_int();
+	position.y = parameters.attribute("y").as_int();
+	texturePath = parameters.attribute("texturepath").as_string();
+
 	texture = app->tex->Load(texturePath);
+	
+	texturePath = parameters.attribute("solutionTexturepath").as_string();
+
+	solutionTexture = app->tex->Load(texturePath);
 
 
 	pbody = app->physics->CreateCircle(position.x, position.y, 20, bodyType::STATIC);
@@ -87,15 +89,16 @@ bool PuzlePassword::Start() {
 
 bool PuzlePassword::Update(float dt)
 {
-	if (OnCollisionStay(this->pbody, app->scene->player->pbody)) 
+	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !hasSolvedPuzle) 
 	{
+
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 			if (currentCombination[currentIndex] < 9) 
 			{
 				currentCombination[currentIndex]++;
 				if (IsCombinationCorrect()) {
 					//Aqui va el codigo de victoria 
-					return false;
+					hasSolvedPuzle = true;
 				}
 			}
 		}
@@ -105,7 +108,8 @@ bool PuzlePassword::Update(float dt)
 				currentCombination[currentIndex]--;
 				if (IsCombinationCorrect()) {
 					//Aqui va el codigo de victoria 
-					return false;
+					hasSolvedPuzle = true;
+
 				}
 			}
 		}
@@ -130,11 +134,8 @@ bool PuzlePassword::Update(float dt)
 			}
 		}
 		DrawNumbers();
-		
-	}
-	else
-	{
-
+		app->render->DrawTexture(arrowTexture, (position.x+ 60 * (currentIndex-1)) / 2,
+			(position.y-80)/4, &currentArrowAnim->GetCurrentFrame(),0.0f, false);
 	}
 
 	
@@ -142,9 +143,14 @@ bool PuzlePassword::Update(float dt)
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
+	currentArrowAnim->Update();
+	if (!hasSolvedPuzle) 
+	{
+		app->render->DrawTexture(texture, position.x-25, position.y-35);
+		app->render->DrawTexture(solutionTexture, 110, 975);
+	}
+	
 
-	app->render->DrawTexture(arrowTexture, (position.x + 20) / scale,
-		(position.y) / scale, &currentArrowAnim->GetCurrentFrame());
 
 
 
@@ -199,15 +205,15 @@ void PuzlePassword::DrawNumbers()
 {
 	std::string cadena = std::to_string(currentCombination[0]);
 	const char* puntero = cadena.c_str();
-	app->fonts->BlitText(position.x, position.y, Font, puntero);
+	app->fonts->BlitText((position.x-10) / 2, position.y/4, Font, puntero);
 
 	cadena = std::to_string(currentCombination[1]);
 	puntero = cadena.c_str();
-	app->fonts->BlitText(position.x + 20, position.y, Font, puntero);
+	app->fonts->BlitText((position.x + 60) / 2, position.y/4, Font, puntero);
 
 	cadena = std::to_string(currentCombination[2]);
 	puntero = cadena.c_str();
-	app->fonts->BlitText(position.x + 40, position.y, Font, puntero);
+	app->fonts->BlitText((position.x + 120) / 2, position.y/4, Font, puntero);
 }
 
 bool PuzlePassword::IsCombinationCorrect()
@@ -225,10 +231,12 @@ bool PuzlePassword::IsCombinationCorrect()
 
 void PuzlePassword::SetCombinations() 
 {
+	//Init puzle
 	currentCombination.Add(0);
 	currentCombination.Add(0);
 	currentCombination.Add(0);
 
+	//Contraseña
 	finalCombination.Add(5);
 	finalCombination.Add(8);
 	finalCombination.Add(4);

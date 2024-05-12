@@ -37,57 +37,77 @@
   <scene>
 	  
 	<encounterFx audiopath ="Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg"   />
-	  <puzlePilar x="400" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" id="0" mapID="0" >
-		  <idleAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="32" width="32" height="32"/>
-		  </idleAnim>
-		  <triggerAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="32" width="32" height="32"/>
-			  <pushback x="32" y="32" width="32" height="32"/>
-		  </triggerAnim>
-	  </puzlePilar>
-	  <puzlePilar x="250" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" id="1" mapID="0" >
-		  <idleAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="32" width="32" height="32"/>
-		  </idleAnim>
-		  <triggerAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="32" width="32" height="32"/>
-			  <pushback x="32" y="32" width="32" height="32"/>
-		  </triggerAnim>
-	  </puzlePilar>
-	  <puzlePilar x="100" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" id="2" mapID="0">
-		  <idleAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="32" width="32" height="32"/>
-		  </idleAnim>
-		  <triggerAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="32" width="32" height="32"/>
-			  <pushback x="32" y="32" width="32" height="32"/>
-		  </triggerAnim>
-	  </puzlePilar>
-    
-    <puzleArrows x="100" y="200" texturepath="Assets/Textures/Arrow.png" mapID="0">
-      <leftAnim animspeed="0.2f" loop="true">
-        <pushback x="0" y="190" width="188" height="190"/>
-      </leftAnim>
+    <puzlePilar x="250" y="700" texturepath="Assets/Textures/PuzzleAntorchas.png" id="0" mapID="0" >
+      <idleAnim animspeed="0.2f" loop="true">
+        <pushback x="0" y="0" width="64" height="64"/>
+      </idleAnim>
+      <triggerAnim animspeed="0.2f" loop="true">
+        <pushback x="64" y="0" width="64" height="64"/>
+        <pushback x="128" y="0" width="64" height="64"/>
+        <pushback x="192" y="0" width="64" height="64"/>
+        <pushback x="256" y="0" width="64" height="64"/>
+        <pushback x="320" y="0" width="64" height="64"/>
+        <pushback x="384" y="0" width="64" height="64"/>
+        <pushback x="448" y="0" width="64" height="64"/>
+        <pushback x="512" y="0" width="64" height="64"/>
+      </triggerAnim>
+    </puzlePilar>
+    <puzlePilar x="400" y="700" texturepath="Assets/Textures/PuzzleAntorchas.png" id="1" mapID="0" >
+      <idleAnim animspeed="0.2f" loop="true">
+        <pushback x="0" y="0" width="64" height="64"/>
+      </idleAnim>
+      <triggerAnim animspeed="0.2f" loop="true">
+        <pushback x="64" y="0" width="64" height="64"/>
+        <pushback x="128" y="0" width="64" height="64"/>
+        <pushback x="192" y="0" width="64" height="64"/>
+        <pushback x="256" y="0" width="64" height="64"/>
+        <pushback x="320" y="0" width="64" height="64"/>
+        <pushback x="384" y="0" width="64" height="64"/>
+        <pushback x="448" y="0" width="64" height="64"/>
+        <pushback x="512" y="0" width="64" height="64"/>
+      </triggerAnim>
+    </puzlePilar>
+    <puzlePilar x="100" y="700" texturepath="Assets/Textures/PuzzleAntorchas.png" id="2" mapID="0">
+      <idleAnim animspeed="0.2f" loop="true">
+        <pushback x="0" y="0" width="64" height="64"/>
+      </idleAnim>
+      <triggerAnim animspeed="0.2f" loop="true">
+        <pushback x="64" y="0" width="64" height="64"/>
+        <pushback x="128" y="0" width="64" height="64"/>
+        <pushback x="192" y="0" width="64" height="64"/>
+        <pushback x="256" y="0" width="64" height="64"/>
+        <pushback x="320" y="0" width="64" height="64"/>
+        <pushback x="384" y="0" width="64" height="64"/>
+        <pushback x="448" y="0" width="64" height="64"/>
+        <pushback x="512" y="0" width="64" height="64"/>
+      </triggerAnim>
+    </puzlePilar>
+
+    <puzleArrows x="1900" y="300" texturepath="Assets/Textures/Pantalla.png" arrowTexturepath="Assets/Textures/PuzzleHelldivers.png" mapID="0">
+
       <upAnim animspeed="0.2f" loop="true">
-        <pushback x="188" y="0" width="188" height="190"/>
+        <pushback x="0" y="0" width="64" height="64"/>
       </upAnim>
       <downAnim animspeed="0.2f" loop="true">
-        <pushback x="188" y="190" width="188" height="190"/>
+        <pushback x="64" y="0" width="64" height="64"/>
       </downAnim>
+      <leftAnim animspeed="0.2f" loop="true">
+        <pushback x="128" y="0" width="64" height="64"/>
+      </leftAnim>
       <rightAnim animspeed="0.2f" loop="true">
-        <pushback x="376" y="190" width="188" height="190"/>
+        <pushback x="192" y="0" width="64" height="64"/>
       </rightAnim>
     </puzleArrows>
-    
-    <puzlePassword x="400" y="200" texturepath="Assets/Textures/Arrow.png" mapID="0" texturePath="Assets/Textures/SelectionArrow.png">
+
+    <puzlePassword x="600" y="855" texturepath="Assets/Textures/TragaPerras.png" solutionTexturepath="Assets/Textures/Codigo.png" mapID="0" arrowTexturePath="Assets/Textures/SelectionArrow.png"  texturePath="Assets/Textures/SelectionArrow.png">
       <arrow animspeed="0.05f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
         <pushback x="64" y="0" width="64" height="64"/>
       </arrow>
     </puzlePassword>
 
-	  <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" x6="336" y6="576" x7="336" y7="576" x8="1264" y8="1024" x9="304" y9="1792" x10="864" y10="304" x11="64" y11="304" x12="32" y12="144" x13="576" y13="144" x14="928" y14="448" x15="1376" y15="416" x16="1248" y16="96"
+
+    <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" x6="336" y6="576" x7="336" y7="576" x8="1264" y8="1024" x9="304" y9="1792" x10="864" y10="304" x11="64" y11="304" x12="32" y12="144" x13="576" y13="144" x14="928" y14="448" x15="1376" y15="416" x16="1248" y16="96"
 			  texturePath="Assets/Textures/PrincipalOverworld.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
 		  <sideWalk animspeed="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
@@ -132,6 +152,14 @@
 		<dialogue text="this neighbourhood is not for you buddy"/>
 		<dialogue text="what is that? you want to overthrow the goverment?"/>
 		<dialogue text="good luck wizard, put your fist in the air"/>
+    </npc>
+    <npc x="500" y="1000" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="0" npcID="0" hasQuest="false">
+      <idleAnim animspeed="0.2f" loop="true">
+        <pushback x="0" y="32" width="32" height="32"/>
+      </idleAnim>
+      <dialogue text="hey buddy you are in the middle of nowhere"/>
+      <dialogue text="let me tell you something right before you go"/>
+      <dialogue text="to iluminate the way, follow my instructions"/>
     </npc>
     <npc x="2048" y="1198" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="0" npcID="1" hasQuest="false">
       <idleAnim animspeed="0.2f" loop="true">
