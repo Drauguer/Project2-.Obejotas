@@ -6,6 +6,7 @@
 #include "NPC.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "GuiControlSlider.h"
 
 struct SDL_Texture;
 
@@ -54,9 +55,9 @@ private:
 	GuiControlButton* setting;
 	GuiControlButton* continue_;
 	GuiControlButton* VsincOff;
-	GuiControlButton* AudioOff;
+	GuiControlSlider* AudioOff;
 	GuiControlButton* AudioOn;
-	GuiControlButton* FxOff;
+	GuiControlSlider* FxOff;
 	GuiControlButton* FxOn;
 	GuiControlButton* Vsinc;
 	GuiControlButton* turnBack;

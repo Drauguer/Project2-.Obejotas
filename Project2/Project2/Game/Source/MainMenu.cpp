@@ -77,15 +77,15 @@ bool MainMenu::Start()
 	VsincOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect SoundOff = { windowW / 2 - 210,windowH / 2 - 180,240,80 };
-	AudioOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Audio Off", SoundOff, this);
+	AudioOff = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 15, "Audio", SoundOff, this);
 	AudioOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect SoundOn = { windowW / 2 - 210,windowH / 2 - 220,240,80 };
 	AudioOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Audio On", SoundOn, this);
 	AudioOn->state = GuiControlState::DISABLED;
 
-	SDL_Rect EffectOff = { windowW / 2 - 650,windowH / 2 - 180,240,80 };
-	FxOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "Fx Off", EffectOff, this);
+	SDL_Rect EffectOff = { windowW / 2 + 250,windowH / 2 - 180,240,80 };
+	FxOff = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 17, "Fx", EffectOff, this);
 	FxOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect EffectOn = { windowW / 2 - 650,windowH / 2 - 220,240,80 };
@@ -228,7 +228,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id == 15) {
 		AudioOff->state = GuiControlState::DISABLED;
 		AudioOn->state = GuiControlState::NORMAL;
-		app->audio->SetMusicVolume(0.0f);
+		app->audio->SetMusicVolume(AudioOff->newValue);
 	}
 	if (control->id == 16) {
 		AudioOff->state = GuiControlState::NORMAL;
@@ -240,7 +240,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id == 17) {
 		FxOff->state = GuiControlState::DISABLED;
 		FxOn->state = GuiControlState::NORMAL;
-		app->audio->SetFxVolume(0.0f);
+		app->audio->SetFxVolume(FxOff->newValue);
 
 		app->audio->PlayFx(clickFx);
 

@@ -39,6 +39,7 @@
     <ClCompile Include="Source\PuzlePilar.cpp" />
     <ClCompile Include="Source\PuzlePassword.cpp" />
     <ClCompile Include="Source\PuzleArrows.cpp" />
+    <ClCompile Include="Source\GuiControlSlider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -109,6 +110,7 @@
     <ClInclude Include="Source\PuzlePilar.h" />
     <ClInclude Include="Source\PuzlePassword.h" />
     <ClInclude Include="Source\PuzleArrows.h" />
+    <ClInclude Include="Source\GuiControlSlider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
