@@ -87,6 +87,10 @@ private:
 	GuiControlButton* FullScreenOff;
 	GuiControlButton* Vsinc;
 	GuiControlButton* VsincOff;
+	GuiControlButton* AudioSceneOff;
+	GuiControlButton* AudioSceneOn;
+	GuiControlButton* FxSceneOff;
+	GuiControlButton* FxSceneOn;
 	GuiControlButton* returned;
 	GuiControlButton* Initial_Screen;
 

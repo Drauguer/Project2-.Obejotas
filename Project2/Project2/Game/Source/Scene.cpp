@@ -308,7 +308,7 @@ bool Scene::Start()
 	/*testDialogue = (Dialogue*)app->dialogueManager->CreateDialogue("hello world!", DialogueType::PLAYER);
 	testDialogue2 = (Dialogue*)app->dialogueManager->CreateDialogue("diabloooo que pasaa ", DialogueType::PLAYER);*/
 	
-	SDL_Rect ExitButton_ = { windowW / 2 - 60,windowH / 2 +240, 240, 80 };
+	SDL_Rect ExitButton_ = { windowW / 2 - 60,windowH / 2 +120, 240, 80 };
 	exitScene = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this);
 	exitScene->state = GuiControlState::DISABLED;
 
@@ -320,25 +320,41 @@ bool Scene::Start()
 	Initial_Screen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Return to inicial screen", Return_Initial, this);
 	Initial_Screen->state = GuiControlState::DISABLED;
 
-	SDL_Rect FullScreenCheck = { windowW / 2 - 60,windowH / 2 + 60, 240, 80 };
+	SDL_Rect FullScreenCheck = { windowW / 2 + 180,windowH / 2 - 240, 240, 80 };
 	FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Full Screen", FullScreenCheck, this);
 	FullScreen->state = GuiControlState::DISABLED;
 
-	SDL_Rect FullScreenCheckOff = { windowW / 2 - 60,windowH / 2, 240, 80 };
+	SDL_Rect FullScreenCheckOff = { windowW / 2 - 60,windowH / 2-240, 240, 80 };
 	FullScreenOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Full Screen Off", FullScreenCheckOff, this);
 	FullScreenOff->state = GuiControlState::DISABLED;
 
-	SDL_Rect VsincCheck = { windowW / 2 - 60,windowH / 2 - 120 , 240, 80 };
+	SDL_Rect VsincCheck = { windowW / 2 - 400,windowH / 2 - 240 , 240, 80 };
 	Vsinc = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Vsync", VsincCheck, this);
 	Vsinc->state = GuiControlState::DISABLED;
 
-	SDL_Rect VsincCheckOff = { windowW / 2 - 60,windowH / 2 + 240 , 240, 80 };
+	SDL_Rect VsincCheckOff = { windowW / 2 - 400,windowH / 2 - 320 , 240, 80 };
 	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Vsync Off", VsincCheckOff, this);
 	VsincOff->state = GuiControlState::DISABLED;
 
-	SDL_Rect Go_Back = { windowW / 2 - 60,windowH / 2 - 240 , 240, 80 };
+	SDL_Rect Go_Back = { windowW / 2 -400,windowH / 2 + 140, 240, 80 };
 	returned = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Go Back", Go_Back, this);
 	returned->state = GuiControlState::DISABLED;
+
+	SDL_Rect SoundOff = { windowW / 2 - 400,windowH / 2 - 60,240,80 };
+	AudioSceneOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "Audio Off", SoundOff, this);
+	AudioSceneOff->state = GuiControlState::DISABLED;
+
+	SDL_Rect SoundOn = { windowW / 2 - 400,windowH / 2 - 140,240,80 };
+	AudioSceneOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Audio On", SoundOn, this);
+	AudioSceneOn->state = GuiControlState::DISABLED;
+
+	SDL_Rect EffectOff = { windowW / 2 + 180,windowH / 2 - 60,240,80 };
+	FxSceneOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Fx Off", EffectOff, this);
+	FxSceneOff->state = GuiControlState::DISABLED;
+
+	SDL_Rect EffectOn = { windowW / 2 + 180,windowH / 2 - 140,240,80 };
+	FxSceneOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "Fx On", EffectOn, this);
+	FxSceneOn->state = GuiControlState::DISABLED;
 
 	if (loadAllies)
 	{
@@ -531,6 +547,8 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		FullScreen->state = GuiControlState::NORMAL;
 		Vsinc->state = GuiControlState::NORMAL;
 		returned->state = GuiControlState::NORMAL;
+		AudioSceneOff->state = GuiControlState::NORMAL;
+		FxSceneOff->state = GuiControlState::NORMAL;
 		exitScene->state = GuiControlState::DISABLED;
 	}
 	if (control->id == 4) {
@@ -563,9 +581,23 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		Initial_Screen->state = GuiControlState::DISABLED;
 		VsincOff->state = GuiControlState::DISABLED;
 		returned->state = GuiControlState::DISABLED;
+		AudioSceneOff->state = GuiControlState::DISABLED;
+		AudioSceneOn->state = GuiControlState::DISABLED;
+		FxSceneOff->state = GuiControlState::DISABLED;
+		FxSceneOn->state = GuiControlState::DISABLED;
 		ResumeScene->state = GuiControlState::NORMAL;
 		exitScene->state = GuiControlState::NORMAL;
 		settingsScene->state = GuiControlState::NORMAL;
+	}
+	if (control->id == 9) {
+		AudioSceneOff->state = GuiControlState::DISABLED;
+		AudioSceneOn->state = GuiControlState::NORMAL;
+		app->audio->SetMusicVolume(0.0f);
+	}
+	if (control->id == 10) {
+		AudioSceneOff->state = GuiControlState::NORMAL;
+		AudioSceneOn->state = GuiControlState::DISABLED;
+		app->audio->SetMusicVolume(100.0f);
 	}
 	if (control->id == 11) {
 		app->scene->player->isOnPause = false;
@@ -583,8 +615,19 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->mainMenu->Enable();
 		app->mainMenu->Start();
 		
-	
 	}
+	if (control->id == 12) {
+		FxSceneOff->state = GuiControlState::DISABLED;
+		FxSceneOn->state = GuiControlState::NORMAL;
+		app->audio->SetFxVolume(0.0f);
+	}
+
+	if (control->id == 13) {
+		FxSceneOff->state = GuiControlState::NORMAL;
+		FxSceneOn->state = GuiControlState::DISABLED;
+		app->audio->SetFxVolume(100.0f);
+	}
+
 	return true;
 }
 
