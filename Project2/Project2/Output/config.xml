@@ -122,7 +122,7 @@
 	<mapPuzzle1 path="Assets/Maps/Map/" name="MapaPuzzle1.tmx"/>
 	<mapPuzzle2 path="Assets/Maps/Map/" name="MapaPuzzle2.tmx"/>
 	<mapInterior path="Assets/Maps/Map/" name="MapaInteriorBueno.tmx"/>
-	<mapInterior2 path="Assets/Maps/Map/" name="MapaInterior2.tmx"/>
+	<mapInterior2 path="Assets/Maps/Map/" name="MapaInterior2Bueno.tmx"/>
 	<mapInterior3 path="Assets/Maps/Map/" name="MapaInterior.tmx"/>
 
     <npc x="300" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="0" npcID="0" hasQuest="false">
