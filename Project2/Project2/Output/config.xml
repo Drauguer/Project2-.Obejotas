@@ -264,6 +264,23 @@
 		  </idleAnim>
 	  </npc>
 
+	  <npc x="1088" y="704" texturepath="Assets/Textures/SatyrOverworlrd.png" hasCombat="false" triggerInRange="false" mapID="3" npcID="10" hasQuest="true" QuestID="3">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="0" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="hey, do you listen that music in the background?"/>
+		  <dialogue text="it's mine! do you like it? hihi"/>
+		  <dialogue text="oh? do you want me to join your party?"/>
+		
+		  <dialogueQuestBad text="sadly, my music deserves to be listened by more people!"/>
+		  <dialogueQuestBad text="if you were at least 3 people, i would happily join!"/>
+		  <dialogueQuestBad text="come again if you get more people in your party hihi"/>
+
+		  <dialogueQuestGood text="hmmm i see you're a pretty big group..."/>
+		  <dialogueQuestGood text="well, then i think i would join you!"/>
+		  <dialogueQuestGood text="i'm pretty sure that you will enjoy a lot my music hahaha"/>
+	  </npc>
+
     <mage x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
@@ -297,7 +314,7 @@
 		
     </mage>
 
-	  <enano x="200" y="400" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
+	  <enano x="200" y="300" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -337,7 +354,7 @@
 		  <ability id="2" name="Visión Laser"/>
 	  </enano>
 	  
-    <eldrin x="200" y="250" texturepath="Assets/Textures/ProtaSpritesheet.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
+    <eldrin x="300" y="200" texturepath="Assets/Textures/ProtaSpritesheet.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
@@ -367,7 +384,7 @@
 		<ability id="2" name="Visión Laser"/>
     </eldrin>
 
-	<bardo x="200" y="550" texturepath="Assets/Textures/SatyrSpriteSheet.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Urgo el Bardo">
+	<bardo x="300" y="400" texturepath="Assets/Textures/SatyrSpriteSheet.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Urgo el Bardo">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -637,13 +654,18 @@
 		  <ability id="2" name="Visión Laser"/>
 	  </enemy>
 	  
-	  <item1 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="1" itemName="test"/>
-	  <item2 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="2" itemName="test"/>
-	  <item3 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="3" itemName="test"/>
-	  <item4 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="3" itemName="test"/>
-	  <item5 x="100" y="100" texturepath="Assets/Textures/goldCoin.png" type="1" itemName="test"/>
-	  <itemMage x="100" y="100" texturepath="Assets/Textures/Items/Armors/Armers3.png" type="3" itemName="Mage Item Quest"/>
-	  <itemQuest3 x="100" y="100" texturepath="Assets/Textures/Items/Helmets/Helmet1.png" type="1" itemName="Helmet 1"/>
+	  <itemMage x="-100" y="-100" texturepath="Assets/Textures/Items/Armors/Armers3.png" type="2" itemName="Mage Item Quest" bonusMP="20" bonusDEF="15"/>
+	  <itemQuest3 x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet1.png" type="1" itemName="Helmet 1" bonusHP="25" bonusATK="15"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet2.png" type="1" itemName="Helmet 2" bonusHP="15" bonusMP="25"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet3.png" type="1" itemName="Helmet 3" bonusHP="35" bonusDEF="25"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet4.png" type="1" itemName="Helmet 4" bonusHP="20" bonusATK="35"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Armers1.png" type="2" itemName="Armor 1" bonusDEF="15" bonusDEX="25"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Armers3.png" type="2" itemName="Armor 3" bonusDEF="35" bonusATK="20"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Armers4.png" type="2" itemName="Armor 4" bonusDEF="50" bonusHP="20"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon1.png" type="3" itemName="Weapon 1" bonusATK="20" bonusDEF="15"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon2.png" type="3" itemName="Weapon 2" bonusATK="25" bonusMP="20"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon3.png" type="3" itemName="Weapon 3" bonusATK="20" bonusDEX="30"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon4.png" type="3" itemName="Weapon 4" bonusATK="55"/>
 
   </scene>
 

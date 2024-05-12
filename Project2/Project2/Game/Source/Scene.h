@@ -153,13 +153,11 @@ public:
 	bool changedMap;
 
 	// Testing items
-	Item* item1;
-	Item* item2;
-	Item* item3;
-	Item* item4;
-	Item* item5;
+	
 	Item* itemMage;
 	Item* itemQuest3;
+
+	List<Item*> listItems;
 
 	//
 	bool loadAllies = true;

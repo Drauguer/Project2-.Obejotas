@@ -292,7 +292,11 @@ bool Player::Update(float dt)
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
 
-		app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), isFlipped);
+		if (!app->inventory->isInventory)
+		{
+			app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), isFlipped);
+		}
+		
 	}
 
 	

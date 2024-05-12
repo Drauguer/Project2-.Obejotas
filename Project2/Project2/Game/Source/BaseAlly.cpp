@@ -133,6 +133,12 @@ bool BaseAlly::Update(float dt)
 
 	int scale = app->win->GetScale();
 
+	int winW = windowW;
+	int winH = windowH;
+
+	dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
+	dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
+
 	if (helmetItem != NULL)
 	{
 		SetHelmetStats();
@@ -169,11 +175,7 @@ bool BaseAlly::Update(float dt)
 		
 	}
 
-	int winW = windowW;
-	int winH = windowH;
-
-	dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
-	dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
+	
 
 	
 

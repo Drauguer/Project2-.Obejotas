@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
+#include "Inventory.h"
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -179,7 +180,7 @@ bool NPC::Update(float dt)
 
 
 	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x + 40) / scale)), PIXEL_TO_METERS((float32)((position.y + 40) / scale)) }, 0);
-	if (!app->scene->isOnCombat) {
+	if (!app->scene->isOnCombat && !app->inventory->isInventory) {
 		app->render->DrawTexture(texture, (position.x - 25) / scale, (position.y - 25) / scale, &currentAnimation->GetCurrentFrame());
 	}
 
@@ -351,6 +352,38 @@ void NPC::CheckQuest(int questID)
 		else
 		{
 			cantTalk = true;
+		}
+		break;
+	case 3:
+		if (app->scene->allies.Count() >= 3)
+		{
+			QuestCompleted = true;
+
+			// Load the dialogues after completing the quest
+			for (pugi::xml_node node = parameters.child("dialogueQuestGood"); node; node = node.next_sibling("dialogueQuestGood")) {
+				dialogueChar = node.attribute("text").as_string();
+				dialogueString = dialogueChar;
+				dialoguesNPC.Add(dialogueString);
+			}
+
+			// Add Bardo to the allies
+			for (pugi::xml_node allyNode = app->scene->scene_parameter.child("bardo"); allyNode; allyNode = allyNode.next_sibling("bardo"))
+			{
+				BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+				app->scene->allies.Add(ally);
+				ally->parameters = allyNode;
+				ally->Start();
+
+			}
+		}
+		else
+		{
+			// Load the dialogues after failing the quest
+			for (pugi::xml_node node = parameters.child("dialogueQuestBad"); node; node = node.next_sibling("dialogueQuestBad")) {
+				dialogueChar = node.attribute("text").as_string();
+				dialogueString = dialogueChar;
+				dialoguesNPC.Add(dialogueString);
+			}
 		}
 		break;
 	}

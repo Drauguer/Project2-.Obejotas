@@ -74,6 +74,8 @@ bool BattleScene::Start()
 	martillazo = app->tex->Load("Assets/Textures/RedMace.png");
 	lifeMago = app->tex->Load("Assets/Textures/LifeMago.png");
 	lifeEnano = app->tex->Load("Assets/Textures/LifeEnano.png");
+	lifeEldrin = app->tex->Load("Assets/Textures/LifeEldrin.png");
+	lifeBardo = app->tex->Load("Assets/Textures/LifeBardo.png");
 	lifeEnemy = app->tex->Load("Assets/Textures/LifeEnemy.png");
 	background = app->tex->Load("Assets/Maps/FondoCombate.png");
 
@@ -125,6 +127,18 @@ bool BattleScene::Update(float dt)
 				app->render->DrawRectangle(app->scene->allies[i]->healthBar, 0, 255, 0, 255);
 				app->render->DrawTexture(lifeEnano, (app->scene->allies[i]->position.x - 150) / scale, app->scene->allies[i]->position.y / scale);
 				
+			}
+			else if (strcmp(app->scene->allies[i]->charName.GetString(), "Eldrin") == 0)
+			{
+				app->render->DrawRectangle(app->scene->allies[i]->healthBar, 0, 255, 0, 255);
+				app->render->DrawTexture(lifeEldrin, (app->scene->allies[i]->position.x - 150) / scale, app->scene->allies[i]->position.y / scale);
+
+			}
+			else if (strcmp(app->scene->allies[i]->charName.GetString(), "Urgo el Bardo") == 0)
+			{
+				app->render->DrawRectangle(app->scene->allies[i]->healthBar, 0, 255, 0, 255);
+				app->render->DrawTexture(lifeBardo, (app->scene->allies[i]->position.x - 150) / scale, app->scene->allies[i]->position.y / scale);
+
 			}
 		}
 
@@ -531,12 +545,9 @@ void BattleScene::CheckState()
 		app->scene->isOnCombat = false;
 		for (int i = 0; i < app->scene->allies.Count(); i++)
 		{
-			app->scene->allies[i]->life = 0;
+			app->scene->allies[i]->life = app->scene->allies[i]->maxHP;
 		}
-		for (int i = 0; i < app->scene->enemies.Count(); i++)
-		{
-			app->scene->enemies[i]->life = 0;
-		}
+		
 		hasStartedCombat = false;
 		return;
 	}
@@ -561,10 +572,7 @@ void BattleScene::CheckState()
 				GiveReward(app->scene->npcs[i]->npcID);
 			}
 		}
-		for (int i = 0; i < app->scene->enemies.Count(); i++)
-		{
-			app->scene->enemies[i]->life = 0;
-		}
+		
 		app->scene->isOnCombat = false;
 		hasStartedCombat = false;
 		return;

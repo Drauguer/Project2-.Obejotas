@@ -183,8 +183,6 @@ void Scene::LoadEnemies()
 		}
 		enemies.Clear();
 	}
-	
-	
 
 	// iterate Enemies in combat
 	for (pugi::xml_node enemyNode = scene_parameter.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
@@ -243,25 +241,15 @@ void Scene::LoadAllies()
 
 void Scene::LoadItems()
 {
-	pugi::xml_node item1Node = scene_parameter.child("item1");
-	item1 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item1->parameters = item1Node;
 
-	pugi::xml_node item2Node = scene_parameter.child("item2");
-	item2 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item2->parameters = item2Node;
+	for (pugi::xml_node itemNode = scene_parameter.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+	{
+		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+		listItems.Add(item);
+		item->parameters = itemNode;
+		item->Start();
 
-	pugi::xml_node item3Node = scene_parameter.child("item3");
-	item3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item3->parameters = item3Node;
-
-	pugi::xml_node item14Node = scene_parameter.child("item4");
-	item4 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item4->parameters = item14Node;
-
-	pugi::xml_node item15Node = scene_parameter.child("item5");
-	item5 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	item5->parameters = item15Node;
+	}
 
 	pugi::xml_node itemMageNode = scene_parameter.child("itemMage");
 	itemMage = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
@@ -385,6 +373,24 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
 		for (pugi::xml_node allyNode = scene_parameter.child("bardo"); allyNode; allyNode = allyNode.next_sibling("bardo"))
+		{
+			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+			allies.Add(ally);
+			ally->parameters = allyNode;
+			ally->Start();
+
+		}
+
+		for (pugi::xml_node allyNode = scene_parameter.child("mage"); allyNode; allyNode = allyNode.next_sibling("mage"))
+		{
+			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+			allies.Add(ally);
+			ally->parameters = allyNode;
+			ally->Start();
+
+		}
+
+		for (pugi::xml_node allyNode = scene_parameter.child("enano"); allyNode; allyNode = allyNode.next_sibling("enano"))
 		{
 			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 			allies.Add(ally);

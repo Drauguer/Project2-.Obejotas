@@ -104,6 +104,8 @@ private:
 	// Vidas Personajes
 	SDL_Texture* lifeMago;
 	SDL_Texture* lifeEnano;
+	SDL_Texture* lifeEldrin;
+	SDL_Texture* lifeBardo;
 	SDL_Texture* lifeEnemy;
 
 	// Fondo Mapa
