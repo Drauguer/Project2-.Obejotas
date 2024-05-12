@@ -40,6 +40,7 @@ public:
 	int fxVolume = 100;
 	int musicVolume = 100;
 
+
 private:
 
 	_Mix_Music* music;

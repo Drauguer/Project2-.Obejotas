@@ -26,8 +26,8 @@ public:
     float newValue;
 protected:
     float value;        // Current value of the slider
-    float minValue;     // Minimum value of the slider
-    float maxValue;     // Maximum value of the slider
+    float minValue= 0.0f;     // Minimum value of the slider
+    float maxValue=100;     // Maximum value of the slider
 
     SDL_Rect sliderButton; // Rectangle representing the slider handle
 

@@ -2,6 +2,7 @@
 #include "Render.h"
 #include "App.h"
 #include "Audio.h"
+#include "Window.h"
 
 // Constructor
 GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, const char* text)
@@ -23,23 +24,23 @@ GuiControlSlider::~GuiControlSlider()
 // Update method
 bool GuiControlSlider::Update(float dt)
 {
+    int scale = app->win->GetScale();
+
     if (state != GuiControlState::DISABLED)
     {
         int mouseX, mouseY;
         app->input->GetMousePosition(mouseX, mouseY);
 
         // Check if the mouse is over the slider
-        if (mouseX > bounds.x && mouseX < bounds.x + bounds.w &&
-            mouseY > bounds.y && mouseY < bounds.y + bounds.h)
-        {
+        if (mouseX * scale > bounds.x && mouseX * scale < bounds.x + bounds.w && mouseY * scale > bounds.y && mouseY * scale < bounds.y + bounds.h) {
+
             state = GuiControlState::FOCUSED;
 
-            if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
-            {
+            if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
                 state = GuiControlState::PRESSED;
 
                 // Update the slider value based on mouse position
-                newValue = (float)(mouseX - bounds.x) / (float)(bounds.w);
+                newValue = (float)(mouseX - bounds.x*scale) / (float)(bounds.w*scale);
                 newValue = minValue + newValue * (maxValue - minValue);
                 SetValue(newValue);
                 
@@ -66,9 +67,10 @@ bool GuiControlSlider::Update(float dt)
 
 void GuiControlSlider::SetValue(float value)
 {
+    int scale = app->win->GetScale();
     this->value = value;
     // Update slider button position based on value
-    sliderButton.x = bounds.x + (int)((value - minValue) / (maxValue - minValue) * bounds.w);
+    sliderButton.x = bounds.x*scale + (int)((value - minValue) / (maxValue - minValue) * bounds.w*scale);
 }
 
 float GuiControlSlider::GetValue() const

@@ -44,23 +44,23 @@ bool MainMenu::Start()
 	app->win->GetWindowSize(windowW, windowH);
 	img = app->tex->Load("Assets/Textures/main_screen.png");
 
-	SDL_Rect StartButton = { windowW / 2 - 300,windowH / 2 +100, 240,80 };
+	SDL_Rect StartButton = { windowW / 2 - 400,windowH / 2 +100, 240,80 };
 	start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Start", StartButton, this);
 
-	SDL_Rect ExitButton = { windowW / 2 - 300,windowH / 2 + 240, 240, 80 };
+	SDL_Rect ExitButton = { windowW / 2 - 400,windowH / 2 + 240, 240, 80 };
 	exit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton, this);
 
 	SDL_Rect SettingsButton = { windowW / 2 - 0,windowH / 2 +240, 240, 80 };
 	setting = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Settings", SettingsButton, this);
 
-	SDL_Rect GoBackButton = { windowW / 2 - 0,windowH / 2 - 40, 240, 80 };
+	SDL_Rect GoBackButton = { windowW / 2 + 180,windowH / 2 +240, 240, 80 };
 	turnBack = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Go Back", GoBackButton, this);
 	turnBack->state = GuiControlState::DISABLED;
 
 	SDL_Rect ContinueButton = { windowW / 2 +0, windowH / 2 + 100, 240, 80 };
 	continue_ = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Continue", ContinueButton, this);
 
-	SDL_Rect FullScreenCheck = { windowW / 2 - 0,windowH / 2 -140, 240, 80 };
+	SDL_Rect FullScreenCheck = { windowW / 2 -400,windowH / 2 + 80, 240, 80 };
 	FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Full Screen", FullScreenCheck, this);
 	FullScreen->state = GuiControlState::DISABLED;
 
@@ -68,27 +68,27 @@ bool MainMenu::Start()
 	FullScreenOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Full Screen Off", FullScreenCheckOff, this);
 	FullScreenOff->state = GuiControlState::DISABLED;
 
-	SDL_Rect VsincCheck = { windowW / 2 - 450,windowH / 2 - 120 , 240, 80 };
+	SDL_Rect VsincCheck = { windowW / 2 + 180,windowH / 2 + 80 , 240, 80 };
 	Vsinc = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "Vsync", VsincCheck, this);
 	Vsinc->state = GuiControlState::DISABLED;
 
-	SDL_Rect VsincCheckOff = { windowW / 2 - 210,windowH / 2 - 120 , 240, 80 };
+	SDL_Rect VsincCheckOff = { windowW / 2 + 180,windowH / 2 + 140 , 240, 80 };
 	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Vsync Off", VsincCheckOff, this);
 	VsincOff->state = GuiControlState::DISABLED;
 
-	SDL_Rect SoundOff = { windowW / 2 - 210,windowH / 2 - 180,240,80 };
-	AudioOff = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 15, "Audio", SoundOff, this);
+	SDL_Rect SoundOff = { windowW / 2 -400,windowH / 2 - 80,240,80 };
+	AudioOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Audio Off", SoundOff, this);
 	AudioOff->state = GuiControlState::DISABLED;
 
-	SDL_Rect SoundOn = { windowW / 2 - 210,windowH / 2 - 220,240,80 };
+	SDL_Rect SoundOn = { windowW / 2 -400,windowH / 2 - 140,240,80 };
 	AudioOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Audio On", SoundOn, this);
 	AudioOn->state = GuiControlState::DISABLED;
 
-	SDL_Rect EffectOff = { windowW / 2 + 250,windowH / 2 - 180,240,80 };
-	FxOff = (GuiControlSlider*)app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 17, "Fx", EffectOff, this);
+	SDL_Rect EffectOff = { windowW / 2 + 180,windowH / 2 - 80,240,80 };
+	FxOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "Fx Off", EffectOff, this);
 	FxOff->state = GuiControlState::DISABLED;
 
-	SDL_Rect EffectOn = { windowW / 2 - 650,windowH / 2 - 220,240,80 };
+	SDL_Rect EffectOn = { windowW / 2 + 180,windowH / 2 - 140,240,80 };
 	FxOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, "Fx On", EffectOn, this);
 	FxOn->state = GuiControlState::DISABLED;
 
@@ -228,7 +228,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id == 15) {
 		AudioOff->state = GuiControlState::DISABLED;
 		AudioOn->state = GuiControlState::NORMAL;
-		app->audio->SetMusicVolume(AudioOff->newValue);
+		app->audio->SetMusicVolume(0.0f);
+		
 	}
 	if (control->id == 16) {
 		AudioOff->state = GuiControlState::NORMAL;
@@ -240,7 +241,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id == 17) {
 		FxOff->state = GuiControlState::DISABLED;
 		FxOn->state = GuiControlState::NORMAL;
-		app->audio->SetFxVolume(FxOff->newValue);
+		app->audio->SetFxVolume(0.0f);
 
 		app->audio->PlayFx(clickFx);
 
