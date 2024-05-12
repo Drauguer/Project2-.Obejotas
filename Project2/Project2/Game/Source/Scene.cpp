@@ -215,7 +215,7 @@ void Scene::LoadAllies()
 	
 
 	// iterate Allies in combat
-	for (pugi::xml_node allyNode = scene_parameter.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))
+	for (pugi::xml_node allyNode = scene_parameter.child("eldrin"); allyNode; allyNode = allyNode.next_sibling("eldrin"))
 	{
 		BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 		allies.Add(ally);
@@ -367,7 +367,7 @@ bool Scene::Update(float dt)
 	// Prueba para añadir allies
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
-		for (pugi::xml_node allyNode = scene_parameter.child("ally"); allyNode; allyNode = allyNode.next_sibling("ally"))
+		for (pugi::xml_node allyNode = scene_parameter.child("bardo"); allyNode; allyNode = allyNode.next_sibling("bardo"))
 		{
 			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
 			allies.Add(ally);
