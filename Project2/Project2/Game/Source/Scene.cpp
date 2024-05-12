@@ -619,14 +619,15 @@ void Scene::CheckPilarPuzleResult()
 			{
 				puzlePilars[j]->isTriggered = false;
 			}
-			break;
+			return;
 		}
 	}
 	PilarPuzleSuccess();
 }
 
-void Scene::PilarPuzleSuccess() {
-
+void Scene::PilarPuzleSuccess()
+{
+	app->hasSolvedPilarPuzzle = true;
 }
 
 bool Scene::CheckAllPilars()

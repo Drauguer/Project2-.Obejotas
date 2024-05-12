@@ -89,7 +89,7 @@ bool PuzlePassword::Start() {
 
 bool PuzlePassword::Update(float dt)
 {
-	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !hasSolvedPuzle) 
+	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedPasswordPuzzle) 
 	{
 
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
@@ -98,7 +98,7 @@ bool PuzlePassword::Update(float dt)
 				currentCombination[currentIndex]++;
 				if (IsCombinationCorrect()) {
 					//Aqui va el codigo de victoria 
-					hasSolvedPuzle = true;
+					app->hasSolvedPasswordPuzzle = true;
 				}
 			}
 		}
@@ -108,7 +108,7 @@ bool PuzlePassword::Update(float dt)
 				currentCombination[currentIndex]--;
 				if (IsCombinationCorrect()) {
 					//Aqui va el codigo de victoria 
-					hasSolvedPuzle = true;
+					app->hasSolvedPasswordPuzzle = true;
 
 				}
 			}
@@ -144,11 +144,10 @@ bool PuzlePassword::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
 	currentArrowAnim->Update();
-	if (!hasSolvedPuzle) 
-	{
-		app->render->DrawTexture(texture, position.x-25, position.y-35);
-		app->render->DrawTexture(solutionTexture, 110, 975);
-	}
+
+	app->render->DrawTexture(texture, position.x-25, position.y-35);
+	app->render->DrawTexture(solutionTexture, 110, 975);
+
 	
 
 

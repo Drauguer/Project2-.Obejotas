@@ -47,6 +47,9 @@ public:
 	void DrawProgressBar();
 
 public:
+
+	bool hasSolvedPuzzle;
+
 	int sequenceCounter = 2;
 	SDL_Rect barRect; // Rectángulo para la barra de tiempo
 	float progress = 200;   // Progreso de la barra de tiempo

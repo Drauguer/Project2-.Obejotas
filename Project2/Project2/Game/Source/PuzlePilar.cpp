@@ -80,14 +80,13 @@ bool PuzlePilar::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PUZLE;
 
-	currentAnim = &idleAnim;
-
 	return true;
 }
 
 bool PuzlePilar::Update(float dt)
 {
-	if (OnCollisionStay(this->pbody, app->scene->player->pbody))
+	
+	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedPilarPuzzle)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN ) 
 		{
@@ -99,7 +98,7 @@ bool PuzlePilar::Update(float dt)
 
 		}
 	}
-	if (isTriggered) {
+	if (isTriggered || app->hasSolvedPilarPuzzle) {
 		currentAnim = &triggeredAnim;
 	}
 	else
