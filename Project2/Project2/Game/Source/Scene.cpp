@@ -176,11 +176,11 @@ void Scene::LoadEnemies()
 	//Esto es provisional, en futuras entregas se guardara las estadisticas de los players/enemies
 	if (enemies.start != NULL)
 	{
-		for (int i = 0; i < enemies.Count(); i++)
+		/*for (int i = 0; i < enemies.Count(); i++)
 		{
 			app->physics->DestroyObject(enemies[i]->pbody);
 
-		}
+		}*/
 		enemies.Clear();
 	}
 

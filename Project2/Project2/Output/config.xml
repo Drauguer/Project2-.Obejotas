@@ -264,7 +264,7 @@
 		  </idleAnim>
 	  </npc>
 
-	  <npc x="1088" y="704" texturepath="Assets/Textures/SatyrOverworlrd.png" hasCombat="false" triggerInRange="false" mapID="3" npcID="10" hasQuest="true" QuestID="3">
+	  <npc x="1088" y="704" texturepath="Assets/Textures/SatyrOverwolrd.png" hasCombat="false" triggerInRange="false" mapID="3" npcID="10" hasQuest="true" QuestID="3">
 		  <idleAnim animspeed="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
 		  </idleAnim>
