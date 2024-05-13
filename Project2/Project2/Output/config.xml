@@ -9,8 +9,37 @@
   <renderer>
     <vsync value="false"/>
   </renderer>
-  
-  
+
+	<logoScene texturePath="Assets/Textures/OliverAssets/Logo/LogoSpritesheet.png">
+		<logoAnim animspeed="0.2f" loop="false">
+			
+		
+			<pushback x="6400" y="0" width="640" height="360"/>
+			<pushback x="5760" y="0" width="640" height="360"/>
+			<pushback x="5120" y="0" width="640" height="360"/>
+			<pushback x="4480" y="0" width="640" height="360"/>
+			<pushback x="3840" y="0" width="640" height="360"/>
+			<pushback x="3200" y="0" width="640" height="360"/>
+			<pushback x="2560" y="0" width="640" height="360"/>
+			<pushback x="1920" y="0" width="640" height="360"/>
+			<pushback x="1280" y="0" width="640" height="360"/>
+			<pushback x="640" y="0" width="640" height="360"/>
+			
+			<pushback x="0" y="0" width="640" height="360"/>
+			
+			<pushback x="640" y="0" width="640" height="360"/>
+			<pushback x="1280" y="0" width="640" height="360"/>
+			<pushback x="1920" y="0" width="640" height="360"/>
+			<pushback x="2560" y="0" width="640" height="360"/>
+			<pushback x="3200" y="0" width="640" height="360"/>
+			<pushback x="3840" y="0" width="640" height="360"/>
+			<pushback x="4480" y="0" width="640" height="360"/>
+			<pushback x="5120" y="0" width="640" height="360"/>
+			<pushback x="5760" y="0" width="640" height="360"/>
+		
+		</logoAnim>
+	
+</logoScene>
 
   <window>
     <resolution width="1280" height="720" scale="2"	/>

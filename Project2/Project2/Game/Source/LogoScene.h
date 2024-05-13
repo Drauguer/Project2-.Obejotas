@@ -48,6 +48,12 @@ public:
 	void Disable();
 
 	unsigned int logoScreenMusic;
+	const char* texturePath;
+
+	Animation logoAnim;
+	Animation* currentAnimation = nullptr;
+	bool isFlipped = false;
+
 
 private:
 	SDL_Texture* img;

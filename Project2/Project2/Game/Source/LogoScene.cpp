@@ -31,15 +31,27 @@ LogoScene::~LogoScene()
 
 bool LogoScene::Awake(pugi::xml_node config)
 {
+	for (pugi::xml_node node = config.child("logoAnim").child("pushback"); node; node = node.next_sibling("pushback")) {
+		logoAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	logoAnim.speed = config.child("logoAnim").attribute("animspeed").as_float();
+	logoAnim.loop = config.child("logoAnim").attribute("loop").as_bool();
+	texturePath = config.attribute("texturePath").as_string();
+
 	return true;
 }
 
 bool LogoScene::Start()
 {
 
-	img = app->tex->Load("Assets/Textures/logo.png");
+	img = app->tex->Load(texturePath);
 	timer = 0;
 
+	currentAnimation = &logoAnim;
+	
 	app->audio->PlayMusic("Assets/Audio/Music/ScreenMusic/TeamLogoSFX.ogg", 1.0f);
 
 	return true;
@@ -53,13 +65,16 @@ bool LogoScene::PreUpdate()
 bool LogoScene::Update(float dt)
 {
 
-	app->render->DrawTexture(img, textPosX, textPosY, false);
+	
 
 	// Increment timer based on delta time (frame rate independent)
 	timer += dt;
 
+	currentAnimation->Update();
+	app->render->DrawTexture(img, textPosX, textPosY, &currentAnimation->GetCurrentFrame(), false);
+
 	// Check if it's time to trigger the fade effect
-	if (timer > 200 )
+	if (timer > 1200 )
 	{
 		// Trigger fade effect
 		app->fadeToBlack->FadeToBlack(this, app->mainMenu, 30);
