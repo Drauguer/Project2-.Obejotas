@@ -216,7 +216,7 @@ bool Inventory::Update(float dt)
 
 					}
 					else {
-						app->render->DrawRectangle({ 42 + i * 150 + k * 50 - app->render->camera.x / scale, 180 + j * 50 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+						//app->render->DrawRectangle({ 42 + i * 150 + k * 50 - app->render->camera.x / scale, 180 + j * 50 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
 						app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
 						app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
 					}

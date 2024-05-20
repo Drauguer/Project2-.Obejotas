@@ -12,6 +12,7 @@ enum class ItemType
 	HELMET,
 	ARMOR,
 	WEAPON,
+	NUM,
 };
 
 class Item : public Entity

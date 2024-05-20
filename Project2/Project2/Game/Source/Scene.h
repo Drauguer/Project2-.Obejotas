@@ -156,6 +156,9 @@ public:
 	
 	Item* itemMage;
 	Item* itemQuest3;
+	Item* itemNum1;
+	Item* itemNum2;
+	Item* itemNum3;
 
 	List<Item*> listItems;
 

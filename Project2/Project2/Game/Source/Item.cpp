@@ -49,6 +49,10 @@ bool Item::Start() {
 	{
 		itemType = ItemType::WEAPON;
 	}
+	else if (typeId == 4)
+	{
+		itemType = ItemType::NUM;
+	}
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);

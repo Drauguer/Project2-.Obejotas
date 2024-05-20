@@ -237,6 +237,7 @@ void Scene::LoadAllies()
 	allies[1]->inventoryChar.Add(item3);
 	allies[1]->inventoryChar.Add(item4);
 	allies[0]->inventoryChar.Add(item5);*/
+	
 }
 
 void Scene::LoadItems()
@@ -254,10 +255,28 @@ void Scene::LoadItems()
 	pugi::xml_node itemMageNode = scene_parameter.child("itemMage");
 	itemMage = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 	itemMage->parameters = itemMageNode;
+	listItems.Add(itemMage);
 
 	pugi::xml_node itemQuest3Node = scene_parameter.child("itemQuest3");
 	itemQuest3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 	itemQuest3->parameters = itemQuest3Node;
+	listItems.Add(itemQuest3);
+
+	pugi::xml_node itemNum1Node = scene_parameter.child("itemNum1");
+	itemNum1 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	itemNum1->parameters = itemNum1Node;
+	listItems.Add(itemNum1);
+
+	pugi::xml_node itemNum2Node = scene_parameter.child("itemNum2");
+	itemNum2 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	itemNum2->parameters = itemNum2Node;
+	listItems.Add(itemNum2);
+
+	pugi::xml_node itemNum3Node = scene_parameter.child("itemNum3");
+	itemNum3 = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	itemNum3->parameters = itemNum3Node;
+	listItems.Add(itemNum3);
+	
 }
 
 // Called before the first frame
