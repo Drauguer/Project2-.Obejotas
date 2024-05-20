@@ -82,6 +82,11 @@ public:
 	bool showDoorLocked = false;
 	int doorLockedTimer = 0;
 
+	// Password Puzzle
+	bool showPasswordWrong = false;
+	int passwordTimer = 0;
+	bool showPasswordCorrect = false;
+	int passwordTimer2 = 0;
 	
 };
 

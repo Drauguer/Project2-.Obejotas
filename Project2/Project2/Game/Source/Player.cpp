@@ -289,6 +289,38 @@ bool Player::Update(float dt)
 			}
 		}
 
+		if (showPasswordWrong)
+		{
+			if (passwordTimer <= 120)
+			{
+				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+				app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "this is not the correct password!!");
+				passwordTimer++;
+			}
+			else
+			{
+				passwordTimer = 0;
+				showPasswordWrong = false;
+				isTalking = false;
+			}
+		}
+
+		if (showPasswordCorrect)
+		{
+			if (passwordTimer2 <= 120)
+			{
+				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+				app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "password correct! you can enter the castle...");
+				passwordTimer2++;
+			}
+			else
+			{
+				passwordTimer2 = 0;
+				showPasswordCorrect = false;
+				isTalking = false;
+			}
+		}
+
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
 
@@ -405,8 +437,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TOZONE3:
 		if (app->scene->mapID != 6)
 		{
-
-			LoadNewMap(6, 9);
+			if (app->hasSolvedPasswordPuzzle)
+			{
+				LoadNewMap(6, 9);
+			}
+			else
+			{
+				showPasswordWrong = true;
+				isTalking = true;
+			}
+			
 
 		}
 		break;

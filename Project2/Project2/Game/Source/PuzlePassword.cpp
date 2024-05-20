@@ -99,6 +99,7 @@ bool PuzlePassword::Update(float dt)
 				if (IsCombinationCorrect()) {
 					//Aqui va el codigo de victoria 
 					app->hasSolvedPasswordPuzzle = true;
+					app->scene->player->showPasswordCorrect = true;
 				}
 			}
 		}
@@ -109,6 +110,7 @@ bool PuzlePassword::Update(float dt)
 				if (IsCombinationCorrect()) {
 					//Aqui va el codigo de victoria 
 					app->hasSolvedPasswordPuzzle = true;
+					app->scene->player->showPasswordCorrect = true;
 
 				}
 			}
@@ -134,8 +136,8 @@ bool PuzlePassword::Update(float dt)
 			}
 		}
 		DrawNumbers();
-		app->render->DrawTexture(arrowTexture, (position.x+ 60 * (currentIndex-1)) / 2,
-			(position.y-80)/4, &currentArrowAnim->GetCurrentFrame(),0.0f, false);
+		app->render->DrawTexture(arrowTexture, (position.x+ 60 * (currentIndex-1)) / 4,
+			(position.y+ 20)/8, &currentArrowAnim->GetCurrentFrame(),0.0f, false);
 	}
 
 	
@@ -204,15 +206,15 @@ void PuzlePassword::DrawNumbers()
 {
 	std::string cadena = std::to_string(currentCombination[0]);
 	const char* puntero = cadena.c_str();
-	app->fonts->BlitText((position.x-10) / 2, position.y/4, Font, puntero);
+	app->fonts->BlitText((position.x + 50) / 4, (position.y + 220) / 8, Font, puntero);
 
 	cadena = std::to_string(currentCombination[1]);
 	puntero = cadena.c_str();
-	app->fonts->BlitText((position.x + 60) / 2, position.y/4, Font, puntero);
+	app->fonts->BlitText((position.x + 120) / 4, (position.y + 220) / 8, Font, puntero);
 
 	cadena = std::to_string(currentCombination[2]);
 	puntero = cadena.c_str();
-	app->fonts->BlitText((position.x + 120) / 2, position.y/4, Font, puntero);
+	app->fonts->BlitText((position.x + 180) / 4, (position.y + 220) / 8, Font, puntero);
 }
 
 bool PuzlePassword::IsCombinationCorrect()
