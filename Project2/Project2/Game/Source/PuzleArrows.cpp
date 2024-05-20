@@ -146,7 +146,7 @@ bool PuzleArrows::Update(float dt)
 						break;
 					}
 					//El 200 se cambia mas adelante cuando tenga un sprite mas pequeño 
-					app->render->DrawTexture(arrowsTexture, (position.x + i*80) , position.y, &currentAnim->GetCurrentFrame());
+					app->render->DrawTexture(arrowsTexture, (position.x + i*80)-200 , position.y, &currentAnim->GetCurrentFrame());
 				}
 				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 					if (solutionIds[0] == 3) {
@@ -198,7 +198,7 @@ bool PuzleArrows::Update(float dt)
 
 
 			barWidth = static_cast<int>((MAX_BAR_WIDTH * (progress / MAX_PROGRESS)));
-			barRect = { (position.x-50) / 4, (position.y - 20), barWidth, 10 };
+			barRect = { ((position.x-50) / 4)+100, (position.y - 20), barWidth, 10 };
 
 			DrawProgressBar();
 		}

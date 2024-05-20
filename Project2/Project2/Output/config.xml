@@ -112,7 +112,7 @@
       </triggerAnim>
     </puzlePilar>
 
-    <puzleArrows x="1900" y="300" texturepath="Assets/Textures/Pantalla.png" arrowTexturepath="Assets/Textures/PuzzleHelldivers.png" mapID="0">
+    <puzleArrows x="569" y="300" texturepath="Assets/Textures/Pantalla.png" arrowTexturepath="Assets/Textures/PuzzleHelldivers.png" mapID="7">
 
       <upAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
