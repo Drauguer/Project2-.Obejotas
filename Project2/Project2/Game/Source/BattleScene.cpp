@@ -65,6 +65,8 @@ bool BattleScene::Start()
 	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
 	deniedFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/033Denied03.wav");
 
+	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 2.0f);
+
 	sableLaser = app->tex->Load("Assets/Textures/LaserSwords.png");
 	gritoGuerra = app->tex->Load("Assets/Textures/Scream_Icon.png");
 	laserGun = app->tex->Load("Assets/Textures/lasergun_Icon.png");
