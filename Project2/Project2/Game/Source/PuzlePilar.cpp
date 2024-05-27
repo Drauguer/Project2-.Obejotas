@@ -114,7 +114,7 @@ bool PuzlePilar::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
 
 
-	app->render->DrawTexture(texture, position.x-20, position.y-40 , &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(texture, (position.x-20), (position.y-40) , &currentAnim->GetCurrentFrame());
 	
 
 	return true;

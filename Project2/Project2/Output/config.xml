@@ -66,7 +66,7 @@
   <scene>
 	  
 	<encounterFx audiopath ="Assets/Audio/Fx/10_Battle_SFX/55_Encounter_02.ogg"   />
-    <puzlePilar x="250" y="700" texturepath="Assets/Textures/PuzzleAntorchas.png" id="0" mapID="0" >
+    <puzlePilar x="350" y="350" texturepath="Assets/Textures/PuzzleAntorchas.png" id="0" mapID="8" >
       <idleAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
       </idleAnim>
@@ -81,7 +81,7 @@
         <pushback x="512" y="0" width="64" height="64"/>
       </triggerAnim>
     </puzlePilar>
-    <puzlePilar x="400" y="700" texturepath="Assets/Textures/PuzzleAntorchas.png" id="1" mapID="0" >
+    <puzlePilar x="500" y="350" texturepath="Assets/Textures/PuzzleAntorchas.png" id="1" mapID="8" >
       <idleAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
       </idleAnim>
@@ -96,7 +96,7 @@
         <pushback x="512" y="0" width="64" height="64"/>
       </triggerAnim>
     </puzlePilar>
-    <puzlePilar x="100" y="700" texturepath="Assets/Textures/PuzzleAntorchas.png" id="2" mapID="0">
+    <puzlePilar x="200" y="350" texturepath="Assets/Textures/PuzzleAntorchas.png" id="2" mapID="8">
       <idleAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
       </idleAnim>
@@ -182,7 +182,7 @@
 		<dialogue text="what is that? you want to overthrow the goverment?"/>
 		<dialogue text="good luck wizard, put your fist in the air"/>
     </npc>
-    <npc x="500" y="1000" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="0" npcID="0" hasQuest="false">
+    <npc x="700" y="300" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="8" npcID="0" hasQuest="false">
       <idleAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="32" width="32" height="32"/>
       </idleAnim>
