@@ -299,6 +299,9 @@ bool Scene::Start()
 	img = app->tex->Load("Assets/Textures/test.png");
 	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
 
+	inventoryIdle = app->tex->Load("Assets/Textures/Inventory Icon_Idle.png");
+	inventoryNewItem = app->tex->Load("Assets/Textures/Inventory Icon_Aviso.png");
+
 	
 
 	//SFX loading
@@ -528,7 +531,22 @@ bool Scene::Update(float dt)
 	}*/
 
 
+	for (int i = 0; i < listItems.Count(); ++i)
+	{
+		if (listItems[i]->newInInventory == true)
+		{
+			isNewItem = true;
+		}
+	}
 
+	if (isNewItem)
+	{
+		app->render->DrawTexture(inventoryNewItem, 20 - app->render->camera.x / scale, 50 - app->render->camera.y / scale);
+	}
+	else
+	{
+		app->render->DrawTexture(inventoryIdle, 20 - app->render->camera.x / scale, 50 - app->render->camera.y / scale);
+	}
 
 	
 	
