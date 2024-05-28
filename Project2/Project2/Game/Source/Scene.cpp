@@ -79,12 +79,23 @@ bool Scene::Awake(pugi::xml_node config)
 	case 5:
 		app->map->name = config.child("mapZona2").attribute("name").as_string();
 		app->map->path = config.child("mapZona2").attribute("path").as_string();
-		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 2.0f);
+		if (!isZone2MusicPlayed)
+		{
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 2.0f);
+			isZone2MusicPlayed = true;
+		}
+		
 		break;
 	case 6:
 		app->map->name = config.child("mapZona3").attribute("name").as_string();
 		app->map->path = config.child("mapZona3").attribute("path").as_string();
-		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);
+		//only play the music once, never triiger again
+		if (!isZone3MusicPlayed)
+		{
+            app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
+			isZone3MusicPlayed = true;
+		}
+
 		break;
 	case 7:
 		app->map->name = config.child("mapPuzzle1").attribute("name").as_string();

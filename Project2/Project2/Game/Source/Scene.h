@@ -164,6 +164,10 @@ public:
 
 	//
 	bool loadAllies = true;
+
+	//music switching
+	bool isZone3MusicPlayed = false;
+	bool isZone2MusicPlayed = false;
 };
 
 #endif // __SCENE_H__
