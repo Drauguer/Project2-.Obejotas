@@ -158,7 +158,7 @@ bool Player::Start() {
 
 	InitAnims();
 	
-	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/WalkingRock.ogg");
+	walkingRockFx = app->audio->LoadFx("Assets/Audio/Fx/12_Player_Movement_SFX/08Steprock02.wav");
 	
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

@@ -79,10 +79,12 @@ bool Scene::Awake(pugi::xml_node config)
 	case 5:
 		app->map->name = config.child("mapZona2").attribute("name").as_string();
 		app->map->path = config.child("mapZona2").attribute("path").as_string();
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 2.0f);
 		break;
 	case 6:
 		app->map->name = config.child("mapZona3").attribute("name").as_string();
 		app->map->path = config.child("mapZona3").attribute("path").as_string();
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);
 		break;
 	case 7:
 		app->map->name = config.child("mapPuzzle1").attribute("name").as_string();
@@ -284,9 +286,9 @@ bool Scene::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
-	
-	//Music is commented so that you can add your own music
 	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
+
+	
 
 	//SFX loading
 	/*encounterFx = app->audio->LoadFx(scene_parameter.child("encounterFx").attribute("audiopath").as_string());*/
