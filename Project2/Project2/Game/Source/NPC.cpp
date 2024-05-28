@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Inventory.h"
+#include "BattleScene.h"
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -99,7 +100,7 @@ bool NPC::Update(float dt)
 	{
 		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->dialogueManager->isTalking == false && hasTalked == false)
 		{
-
+			
 			app->scene->player->isTalking = true;
 
 			app->dialogueManager->isTalking = true;
@@ -109,6 +110,7 @@ bool NPC::Update(float dt)
 
 			if (hasQuest && QuestCompleted == false && cantTalk == false)
 			{
+				app->audio->PlayFx(app->scene->clickFx);
 				CheckQuest(QuestID);
 			}
 
@@ -116,11 +118,13 @@ bool NPC::Update(float dt)
 
 			for (item = dialoguesNPC.start; item != NULL; item = item->next)
 			{
+				app->audio->PlayFx(app->scene->clickFx);
 				app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
 			}
 
 			if (hasCombat)
 			{
+				app->audio->PlayFx(app->scene->clickFx);
 				app->dialogueManager->activateCombat = true;
 				app->dialogueManager->npcIDcombat = npcID;
 
@@ -131,6 +135,8 @@ bool NPC::Update(float dt)
 
 		if (cantTalk && app->scene->player->isTalking == false)
 		{
+			app->audio->PlayFx(app->scene->deniedFx);
+
 			timerTalk++;
 
 			if (timerTalk > 20)
@@ -145,6 +151,7 @@ bool NPC::Update(float dt)
 	{
 		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || pad.y && app->dialogueManager->isTalking == false)
 		{
+			app->audio->PlayFx(app->scene->clickFx);
 
 			app->scene->player->isTalking = true;
 
@@ -154,6 +161,7 @@ bool NPC::Update(float dt)
 
 			if (hasQuest && QuestCompleted == false)
 			{
+				app->audio->PlayFx(app->scene->clickFx);
 				CheckQuest(QuestID);
 			}
 
@@ -161,11 +169,13 @@ bool NPC::Update(float dt)
 
 			for (item = dialoguesNPC.start; item != NULL; item = item->next)
 			{
+				app->audio->PlayFx(app->scene->clickFx);
 				app->dialogueManager->CreateDialogue(item->data, DialogueType::NPC);
 			}
 
 			if (hasCombat)
 			{
+				app->audio->PlayFx(app->scene->clickFx);
 				app->dialogueManager->activateCombat = true;
 				app->dialogueManager->npcIDcombat = npcID;
 			}
