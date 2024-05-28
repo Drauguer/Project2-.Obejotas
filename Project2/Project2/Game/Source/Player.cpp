@@ -257,6 +257,11 @@ bool Player::Update(float dt)
 					}
 					else if (app->inventory->active == false)
 					{
+						app->scene->isNewItem = false;
+						for (int i = 0; i < app->scene->listItems.Count(); ++i)
+						{
+							app->scene->listItems[i]->newInInventory = false;
+						}
 						app->inventory->Enable();
 					}
 

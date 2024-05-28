@@ -334,8 +334,6 @@ bool Inventory::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 
-		
-
 		switch (app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->itemType)
 		{
 		case ItemType::HELMET:

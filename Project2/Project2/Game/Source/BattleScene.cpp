@@ -693,18 +693,23 @@ void BattleScene::GiveReward(int npcID)
 	{
 	case 5:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemMage);
+		app->scene->itemMage->newInInventory = true;
 		break;
 	case 8:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemQuest3);
+		app->scene->itemQuest3->newInInventory = true;
 		break;
 	case 11:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemNum1);
+		app->scene->itemNum1->newInInventory = true;
 		break;
 	case 12:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemNum2);
+		app->scene->itemNum2->newInInventory = true;
 		break;
 	case 13:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemNum3);
+		app->scene->itemNum3->newInInventory = true;
 		break;
 	}
 }

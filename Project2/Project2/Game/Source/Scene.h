@@ -171,6 +171,11 @@ public:
 	//music switching
 	bool isZone3MusicPlayed = false;
 	bool isZone2MusicPlayed = false;
+
+	// Inventory icon
+	SDL_Texture* inventoryIdle;
+	SDL_Texture* inventoryNewItem;
+	bool isNewItem = false;
 };
 
 #endif // __SCENE_H__

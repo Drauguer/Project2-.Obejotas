@@ -45,6 +45,8 @@ public:
 	float bonusDEX = 0;
 	float bonusHP = 0;
 
+	bool newInInventory = false;
+
 private:
 
 	SDL_Texture* texture;
