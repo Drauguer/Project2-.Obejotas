@@ -124,6 +124,9 @@ public:
 	//Audio
 	uint encounterFx;
 	uint clickFx;
+	unsigned int hoverFx;
+	unsigned int declineFx;
+	unsigned int deniedFx;
 
 	//List of enemies (reemplazar porque no son players xd) 
 	List<BaseEnemy*> enemies;

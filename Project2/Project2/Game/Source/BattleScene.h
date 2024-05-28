@@ -140,10 +140,10 @@ public:
 	//Cooldown for selecting abilities
 	//float selectionCooldown = 1;
 
-	unsigned int hoverFx;
-	unsigned int clickFx;
-	unsigned int declineFx;
-	unsigned int deniedFx;
+	uint hoverFx;
+	uint clickFx;
+	uint declineFx;
+	uint deniedFx;
 
 	// NPC ID para detectar que NPC ha empezado el combate
 	int npcIDbattle = 0;
