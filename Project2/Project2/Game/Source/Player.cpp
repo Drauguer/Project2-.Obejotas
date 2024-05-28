@@ -316,7 +316,7 @@ bool Player::Update(float dt)
 
 		if (showPasswordCorrect)
 		{
-			app->audio->PlayFx(app->scene->clickFx);
+			app->audio->PlayFx(app->scene->attackUpSFX);
 
 			if (passwordTimer2 <= 120)
 			{

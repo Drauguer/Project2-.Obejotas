@@ -295,6 +295,8 @@ void Scene::LoadItems()
 // Called before the first frame
 bool Scene::Start()
 {
+	
+
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
 	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
@@ -311,7 +313,14 @@ bool Scene::Start()
 	hoverFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/001Hover01.wav");
 	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
 	deniedFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/033Denied03.wav");
-	
+
+	attackSFX = app->audio->LoadFx("Assets/Audio/Fx/10_Battle_SFX/03Claw03.wav");
+	fireMagicAttackSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Atk_Magic_SFX/04Fireexplosion04medium.wav");
+	attackUpSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Buffs_Heals_SFX/16Atkbuff04.wav");
+	hpRecoverSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Buffs_Heals_SFX/02Heal02.wav");
+	firePuzzleSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Atk_Magic_SFX/13Iceexplosion01.wav");
+	arrowPuzzleSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Buffs_Heals_SFX/48Speedup02.wav");
+
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

@@ -127,6 +127,14 @@ public:
 	unsigned int hoverFx;
 	unsigned int declineFx;
 	unsigned int deniedFx;
+	unsigned int attackSFX;
+	unsigned int fireMagicAttackSFX;
+	unsigned int hpRecoverSFX;
+	unsigned int attackUpSFX;
+	unsigned int firePuzzleSFX;
+	unsigned int arrowPuzzleSFX;
+	unsigned int pauseSFX;
+	unsigned int unpauseSFX;
 
 	//List of enemies (reemplazar porque no son players xd) 
 	List<BaseEnemy*> enemies;

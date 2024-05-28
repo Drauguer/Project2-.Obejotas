@@ -95,11 +95,13 @@ bool PuzlePilar::Update(float dt)
 			if (app->scene->CheckAllPilars()) {
 				app->scene->CheckPilarPuzleResult();
 			}
+			app->audio->PlayFx(app->scene->firePuzzleSFX);
 
 		}
 	}
 	if (isTriggered || app->hasSolvedPilarPuzzle) {
 		currentAnim = &triggeredAnim;
+		app->audio->PlayFx(app->scene->attackUpSFX);
 	}
 	else
 	{

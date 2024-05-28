@@ -102,6 +102,7 @@ bool PuzlePassword::Update(float dt)
 					app->scene->player->showPasswordCorrect = true;
 				}
 			}
+			app->audio->PlayFx(app->scene->hoverFx);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 			if (currentCombination[currentIndex] >0)
@@ -114,6 +115,7 @@ bool PuzlePassword::Update(float dt)
 
 				}
 			}
+			app->audio->PlayFx(app->scene->hoverFx);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
 			if (currentIndex < 1)
@@ -124,6 +126,7 @@ bool PuzlePassword::Update(float dt)
 			{
 				currentIndex--;
 			}
+			app->audio->PlayFx(app->scene->hoverFx);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
 			if (currentIndex > 1)
@@ -134,6 +137,7 @@ bool PuzlePassword::Update(float dt)
 			{
 				currentIndex++;
 			}
+			app->audio->PlayFx(app->scene->hoverFx);
 		}
 		DrawNumbers();
 		app->render->DrawTexture(arrowTexture, (position.x+ 60 * (currentIndex-1)) / 4,

@@ -151,7 +151,7 @@ bool NPC::Update(float dt)
 	{
 		if (OnCollisionStay(this->pbody, app->scene->player->pbody) && (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || pad.y) && app->dialogueManager->isTalking == false)
 		{
-			
+			app->audio->PlayFx(app->scene->clickFx);
 
 			app->scene->player->isTalking = true;
 

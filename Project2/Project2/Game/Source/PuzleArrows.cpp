@@ -152,21 +152,26 @@ bool PuzleArrows::Update(float dt)
 					if (solutionIds[0] == 3) {
 						solutionIds.RemoveAt(0);
 					}
+
+					app->audio->PlayFx(app->scene->hoverFx);
 				}
 				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 					if (solutionIds[0] == 4) {
 						solutionIds.RemoveAt(0);
 					}
+					app->audio->PlayFx(app->scene->hoverFx);
 				}
 				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
 					if (solutionIds[0] == 1) {
 						solutionIds.RemoveAt(0);
 					}
+					app->audio->PlayFx(app->scene->hoverFx);
 				}
 				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
 					if (solutionIds[0] == 2) {
 						solutionIds.RemoveAt(0);
 					}
+					app->audio->PlayFx(app->scene->hoverFx);
 				}
 			}
 			else
@@ -175,11 +180,12 @@ bool PuzleArrows::Update(float dt)
 					//Codigo de victoria
 					if (sequenceCounter <= 0) {
 						app->hasSolvedArrowPuzzle = true;
+						app->audio->PlayFx(app->scene->attackUpSFX);
 					}		
 					else
 					{
 						hasCreatedPassword = false;
-
+						app->audio->PlayFx(app->scene->declineFx);
 					}
 
 			}
