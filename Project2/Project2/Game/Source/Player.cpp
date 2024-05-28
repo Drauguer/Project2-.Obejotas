@@ -280,6 +280,8 @@ bool Player::Update(float dt)
 		
 		if (showDoorLocked)
 		{
+			app->audio->PlayFx(app->scene->deniedFx);
+
 			if (doorLockedTimer <= 120)
 			{
 				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
@@ -296,6 +298,8 @@ bool Player::Update(float dt)
 
 		if (showPasswordWrong)
 		{
+			app->audio->PlayFx(app->scene->deniedFx)
+
 			if (passwordTimer <= 120)
 			{
 				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
@@ -312,6 +316,8 @@ bool Player::Update(float dt)
 
 		if (showPasswordCorrect)
 		{
+			app->audio->PlayFx(app->scene->clickFx);
+
 			if (passwordTimer2 <= 120)
 			{
 				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
