@@ -6,24 +6,33 @@
 	<audio />
 	<battleScene />
 	<scene />
-	<mainmenu />
-	<mainmenu />
+	<inventory />
 	<entitymanager>
 		<Player>
 			<player1>
-				<Position x="3.32197857" y="16.4499302" Map_ID="1" Player_Map_ID="2" />
+				<Position x="25.2799988" y="7.17144346" Map_ID="5" Player_Map_ID="8" />
 				<Stats Life="30" Attack="10" />
 			</player1>
 		</Player>
 		<NPCs>
 			<NPC1>
-				<Position x="13.8999996" y="1.89999998" />
-				<State Has_Combat="false" Has_Talked="false" />
+				<Position x="18.3199997" y="16.3999996" />
+				<State Has_Combat="true" Has_Talked="false" />
 			</NPC1>
+			<NPC2>
+				<Position x="47.1199989" y="6.79999971" />
+				<State Has_Combat="true" Has_Talked="false" />
+			</NPC2>
+			<NPC3>
+				<Position x="10.6399994" y="1.67999995" />
+				<State Has_Combat="true" Has_Talked="false" />
+			</NPC3>
 		</NPCs>
 		<Enemies />
 		<Allies />
 	</entitymanager>
+	<mainmenu />
+	<logoScene />
 	<guiManager />
 	<dialoguemanager />
 	<renderer />

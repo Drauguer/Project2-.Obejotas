@@ -91,6 +91,11 @@ bool PuzlePassword::Update(float dt)
 {
 	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedPasswordPuzzle) 
 	{
+		if (isPasswordSFXPlayed == false)
+		{
+			app->audio->PlayFx(app->scene->clickFx);
+			isPasswordSFXPlayed = true;
+		}
 
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 			if (currentCombination[currentIndex] < 9) 

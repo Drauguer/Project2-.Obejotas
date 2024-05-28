@@ -250,6 +250,8 @@ bool Player::Update(float dt)
 
 				if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
 				{
+					app->audio->PlayFx(app->scene->hoverFx);
+
 					app->inventory->isInventory = !app->inventory->isInventory;
 					if (app->inventory->active)
 					{
@@ -456,6 +458,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			{
 				showPasswordWrong = true;
 				isTalking = true;
+				app->audio->PlayFx(app->scene->deniedFx);
 			}
 			
 

@@ -294,18 +294,22 @@ bool Inventory::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemSelectedIndex + 1 < app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex + 1]->isEquipped == false)
 	{
+		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex += 1;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemSelectedIndex - 1 >= 0 && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex - 1]->isEquipped == false)
 	{
+		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex -= 1;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && itemSelectedIndex + 3 < app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex + 3]->isEquipped == false)
 	{
+		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex += 3;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 	{
+
 		int count = app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() - 1;
 		if (app->scene->allies[inventorySelectedIndex]->inventoryChar[count]->isEquipped)
 		{
@@ -314,14 +318,18 @@ bool Inventory::Update(float dt)
 		else {
 			itemSelectedIndex = app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() - 1;
 		}
+
+		app->audio->PlayFx(app->scene->hoverFx);
 		
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && itemSelectedIndex - 3 >= 0 && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex - 3]->isEquipped == false)
 	{
+		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex -= 3;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 	{
+		app->audio->PlayFx(app->scene->hoverFx);
 		if (app->scene->allies[inventorySelectedIndex]->inventoryChar[0]->isEquipped)
 		{
 			itemSelectedIndex = 1;
@@ -333,6 +341,7 @@ bool Inventory::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
+		
 
 		switch (app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->itemType)
 		{
@@ -377,6 +386,8 @@ bool Inventory::Update(float dt)
 			break;
 		}
 
+		app->audio->PlayFx(app->scene->clickFx);
+
 		if (itemSelectedIndex == app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() - 1)
 		{
 			itemSelectedIndex -= 1;
@@ -411,9 +422,8 @@ bool Inventory::Update(float dt)
 				}
 			}
 			
-				
-			
-			
+			app->audio->PlayFx(app->scene->declineFx);
+
 		}
 	
 

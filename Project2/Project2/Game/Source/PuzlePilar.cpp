@@ -101,7 +101,7 @@ bool PuzlePilar::Update(float dt)
 	}
 	if (isTriggered || app->hasSolvedPilarPuzzle) {
 		currentAnim = &triggeredAnim;
-		app->audio->PlayFx(app->scene->attackUpSFX);
+		/*app->audio->PlayFx(app->scene->attackUpSFX);*/
 	}
 	else
 	{

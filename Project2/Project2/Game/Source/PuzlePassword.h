@@ -69,6 +69,8 @@ public:
 
 	bool hasSolvedPuzle = false;
 
+	bool isPasswordSFXPlayed = false;
+
 	int id;
 
 	bool isPicked = false;

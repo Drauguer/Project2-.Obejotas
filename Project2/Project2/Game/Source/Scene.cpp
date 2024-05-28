@@ -320,6 +320,8 @@ bool Scene::Start()
 	hpRecoverSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Buffs_Heals_SFX/02Heal02.wav");
 	firePuzzleSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Atk_Magic_SFX/13Iceexplosion01.wav");
 	arrowPuzzleSFX = app->audio->LoadFx("Assets/Audio/Fx/8_Buffs_Heals_SFX/48Speedup02.wav");
+	pauseSFX = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/092Pause04.wav");
+	unpauseSFX = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/098Unpause04.wav");
 
 
 	//Get the size of the window
@@ -515,16 +517,20 @@ bool Scene::Update(float dt)
 	
 	
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->scene->player->isOnPause == false) {
+		app->audio->PlayFx(pauseSFX);
+
 		app->scene->player->isOnPause = true;
 		app->scene->ResumeScene->state = GuiControlState::NORMAL;
 		app->scene->exitScene->state = GuiControlState::NORMAL;
 		app->scene->settingsScene->state = GuiControlState::NORMAL;
+		
 		
 		Mix_PauseMusic();
 	}
 	
 	if (app->scene->player->isOnPause == false)
 	{
+		
 		Mix_ResumeMusic();
 	}
 	

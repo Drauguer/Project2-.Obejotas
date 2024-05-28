@@ -117,12 +117,13 @@ bool PuzleArrows::Update(float dt)
 {
 	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedArrowPuzzle)
 	{
-
+		
 		if (sequenceCounter > 0)
 		{
 			if (!hasCreatedPassword)
 			{
 				GeneratePassword();
+				app->audio->PlayFx(app->scene->arrowPuzzleSFX);
 			}
 			if (solutionIds.Count() > 0)
 			{
