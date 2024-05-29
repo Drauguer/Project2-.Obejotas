@@ -81,7 +81,7 @@ bool Scene::Awake(pugi::xml_node config)
 		app->map->path = config.child("mapZona2").attribute("path").as_string();
 		if (!isZone2MusicPlayed)
 		{
-			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 2.0f);
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 1.0f);
 			isZone2MusicPlayed = true;
 		}
 		
@@ -92,7 +92,7 @@ bool Scene::Awake(pugi::xml_node config)
 		//only play the music once, never triiger again
 		if (!isZone3MusicPlayed)
 		{
-            app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
+            app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
 			isZone3MusicPlayed = true;
 		}
 

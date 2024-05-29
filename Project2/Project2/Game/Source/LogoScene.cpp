@@ -52,7 +52,7 @@ bool LogoScene::Start()
 
 	currentAnimation = &logoAnim;
 	
-	app->audio->PlayMusic("Assets/Audio/Music/ScreenMusic/TeamLogoSFX.ogg", 1.0f);
+	app->audio->PlayMusic("Assets/Audio/Music/ScreenMusic/TeamLogoSFX.ogg", 0.5f);
 
 	return true;
 }
@@ -74,7 +74,7 @@ bool LogoScene::Update(float dt)
 	app->render->DrawTexture(img, textPosX, textPosY, &currentAnimation->GetCurrentFrame(), false);
 
 	// Check if it's time to trigger the fade effect
-	if (timer > 1200 )
+	if (timer > 3600 )
 	{
 		// Trigger fade effect
 		app->fadeToBlack->FadeToBlack(this, app->mainMenu, 30);

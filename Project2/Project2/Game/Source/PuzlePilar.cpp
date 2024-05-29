@@ -90,12 +90,13 @@ bool PuzlePilar::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN ) 
 		{
+			app->audio->PlayFx(app->scene->firePuzzleSFX);
 			isTriggered = true;
 			app->scene->combination.Add(id);
 			if (app->scene->CheckAllPilars()) {
 				app->scene->CheckPilarPuzleResult();
 			}
-			app->audio->PlayFx(app->scene->firePuzzleSFX);
+			
 
 		}
 	}

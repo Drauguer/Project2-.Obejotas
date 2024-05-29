@@ -250,7 +250,7 @@ bool Player::Update(float dt)
 
 				if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
 				{
-					app->audio->PlayFx(app->scene->hoverFx);
+					
 
 					app->inventory->isInventory = !app->inventory->isInventory;
 					if (app->inventory->active)
@@ -266,7 +266,7 @@ bool Player::Update(float dt)
 						}
 						app->inventory->Enable();
 					}
-
+					app->audio->PlayFx(app->scene->hoverFx);
 				}
 
 
@@ -282,7 +282,7 @@ bool Player::Update(float dt)
 		
 		if (showDoorLocked)
 		{
-			app->audio->PlayFx(app->scene->deniedFx);
+			
 
 			if (doorLockedTimer <= 120)
 			{
@@ -296,11 +296,11 @@ bool Player::Update(float dt)
 				showDoorLocked = false;
 				isTalking = false;
 			}
+			app->audio->PlayFx(app->scene->deniedFx);
 		}
 
 		if (showPasswordWrong)
 		{
-			app->audio->PlayFx(app->scene->deniedFx);
 
 			if (passwordTimer <= 120)
 			{
@@ -314,12 +314,13 @@ bool Player::Update(float dt)
 				showPasswordWrong = false;
 				isTalking = false;
 			}
+
+			app->audio->PlayFx(app->scene->deniedFx);
 		}
 
 		if (showPasswordCorrect)
 		{
-			app->audio->PlayFx(app->scene->attackUpSFX);
-
+			
 			if (passwordTimer2 <= 120)
 			{
 				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
@@ -332,6 +333,7 @@ bool Player::Update(float dt)
 				showPasswordCorrect = false;
 				isTalking = false;
 			}
+			app->audio->PlayFx(app->scene->attackUpSFX);
 		}
 
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
@@ -458,7 +460,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			{
 				showPasswordWrong = true;
 				isTalking = true;
-				app->audio->PlayFx(app->scene->deniedFx);
+				
 			}
 			
 
