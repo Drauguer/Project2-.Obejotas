@@ -40,7 +40,9 @@ bool BattleScene::Awake(pugi::xml_node config)
 	LOG("Loading Scene");
 
 
-	arrowTexturePath = config.attribute("texturePath").as_string();
+	arrowTexturePath = config.attribute("arrowTexturePath").as_string();
+	winTexturePath = config.attribute("winTexturePath").as_string();
+	loseTexturePath = config.attribute("loseTexturePath").as_string();
 
 	for (pugi::xml_node node = config.child("arrow").child("pushback"); node; node = node.next_sibling("pushback")) {
 		idleArrowAnim.PushBack({ node.attribute("x").as_int(),
@@ -50,6 +52,24 @@ bool BattleScene::Awake(pugi::xml_node config)
 	}
 	idleArrowAnim.speed = config.child("arrow").attribute("animspeed").as_float();
 	idleArrowAnim.loop = config.child("arrow").attribute("loop").as_bool();
+	
+	for (pugi::xml_node node = config.child("win").child("pushback"); node; node = node.next_sibling("pushback")) {
+		winAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	winAnim.speed = config.child("win").attribute("animspeed").as_float();
+	winAnim.loop = config.child("win").attribute("loop").as_bool();
+	
+	for (pugi::xml_node node = config.child("lose").child("pushback"); node; node = node.next_sibling("pushback")) {
+		loseAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+	}
+	loseAnim.speed = config.child("lose").attribute("animspeed").as_float();
+	loseAnim.loop = config.child("lose").attribute("loop").as_bool();
 
 	bool ret = true;
 
@@ -82,9 +102,21 @@ bool BattleScene::Start()
 	background = app->tex->Load("Assets/Maps/FondoCombate.png");
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
+	winTexture = app->tex->Load(winTexturePath);
+	loseTexture = app->tex->Load(loseTexturePath);
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
+
+	SDL_Rect ContinueButton_ = { windowW / 2 + 60,windowH / 2 + 120, 240, 80 };
+	continueBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continue", ContinueButton_, this);
+	continueBattle->state = GuiControlState::DISABLED;
+
+	SDL_Rect ExitButton_ = { windowW / 2 - 360,windowH / 2 + 120, 240, 80 };
+	exitBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this);
+	exitBattle->state = GuiControlState::DISABLED;
+	
+	
 
 	combatState = CombatState::NONE;
 	return true;
@@ -102,6 +134,7 @@ bool BattleScene::Update(float dt)
 	GamePad& pad = app->input->pads[0];
 
 	int scale = app->win->GetScale();
+	
 	if (app->scene->isOnCombat) 
 	{
 
@@ -160,317 +193,341 @@ bool BattleScene::Update(float dt)
 		{
 			CheckState();
 			combatState = CombatState::SELECT_CHARACTER;
+			currentPlayerInCombatIndex = FindFirstPlayerIndex();
 			app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
 			app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
 			hasStartedCombat = true;
 		}
 		//Combat state
-		switch (combatState)
+		if (!hasEndedCombat)
 		{
-		case CombatState::SELECT_CHARACTER:
-			//Navigate in the selection character menu
-			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && selectActionCooldown == 0)
+			switch (combatState)
 			{
-				if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count() &&
-					app->scene->allies[currentPlayerInCombatIndex + 1]->life > 0 &&
-					!app->scene->allies[currentPlayerInCombatIndex + 1]->hasAttacked)
+			case CombatState::SELECT_CHARACTER:
+				//Navigate in the selection character menu
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && selectActionCooldown == 0)
 				{
-					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
-					currentPlayerInCombatIndex += 1;
-					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+					if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count() &&
+						app->scene->allies[currentPlayerInCombatIndex + 1]->life > 0 &&
+						!app->scene->allies[currentPlayerInCombatIndex + 1]->hasAttacked)
+					{
+						app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
+						currentPlayerInCombatIndex += 1;
+						app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
 
-					app->audio->PlayFx(hoverFx);
-				}
-				selectActionCooldown = 10;
+						app->audio->PlayFx(hoverFx);
+					}
+					selectActionCooldown = 10;
 				
-			}
-			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && selectActionCooldown == 0)
-			{
-				if (currentPlayerInCombatIndex - 1 >= 0 &&
-					app->scene->allies[currentPlayerInCombatIndex - 1]->life > 0 &&
-					!app->scene->allies[currentPlayerInCombatIndex - 1]->hasAttacked)
-				{
-					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
-					currentPlayerInCombatIndex -= 1;
-					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
-
-					app->audio->PlayFx(hoverFx);
 				}
-				selectActionCooldown = 10;
+				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && selectActionCooldown == 0)
+				{
+					if (currentPlayerInCombatIndex - 1 >= 0 &&
+						app->scene->allies[currentPlayerInCombatIndex - 1]->life > 0 &&
+						!app->scene->allies[currentPlayerInCombatIndex - 1]->hasAttacked)
+					{
+						app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
+						currentPlayerInCombatIndex -= 1;
+						app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = true;
+
+						app->audio->PlayFx(hoverFx);
+					}
+					selectActionCooldown = 10;
 				
-			}
-			//Selected character, waiting for action
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
-			{
-				selectActionCooldown = 10;
-				if (app->scene->allies[currentPlayerInCombatIndex]->life > 0)
-				{
-					app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
-					combatState = CombatState::SELECT_ACTION;
-
-					app->audio->PlayFx(clickFx);
 				}
-				else
+				//Selected character, waiting for action
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
 				{
-					printf("that character is dead, please select another\n");
+					selectActionCooldown = 10;
+					if (app->scene->allies[currentPlayerInCombatIndex]->life > 0)
+					{
+						app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
+						combatState = CombatState::SELECT_ACTION;
 
-					app->audio->PlayFx(deniedFx);
-				}
+						app->audio->PlayFx(clickFx);
+					}
+					else
+					{
+						printf("that character is dead, please select another\n");
+
+						app->audio->PlayFx(deniedFx);
+					}
 				
-			}
-
-			//app->render->DrawCircle((app->scene->allies[currentPlayerInCombatIndex]->position.x - 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y + 20) / scale, 5, 255, 0, 0, 255);
-			currentArrowAnim->Update();
-			app->render->DrawTexture(arrowTexture, (app->scene->allies[currentPlayerInCombatIndex]->position.x + 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y ) / scale, &currentArrowAnim->GetCurrentFrame());
-
-
-			break;
-		case CombatState::SELECT_ACTION:
-
-			// Codigo provisional para los "iconos" de los ataques
-
-			for (int i = 0; i < app->scene->allies[currentPlayerInCombatIndex]->numAttacks; ++i)
-			{
-
-				switch (app->scene->allies[currentPlayerInCombatIndex]->abilities[i].id)
-				{
-				case 0:
-					app->render->DrawTexture(sableLaser, (400 + 200 * i) / scale, 525 / scale);
-					break;
-				case 1:
-					app->render->DrawTexture(gritoGuerra, (400 + 200 * i) / scale, 525 / scale);
-					break;
-				case 2:
-					app->render->DrawTexture(laserGun, (400 + 200 * i) / scale, 525 / scale);
-					break;
-				case 3:
-					app->render->DrawTexture(fireBall, (400 + 200 * i) / scale, 525 / scale);
-					break;
-				case 4:
-					app->render->DrawTexture(healingMagic, (400 + 200 * i) / scale, 525 / scale);
-					break;
-				case 5:
-					app->render->DrawTexture(laserCannon, (400 + 200 * i) / scale, 525 / scale);
-					break;
-				case 6:
-					app->render->DrawTexture(martillazo, (400 + 200 * i) / scale, 525 / scale);
-					break;
 				}
 
-			}
+				//app->render->DrawCircle((app->scene->allies[currentPlayerInCombatIndex]->position.x - 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y + 20) / scale, 5, 255, 0, 0, 255);
+				currentArrowAnim->Update();
+				app->render->DrawTexture(arrowTexture, (app->scene->allies[currentPlayerInCombatIndex]->position.x + 20) / scale, (app->scene->allies[currentPlayerInCombatIndex]->position.y ) / scale, &currentArrowAnim->GetCurrentFrame());
 
-			currentArrowAnim->Update();
-			app->render->DrawTexture(arrowTexture, (450 + 200 * selectAttackIndex) / scale, 500 / scale, &currentArrowAnim->GetCurrentFrame());
 
+				break;
+			case CombatState::SELECT_ACTION:
 
-			//Navigate in the selection attack menu
-			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && selectActionCooldown == 0)
-			{
-				if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->abilities.Count() - 1)
-				{
-					selectAttackIndex += 1;
+				// Codigo provisional para los "iconos" de los ataques
 
-					app->audio->PlayFx(hoverFx);
-				}
-				selectActionCooldown = 10;
-				
-			}
-			if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && selectActionCooldown == 0)
-			{
-				if (selectAttackIndex > 0)
-				{
-					selectAttackIndex -= 1;
-
-					app->audio->PlayFx(hoverFx);
-				}
-				selectActionCooldown = 10;
-				
-			}
-			//Selected action
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
-			{
-				selectActionCooldown = 10;
-
-				currentEnemySelectedIndex = FindFirstEnemyIndex();
-				app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(app->scene->allies[currentPlayerInCombatIndex]->abilities[selectAttackIndex].id, currentPlayerInCombatIndex);
-
-				app->audio->PlayFx(clickFx);
-			}
-			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.b && selectActionCooldown == 0)
-			{
-				printf("vuelves a la seleccion de personaje\n");
-				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
-				combatState = CombatState::SELECT_CHARACTER;
-
-				app->audio->PlayFx(declineFx);
-				selectActionCooldown = 10;
-			}
-			break;
-		case CombatState::SELECT_ENEMY:
-			//Navigate in the selection enemy menu
-			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && selectActionCooldown == 0)
-			{
-				if (currentEnemySelectedIndex + 1 < app->scene->enemies.Count() && app->scene->enemies[currentEnemySelectedIndex + 1]->life > 0)
+				for (int i = 0; i < app->scene->allies[currentPlayerInCombatIndex]->numAttacks; ++i)
 				{
 
-					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
-					currentEnemySelectedIndex += 1;
-					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
-
-					app->audio->PlayFx(hoverFx);
-				}
-				selectActionCooldown = 10;
-				
-			}
-			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && selectActionCooldown == 0)
-			{
-				if (currentEnemySelectedIndex - 1 >= 0 && app->scene->enemies[currentEnemySelectedIndex - 1]->life > 0)
-				{
-					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
-					currentEnemySelectedIndex -= 1;
-					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
-
-					app->audio->PlayFx(hoverFx);
-				}
-				selectActionCooldown = 10;
-				
-			}
-			//Selected character, waiting for action
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
-			{
-				selectActionCooldown = 10;
-				if (app->scene->enemies[currentEnemySelectedIndex]->life > 0)
-				{
-					app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
-					app->scene->allies[currentPlayerInCombatIndex]->SetAttackAnimation();
-					switch (idAttack)
+					switch (app->scene->allies[currentPlayerInCombatIndex]->abilities[i].id)
 					{
 					case 0:
-						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
-						damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
-						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
-						isText = true;
+						app->render->DrawTexture(sableLaser, (400 + 200 * i) / scale, 525 / scale);
 						break;
 					case 1:
+						app->render->DrawTexture(gritoGuerra, (400 + 200 * i) / scale, 525 / scale);
 						break;
 					case 2:
+						app->render->DrawTexture(laserGun, (400 + 200 * i) / scale, 525 / scale);
 						break;
 					case 3:
+						app->render->DrawTexture(fireBall, (400 + 200 * i) / scale, 525 / scale);
 						break;
 					case 4:
+						app->render->DrawTexture(healingMagic, (400 + 200 * i) / scale, 525 / scale);
 						break;
 					case 5:
-						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
-						damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.75f;
-						printf("El Ca�on laser ha hecho %f de da�o\n", damage);
-						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
-						isText = true;
+						app->render->DrawTexture(laserCannon, (400 + 200 * i) / scale, 525 / scale);
 						break;
 					case 6:
-						app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
-						damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
-						app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
-						isText = true;
+						app->render->DrawTexture(martillazo, (400 + 200 * i) / scale, 525 / scale);
 						break;
 					}
 
 				}
-				else
-				{
-					printf("that enemy is dead, please select another\n");
 
-					app->audio->PlayFx(deniedFx);
-				}
-				if (CheckAllPlayersAttacked()) {
-					CheckState();
-					app->battleScene->combatState = CombatState::ENEMY_ATTACK;
-					
-					selectAttackIndex = 0;
-				}
-				else
+				currentArrowAnim->Update();
+				app->render->DrawTexture(arrowTexture, (450 + 200 * selectAttackIndex) / scale, 500 / scale, &currentArrowAnim->GetCurrentFrame());
+
+
+				//Navigate in the selection attack menu
+				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && selectActionCooldown == 0)
 				{
+					if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->abilities.Count() - 1)
+					{
+						selectAttackIndex += 1;
+
+						app->audio->PlayFx(hoverFx);
+					}
+					selectActionCooldown = 10;
+				
+				}
+				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && selectActionCooldown == 0)
+				{
+					if (selectAttackIndex > 0)
+					{
+						selectAttackIndex -= 1;
+
+						app->audio->PlayFx(hoverFx);
+					}
+					selectActionCooldown = 10;
+				
+				}
+				//Selected action
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
+				{
+					selectActionCooldown = 10;
+
+					currentEnemySelectedIndex = FindFirstEnemyIndex();
+					app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(app->scene->allies[currentPlayerInCombatIndex]->abilities[selectAttackIndex].id, currentPlayerInCombatIndex);
+
+					app->audio->PlayFx(clickFx);
+				}
+				if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.b && selectActionCooldown == 0)
+				{
+					printf("vuelves a la seleccion de personaje\n");
 					currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
-					CheckState();
-					app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+					combatState = CombatState::SELECT_CHARACTER;
+
+					app->audio->PlayFx(declineFx);
+					selectActionCooldown = 10;
+				}
+				break;
+			case CombatState::SELECT_ENEMY:
+				//Navigate in the selection enemy menu
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && selectActionCooldown == 0)
+				{
+					if (currentEnemySelectedIndex + 1 < app->scene->enemies.Count() && app->scene->enemies[currentEnemySelectedIndex + 1]->life > 0)
+					{
+
+						app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
+						currentEnemySelectedIndex += 1;
+						app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
+
+						app->audio->PlayFx(hoverFx);
+					}
+					selectActionCooldown = 10;
+				
+				}
+				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && selectActionCooldown == 0)
+				{
+					if (currentEnemySelectedIndex - 1 >= 0 && app->scene->enemies[currentEnemySelectedIndex - 1]->life > 0)
+					{
+						app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
+						currentEnemySelectedIndex -= 1;
+						app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = true;
+
+						app->audio->PlayFx(hoverFx);
+					}
+					selectActionCooldown = 10;
+				
+				}
+				//Selected character, waiting for action
+				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && selectActionCooldown == 0)
+				{
+					selectActionCooldown = 10;
+					if (app->scene->enemies[currentEnemySelectedIndex]->life > 0)
+					{
+						app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
+						app->scene->allies[currentPlayerInCombatIndex]->SetAttackAnimation();
+						switch (idAttack)
+						{
+						case 0:
+							app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
+							damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
+							app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+							isText = true;
+							break;
+						case 1:
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						case 4:
+							break;
+						case 5:
+							app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
+							damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.75f;
+							printf("El Ca�on laser ha hecho %f de da�o\n", damage);
+							app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+							isText = true;
+							break;
+						case 6:
+							app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
+							damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
+							app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+							isText = true;
+							break;
+						}
+
+					}
+					else
+					{
+						printf("that enemy is dead, please select another\n");
+
+						app->audio->PlayFx(deniedFx);
+					}
+					if (CheckAllPlayersAttacked()) {
+						CheckState();
+						app->battleScene->combatState = CombatState::ENEMY_ATTACK;
 					
-					selectAttackIndex = 0;
+						selectAttackIndex = 0;
+					}
+					else
+					{
+						currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
+						CheckState();
+						app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+					
+						selectAttackIndex = 0;
+					}
+
+					app->audio->PlayFx(clickFx);
+				}
+				if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.b && selectActionCooldown == 0)
+				{
+					printf("vuelves a la seleccion de personaje\n");
+					currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
+					combatState = CombatState::SELECT_CHARACTER;
+
+					app->audio->PlayFx(declineFx);
+					selectActionCooldown = 10;
+
 				}
 
-				app->audio->PlayFx(clickFx);
-			}
-			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.b && selectActionCooldown == 0)
-			{
-				printf("vuelves a la seleccion de personaje\n");
-				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
-				combatState = CombatState::SELECT_CHARACTER;
-
-				app->audio->PlayFx(declineFx);
-				selectActionCooldown = 10;
-
-			}
-
-			//CheckState();
-			//app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 100) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
-			currentArrowAnim->Update();
-			app->render->DrawTexture(arrowTexture, (app->scene->enemies[currentEnemySelectedIndex]->position.x + 30) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y) / scale, &currentArrowAnim->GetCurrentFrame());
+				//CheckState();
+				//app->render->DrawCircle((app->scene->enemies[currentEnemySelectedIndex]->position.x + 100) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y + 40) / scale, 5, 255, 0, 0, 255);
+				currentArrowAnim->Update();
+				app->render->DrawTexture(arrowTexture, (app->scene->enemies[currentEnemySelectedIndex]->position.x + 30) / scale, (app->scene->enemies[currentEnemySelectedIndex]->position.y) / scale, &currentArrowAnim->GetCurrentFrame());
 
 
-			break;
-		case CombatState::ENEMY_ATTACK:
-			//Aqui va el ataque del enemigo y despues un check State
+				break;
+			case CombatState::ENEMY_ATTACK:
+				//Aqui va el ataque del enemigo y despues un check State
 			
-			//Aqui se podria hacer una animacion para seleccionar al player al que va a atacar, 
-			//por ejemplo la flechita moviendose rapidamente entre players hasta que selecciona a uno 
-			timerEnemy++;
-			srand((unsigned)time(NULL));
-			int indexPlayerToAttack = rand() % app->scene->allies.Count();
-			int indexAbility = rand() % app->scene->enemies[currentEnemyInCombatIndex]->abilities.Count();
+				//Aqui se podria hacer una animacion para seleccionar al player al que va a atacar, 
+				//por ejemplo la flechita moviendose rapidamente entre players hasta que selecciona a uno 
+				timerEnemy++;
+				srand((unsigned)time(NULL));
+				int indexPlayerToAttack = rand() % app->scene->allies.Count();
+				int indexAbility = rand() % app->scene->enemies[currentEnemyInCombatIndex]->abilities.Count();
 
-			if (app->scene->enemies[currentEnemyInCombatIndex]->life <= 0)
-			{
-				currentEnemyInCombatIndex++;
+				if (app->scene->enemies[currentEnemyInCombatIndex]->life <= 0)
+				{
+					currentEnemyInCombatIndex++;
+				}
+
+				if (timerEnemy >= 120)
+				{
+					app->scene->enemies[currentEnemyInCombatIndex]->SetAttackAnimation();
+					CheckEnemyAbility(indexAbility, indexPlayerToAttack);			
+					timerEnemy = 0;
+					currentEnemyInCombatIndex++;
+				}
+
+				if (currentEnemyInCombatIndex == app->scene->enemies.Count())
+				{
+					CheckState();
+					currentEnemyInCombatIndex = 0;
+					SetAllPlayersAliveToAttack();
+					currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
+					combatState = CombatState::SELECT_CHARACTER;
+				}
+
+				break;
+
 			}
 
-			if (timerEnemy >= 120)
+			if (isText)
 			{
-				app->scene->enemies[currentEnemyInCombatIndex]->SetAttackAnimation();
-				CheckEnemyAbility(indexAbility, indexPlayerToAttack);			
-				timerEnemy = 0;
-				currentEnemyInCombatIndex++;
+
+				if (timerText <= 120)
+				{
+					TextAttack(idAttack);
+					timerText++;
+				}
+				else {
+					timerText = 0;
+					idAttack = 0;
+					isText = false;
+				}
+
 			}
-
-			if (currentEnemyInCombatIndex == app->scene->enemies.Count())
-			{
-				CheckState();
-				currentEnemyInCombatIndex = 0;
-				SetAllPlayersAliveToAttack();
-				currentPlayerInCombatIndex = FindFirstPlayerToAttackIndex();
-				combatState = CombatState::SELECT_CHARACTER;
-			}
-
-			break;
-
 		}
-
-		if (isText)
+		else
 		{
-
-			if (timerText <= 120)
+			int winLoseWidth;
+			if (playerLose) 
 			{
-				TextAttack(idAttack);
-				timerText++;
+				currentFinalAnimation = &loseAnim;
+				winLoseWidth = 448;
+				app->render->DrawTexture(loseTexture, (windowW - winLoseWidth) / 4, (windowH - 300) / 4, &currentFinalAnimation->GetCurrentFrame());
+
 			}
-			else {
-				timerText = 0;
-				idAttack = 0;
-				isText = false;
+			else
+			{
+				currentFinalAnimation = &winAnim;
+				winLoseWidth = 392;
+				app->render->DrawTexture(winTexture, (windowW - winLoseWidth) / 4, (windowH - 300) / 4, &currentFinalAnimation->GetCurrentFrame());
+
+
 			}
+			currentFinalAnimation->Update();
 
 		}
-	}
 	
 
-	
+	}
 
 	return true;
 }
@@ -479,7 +536,8 @@ bool BattleScene::Update(float dt)
 bool BattleScene::PostUpdate()
 {
 	bool ret = true;
-
+	if (isExiting == true)
+		ret = false;
 	return ret;
 }
 
@@ -495,6 +553,30 @@ bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
 	LOG("Press Gui Control: %d", control->id);
+
+	if (control->id == 1) 
+	{
+		app->audio->PlayFx(clickFx);
+		exitBattle->state = GuiControlState::DISABLED;
+		continueBattle->state = GuiControlState::DISABLED;
+		hasStartedCombat = false;
+		hasEndedCombat = false;
+		currentFinalAnimation->Reset();
+		if (playerLose) {
+			PlayerLose();
+
+		}
+		else
+		{
+			PlayerWin();
+		}
+		
+	}
+	else
+	{
+		app->audio->PlayFx(clickFx);
+		isExiting = true;
+	}
 
 	return true;
 }
@@ -531,28 +613,6 @@ void BattleScene::CheckState()
 			break;
 		}
 	}
-	if (playerLose) {
-		printf("Has perdido el combate");
-		app->dialogueManager->playerHasLosed = true;
-		app->scene->Enable();
-		for (int i = 0; i < app->scene->npcs.Count(); ++i)
-		{
-			if (app->scene->npcs[i]->npcID == npcIDbattle)
-			{
-				app->scene->npcs[i]->hasTalked = false;
-				app->scene->npcIDcombatFinished.Add(npcIDbattle);
-			}
-		}
-		Disable();
-		app->scene->isOnCombat = false;
-		for (int i = 0; i < app->scene->allies.Count(); i++)
-		{
-			app->scene->allies[i]->life = app->scene->allies[i]->maxHP;
-		}
-		
-		hasStartedCombat = false;
-		return;
-	}
 	for (int i = 0; i < app->scene->enemies.Count(); i++)
 	{
 		if (app->scene->enemies[i]->life > 0)
@@ -561,24 +621,54 @@ void BattleScene::CheckState()
 			break;
 		}
 	}
-	if (playerWin) {
-		printf("Has ganado el combate");
-		app->fadeToBlack->FadeToBlack( app->battleScene, app->scene, 20);
-		for (int i = 0; i < app->scene->npcs.Count(); ++i)
-		{
-			if (app->scene->npcs[i]->npcID == npcIDbattle)
-			{
-				app->scene->npcs[i]->hasCombat = false;
-				app->scene->npcs[i]->hasTalked = true;
-				app->scene->npcIDcombatFinished.Add(app->scene->npcs[i]->npcID);
-				GiveReward(app->scene->npcs[i]->npcID);
-			}
-		}
-		
-		app->scene->isOnCombat = false;
-		hasStartedCombat = false;
-		return;
+	if (playerWin || playerLose) {
+		hasEndedCombat = true;
+		exitBattle->state = GuiControlState::NORMAL;
+		continueBattle->state = GuiControlState::NORMAL;
 	}
+}
+
+void BattleScene::PlayerLose()
+{
+	printf("Has perdido el combate");
+	
+	app->dialogueManager->playerHasLosed = true;
+	app->scene->Enable();
+	for (int i = 0; i < app->scene->npcs.Count(); ++i)
+	{
+		if (app->scene->npcs[i]->npcID == npcIDbattle)
+		{
+			app->scene->npcs[i]->hasTalked = false;
+			app->scene->npcIDcombatFinished.Add(npcIDbattle);
+		}
+	}	
+	app->scene->isOnCombat = false;
+	for (int i = 0; i < app->scene->allies.Count(); i++)
+	{
+		app->scene->allies[i]->life = app->scene->allies[i]->maxHP;
+	}
+	
+	
+	Disable();
+	return;
+}
+void BattleScene::PlayerWin()
+{
+	printf("Has ganado el combate");
+	app->fadeToBlack->FadeToBlack(app->battleScene, app->scene, 20);
+	for (int i = 0; i < app->scene->npcs.Count(); ++i)
+	{
+		if (app->scene->npcs[i]->npcID == npcIDbattle)
+		{
+			app->scene->npcs[i]->hasCombat = false;
+			app->scene->npcs[i]->hasTalked = true;
+			app->scene->npcIDcombatFinished.Add(app->scene->npcs[i]->npcID);
+			GiveReward(app->scene->npcs[i]->npcID);
+		}
+	}
+
+	app->scene->isOnCombat = false;
+	return;
 }
 
 int BattleScene::FindFirstEnemyIndex() 
@@ -598,6 +688,17 @@ int BattleScene::FindFirstPlayerToAttackIndex()
 	for (int i = 0; i < app->scene->allies.Count(); i++)
 	{
 		if (app->scene->allies[i]->life > 0 && !app->scene->allies[i]->hasAttacked) {
+			return i;
+		}
+	}
+	return -1;
+
+}
+int BattleScene::FindFirstPlayerIndex() 
+{
+	for (int i = 0; i < app->scene->allies.Count(); i++)
+	{
+		if (app->scene->allies[i]->life > 0 ) {
 			return i;
 		}
 	}

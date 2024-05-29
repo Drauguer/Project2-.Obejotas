@@ -67,11 +67,17 @@ public:
 
 	int FindFirstPlayerToAttackIndex();
 
+	int FindFirstPlayerIndex();
+
 	void TextAttack(int attackIndex);
 
 	void CheckEnemyAbility(int abilityId, int playerToAttackIndex = -1);
 
 	void GiveReward(int npcID);
+
+	void PlayerLose();
+	void PlayerWin();
+
 
 private:
 	SDL_Texture* img;
@@ -111,12 +117,28 @@ private:
 	// Fondo Mapa
 	SDL_Texture* background;
 
+
+	GuiControlButton* exitBattle;
+	GuiControlButton* continueBattle;
+
+	bool isExiting = false;
+
+	bool hasEndedCombat = false;
+
+
 public:
 	SDL_Texture* arrowTexture = NULL;
+	SDL_Texture* winTexture = NULL;
+	SDL_Texture* loseTexture = NULL;
 	const char* arrowTexturePath;
+	const char* winTexturePath;
+	const char* loseTexturePath;
 	Animation* currentArrowAnim;
+	Animation* currentFinalAnimation;
 
 	Animation idleArrowAnim;
+	Animation winAnim;
+	Animation loseAnim;
 
 	CombatState combatState;
 

@@ -56,11 +56,31 @@
 	
   </audio>
 
-  <battleScene texturePath="Assets/Textures/SelectionArrow.png">
+  <battleScene arrowTexturePath="Assets/Textures/SelectionArrow.png" winTexturePath="Assets/Textures/victoryV.png" loseTexturePath="Assets/Textures/defeatP.png">
     <arrow animspeed="0.05f" loop="true">
       <pushback x="0" y="0" width="64" height="64"/>
       <pushback x="64" y="0" width="64" height="64"/>
-    </arrow>
+    </arrow> 
+    <win animspeed="0.5f" loop="false">
+      <pushback x="0" y="0" width="22" height="45"/>
+      <pushback x="0" y="0" width="44" height="45"/>
+      <pushback x="0" y="0" width="66" height="45"/>
+      <pushback x="0" y="0" width="88" height="45"/>
+      <pushback x="0" y="0" width="110" height="45"/>
+      <pushback x="0" y="0" width="132" height="45"/>
+      <pushback x="0" y="0" width="154" height="45"/>
+      <pushback x="0" y="0" width="180" height="45"/>
+    </win> 
+    <lose animspeed="0.5f" loop="false">
+      <pushback x="0" y="0" width="28" height="46"/>
+      <pushback x="0" y="0" width="56" height="46"/>
+      <pushback x="0" y="0" width="84" height="46"/>
+      <pushback x="0" y="0" width="112" height="46"/>
+      <pushback x="0" y="0" width="140" height="46"/>
+      <pushback x="0" y="0" width="168" height="46"/>
+      <pushback x="0" y="0" width="196" height="46"/>
+      <pushback x="0" y="0" width="224" height="46"/>
+    </lose>
   </battleScene>
   
   <scene>
