@@ -59,6 +59,7 @@ bool Scene::Awake(pugi::xml_node config)
 	case 0:
 		app->map->name = config.child("map").attribute("name").as_string();
 		app->map->path = config.child("map").attribute("path").as_string();
+		
 		break;
 	case 1:
 		app->map->name = config.child("map2").attribute("name").as_string();
@@ -79,22 +80,24 @@ bool Scene::Awake(pugi::xml_node config)
 	case 5:
 		app->map->name = config.child("mapZona2").attribute("name").as_string();
 		app->map->path = config.child("mapZona2").attribute("path").as_string();
-		if (!isZone2MusicPlayed)
+		/*if (!isZone2MusicPlayed)
 		{
-			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 1.0f);
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
 			isZone2MusicPlayed = true;
-		}
+		}*/
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
 		
 		break;
 	case 6:
 		app->map->name = config.child("mapZona3").attribute("name").as_string();
 		app->map->path = config.child("mapZona3").attribute("path").as_string();
 		//only play the music once, never triiger again
-		if (!isZone3MusicPlayed)
+		/*if (!isZone3MusicPlayed)
 		{
             app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
 			isZone3MusicPlayed = true;
-		}
+		}*/
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
 
 		break;
 	case 7:
@@ -295,11 +298,41 @@ void Scene::LoadItems()
 // Called before the first frame
 bool Scene::Start()
 {
+	switch (mapID)
+	{
+	case 0:
+		
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
+		break;
 	
+	case 5:
+		
+		/*if (!isZone2MusicPlayed)
+		{
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
+			isZone2MusicPlayed = true;
+		}*/
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
+
+		break;
+	case 6:
+		
+		//only play the music once, never triiger again
+		/*if (!isZone3MusicPlayed)
+		{
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
+			isZone3MusicPlayed = true;
+		}*/
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
+
+		break;
+	
+
+	}
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
-	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
+	
 
 	inventoryIdle = app->tex->Load("Assets/Textures/Inventory Icon_Idle.png");
 	inventoryNewItem = app->tex->Load("Assets/Textures/Inventory Icon_Aviso.png");

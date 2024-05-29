@@ -179,6 +179,7 @@ public:
 	//music switching
 	bool isZone3MusicPlayed = false;
 	bool isZone2MusicPlayed = false;
+	bool isZone1MusicPlayed = false;
 
 	// Inventory icon
 	SDL_Texture* inventoryIdle;
