@@ -54,12 +54,28 @@ bool Scene::Awake(pugi::xml_node config)
 
 	//Get the map name from the config file and assigns the value in the module
 
+	/*switch (mapID)
+	{
+	case 7:
+		
+
+		player->isPlayerinPuzzle1 = true;
+
+		break;
+	case 8:
+		
+
+		player->isPlayerinPuzzle2 = true;
+		break;
+	}
+	*/
+
 	switch (mapID)
 	{
 	case 0:
 		app->map->name = config.child("map").attribute("name").as_string();
 		app->map->path = config.child("map").attribute("path").as_string();
-		
+
 		break;
 	case 1:
 		app->map->name = config.child("map2").attribute("name").as_string();
@@ -85,8 +101,9 @@ bool Scene::Awake(pugi::xml_node config)
 			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
 			isZone2MusicPlayed = true;
 		}*/
-		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
-		
+
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 1.0f);
+
 		break;
 	case 6:
 		app->map->name = config.child("mapZona3").attribute("name").as_string();
@@ -94,19 +111,34 @@ bool Scene::Awake(pugi::xml_node config)
 		//only play the music once, never triiger again
 		/*if (!isZone3MusicPlayed)
 		{
-            app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
 			isZone3MusicPlayed = true;
 		}*/
-		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
+
+		
+
+		if(isPlayerinPuzzle1 == false && isPlayerinPuzzle2 == false)
+		{
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
+		}
+		//if isPlayerinPuzzle1 and isPlayerinPuzzle2 both false at the same time, play the music
+
+
+		
 
 		break;
 	case 7:
 		app->map->name = config.child("mapPuzzle1").attribute("name").as_string();
 		app->map->path = config.child("mapPuzzle1").attribute("path").as_string();
+
+		isPlayerinPuzzle1 = true;
+
 		break;
 	case 8:
 		app->map->name = config.child("mapPuzzle2").attribute("name").as_string();
 		app->map->path = config.child("mapPuzzle2").attribute("path").as_string();
+
+		isPlayerinPuzzle2 = true;
 		break;
 
 	}
@@ -169,8 +201,6 @@ bool Scene::Awake(pugi::xml_node config)
 		{
 			PuzlePassword* passwordPuzle = (PuzlePassword*)app->entityManager->CreateEntity(EntityType::PUZLE_PASSWORD);
 			passwordPuzle->parameters = passwordNode;
-
-
 		}
 
 	}
@@ -312,23 +342,15 @@ bool Scene::Start()
 			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
 			isZone2MusicPlayed = true;
 		}*/
-		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
-
-		break;
-	case 6:
-		
-		//only play the music once, never triiger again
-		/*if (!isZone3MusicPlayed)
-		{
-			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
-			isZone3MusicPlayed = true;
-		}*/
-		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 1.0f);
 
 		break;
 	
 
+
+
 	}
+	
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");

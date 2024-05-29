@@ -158,6 +158,9 @@ public:
 	int mapID = 0;
 	int playerMapID = 0;
 
+	bool isPlayerinPuzzle1 = false;
+	bool isPlayerinPuzzle2 = false;
+
 	// ID for combats
 	int combatID = 0;
 
@@ -173,13 +176,15 @@ public:
 
 	List<Item*> listItems;
 
-	//
+	
 	bool loadAllies = true;
 
 	//music switching
 	bool isZone3MusicPlayed = false;
 	bool isZone2MusicPlayed = false;
 	bool isZone1MusicPlayed = false;
+	
+	
 
 	// Inventory icon
 	SDL_Texture* inventoryIdle;
