@@ -136,8 +136,8 @@ bool Inventory::Update(float dt)
 						}
 						else {
 							
-							app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-							app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+							app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+							app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 						}
 						t++;
 					}
@@ -224,8 +224,8 @@ bool Inventory::Update(float dt)
 						}
 						else {
 							
-							app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-							app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+							app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+							app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 						}
 						
 						t++;
@@ -312,8 +312,8 @@ bool Inventory::Update(float dt)
 					}
 					else {
 						
-						app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-						app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+						app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+						app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 					}
 
 					t++;
@@ -400,8 +400,8 @@ bool Inventory::Update(float dt)
 					}
 					else {
 						
-						app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-						app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+						app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+						app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 					}
 
 					t++;
