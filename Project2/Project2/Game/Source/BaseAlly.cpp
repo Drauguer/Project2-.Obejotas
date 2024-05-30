@@ -139,6 +139,8 @@ bool BaseAlly::Update(float dt)
 	dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
 	dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
 
+	SetStats();
+
 	if (helmetItem != NULL)
 	{
 		SetHelmetStats();
@@ -371,6 +373,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 void BaseAlly::SetStats()
 {
 	life = baseLife;
+	maxHP = baseLife;
 	attack = baseAttack;
 	defense = baseDefense;
 	magicPower = baseMagicPower;
@@ -379,27 +382,30 @@ void BaseAlly::SetStats()
 
 void BaseAlly::SetHelmetStats()
 {
-	life = baseLife + helmetItem->bonusHP;
-	attack = baseAttack + helmetItem->bonusATK;
-	defense = baseDefense + helmetItem->bonusDEF;
-	magicPower = baseMagicPower + helmetItem->bonusMP;
-	dexerity = baseDexerity + helmetItem->bonusDEX;
+	life = life + helmetItem->bonusHP;
+	maxHP = maxHP + helmetItem->bonusHP;
+	attack = attack + helmetItem->bonusATK;
+	defense = defense + helmetItem->bonusDEF;
+	magicPower = magicPower + helmetItem->bonusMP;
+	dexerity = dexerity + helmetItem->bonusDEX;
 }
 
 void BaseAlly::SetArmorStats()
 {
-	life = baseLife + armorItem->bonusHP;
-	attack = baseAttack + armorItem->bonusATK;
-	defense = baseDefense + armorItem->bonusDEF;
-	magicPower = baseMagicPower + armorItem->bonusMP;
-	dexerity = baseDexerity + armorItem->bonusDEX;
+	life = life + armorItem->bonusHP;
+	maxHP = maxHP + armorItem->bonusHP;
+	attack = attack + armorItem->bonusATK;
+	defense = defense + armorItem->bonusDEF;
+	magicPower = magicPower + armorItem->bonusMP;
+	dexerity = dexerity + armorItem->bonusDEX;
 }
 
 void BaseAlly::SetWeaponStats()
 {
-	life = baseLife + weaponItem->bonusHP;
-	attack = baseAttack + weaponItem->bonusATK;
-	defense = baseDefense + weaponItem->bonusDEF;
-	magicPower = baseMagicPower + weaponItem->bonusMP;
-	dexerity = baseDexerity + weaponItem->bonusDEX;
+	life = life + weaponItem->bonusHP;
+	maxHP = maxHP + weaponItem->bonusHP;
+	attack = attack + weaponItem->bonusATK;
+	defense = defense + weaponItem->bonusDEF;
+	magicPower = magicPower + weaponItem->bonusMP;
+	dexerity = dexerity + weaponItem->bonusDEX;
 }
