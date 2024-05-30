@@ -503,6 +503,29 @@ bool Scene::Update(float dt)
 			ally->Start();
 
 		}
+
+		int k = 0;
+
+		for (int i = 0; i < listItems.Count(); ++i)
+		{
+			
+
+			if (k < 9)
+			{
+				allies[0]->inventoryChar.Add(listItems[i]);
+				k++;
+			}
+			else if (k >= 9 && k < 18)
+			{
+				allies[1]->inventoryChar.Add(listItems[i]);
+				k++;
+			}
+			else if (k >= 18 && k < 27)
+			{
+				allies[2]->inventoryChar.Add(listItems[i]);
+				k++;
+			}
+		}
 		
 	}
 
