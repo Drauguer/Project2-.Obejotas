@@ -476,14 +476,6 @@ bool Scene::Update(float dt)
 	// Prueba para añadir allies
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
-		for (pugi::xml_node allyNode = scene_parameter.child("bardo"); allyNode; allyNode = allyNode.next_sibling("bardo"))
-		{
-			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
-			allies.Add(ally);
-			ally->parameters = allyNode;
-			ally->Start();
-
-		}
 
 		for (pugi::xml_node allyNode = scene_parameter.child("mage"); allyNode; allyNode = allyNode.next_sibling("mage"))
 		{
@@ -502,6 +494,16 @@ bool Scene::Update(float dt)
 			ally->Start();
 
 		}
+
+		for (pugi::xml_node allyNode = scene_parameter.child("bardo"); allyNode; allyNode = allyNode.next_sibling("bardo"))
+		{
+			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+			allies.Add(ally);
+			ally->parameters = allyNode;
+			ally->Start();
+
+		}
+		
 	}
 
 

@@ -47,6 +47,8 @@ public:
 
 	bool newInInventory = false;
 
+	SString description;
+
 private:
 
 	SDL_Texture* texture;

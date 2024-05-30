@@ -46,6 +46,20 @@ public:
 	SDL_Texture* Enano;
 	SDL_Texture* Bardo;
 
+	// Inventory UI
+	SDL_Texture* itemBox;
+	SDL_Texture* charBox;
+
+	SDL_Texture* atkIcon;
+	SDL_Texture* defIcon;
+	SDL_Texture* mpIcon;
+	SDL_Texture* dexIcon;
+
+	SDL_Texture* healthIcon;
+
+	// Text Box
+	SDL_Texture* itemText;
+
 	// Arrow
 	SDL_Texture* arrowTexture = NULL;
 	const char* arrowTexturePath;
