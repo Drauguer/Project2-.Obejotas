@@ -41,7 +41,47 @@
 	
 </logoScene>
 
-  <window>
+
+	
+	
+	<MainMenu texturePath="Assets/Textures/OliverAssets/Animationmainscreen/MenuSpritesheet.png">
+		<menuAnim animspeed="0.2f" loop="true">
+
+			<pushback x="0" y="0" width="788" height="450"/>
+			<pushback x="788" y="0" width="788" height="450"/>
+			<pushback x="1576" y="0" width="788" height="450"/>
+			<pushback x="2364" y="0" width="788" height="450"/>
+			<pushback x="3152" y="0" width="788" height="450"/>
+			<pushback x="3940" y="0" width="788" height="450"/>
+			<pushback x="4728" y="0" width="788" height="450"/>
+			<pushback x="5516" y="0" width="788" height="450"/>
+			<pushback x="6304" y="0" width="788" height="450"/>
+			<pushback x="7092" y="0" width="788" height="450"/>
+			<pushback x="7880" y="0" width="788" height="450"/>
+			<pushback x="8668" y="0" width="788" height="450"/>
+			<pushback x="9456" y="0" width="788" height="450"/>
+			<pushback x="10244" y="0" width="788" height="450"/>
+			<pushback x="11032" y="0" width="788" height="450"/>
+			<pushback x="10244" y="0" width="788" height="450"/>
+			<pushback x="9456" y="0" width="788" height="450"/>
+			<pushback x="8668" y="0" width="788" height="450"/>
+			<pushback x="7880" y="0" width="788" height="450"/>
+			<pushback x="7092" y="0" width="788" height="450"/>
+			<pushback x="6304" y="0" width="788" height="450"/>
+			<pushback x="5516" y="0" width="788" height="450"/>
+			<pushback x="4728" y="0" width="788" height="450"/>
+			<pushback x="3940" y="0" width="788" height="450"/>
+			<pushback x="3152" y="0" width="788" height="450"/>
+			<pushback x="2364" y="0" width="788" height="450"/>
+			<pushback x="1576" y="0" width="788" height="450"/>
+			<pushback x="788" y="0" width="788" height="450"/>
+			<pushback x="0" y="0" width="788" height="450"/>
+		</menuAnim>
+
+</MainMenu>
+
+
+	<window>
     <resolution width="1280" height="720" scale="2"	/>
     <fullscreen value="false"/>
     <borderless value="false"/>
