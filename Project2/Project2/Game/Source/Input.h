@@ -114,12 +114,13 @@ private:
 	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
 	int	mouseMotionX;
 	int mouseMotionY;
-	int mouseX;
-	int mouseY;
+	
 
 public:
 	// An array to fill in all detected gamepads
 	GamePad pads[MAX_PADS];
+	int mouseX;
+	int mouseY;
 };
 
 #endif // __INPUT_H__

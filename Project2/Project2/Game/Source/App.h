@@ -131,6 +131,8 @@ public:
 	bool hasSolvedPasswordPuzzle = false;
 	bool hasSolvedPilarPuzzle = false;
 
+	int selectActionCooldown = 60;
+
 private:
 
 	int argc;

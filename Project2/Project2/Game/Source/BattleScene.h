@@ -155,8 +155,6 @@ public:
 
 	int timerEnemy = 0;
 
-	int selectActionCooldown = 60;
-
 	float damage;
 
 	//Cooldown for selecting abilities

@@ -468,6 +468,7 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	if (SDL_Init(SDL_INIT_TIMER) != 0) {
 		std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return 1;
@@ -571,17 +572,33 @@ bool Scene::Update(float dt)
 
 	
 	
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->scene->player->isOnPause == false) {
+	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && app->scene->player->isOnPause == false) || pad.start == 1 && app->selectActionCooldown == 0) {
 		app->audio->PlayFx(pauseSFX);
-
+		isOnSettings = false;
 		app->scene->player->isOnPause = true;
 		app->scene->ResumeScene->state = GuiControlState::NORMAL;
 		app->scene->exitScene->state = GuiControlState::NORMAL;
 		app->scene->settingsScene->state = GuiControlState::NORMAL;
-		
+		app->selectActionCooldown = 30;
+		uiGamePadCounter = 0;
 		
 		Mix_PauseMusic();
 	}
+	if (pad.b == 1 && app->selectActionCooldown == 0)
+	{
+		if (isOnSettings) {
+			OnGuiMouseClickEvent(returned);
+			app->selectActionCooldown = 30;
+
+
+		}
+		else
+		{
+			OnGuiMouseClickEvent(ResumeScene);
+			app->selectActionCooldown = 30;
+		}
+	}
+	
 	
 	if (app->scene->player->isOnPause == false)
 	{
@@ -589,19 +606,6 @@ bool Scene::Update(float dt)
 		Mix_ResumeMusic();
 	}
 	
-	
-	/*if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
-	{
-		
-		isOnCombat = !isOnCombat;
-		LoadEnemies();
-		LoadAllies();
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		this->Disable();
-		app->battleScene->Enable();
-		app->audio->PlayFx(encounterFx);
-	}*/
 
 
 	for (int i = 0; i < listItems.Count(); ++i)
@@ -621,7 +625,132 @@ bool Scene::Update(float dt)
 		app->render->DrawTexture(inventoryIdle, 20 - app->render->camera.x / scale, 50 - app->render->camera.y / scale);
 	}
 
-	
+	if (app->selectActionCooldown > 0) {
+		app->selectActionCooldown--;
+	}
+
+	if (player->isOnPause) {
+
+		GamePad& pad = app->input->pads[0];
+
+
+
+		if (!isOnSettings) {
+
+			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 3)
+			{
+				uiGamePadCounter++;
+				app->selectActionCooldown = 20;
+
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+			{
+				uiGamePadCounter--;
+				app->selectActionCooldown = 20;
+
+			}
+			ResumeScene->isButtonPressed = false;
+			settingsScene->isButtonPressed = false;
+			exitScene->isButtonPressed = false;
+			switch (uiGamePadCounter)
+			{
+			case 0:
+				ResumeScene->isButtonPressed = true;
+				break;
+			case 1:
+				settingsScene->isButtonPressed = true;
+				break;
+			case 2:
+				exitScene->isButtonPressed = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+		else
+		{
+			if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 4)
+			{
+				uiGamePadCounter++;
+				app->selectActionCooldown = 20;
+
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+			{
+				uiGamePadCounter--;
+				app->selectActionCooldown = 20;
+
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 2)
+			{
+				uiGamePadCounter+=3;
+				app->selectActionCooldown = 20;
+
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 2)
+			{
+				uiGamePadCounter-=3;
+				app->selectActionCooldown = 20;
+
+			}
+			VsincOff->isButtonPressed = false;
+			Vsinc->isButtonPressed = false;
+			FullScreen->isButtonPressed = false;
+			FullScreenOff->isButtonPressed = false;
+			AudioSceneOn->isButtonPressed = false;
+			AudioSceneOff->isButtonPressed = false;
+			FxSceneOn->isButtonPressed = false;
+			FxSceneOff->isButtonPressed = false;
+			returned->isButtonPressed = false;
+			switch (uiGamePadCounter)
+			{
+			case 0:
+				if (Vsinc->state == GuiControlState::DISABLED) {
+					VsincOff->isButtonPressed = true;
+				}
+				else
+				{
+					Vsinc->isButtonPressed = true;
+				}
+				break;
+			case 1:
+				if (AudioSceneOn->state == GuiControlState::DISABLED) {
+					AudioSceneOff->isButtonPressed = true;
+				}
+				else
+				{
+					AudioSceneOn->isButtonPressed = true;
+				}
+				break;
+			case 2:
+				returned->isButtonPressed = true;
+				break;
+			case 3:
+				if (FullScreen->state == GuiControlState::DISABLED) {
+					FullScreenOff->isButtonPressed = true;
+				}
+				else
+				{
+					FullScreen->isButtonPressed = true;
+				}
+				break;
+			case 4:
+				if (FxSceneOn->state == GuiControlState::DISABLED) {
+					FxSceneOff->isButtonPressed = true;
+				}
+				else
+				{
+					FxSceneOn->isButtonPressed = true;
+				}
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
 	
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
@@ -661,7 +790,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	bool ret = true;
 
 	if (control->id == 1) {
-
+		//RESUME
 		app->scene->player->isOnPause = false;
 		exitScene->state = GuiControlState::DISABLED;
 		settingsScene->state = GuiControlState::DISABLED;
@@ -670,10 +799,14 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 2) {
+		//EXIT
 		app->audio->PlayFx(clickFx);
 		IsExiting = true;
 	}
 	if (control->id == 3) {
+		//SETTINGS
+		uiGamePadCounter = 0;
+		isOnSettings = true;
 		ResumeScene->state = GuiControlState::DISABLED;
 		settingsScene->state = GuiControlState::DISABLED;
 		Initial_Screen->state = GuiControlState::DISABLED;
@@ -686,7 +819,12 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 		app->audio->PlayFx(clickFx);
 	}
+	//VSUNC
+	//AUDIO
+	//FULL
+	//FX
 	if (control->id == 4) {
+		//FULLSCREEN ACTIVE
 		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
 		FullScreenOff->state = GuiControlState::NORMAL;
 		FullScreen->state = GuiControlState::DISABLED;
@@ -694,6 +832,8 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 5) {
+		//FULLSCREEN NOT ACTIVE
+
 		app->win->GetWindowSize(windowW, windowH);
 		SDL_SetWindowSize(app->win->window, windowW, windowH);
 		SDL_SetWindowFullscreen(app->win->window, 0);
@@ -704,6 +844,8 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 6) {
+		//VSYNC NOT ACTIVE
+
 		app->IsVsincActive = false;
 		Vsinc->state = GuiControlState::DISABLED;
 		VsincOff->state = GuiControlState::NORMAL;
@@ -711,6 +853,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 7) {
+		//VSYNC ACTIVE
 		app->IsVsincActive = true;
 		Vsinc->state = GuiControlState::NORMAL;
 		VsincOff->state = GuiControlState::DISABLED;
@@ -718,6 +861,8 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 8) {
+		//GO BACK BUTTON
+		isOnSettings =  false;
 		FullScreen->state = GuiControlState::DISABLED;
 		FullScreenOff->state = GuiControlState::DISABLED;
 		Vsinc->state = GuiControlState::DISABLED;
@@ -735,6 +880,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 9) {
+		//AUDIO ON
 		AudioSceneOff->state = GuiControlState::DISABLED;
 		AudioSceneOn->state = GuiControlState::NORMAL;
 		app->audio->SetMusicVolume(0.0f);
@@ -744,6 +890,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		
 	}
 	if (control->id == 10) {
+		//AUDIO OFF
 		AudioSceneOff->state = GuiControlState::NORMAL;
 		AudioSceneOn->state = GuiControlState::DISABLED;
 		app->audio->SetMusicVolume(100.0f);
@@ -751,6 +898,7 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 11) {
+
 		app->scene->player->isOnPause = false;
 		app->entityManager->Disable();
 		
@@ -837,6 +985,10 @@ bool Scene::CheckAllPilars()
 		}
 	}
 	return true;
+}
+
+void Scene::GamePadUi(List<GuiControlButton*> members, bool isOnSettings)
+{
 }
 
 
