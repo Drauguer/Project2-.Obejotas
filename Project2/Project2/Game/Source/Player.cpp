@@ -148,6 +148,10 @@ bool Player::Start() {
 		position.x = parameters.attribute("x16").as_int() * scale;
 		position.y = parameters.attribute("y16").as_int() * scale;
 		break;
+	case 17:
+		position.x = parameters.attribute("x17").as_int() * scale;
+		position.y = parameters.attribute("y17").as_int() * scale;
+		break;
 	
 	}
 
@@ -336,6 +340,24 @@ bool Player::Update(float dt)
 			app->audio->PlayFx(app->scene->attackUpSFX);
 		}
 
+		if (showBossLocked)
+		{
+
+			if (bossLockedTimer <= 120)
+			{
+				app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+				app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "you shall not pass!");
+				bossLockedTimer++;
+			}
+			else
+			{
+				bossLockedTimer = 0;
+				showBossLocked = false;
+				isTalking = false;
+			}
+			app->audio->PlayFx(app->scene->attackUpSFX);
+		}
+
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
 
@@ -519,6 +541,26 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		{
 
 			LoadNewMap(5, 16);
+
+		}
+		break;
+	case ColliderType::TO_ZONE_FINAL:
+		if (app->scene->mapID != 9)
+		{
+			if (app->hasSolvedArrowPuzzle && app->hasSolvedPilarPuzzle)
+			{
+				for (int i = 0; i < app->scene->allies.Count(); ++i)
+				{
+					app->scene->allies[i]->life = app->scene->allies[i]->maxHP;
+				}
+				LoadNewMap(9, 17);
+			}
+			else
+			{
+				showBossLocked = true;
+				isTalking = true;
+			}
+			
 
 		}
 		break;

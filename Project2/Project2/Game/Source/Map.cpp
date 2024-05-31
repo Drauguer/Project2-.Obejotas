@@ -715,6 +715,25 @@ bool Map::LoadObjectGroups(pugi::xml_node mapNode)
 
         }
         }
+        else if (strcmp(objectNode.attribute("name").as_string(), "toZoneFinal") == 0)
+        {
+        for (pugi::xml_node objectIt = objectNode.child("object"); objectIt != NULL; objectIt = objectIt.next_sibling("object")) {
+
+            int x = objectIt.attribute("x").as_int();
+            int y = objectIt.attribute("y").as_int();
+            int width = objectIt.attribute("width").as_int();
+            int height = objectIt.attribute("height").as_int();
+
+            x += width / 2;
+            y += height / 2;
+
+            PhysBody* c1 = app->physics->CreateRectangleSensor(x, y, width, height, STATIC);
+
+
+            c1->ctype = ColliderType::TO_ZONE_FINAL;
+
+        }
+        }
 
         
 

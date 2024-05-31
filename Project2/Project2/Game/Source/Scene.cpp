@@ -140,6 +140,12 @@ bool Scene::Awake(pugi::xml_node config)
 
 		isPlayerinPuzzle2 = true;
 		break;
+	case 9:
+		app->map->name = config.child("mapBoss").attribute("name").as_string();
+		app->map->path = config.child("mapBoss").attribute("path").as_string();
+
+		isPlayerinPuzzle2 = true;
+		break;
 
 	}
 	

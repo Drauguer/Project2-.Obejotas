@@ -46,6 +46,7 @@ enum class ColliderType {
 	TO_OUT2,
 	TO_OUT3,
 	TO_ZONE2_OUT,
+	TO_ZONE_FINAL,
 	NPC,
 	PUZLE,
 	UNKNOWN

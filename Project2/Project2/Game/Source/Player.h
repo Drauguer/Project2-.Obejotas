@@ -90,6 +90,10 @@ public:
 	int passwordTimer = 0;
 	bool showPasswordCorrect = false;
 	int passwordTimer2 = 0;
+
+	// Final Boss Door
+	bool showBossLocked = false;
+	int bossLockedTimer = 0;
 	
 };
 

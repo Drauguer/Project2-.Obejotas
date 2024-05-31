@@ -196,7 +196,7 @@
     </puzlePassword>
 
 
-    <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" x6="336" y6="576" x7="336" y7="576" x8="1264" y8="1024" x9="304" y9="1792" x10="864" y10="304" x11="64" y11="304" x12="32" y12="144" x13="576" y13="144" x14="928" y14="448" x15="1376" y15="416" x16="1248" y16="96"
+    <player x="288" y="64" x1="2208" y1="64" x2="288" y2="1056" x3="2208" y3="1056" x4="320" y4="544" x5="992" y5="628" x6="336" y6="576" x7="336" y7="576" x8="1264" y8="1024" x9="304" y9="1792" x10="864" y10="304" x11="64" y11="304" x12="32" y12="144" x13="576" y13="144" x14="928" y14="448" x15="1376" y15="416" x16="1248" y16="96" x17="320" y17="544"
 			  texturePath="Assets/Textures/PrincipalOverworld.png" coinfxpath="Assets/Audio/Fx/10_UI_Menu_SFX/013_Confirm_03.wav" life="30" attack="20" defense="10" magicPower="5" dexerity="20">
 		  <sideWalk animspeed="0.2f" loop="true">
 			  <pushback x="0" y="0" width="32" height="32"/>
@@ -233,6 +233,7 @@
 	<mapInterior path="Assets/Maps/Map/" name="MapaInteriorBueno.tmx"/>
 	<mapInterior2 path="Assets/Maps/Map/" name="MapaInterior2Bueno.tmx"/>
 	<mapInterior3 path="Assets/Maps/Map/" name="MapaInterior3Buen.tmx"/>
+	<mapBoss path="Assets/Maps/Map/" name="MapaBoss.tmx"/>
 
     <npc x="300" y="400" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="0" npcID="0" hasQuest="false">
       <idleAnim animspeed="0.2f" loop="true">
@@ -398,6 +399,21 @@
 		  <dialogue text="you can't battle the king before fighting us!"/>
 		  <dialogue text="if you defeat each one of us, you will get the password"/>
 		  <dialogue text="for the king!!!!!"/>
+	  </npc>
+
+	  <npc x="1024" y="128" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="9" npcID="14" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="64" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="you finally arrived here..."/>
+		  <dialogue text="after all the obstacles"/>
+		  <dialogue text="after all these fights"/>
+		  <dialogue text="you stayed with determination"/>
+		  <dialogue text="however, your journey ends here"/>
+		  <dialogue text="you"/>
+		  <dialogue text="can't"/>
+		  <dialogue text="defeat"/>
+		  <dialogue text="me"/>
 	  </npc>
 
     <mage x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
@@ -821,6 +837,52 @@
 			  <pushback x="384" y="0" width="64" height="64"/>
 			  <pushback x="448" y="0" width="64" height="64"/>
 			  <pushback x="512" y="0" width="64" height="64"/>
+		  </Attack>
+		  <ability id="0" name="Sable Laser"/>
+		  <ability id="1" name="Grito de Guerra"/>
+		  <ability id="2" name="Visión Laser"/>
+	  </enemy>
+
+	  <enemy x="900" y="250" texturepath="Assets/Textures/BossSpriteSheet.png" life="250" attack="50" defense="60" magicPower="30" dexerity="70" combatID="14">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="136" height="160"/>
+			  <pushback x="136" y="0" width="136" height="160"/>
+			  <pushback x="272" y="0" width="136" height="160"/>
+			  <pushback x="408" y="0" width="136" height="160"/>
+			  <pushback x="544" y="0" width="136" height="160"/>
+			  <pushback x="680" y="0" width="136" height="160"/>
+			  <pushback x="816" y="0" width="136" height="160"/>
+			  <pushback x="952" y="0" width="136" height="160"/>
+			  <pushback x="1088" y="0" width="136" height="160"/>
+			  <pushback x="1224" y="0" width="136" height="160"/>
+			  <pushback x="1360" y="0" width="136" height="160"/>
+			  <pushback x="1496" y="0" width="136" height="160"/>
+			  <pushback x="1632" y="0" width="136" height="160"/>
+			  <pushback x="1768" y="0" width="136" height="160"/>
+			  <pushback x="1904" y="0" width="136" height="160"/>
+			  <pushback x="2040" y="0" width="136" height="160"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+			  <pushback x="0" y="160" width="164" height="160"/>
+			  <pushback x="164" y="160" width="164" height="160"/>
+			  <pushback x="328" y="160" width="164" height="160"/>
+			  <pushback x="492" y="160" width="164" height="160"/>
+			  <pushback x="656" y="160" width="164" height="160"/>
+			  <pushback x="820" y="160" width="164" height="160"/>
+			  <pushback x="984" y="160" width="164" height="160"/>
+			  <pushback x="1148" y="160" width="164" height="160"/>
+			  <pushback x="1312" y="160" width="164" height="160"/>
+			  <pushback x="1476" y="160" width="164" height="160"/>
+			  <pushback x="1640" y="160" width="164" height="160"/>
+			  <pushback x="1804" y="160" width="164" height="160"/>
+			  <pushback x="1968" y="160" width="164" height="160"/>
+			  <pushback x="2132" y="160" width="164" height="160"/>
+			  <pushback x="2296" y="160" width="164" height="160"/>
+			  <pushback x="2460" y="160" width="164" height="160"/>
+			  <pushback x="2624" y="160" width="164" height="160"/>
+			  <pushback x="2788" y="160" width="164" height="160"/>
+			  <pushback x="2952" y="160" width="164" height="160"/>
+			  <pushback x="3116" y="160" width="164" height="160"/>
 		  </Attack>
 		  <ability id="0" name="Sable Laser"/>
 		  <ability id="1" name="Grito de Guerra"/>

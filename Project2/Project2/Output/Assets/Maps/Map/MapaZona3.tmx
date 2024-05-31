@@ -3647,7 +3647,7 @@
  </layer>
  <layer id="4" name="Pared" width="20" height="60">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
   </properties>
   <data>
    <tile gid="24"/>
@@ -6060,6 +6060,9 @@
   </data>
  </layer>
  <layer id="12" name="Props4" width="20" height="60">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -7264,6 +7267,9 @@
   </data>
  </layer>
  <layer id="11" name="Props3" width="20" height="60">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -9722,6 +9728,6 @@
   <object id="29" x="288" y="1856" width="64" height="32"/>
  </objectgroup>
  <objectgroup id="13" name="toZoneFinal">
-  <object id="44" x="301.75" y="18.75" width="35" height="46.25"/>
+  <object id="44" x="301.75" y="18.75" width="35" height="37.5833"/>
  </objectgroup>
 </map>
