@@ -88,38 +88,41 @@ bool Scene::Awake(pugi::xml_node config)
 	case 3:
 		app->map->name = config.child("mapInterior2").attribute("name").as_string();
 		app->map->path = config.child("mapInterior2").attribute("path").as_string();
+		
 		break;
 	case 4:
 		app->map->name = config.child("mapInterior3").attribute("name").as_string();
 		app->map->path = config.child("mapInterior3").attribute("path").as_string();
+		/*isPlayerinLevel2Room1 = true;*/
+
+		
 		break;
 	case 5:
 		app->map->name = config.child("mapZona2").attribute("name").as_string();
 		app->map->path = config.child("mapZona2").attribute("path").as_string();
-		/*if (!isZone2MusicPlayed)
+		
+		
+
+		/*if (isPlayerinLevel2Room1 = false)
 		{
-			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 2.0f);
-			isZone2MusicPlayed = true;
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 1.0f);
 		}*/
 
 		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level2Music.ogg", 1.0f);
+
+		
+		
 
 		break;
 	case 6:
 		app->map->name = config.child("mapZona3").attribute("name").as_string();
 		app->map->path = config.child("mapZona3").attribute("path").as_string();
-		//only play the music once, never triiger again
-		/*if (!isZone3MusicPlayed)
-		{
-			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 1.0f);
-			isZone3MusicPlayed = true;
-		}*/
-
+		
 		
 
 		if(isPlayerinPuzzle1 == false && isPlayerinPuzzle2 == false)
 		{
-			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Scene1Music.ogg", 2.0f);
+			app->audio->PlayMusic("Assets/Audio/Music/Music Loops/Level3Music.ogg", 1.0f);
 		}
 		//if isPlayerinPuzzle1 and isPlayerinPuzzle2 both false at the same time, play the music
 

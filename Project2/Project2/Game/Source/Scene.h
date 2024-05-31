@@ -170,6 +170,8 @@ public:
 
 	bool isPlayerinPuzzle1 = false;
 	bool isPlayerinPuzzle2 = false;
+	/*bool hasPlayerEnteredLevel2 = false;*/
+	bool isPlayerinLevel2Room1 = false;
 
 	// ID for combats
 	int combatID = 0;
