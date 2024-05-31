@@ -136,8 +136,170 @@ bool MainMenu::Update(float dt)
 
 	GamePad& pad = app->input->pads[0];
 
+	if (!isOnSettings) {
+		//Fullscreen
+		//Exit
+		//Fx
+		//Audio
+		//Vsync 
+		//Go back
 
+		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 3)
+		{
+			uiGamePadCounter++;
+			app->selectActionCooldown = 20;
 
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+		{
+			uiGamePadCounter--;
+			app->selectActionCooldown = 20;
+
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 2)
+		{
+			uiGamePadCounter += 2;
+			app->selectActionCooldown = 20;
+
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 1)
+		{
+			uiGamePadCounter -= 2;
+			app->selectActionCooldown = 20;
+
+		}
+		start->isButtonPressed = false;
+		continue_->isButtonPressed = false;
+		exit->isButtonPressed = false;
+		setting->isButtonPressed = false;
+		switch (uiGamePadCounter)
+		{
+		case 0:
+			start->isButtonPressed = true;
+			break;
+		case 1:
+			exit->isButtonPressed = true;
+			break;
+		case 2:
+			continue_->isButtonPressed = true;
+			break;
+		case 3:
+			setting->isButtonPressed = true;
+			break;
+
+		default:
+			break;
+		}
+	}
+	else
+	{
+		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 6)
+		{
+			uiGamePadCounter++;
+			app->selectActionCooldown = 20;
+
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+		{
+			uiGamePadCounter--;
+			app->selectActionCooldown = 20;
+
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 2)
+		{
+			if (uiGamePadCounter == 0)
+			{
+				uiGamePadCounter += 2;
+			}
+			else
+			{
+				uiGamePadCounter += 4;
+			}
+			app->selectActionCooldown = 20;
+
+		}
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 1)
+		{
+			if (uiGamePadCounter==2) 
+			{
+				uiGamePadCounter -= 2;
+
+			}
+			else if (uiGamePadCounter == 3)
+			{
+				uiGamePadCounter -= 3;
+			}
+			else
+			{
+				uiGamePadCounter -= 4;
+			}
+			app->selectActionCooldown = 20;
+
+		}
+		FullScreen->isButtonPressed = false;
+		FullScreenOff->isButtonPressed = false;
+		exit->isButtonPressed = false;
+		FxOn->isButtonPressed = false;
+		FxOff->isButtonPressed = false;
+		AudioOn->isButtonPressed = false;
+		AudioOff->isButtonPressed = false;
+		AudioOff->isButtonPressed = false;
+		Vsinc->isButtonPressed = false;
+		VsincOff->isButtonPressed = false;
+		turnBack->isButtonPressed = false;
+		switch (uiGamePadCounter)
+		{
+		case 0:
+			if (FullScreen->state == GuiControlState::DISABLED) {
+				FullScreenOff->isButtonPressed = true;
+			}
+			else
+			{
+				FullScreen->isButtonPressed = true;
+			}
+			break;
+		case 1:
+			exit->isButtonPressed = true;
+			break;
+		case 2:
+			if (FxOn->state == GuiControlState::DISABLED) {
+				FxOff->isButtonPressed = true;
+			}
+			else
+			{
+				FxOn->isButtonPressed = true;
+			}
+			break;
+		case 3:
+			if (AudioOn->state == GuiControlState::DISABLED) {
+				AudioOff->isButtonPressed = true;
+			}
+			else
+			{
+				AudioOn->isButtonPressed = true;
+			}
+			break;
+		case 4:
+			if (Vsinc->state == GuiControlState::DISABLED) {
+				VsincOff->isButtonPressed = true;
+			}
+			else
+			{
+				Vsinc->isButtonPressed = true;
+			}
+			break;
+		case 5:
+			turnBack->isButtonPressed = true;
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	if (app->selectActionCooldown > 0) {
+		app->selectActionCooldown--;
+	}
 	
 	if (isExiting == true)
 	{
@@ -182,6 +344,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	}
 
 	if (control->id == 3) {
+		isOnSettings = true;
+		uiGamePadCounter = 0;
 		start->state = GuiControlState::DISABLED;
 		continue_->state = GuiControlState::DISABLED;
 		setting->state = GuiControlState::DISABLED;
@@ -194,6 +358,8 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 6) {
+		isOnSettings = false;
+		uiGamePadCounter = 0;
 		start->state = GuiControlState::NORMAL;
 		continue_->state = GuiControlState::NORMAL;
 		setting->state = GuiControlState::NORMAL;

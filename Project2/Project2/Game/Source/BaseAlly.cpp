@@ -368,7 +368,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 
 		break;
 
-		/*
+	/*
 	Ataques del bardo
 
 		1- Curacion: sana un poco a todos los aliados (sprite: SatyrAttack1_Icon)

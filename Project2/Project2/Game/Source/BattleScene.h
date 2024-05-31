@@ -80,6 +80,8 @@ public:
 
 
 private:
+	int uiGamePadCounter = 0;
+
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;

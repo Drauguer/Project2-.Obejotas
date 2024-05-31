@@ -67,10 +67,10 @@ bool DialogueManager::Update(float dt)
 			app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, Font,item->data->text.GetString());
 			LOG("Write Text");
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a)
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || (pad.a&&app->selectActionCooldown==0))
 			{
 				app->audio->PlayFx(dialogueClickFx);
-				
+				app->selectActionCooldown = 20;
 				dialogueList.Del(item);
 				item = item->next;
 				LOG("Next dialogue");

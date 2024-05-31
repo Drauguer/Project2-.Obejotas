@@ -507,6 +507,31 @@ bool BattleScene::Update(float dt)
 		}
 		else
 		{
+			if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 1)
+			{
+				uiGamePadCounter ++;
+				app->selectActionCooldown = 20;
+
+			}
+			if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+			{
+				uiGamePadCounter --;
+				app->selectActionCooldown = 20;
+
+			}
+			continueBattle->isButtonPressed = false;
+			exitBattle->isButtonPressed = false;
+			switch (uiGamePadCounter)
+			{
+			case 0:
+				exitBattle->isButtonPressed = true;
+				break;
+			case 1:
+				continueBattle->isButtonPressed = true;
+				break;
+			default:
+				break;
+			}
 			int winLoseWidth;
 			if (playerLose) 
 			{
@@ -526,9 +551,10 @@ bool BattleScene::Update(float dt)
 			currentFinalAnimation->Update();
 
 		}
-	
+		
 
 	}
+
 
 	return true;
 }

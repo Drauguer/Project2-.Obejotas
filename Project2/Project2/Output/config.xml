@@ -489,7 +489,7 @@
 		  <ability id="2" name="Visión Laser"/>
 	  </enano>
 	  
-    <eldrin x="300" y="200" texturepath="Assets/Textures/ProtaSpritesheet.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
+    <eldrin x="300" y="200" texturepath="Assets/Textures/ProtaSpritesheet.png" life="1" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>

@@ -72,6 +72,8 @@ private:
 
 	bool isExiting = false;
 
+	bool isOnSettings = false;
+	int uiGamePadCounter = 0;
 	
 public:
 	const char* texturePath;
