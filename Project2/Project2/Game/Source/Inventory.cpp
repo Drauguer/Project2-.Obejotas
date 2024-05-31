@@ -484,7 +484,7 @@ bool Inventory::Update(float dt)
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->allies[inventorySelectedIndex]->inventoryChar.start != NULL)
 	{
 		
 
