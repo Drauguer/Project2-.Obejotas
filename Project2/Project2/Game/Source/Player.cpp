@@ -217,7 +217,7 @@ bool Player::Update(float dt)
 			vel = b2Vec2(0, 0);
 			if (isOnPause == false) {
 
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0) {
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0 && pad.l_y < 0.6 && pad.l_y > -0.6) {
 					vel.x += -0.2 * dt;
 					isFlipped = true;
 					currentAnimation = &sideWalk;
@@ -225,7 +225,7 @@ bool Player::Update(float dt)
 					app->audio->PlayFx(walkingRockFx);
 
 				}
-				else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0) {
+				else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0 && pad.l_y < 0.6 && pad.l_y > -0.6) {
 					vel.x += 0.2 * dt;
 					currentAnimation = &sideWalk;
 					sideWalk.Update();
