@@ -27,7 +27,10 @@ bool GuiControlButton::Update(float dt)
 	{
 		if (isButtonPressed) {
 			state = GuiControlState::FOCUSED;
-			if (pad.a == 1 && app->selectActionCooldown == 0) {
+
+			if (((mouseX * scale > bounds.x && mouseX * scale < bounds.x + bounds.w && mouseY * scale > bounds.y && mouseY * scale < bounds.y + bounds.h)
+				&&(app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP))
+				|| (pad.a == 1 && app->selectActionCooldown == 0)) {
 				NotifyObserver();
 				app->selectActionCooldown = 30;
 			}
