@@ -74,6 +74,13 @@ private:
 
 	
 public:
+	const char* texturePath;
+
+	Animation menuAnim;
+	Animation* currentAnimation = nullptr;
+	bool isFlipped = false;
+
+
 	unsigned int hoverFx;
 	unsigned int clickFx;
 	unsigned int declineFx;

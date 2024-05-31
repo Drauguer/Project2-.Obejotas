@@ -8,6 +8,7 @@
 #include "ModuleFonts.h"
 #include "BattleScene.h"
 #include "Audio.h"
+#include "DialogueManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -45,11 +46,21 @@ bool Inventory::Awake(pugi::xml_node config)
 bool Inventory::Start()
 {
 	
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz 1234567890.,'=(?!)+-*/      " };
+	Font = app->fonts->Load("Assets/Fonts/typography.png", lookupTable, 2);
 
 	Mago = app->tex->Load("Assets/Textures/MagoPortrait.png");
 	Enano = app->tex->Load("Assets/Textures/EnanoPortrait.png");
 	Eldrin = app->tex->Load("Assets/Textures/EldrinPortrait.png");
 	Bardo = app->tex->Load("Assets/Textures/BardoPortrait.png");
+	itemText = app->tex->Load("Assets/Textures/Item_Text.png");
+	itemBox = app->tex->Load("Assets/Textures/OliverAssets/Inventory/Item_Box.png");
+	charBox = app->tex->Load("Assets/Textures/OliverAssets/Inventory/Char_Box.png");
+	atkIcon = app->tex->Load("Assets/Textures/OliverAssets/Inventory/Atk_icon.png");
+	defIcon = app->tex->Load("Assets/Textures/OliverAssets/Inventory/Def_icon.png");
+	mpIcon = app->tex->Load("Assets/Textures/OliverAssets/Inventory/MP_icon.png");
+	dexIcon = app->tex->Load("Assets/Textures/OliverAssets/Inventory/Dex_icon.png");
+	healthIcon = app->tex->Load("Assets/Textures/LifeEnemy.png");
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
 
@@ -64,22 +75,40 @@ bool Inventory::Update(float dt)
 	{
 		int t = 0;
 
-		app->render->DrawRectangle({ 35 + i * 150 - app->render->camera.x / scale, 25 - app->render->camera.y / scale, 140, 300 }, 0, 0, 255, 255);
+		app->render->DrawTexture(charBox, 35 + i * 150 - app->render->camera.x / scale, 25 - app->render->camera.y / scale);
 		
 		if (strcmp(app->scene->allies[i]->charName.GetString(), "Gale el Mago") == 0)
 		{
 			
+			app->render->DrawTexture(atkIcon, 50 + i * 150 - app->render->camera.x / scale, 25 - app->render->camera.y / scale);
+			int atkNum = app->scene->allies[i]->attack;
+			std::string atk = std::to_string(atkNum);
+			app->fonts->BlitText(205, 50, Font, atk.c_str());
+			app->render->DrawTexture(defIcon, 50 + i * 150 - app->render->camera.x / scale, 60 - app->render->camera.y / scale);
+			int defNum = app->scene->allies[i]->defense;
+			std::string def = std::to_string(defNum);
+			app->fonts->BlitText(205, 85, Font, def.c_str());
+			app->render->DrawTexture(mpIcon, 50 + i * 150 - app->render->camera.x / scale, 95 - app->render->camera.y / scale);
+			int mpNum = app->scene->allies[i]->magicPower;
+			std::string mp = std::to_string(mpNum);
+			app->fonts->BlitText(205, 120, Font, mp.c_str());
+			app->render->DrawTexture(dexIcon, 50 + i * 150 - app->render->camera.x / scale, 130 - app->render->camera.y / scale);
+			int dexNum = app->scene->allies[i]->dexerity;
+			std::string dex = std::to_string(dexNum);
+			app->fonts->BlitText(205, 155, Font, dex.c_str());
 
 			for (int h = 0; h < 3; ++h)
 			{
-				app->render->DrawRectangle({ 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+
+				app->render->DrawTexture(itemBox, 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale);
+				
 			}
 
 			for (int j = 0; j < 3; ++j)
 			{
 				for (int k = 0; k < 3; ++k)
 				{
-					app->render->DrawRectangle({ 42 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+					app->render->DrawTexture(itemBox, 39 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale);
 					
 					if (t < app->scene->allies[i]->inventoryChar.Count())
 					{
@@ -88,17 +117,17 @@ bool Inventory::Update(float dt)
 							switch (app->scene->allies[i]->inventoryChar[t]->itemType)
 							{
 							case ItemType::HELMET:
-								app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+								
 								app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 								app->scene->allies[i]->inventoryChar[t]->position.y = 30 - app->render->camera.y / scale;
 								break;
 							case ItemType::ARMOR:
-								app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 45 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+								
 								app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 								app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 45 - app->render->camera.y / scale;
 								break;
 							case ItemType::WEAPON:
-								app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 90 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+								
 								app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 								app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 90 - app->render->camera.y / scale;
 								break;
@@ -106,9 +135,9 @@ bool Inventory::Update(float dt)
 
 						}
 						else {
-							app->render->DrawRectangle({ 42 + i * 150 + k * 50 - app->render->camera.x / scale, 180 + j * 50 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
-							app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-							app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+							
+							app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+							app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 						}
 						t++;
 					}
@@ -117,24 +146,57 @@ bool Inventory::Update(float dt)
 
 			}
 
+			SDL_Rect healthBar;
+			healthBar.x = 95 + i * 150 - app->render->camera.x / scale;
+			healthBar.y = 120 - app->render->camera.y / scale;
+			healthBar.w = 36;
+			healthBar.h = 6;
+
 			app->render->DrawTexture(Mago, 75 + i * 150 - app->render->camera.x / scale, 45 - app->render->camera.y / scale);
+
+			int lifeW = (app->scene->allies[i]->life / app->scene->allies[i]->maxHP) * 36;
+			if (lifeW <= 0)
+			{
+				lifeW = 0;
+			}
+			healthBar.w = lifeW;
+
+			app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+
+			app->render->DrawTexture(healthIcon, 75 + i * 150 - app->render->camera.x / scale, 75 - app->render->camera.y / scale);
 
 			t = 0;
 		} 
 		else if (strcmp(app->scene->allies[i]->charName.GetString(), "David el Enano") == 0)
 		{
 			
+			app->render->DrawTexture(atkIcon, 50 + i * 150 - app->render->camera.x / scale, 25 - app->render->camera.y / scale);
+			int atkNum = app->scene->allies[i]->attack;
+			std::string atk = std::to_string(atkNum);
+			app->fonts->BlitText(355, 50, Font, atk.c_str());
+			app->render->DrawTexture(defIcon, 50 + i * 150 - app->render->camera.x / scale, 60 - app->render->camera.y / scale);
+			int defNum = app->scene->allies[i]->defense;
+			std::string def = std::to_string(defNum);
+			app->fonts->BlitText(355, 85, Font, def.c_str());
+			app->render->DrawTexture(mpIcon, 50 + i * 150 - app->render->camera.x / scale, 95 - app->render->camera.y / scale);
+			int mpNum = app->scene->allies[i]->magicPower;
+			std::string mp = std::to_string(mpNum);
+			app->fonts->BlitText(355, 120, Font, mp.c_str());
+			app->render->DrawTexture(dexIcon, 50 + i * 150 - app->render->camera.x / scale, 130 - app->render->camera.y / scale);
+			int dexNum = app->scene->allies[i]->dexerity;
+			std::string dex = std::to_string(dexNum);
+			app->fonts->BlitText(355, 155, Font, dex.c_str());
 
 			for (int h = 0; h < 3; ++h)
 			{
-				app->render->DrawRectangle({ 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+				app->render->DrawTexture(itemBox, 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale);
 			}
 
 			for (int j = 0; j < 3; ++j)
 			{
 				for (int k = 0; k < 3; ++k)
 				{
-					app->render->DrawRectangle({ 42 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+					app->render->DrawTexture(itemBox, 39 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale);
 
 					if (t < app->scene->allies[i]->inventoryChar.Count())
 					{
@@ -143,17 +205,17 @@ bool Inventory::Update(float dt)
 							switch (app->scene->allies[i]->inventoryChar[t]->itemType)
 							{
 							case ItemType::HELMET:
-								app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+								
 								app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 								app->scene->allies[i]->inventoryChar[t]->position.y = 30 - app->render->camera.y / scale;
 								break;
 							case ItemType::ARMOR:
-								app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 45 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+								
 								app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 								app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 45 - app->render->camera.y / scale;
 								break;
 							case ItemType::WEAPON:
-								app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 90 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+								
 								app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 								app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 90 - app->render->camera.y / scale;
 								break;
@@ -161,9 +223,9 @@ bool Inventory::Update(float dt)
 							
 						}
 						else {
-							app->render->DrawRectangle({ 42 + i * 150 + k * 50 - app->render->camera.x / scale, 180 + j * 50 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
-							app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-							app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+							
+							app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+							app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 						}
 						
 						t++;
@@ -172,24 +234,57 @@ bool Inventory::Update(float dt)
 
 			}
 
+			SDL_Rect healthBar;
+			healthBar.x = 95 + i * 150 - app->render->camera.x / scale;
+			healthBar.y = 120 - app->render->camera.y / scale;
+			healthBar.w = 36;
+			healthBar.h = 6;
+
 			app->render->DrawTexture(Enano, 75 + i * 150 - app->render->camera.x / scale, 45 - app->render->camera.y / scale);
+
+			int lifeW = (app->scene->allies[i]->life / app->scene->allies[i]->maxHP) * 36;
+			if (lifeW <= 0)
+			{
+				lifeW = 0;
+			}
+			healthBar.w = lifeW;
+
+			app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+
+			app->render->DrawTexture(healthIcon, 75 + i * 150 - app->render->camera.x / scale, 75 - app->render->camera.y / scale);
 
 			t = 0;
 		}
 		else if (strcmp(app->scene->allies[i]->charName.GetString(), "Eldrin") == 0)
 		{
 
+		app->render->DrawTexture(atkIcon, 50 + i * 150 - app->render->camera.x / scale, 25 - app->render->camera.y / scale);
+		int atkNum = app->scene->allies[i]->attack;
+		std::string atk = std::to_string(atkNum);
+		app->fonts->BlitText(55, 50, Font, atk.c_str());
+		app->render->DrawTexture(defIcon, 50 + i * 150 - app->render->camera.x / scale, 60 - app->render->camera.y / scale);
+		int defNum = app->scene->allies[i]->defense;
+		std::string def = std::to_string(defNum);
+		app->fonts->BlitText(55, 85, Font, def.c_str());
+		app->render->DrawTexture(mpIcon, 50 + i * 150 - app->render->camera.x / scale, 95 - app->render->camera.y / scale);
+		int mpNum = app->scene->allies[i]->magicPower;
+		std::string mp = std::to_string(mpNum);
+		app->fonts->BlitText(55, 120, Font, mp.c_str());
+		app->render->DrawTexture(dexIcon, 50 + i * 150 - app->render->camera.x / scale, 130 - app->render->camera.y / scale);
+		int dexNum = app->scene->allies[i]->dexerity;
+		std::string dex = std::to_string(dexNum);
+		app->fonts->BlitText(55, 155, Font, dex.c_str());
 
 		for (int h = 0; h < 3; ++h)
 		{
-			app->render->DrawRectangle({ 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+			app->render->DrawTexture(itemBox, 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale);
 		}
 
 		for (int j = 0; j < 3; ++j)
 		{
 			for (int k = 0; k < 3; ++k)
 			{
-				app->render->DrawRectangle({ 42 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+				app->render->DrawTexture(itemBox, 39 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale);
 
 				if (t < app->scene->allies[i]->inventoryChar.Count())
 				{
@@ -198,17 +293,17 @@ bool Inventory::Update(float dt)
 						switch (app->scene->allies[i]->inventoryChar[t]->itemType)
 						{
 						case ItemType::HELMET:
-							app->render->DrawRectangle({ 140 + i * 150, 30 - app->render->camera.x / scale, 25 - app->render->camera.y / scale, 25 }, 0, 255, 255, 255);
+							
 							app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 							app->scene->allies[i]->inventoryChar[t]->position.y = 30 - app->render->camera.y / scale;
 							break;
 						case ItemType::ARMOR:
-							app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 45 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+							
 							app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 							app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 45 - app->render->camera.y / scale;
 							break;
 						case ItemType::WEAPON:
-							app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 90 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+							
 							app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 							app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 90 - app->render->camera.y / scale;
 							break;
@@ -216,9 +311,9 @@ bool Inventory::Update(float dt)
 
 					}
 					else {
-						//app->render->DrawRectangle({ 42 + i * 150 + k * 50 - app->render->camera.x / scale, 180 + j * 50 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
-						app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-						app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+						
+						app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+						app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 					}
 
 					t++;
@@ -227,24 +322,57 @@ bool Inventory::Update(float dt)
 
 		}
 
+		SDL_Rect healthBar;
+		healthBar.x = 95 + i * 150 - app->render->camera.x / scale;
+		healthBar.y = 120 - app->render->camera.y / scale;
+		healthBar.w = 36;
+		healthBar.h = 6;
+
 		app->render->DrawTexture(Eldrin, 75 + i * 150 - app->render->camera.x / scale, 45 - app->render->camera.y / scale);
+
+		int lifeW = (app->scene->allies[i]->life / app->scene->allies[i]->maxHP) * 36;
+		if (lifeW <= 0)
+		{
+			lifeW = 0;
+		}
+		healthBar.w = lifeW;
+
+		app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+
+		app->render->DrawTexture(healthIcon, 75 + i * 150 - app->render->camera.x / scale, 75 - app->render->camera.y / scale);
 
 		t = 0;
 		}
 		else if (strcmp(app->scene->allies[i]->charName.GetString(), "Urgo el Bardo") == 0)
 		{
 
+		app->render->DrawTexture(atkIcon, 50 + i * 150 - app->render->camera.x / scale, 25 - app->render->camera.y / scale);
+		int atkNum = app->scene->allies[i]->attack;
+		std::string atk = std::to_string(atkNum);
+		app->fonts->BlitText(505, 50, Font, atk.c_str());
+		app->render->DrawTexture(defIcon, 50 + i * 150 - app->render->camera.x / scale, 60 - app->render->camera.y / scale);
+		int defNum = app->scene->allies[i]->defense;
+		std::string def = std::to_string(defNum);
+		app->fonts->BlitText(505, 85, Font, def.c_str());
+		app->render->DrawTexture(mpIcon, 50 + i * 150 - app->render->camera.x / scale, 95 - app->render->camera.y / scale);
+		int mpNum = app->scene->allies[i]->magicPower;
+		std::string mp = std::to_string(mpNum);
+		app->fonts->BlitText(505, 120, Font, mp.c_str());
+		app->render->DrawTexture(dexIcon, 50 + i * 150 - app->render->camera.x / scale, 130 - app->render->camera.y / scale);
+		int dexNum = app->scene->allies[i]->dexerity;
+		std::string dex = std::to_string(dexNum);
+		app->fonts->BlitText(505, 155, Font, dex.c_str());
 
 		for (int h = 0; h < 3; ++h)
 		{
-			app->render->DrawRectangle({ 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+			app->render->DrawTexture(itemBox, 135 + i * 150 - app->render->camera.x / scale, 30 + 45 * h - app->render->camera.y / scale);
 		}
 
 		for (int j = 0; j < 3; ++j)
 		{
 			for (int k = 0; k < 3; ++k)
 			{
-				app->render->DrawRectangle({ 42 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale, 35, 35 }, 0, 255, 0, 255);
+				app->render->DrawTexture(itemBox, 39 + i * 150 + k * 45 - app->render->camera.x / scale, 180 + j * 45 - app->render->camera.y / scale);
 
 				if (t < app->scene->allies[i]->inventoryChar.Count())
 				{
@@ -253,17 +381,17 @@ bool Inventory::Update(float dt)
 						switch (app->scene->allies[i]->inventoryChar[t]->itemType)
 						{
 						case ItemType::HELMET:
-							app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+							
 							app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 							app->scene->allies[i]->inventoryChar[t]->position.y = 30 - app->render->camera.y / scale;
 							break;
 						case ItemType::ARMOR:
-							app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 45 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+							
 							app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 							app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 45 - app->render->camera.y / scale;
 							break;
 						case ItemType::WEAPON:
-							app->render->DrawRectangle({ 140 + i * 150 - app->render->camera.x / scale, 30 + 90 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
+							
 							app->scene->allies[i]->inventoryChar[t]->position.x = 140 + i * 150 - app->render->camera.x / scale;
 							app->scene->allies[i]->inventoryChar[t]->position.y = 30 + 90 - app->render->camera.y / scale;
 							break;
@@ -271,9 +399,9 @@ bool Inventory::Update(float dt)
 
 					}
 					else {
-						app->render->DrawRectangle({ 42 + i * 150 + k * 50 - app->render->camera.x / scale, 180 + j * 50 - app->render->camera.y / scale, 25, 25 }, 0, 255, 255, 255);
-						app->scene->allies[i]->inventoryChar[t]->position.x = 42 + i * 150 + k * 50 - app->render->camera.x / scale;
-						app->scene->allies[i]->inventoryChar[t]->position.y = 180 + j * 50 - app->render->camera.y / scale;
+						
+						app->scene->allies[i]->inventoryChar[t]->position.x = 47 + i * 150 + k * 45 - app->render->camera.x / scale;
+						app->scene->allies[i]->inventoryChar[t]->position.y = 190 + j * 43 - app->render->camera.y / scale;
 					}
 
 					t++;
@@ -282,7 +410,24 @@ bool Inventory::Update(float dt)
 
 		}
 
+		SDL_Rect healthBar;
+		healthBar.x = 95 + i * 150 - app->render->camera.x / scale;
+		healthBar.y = 120 - app->render->camera.y / scale;
+		healthBar.w = 36;
+		healthBar.h = 6;
+
 		app->render->DrawTexture(Bardo, 75 + i * 150 - app->render->camera.x / scale, 45 - app->render->camera.y / scale);
+
+		int lifeW = (app->scene->allies[i]->life / app->scene->allies[i]->maxHP) * 36;
+		if (lifeW <= 0)
+		{
+			lifeW = 0;
+		}
+		healthBar.w = lifeW;
+
+		app->render->DrawRectangle(healthBar, 0, 255, 0, 255);
+
+		app->render->DrawTexture(healthIcon, 75 + i * 150 - app->render->camera.x / scale, 75 - app->render->camera.y / scale);
 
 		t = 0;
 		}
@@ -339,7 +484,7 @@ bool Inventory::Update(float dt)
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->allies[inventorySelectedIndex]->inventoryChar.start != NULL)
 	{
 		
 
@@ -432,6 +577,8 @@ bool Inventory::Update(float dt)
 
 	if (app->scene->allies[inventorySelectedIndex]->inventoryChar.start != NULL)
 	{
+		app->render->DrawTexture(itemText, 10 - app->render->camera.x / scale, 320 - app->render->camera.y / scale);
+		app->fonts->BlitText(20, 340, Font, app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->description.GetString());
 		app->render->DrawTexture(arrowTexture, app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->position.x - 10, app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->position.y - 15, &currentArrowAnim->GetCurrentFrame());
 	}
 	

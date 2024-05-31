@@ -21,7 +21,7 @@
 
 MainMenu::MainMenu(bool startEnabled) : Module(startEnabled)
 {
-	name.Create("mainmenu");
+	name.Create("MainMenu");
 }
 
 // Destructor
@@ -30,11 +30,32 @@ MainMenu::~MainMenu()
 
 bool MainMenu::Awake(pugi::xml_node config)
 {
+	for (pugi::xml_node node = config.child("menuAnim").child("pushback"); node; node = node.next_sibling("pushback")) {
+		menuAnim.PushBack({ node.attribute("x").as_int(),
+						node.attribute("y").as_int(),
+						node.attribute("width").as_int(),
+						node.attribute("height").as_int() });
+
+	}
+	menuAnim.speed = config.child("menuAnim").attribute("animspeed").as_float();
+	menuAnim.loop = config.child("menuAnim").attribute("loop").as_bool();
+	texturePath = config.attribute("texturePath").as_string();
+
+
 	return true;
 }
 
 bool MainMenu::Start()
 {
+
+	img = app->tex->Load(texturePath);
+
+
+
+	currentAnimation = &menuAnim;
+
+
+
 	hoverFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/001Hover01.wav");
 	clickFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/013Confirm03.wav");
 	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
@@ -42,7 +63,11 @@ bool MainMenu::Start()
 
 
 	app->win->GetWindowSize(windowW, windowH);
-	img = app->tex->Load("Assets/Textures/main_screen.png");
+	
+
+
+
+
 
 	SDL_Rect StartButton = { windowW / 2 - 400,windowH / 2 +100, 240,80 };
 	start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Start", StartButton, this);
@@ -104,9 +129,15 @@ bool MainMenu::PreUpdate()
 
 bool MainMenu::Update(float dt)
 {
+
+
+	currentAnimation->Update();
+	app->render->DrawTexture(img, textPosX, textPosY, &currentAnimation->GetCurrentFrame(), false);
+
 	GamePad& pad = app->input->pads[0];
 
-	app->render->DrawTexture(img, textPosX, textPosY, false);
+
+
 	
 	if (isExiting == true)
 	{

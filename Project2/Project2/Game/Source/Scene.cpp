@@ -477,14 +477,6 @@ bool Scene::Update(float dt)
 	// Prueba para añadir allies
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 	{
-		for (pugi::xml_node allyNode = scene_parameter.child("bardo"); allyNode; allyNode = allyNode.next_sibling("bardo"))
-		{
-			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
-			allies.Add(ally);
-			ally->parameters = allyNode;
-			ally->Start();
-
-		}
 
 		for (pugi::xml_node allyNode = scene_parameter.child("mage"); allyNode; allyNode = allyNode.next_sibling("mage"))
 		{
@@ -503,6 +495,39 @@ bool Scene::Update(float dt)
 			ally->Start();
 
 		}
+
+		for (pugi::xml_node allyNode = scene_parameter.child("bardo"); allyNode; allyNode = allyNode.next_sibling("bardo"))
+		{
+			BaseAlly* ally = (BaseAlly*)app->entityManager->CreateEntity(EntityType::ALLY);
+			allies.Add(ally);
+			ally->parameters = allyNode;
+			ally->Start();
+
+		}
+
+		int k = 0;
+
+		for (int i = 0; i < listItems.Count(); ++i)
+		{
+			
+
+			if (k < 9)
+			{
+				allies[0]->inventoryChar.Add(listItems[i]);
+				k++;
+			}
+			else if (k >= 9 && k < 18)
+			{
+				allies[1]->inventoryChar.Add(listItems[i]);
+				k++;
+			}
+			else if (k >= 18 && k < 27)
+			{
+				allies[2]->inventoryChar.Add(listItems[i]);
+				k++;
+			}
+		}
+		
 	}
 
 

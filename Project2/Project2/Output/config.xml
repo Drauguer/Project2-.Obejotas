@@ -41,7 +41,47 @@
 	
 </logoScene>
 
-  <window>
+
+	
+	
+	<MainMenu texturePath="Assets/Textures/OliverAssets/Animationmainscreen/MenuSpritesheet.png">
+		<menuAnim animspeed="0.2f" loop="true">
+
+			<pushback x="0" y="0" width="788" height="450"/>
+			<pushback x="788" y="0" width="788" height="450"/>
+			<pushback x="1576" y="0" width="788" height="450"/>
+			<pushback x="2364" y="0" width="788" height="450"/>
+			<pushback x="3152" y="0" width="788" height="450"/>
+			<pushback x="3940" y="0" width="788" height="450"/>
+			<pushback x="4728" y="0" width="788" height="450"/>
+			<pushback x="5516" y="0" width="788" height="450"/>
+			<pushback x="6304" y="0" width="788" height="450"/>
+			<pushback x="7092" y="0" width="788" height="450"/>
+			<pushback x="7880" y="0" width="788" height="450"/>
+			<pushback x="8668" y="0" width="788" height="450"/>
+			<pushback x="9456" y="0" width="788" height="450"/>
+			<pushback x="10244" y="0" width="788" height="450"/>
+			<pushback x="11032" y="0" width="788" height="450"/>
+			<pushback x="10244" y="0" width="788" height="450"/>
+			<pushback x="9456" y="0" width="788" height="450"/>
+			<pushback x="8668" y="0" width="788" height="450"/>
+			<pushback x="7880" y="0" width="788" height="450"/>
+			<pushback x="7092" y="0" width="788" height="450"/>
+			<pushback x="6304" y="0" width="788" height="450"/>
+			<pushback x="5516" y="0" width="788" height="450"/>
+			<pushback x="4728" y="0" width="788" height="450"/>
+			<pushback x="3940" y="0" width="788" height="450"/>
+			<pushback x="3152" y="0" width="788" height="450"/>
+			<pushback x="2364" y="0" width="788" height="450"/>
+			<pushback x="1576" y="0" width="788" height="450"/>
+			<pushback x="788" y="0" width="788" height="450"/>
+			<pushback x="0" y="0" width="788" height="450"/>
+		</menuAnim>
+
+</MainMenu>
+
+
+	<window>
     <resolution width="1280" height="720" scale="2"	/>
     <fullscreen value="false"/>
     <borderless value="false"/>
@@ -787,21 +827,21 @@
 		  <ability id="2" name="Visión Laser"/>
 	  </enemy>
 	  
-	  <itemMage x="-100" y="-100" texturepath="Assets/Textures/Items/Armors/Armers3.png" type="2" itemName="Mage Item Quest" bonusMP="20" bonusDEF="15"/>
-	  <itemQuest3 x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet1.png" type="1" itemName="Helmet 1" bonusHP="25" bonusATK="15"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet2.png" type="1" itemName="Helmet 2" bonusHP="15" bonusMP="25"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet3.png" type="1" itemName="Helmet 3" bonusHP="35" bonusDEF="25"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet4.png" type="1" itemName="Helmet 4" bonusHP="20" bonusATK="35"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Armers1.png" type="2" itemName="Armor 1" bonusDEF="15" bonusDEX="25"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Armers3.png" type="2" itemName="Armor 3" bonusDEF="35" bonusATK="20"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Armers4.png" type="2" itemName="Armor 4" bonusDEF="50" bonusHP="20"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon1.png" type="3" itemName="Weapon 1" bonusATK="20" bonusDEF="15"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon2.png" type="3" itemName="Weapon 2" bonusATK="25" bonusMP="20"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon3.png" type="3" itemName="Weapon 3" bonusATK="20" bonusDEX="30"/>
-	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Weapon4.png" type="3" itemName="Weapon 4" bonusATK="55"/>
-	  <itemNum1 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num1.png" type="4" itemName="Num 1"/>
-	  <itemNum2 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num2.png" type="4" itemName="Num 2"/>
-	  <itemNum3 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num3.png" type="4" itemName="Num 3"/>
+	  <itemMage x="-100" y="-100" texturepath="Assets/Textures/Items/Armors/Armers3.png" type="2" itemName="Mage Item Quest" bonusMP="20" bonusDEF="15" description="the magic armor that the mage has lost +20 mp +15 def"/>
+	  <itemQuest3 x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet1.png" type="1" itemName="Helmet 1" bonusHP="25" bonusATK="15" description="mysterious helmet that boosts attack +25 hp +15 atk"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet2.png" type="1" itemName="Helmet 2" bonusHP="15" bonusMP="25" description="a helmet that boosts magic power +15 hp +25 mp"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet3.png" type="1" itemName="Helmet 3" bonusHP="35" bonusDEF="25" description="a very resistant futuristic helmet +35 hp +25 def"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Helmets/Helmet4.png" type="1" itemName="Helmet 4" bonusHP="20" bonusATK="35" description="strange helmet with alien origins +20 hp +35 atk"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Armors/Armers1.png" type="2" itemName="Armor 1" bonusDEF="15" bonusDEX="25" description="stylized and light armor +15 def +25 dex"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Armors/Armers3.png" type="2" itemName="Armor 3" bonusDEF="35" bonusATK="20" description="perfect armor for melee fighters +35 def +20 atk"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Armors/Armers4.png" type="2" itemName="Armor 4" bonusDEF="50" bonusHP="20" description="the most resistant armor in the reign +50 def +20 hp"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Weapons/Weapons1.png" type="3" itemName="Weapon 1" bonusATK="20" bonusDEF="15" description="a legendary and classic sword +20 atk +15 def"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Weapons/Weapons2.png" type="3" itemName="Weapon 2" bonusATK="25" bonusMP="20" description="an incredible sword imbued with magic +25 atk +20 mp"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Weapons/Weapons3.png" type="3" itemName="Weapon 3" bonusATK="20" bonusDEX="30" description="guns that never misses its shots +20 atk +30 dex"/>
+	  <item x="-100" y="-100" texturepath="Assets/Textures/Items/Weapons/Weapons4.png" type="3" itemName="Weapon 4" bonusATK="55" description="a devastating sword that cuts everything +55 atk"/>
+	  <itemNum1 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num1.png" type="4" itemName="Num 1" description="first number of the castle password (5)"/>
+	  <itemNum2 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num2.png" type="4" itemName="Num 2" description="second number of the castle password (8)"/>
+	  <itemNum3 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num3.png" type="4" itemName="Num 3" description="third number of the castle password (4)"/>
 
   </scene>
 
