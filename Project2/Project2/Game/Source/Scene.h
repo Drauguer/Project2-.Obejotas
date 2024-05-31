@@ -69,12 +69,20 @@ public:
 
 	bool CheckAllPilars();
 
+	void GamePadUi(List<GuiControlButton*> members, bool isOnSettings);
+
+	//el resultado se hace al dar enter, se hace un switch del id del boton actual 
+	//Para navegar es mas complicado deberia haber una lista de todos los botones actuales 
+
 	pugi::xml_node scene_parameter;
 	bool IsExiting = false;
+	bool isOnSettings = false;
 
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
+
+	int uiGamePadCounter = 0;
 	
 	bool IsVsyncActive = false;
 	uint texW, texH;
@@ -105,6 +113,8 @@ private:
 	Dialogue* testDialogue2;
 
 public:
+
+
 
 	//L03: DONE 3b: Declare a Player attribute
 	Player* player;

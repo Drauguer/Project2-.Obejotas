@@ -252,7 +252,7 @@ bool Player::Update(float dt)
 
 				pbody->body->SetLinearVelocity(vel);
 
-				if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+				if (app->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN || pad.x == 1 && app->selectActionCooldown==0)
 				{
 					
 
@@ -271,6 +271,7 @@ bool Player::Update(float dt)
 						app->inventory->Enable();
 					}
 					app->audio->PlayFx(app->scene->hoverFx);
+					app->selectActionCooldown = 30;
 				}
 
 
@@ -283,7 +284,9 @@ bool Player::Update(float dt)
 			vel = b2Vec2(0, 0);
 			pbody->body->SetLinearVelocity(vel);
 		}
-		
+		if (app->selectActionCooldown > 0) {
+			app->selectActionCooldown--;
+		}
 		if (showDoorLocked)
 		{
 			

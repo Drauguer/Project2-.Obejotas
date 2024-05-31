@@ -367,6 +367,19 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 
 		break;
+
+		/*
+	Ataques del bardo
+
+		1- Curacion: sana un poco a todos los aliados (sprite: SatyrAttack1_Icon)
+		2- Ataque multiple: hace un poco de daño a todos los enemigos (sprite: SatyrAttack2_Icon)
+		3- Ataque a un solo objetivo: hace daño a un enemigo (hace falta seleccionarlo) (sprite: SatyrAttack3_Icon)
+
+	Ataque del enano
+
+		Hemos puesto el grito al protagonista y el enano tendra un ataque que le sube la defensa (icono de escudo)
+	*/
+
 	}
 }
 

@@ -17,6 +17,8 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	bool isButtonPressed = false;
+
 private:
 
 	int mouseX, mouseY;
@@ -24,6 +26,7 @@ private:
 
 	bool canClick = true;
 	bool drawBasic = false;
+	int cooldown = 0;
 };
 
 #endif // __GUICONTROLBUTTON_H__
