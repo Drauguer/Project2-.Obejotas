@@ -172,6 +172,7 @@ public:
 	bool isPlayerinPuzzle2 = false;
 	/*bool hasPlayerEnteredLevel2 = false;*/
 	bool isPlayerinLevel2Room1 = false;
+	bool hasEnteredBoss = false;
 
 	// ID for combats
 	int combatID = 0;
