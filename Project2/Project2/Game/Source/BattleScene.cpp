@@ -107,7 +107,8 @@ bool BattleScene::Start()
 	lifeEldrin = app->tex->Load("Assets/Textures/LifeEldrin.png");
 	lifeBardo = app->tex->Load("Assets/Textures/LifeBardo.png");
 	lifeEnemy = app->tex->Load("Assets/Textures/LifeEnemy.png");
-
+	IdleContinueButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalContinue.png");
+	IdleExitButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalExit.png");
 	background = app->tex->Load("Assets/Maps/FondoCombate.png");
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
@@ -118,11 +119,11 @@ bool BattleScene::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	SDL_Rect ContinueButton_ = { windowW / 2 + 60,windowH / 2 + 120, 240, 80 };
-	continueBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continue", ContinueButton_, this);
+	continueBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continue", ContinueButton_, this, IdleContinueButton);
 	continueBattle->state = GuiControlState::DISABLED;
 
 	SDL_Rect ExitButton_ = { windowW / 2 - 360,windowH / 2 + 120, 240, 80 };
-	exitBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this);
+	exitBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this, IdleExitButton);
 	exitBattle->state = GuiControlState::DISABLED;
 	
 	

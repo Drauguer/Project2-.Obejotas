@@ -197,6 +197,14 @@ public:
 	bool isZone1MusicPlayed = false;
 	
 	
+	SDL_Texture* IdleStartButton;
+	SDL_Texture* IdleContinueButton;
+	SDL_Texture* IdleOptionsButton;
+	SDL_Texture* IdleExitButton;
+	SDL_Texture* IdleVsyncButton;
+	SDL_Texture* IdleFullScreenButton;
+	SDL_Texture* IdleNormalScreenButton;
+	SDL_Texture* IdleBackButton;
 
 	// Inventory icon
 	SDL_Texture* inventoryIdle;

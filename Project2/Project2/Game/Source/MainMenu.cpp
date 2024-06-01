@@ -61,6 +61,25 @@ bool MainMenu::Start()
 	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
 	deniedFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/033Denied03.wav");
 
+	IdleStartButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalStart.png");
+	IdleContinueButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalContinue.png");
+	IdleOptionsButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalOptions.png");
+	IdleExitButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalExit.png");
+
+	IdleBackButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsPrincipalBack.png");
+	IdleFullScreenButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsPrincipalMaximizar.png");
+	IdleNormalScreenButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsPrincipalMinimizar.png");
+	IdleVsyncButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsPrincipalVsync.png");
+
+	ActiveStartButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalStartHighlighted.png");
+	ActiveContinueButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalContinueHighlighted.png");
+	ActiveOptionsButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalOptionsHighlighted.png");
+	ActiveExitButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalExitHighlighted.png");
+
+	ActiveBackButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsReturnHighlighted.png");
+	ActiveFullScreenButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsMaximisesHighlighted.png");
+	ActiveNormalScreenButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsMininizesHighlighted.png");
+	ActiveVsyncButton = app->tex->Load("Assets/Textures/BotonesUI/SettingsVsyncHighlighted.png");
 
 	app->win->GetWindowSize(windowW, windowH);
 	
@@ -70,51 +89,51 @@ bool MainMenu::Start()
 
 
 	SDL_Rect StartButton = { windowW / 2 - 400,windowH / 2 +100, 240,80 };
-	start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Start", StartButton, this);
+	start = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Start", StartButton, this,IdleStartButton);
 
 	SDL_Rect ExitButton = { windowW / 2 - 400,windowH / 2 + 240, 240, 80 };
-	exit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton, this);
+	exit = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton, this, IdleExitButton);
 
 	SDL_Rect SettingsButton = { windowW / 2 - 0,windowH / 2 +240, 240, 80 };
-	setting = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Settings", SettingsButton, this);
+	setting = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Settings", SettingsButton, this, IdleOptionsButton);
 
 	SDL_Rect GoBackButton = { windowW / 2 + 260,windowH / 2 +240, 240, 80 };
-	turnBack = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Go Back", GoBackButton, this);
+	turnBack = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Go Back", GoBackButton, this, IdleBackButton);
 	turnBack->state = GuiControlState::DISABLED;
 
 	SDL_Rect ContinueButton = { windowW / 2 +0, windowH / 2 + 100, 240, 80 };
-	continue_ = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Continue", ContinueButton, this);
+	continue_ = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Continue", ContinueButton, this, IdleContinueButton);
 
 	SDL_Rect FullScreenCheck = { windowW / 2 -400,windowH / 2 + 80, 240, 80 };
-	FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Full Screen", FullScreenCheck, this);
+	FullScreen = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Full Screen", FullScreenCheck, this, IdleFullScreenButton);
 	FullScreen->state = GuiControlState::DISABLED;
 
 	SDL_Rect FullScreenCheckOff = { windowW / 2 - 210,windowH / 2 - 240, 240, 80 };
-	FullScreenOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Full Screen Off", FullScreenCheckOff, this);
+	FullScreenOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 12, "Full Screen Off", FullScreenCheckOff, this, IdleNormalScreenButton);
 	FullScreenOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect VsincCheck = { windowW / 2 + 260,windowH / 2 + 80 , 240, 80 };
-	Vsinc = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "Vsync", VsincCheck, this);
+	Vsinc = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 13, "Vsync", VsincCheck, this, IdleVsyncButton);
 	Vsinc->state = GuiControlState::DISABLED;
 
 	SDL_Rect VsincCheckOff = { windowW / 2 + 260,windowH / 2 + 140 , 240, 80 };
-	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Vsync Off", VsincCheckOff, this);
+	VsincOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Vsync Off", VsincCheckOff, this, IdleVsyncButton);
 	VsincOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect SoundOff = { windowW / 2 +260,windowH / 2 - 80,240,80 };
-	AudioOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Audio Off", SoundOff, this);
+	AudioOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 15, "Audio Off", SoundOff, this, IdleVsyncButton);
 	AudioOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect SoundOn = { windowW / 2 +260,windowH / 2 - 140,240,80 };
-	AudioOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Audio On", SoundOn, this);
+	AudioOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 16, "Audio On", SoundOn, this, IdleVsyncButton);
 	AudioOn->state = GuiControlState::DISABLED;
 
 	SDL_Rect EffectOff = { windowW / 2 + 260,windowH / 2 + -260,240,80 };
-	FxOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "Fx Off", EffectOff, this);
+	FxOff = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 17, "Fx Off", EffectOff, this, IdleVsyncButton);
 	FxOff->state = GuiControlState::DISABLED;
 
 	SDL_Rect EffectOn = { windowW / 2 +260,windowH / 2 -320,240,80 };
-	FxOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, "Fx On", EffectOn, this);
+	FxOn = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, "Fx On", EffectOn, this, IdleVsyncButton);
 	FxOn->state = GuiControlState::DISABLED;
 
 	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/TitleMusic.ogg", 2.0f);

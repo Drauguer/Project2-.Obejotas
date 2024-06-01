@@ -127,6 +127,8 @@ private:
 
 	GuiControlButton* exitBattle;
 	GuiControlButton* continueBattle;
+	SDL_Texture* IdleExitButton;
+	SDL_Texture* IdleContinueButton;
 
 	bool isExiting = false;
 
