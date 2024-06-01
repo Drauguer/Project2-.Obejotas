@@ -886,14 +886,18 @@ void BattleScene::CheckEnemyAbility(int abilityId, int indexPlayerToAttack) {
 		}
 		break;
 	case 1:
-		app->scene->enemies[currentEnemyInCombatIndex + 1]->life -= 10;
-		app->scene->enemies[currentEnemyInCombatIndex]->life += 25;
-		if (app->scene->enemies[currentEnemyInCombatIndex]->life >= app->scene->enemies[currentEnemyInCombatIndex]->maxHP)
+		if (currentEnemyInCombatIndex + 1 < app->scene->enemies.Count())
 		{
-			app->scene->enemies[currentEnemyInCombatIndex]->life = app->scene->enemies[currentEnemyInCombatIndex]->maxHP;
-		}
+			app->scene->enemies[currentEnemyInCombatIndex + 1]->life -= 10;
+			app->scene->enemies[currentEnemyInCombatIndex]->life += 25;
+			if (app->scene->enemies[currentEnemyInCombatIndex]->life >= app->scene->enemies[currentEnemyInCombatIndex]->maxHP)
+			{
+				app->scene->enemies[currentEnemyInCombatIndex]->life = app->scene->enemies[currentEnemyInCombatIndex]->maxHP;
+			}
 
-		printf("Daño a su amigo y se cura\n");
+			printf("Daño a su amigo y se cura\n");
+		}
+		
 		break;
 	case 2:
 		damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexPlayerToAttack]->defense * 20;
