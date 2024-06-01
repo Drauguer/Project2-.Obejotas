@@ -812,7 +812,7 @@ void BattleScene::TextAttack(int indexAttack)
 		break;
 	case 1:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "wroarrrrrr!! (+ATK)");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "wroarrrrrr!! (+atk)");
 		break;
 	case 2:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
@@ -836,7 +836,7 @@ void BattleScene::TextAttack(int indexAttack)
 		break;
 	case 7:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "im immovable! (+DEF)");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "im immovable! (+def)");
 		break;
 	case 8:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
@@ -848,7 +848,7 @@ void BattleScene::TextAttack(int indexAttack)
 		break;
 	case 10:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "don't worry, be happy! (+HP y +ATK)");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "don't worry, be happy! (+hp y +atk)");
 		break;
 	case 11:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
