@@ -70,6 +70,24 @@ private:
 	uint windowW, windowH;
 	SDL_Texture* mouseTileTex = nullptr;
 
+	SDL_Texture* IdleStartButton;
+	SDL_Texture* IdleContinueButton;
+	SDL_Texture* IdleOptionsButton;
+	SDL_Texture* IdleExitButton;
+	SDL_Texture* IdleVsyncButton;
+	SDL_Texture* IdleFullScreenButton;
+	SDL_Texture* IdleNormalScreenButton;
+	SDL_Texture* IdleBackButton;
+
+	SDL_Texture* ActiveStartButton;
+	SDL_Texture* ActiveContinueButton;
+	SDL_Texture* ActiveOptionsButton;
+	SDL_Texture* ActiveExitButton;
+	SDL_Texture* ActiveVsyncButton;
+	SDL_Texture* ActiveFullScreenButton;
+	SDL_Texture* ActiveNormalScreenButton;
+	SDL_Texture* ActiveBackButton;
+
 	bool isExiting = false;
 
 	bool isOnSettings = false;
