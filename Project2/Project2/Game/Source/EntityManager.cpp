@@ -11,6 +11,7 @@
 #include "PuzlePilar.h"
 #include "PuzleArrows.h"
 #include "PuzlePassword.h"
+#include "HealingStatue.h"
 
 
 #include "Defs.h"
@@ -117,7 +118,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	break;
 	case EntityType::PUZLE_ARROWS:
 		entity = new PuzleArrows();
-		break;;
+		break;
+	case EntityType::HEALING_STATUE:
+		entity = new HealingStatue();
+		break;
 	default:
 		break;
 	}

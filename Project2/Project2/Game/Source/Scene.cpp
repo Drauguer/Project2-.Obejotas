@@ -17,6 +17,7 @@
 #include "PuzlePilar.h"
 #include "PuzleArrows.h"
 #include "PuzlePassword.h"
+#include "HealingStatue.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -146,8 +147,6 @@ bool Scene::Awake(pugi::xml_node config)
 	case 9:
 		app->map->name = config.child("mapBoss").attribute("name").as_string();
 		app->map->path = config.child("mapBoss").attribute("path").as_string();
-
-		isPlayerinPuzzle2 = true;
 		break;
 
 	}
@@ -180,6 +179,18 @@ bool Scene::Awake(pugi::xml_node config)
 			
 		}
 		
+	}
+	// iterate Healing Statues in scene
+	for (pugi::xml_node statueNode = config.child("healing_statue"); statueNode; statueNode = statueNode.next_sibling("healing_statue"))
+	{
+		if (statueNode.attribute("mapID").as_int() == mapID)
+		{
+			HealingStatue* statue = (HealingStatue*)app->entityManager->CreateEntity(EntityType::HEALING_STATUE);
+			statue->parameters = statueNode;
+
+
+		}
+
 	}
 	for (pugi::xml_node pilarNode = config.child("puzlePilar"); pilarNode; pilarNode = pilarNode.next_sibling("puzlePilar"))
 	{

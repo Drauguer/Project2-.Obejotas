@@ -108,6 +108,11 @@ private:
 	SDL_Texture* healingMagic;
 	SDL_Texture* laserCannon;
 	SDL_Texture* martillazo;
+	SDL_Texture* elMuro;
+	SDL_Texture* lluviaAsesina;
+	SDL_Texture* inspiracionBardica;
+	SDL_Texture* vivaRock;
+	SDL_Texture* musicaMaldita;
 
 	// Vidas Personajes
 	SDL_Texture* lifeMago;

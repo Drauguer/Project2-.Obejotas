@@ -401,9 +401,9 @@
 		  <dialogue text="for the king!!!!!"/>
 	  </npc>
 
-	  <npc x="1024" y="128" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="9" npcID="14" hasQuest="false">
+	  <npc x="288" y="288" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="9" npcID="14" hasQuest="false">
 		  <idleAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="64" width="32" height="32"/>
+			  <pushback x="96" y="96" width="32" height="32"/>
 		  </idleAnim>
 		  <dialogue text="you finally arrived here..."/>
 		  <dialogue text="after all the obstacles"/>
@@ -416,7 +416,7 @@
 		  <dialogue text="me"/>
 	  </npc>
 
-    <mage x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
+    <mage x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="50" attack="30" defense="25" magicPower="95" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
@@ -449,7 +449,7 @@
 		
     </mage>
 
-	  <enano x="200" y="300" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="David el Enano">
+	  <enano x="200" y="300" texturepath="Assets/Textures/SpriteSheetEnanoCombate.png" life="120" attack="50" defense="60" magicPower="15" dexerity="75" charName="David el Enano">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -485,11 +485,11 @@
 
 		  </Attack>
 		  <ability id="6" name="Martillazo"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="7" name="El Muro"/>
+		  <ability id="2" name="Disparos Láser"/>
 	  </enano>
 	  
-    <eldrin x="300" y="200" texturepath="Assets/Textures/ProtaSpritesheet.png" life="1" attack="60" defense="50" magicPower="15" dexerity="85" charName="Eldrin">
+    <eldrin x="300" y="200" texturepath="Assets/Textures/ProtaSpritesheet.png" life="100" attack="70" defense="50" magicPower="50" dexerity="85" charName="Eldrin">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
@@ -514,12 +514,12 @@
 			<pushback x="880" y="64" width="88" height="64"/>
 	
 		</Attack>
-        <ability id="6" name="Martillazo"/>
+        <ability id="8" name="Espada Santa"/>
         <ability id="1" name="Grito de Guerra"/>
-		<ability id="2" name="Visión Laser"/>
+		<ability id="9" name="Lluvia Asesina"/>
     </eldrin>
 
-	<bardo x="300" y="400" texturepath="Assets/Textures/SatyrSpriteSheet.png" life="120" attack="60" defense="50" magicPower="15" dexerity="85" charName="Urgo el Bardo">
+	<bardo x="300" y="400" texturepath="Assets/Textures/SatyrSpriteSheet.png" life="70" attack="25" defense="70" magicPower="70" dexerity="100" charName="Urgo el Bardo">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -549,9 +549,9 @@
 			  <pushback x="1274" y="64" width="91" height="64"/>
 
 		  </Attack>
-		  <ability id="6" name="Martillazo"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="10" name="Inspiración Bardica"/>
+		  <ability id="11" name="Viva el Rock!"/>
+		  <ability id="12" name="Musica Maldita"/>
 	  </bardo>
 
 	  <ally2 x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="80" attack="30" defense="35" magicPower="85" dexerity="70" charName="Gale el Mago">
@@ -905,6 +905,11 @@
 	  <itemNum2 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num2.png" type="4" itemName="Num 2" description="second number of the castle password (8)"/>
 	  <itemNum3 x="-100" y="-100" texturepath="Assets/Textures/Items/Password/Num3.png" type="4" itemName="Num 3" description="third number of the castle password (4)"/>
 
+	  <healing_statue x="2122" y="416" mapID="0"/>
+	  <healing_statue x="576" y="256" mapID="5"/>
+	  <healing_statue x="1472" y="32" mapID="5"/>
+	  <healing_statue x="160" y="384" mapID="9"/>
+	
   </scene>
 
 	<inventory texturePath="Assets/Textures/SelectionArrow.png">

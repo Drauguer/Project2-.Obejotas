@@ -140,22 +140,27 @@ bool BaseAlly::Update(float dt)
 	dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
 	dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
 
-	SetStats();
+	if (app->battleScene->hasStartedCombat)
+	{
+		SetStats();
 
-	if (helmetItem != NULL)
-	{
-		SetHelmetStats();
-	}
-		
-	if (armorItem != NULL)
-	{
-		SetArmorStats();
+		if (helmetItem != NULL)
+		{
+			SetHelmetStats();
+		}
+
+		if (armorItem != NULL)
+		{
+			SetArmorStats();
+		}
+
+		if (weaponItem != NULL)
+		{
+			SetWeaponStats();
+		}
 	}
 
-	if (weaponItem != NULL)
-	{
-		SetWeaponStats();
-	}
+	
 
 
 	
@@ -332,7 +337,7 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		{
 			if (life < maxHP)
 			{
-				life += 15;
+				life += 20;
 				printf("Has curado a %s\n", app->scene->allies[i]->charName.GetString());
 				if (life >= maxHP)
 				{
@@ -368,6 +373,134 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 		app->battleScene->combatState = CombatState::SELECT_ENEMY;
 
 		break;
+	case 7:
+		hasAttacked = true;
+		printf("Aumenta la defensa x1,5\n");
+
+		app->audio->PlayFx(attackUpSFX);
+		app->battleScene->idAttack = 7;
+		app->scene->allies[currentPlayerIndex]->defense *= 1.5f;
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
+		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		}
+		else
+		{
+			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+		}
+		break;
+	case 8:
+		printf("ESPADA SANTA!!!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
+
+		app->battleScene->idAttack = 8;
+		app->battleScene->combatState = CombatState::SELECT_ENEMY;
+		break;
+	case 9:
+		hasAttacked = true;
+		printf("Lluvia Asesina!!!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
+
+		app->battleScene->isText = true;
+
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
+
+		app->battleScene->idAttack = 9;
+		damage = app->scene->allies[currentPlayerIndex]->magicPower / 2;
+
+		for (int i = 0; i < app->scene->enemies.Count(); ++i)
+		{
+			app->scene->enemies[i]->life -= damage;
+			printf("Has hecho %f de daño al enemigo %d\n", damage, i);
+		}
+
+		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		}
+		else
+		{
+			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+		}
+		break;
+	case 10:
+		hasAttacked = true;
+		printf("Un poco de musica curativa y motivacion!!!\n");
+		app->audio->PlayFx(hpRecoverSFX);
+
+		app->battleScene->isText = true;
+
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
+
+		app->battleScene->idAttack = 10;
+
+		for (int i = 0; i < app->scene->allies.Count(); ++i)
+		{
+			if (life < maxHP)
+			{
+				life += 15;
+				printf("Has curado a %s\n", app->scene->allies[i]->charName.GetString());
+				if (life >= maxHP)
+				{
+					life = maxHP;
+				}
+			}
+			app->scene->allies[i]->attack *= 1.2f;
+		}
+
+		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		}
+		else
+		{
+			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+		}
+		break;
+	case 11:
+		hasAttacked = true;
+		printf("Viva el Rock!!!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
+
+		app->battleScene->isText = true;
+
+		app->scene->allies[currentPlayerIndex]->SetAttackAnimation();
+
+		app->battleScene->idAttack = 11;
+		damage = app->scene->allies[currentPlayerIndex]->magicPower / 2;
+
+		for (int i = 0; i < app->scene->enemies.Count(); ++i)
+		{
+			app->scene->enemies[i]->life -= damage;
+			printf("Has hecho %f de daño al enemigo %d\n", damage, i);
+		}
+
+		if (app->battleScene->CheckAllPlayersAttacked()) {
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::ENEMY_ATTACK;
+		}
+		else
+		{
+			app->battleScene->currentPlayerInCombatIndex = app->battleScene->FindFirstPlayerToAttackIndex();
+			app->battleScene->CheckState();
+			app->battleScene->combatState = CombatState::SELECT_CHARACTER;
+		}
+		break;
+	case 12:
+		printf("BOMBAZO!!!\n");
+		app->audio->PlayFx(fireMagicAttackSFX);
+
+		app->battleScene->idAttack = 5;
+		app->battleScene->combatState = CombatState::SELECT_ENEMY;
+		break;
+
 
 	/*
 	Ataques del bardo
@@ -395,7 +528,7 @@ void BaseAlly::SetStats()
 
 void BaseAlly::SetHelmetStats()
 {
-	life = life + helmetItem->bonusHP;
+	
 	maxHP = maxHP + helmetItem->bonusHP;
 	attack = attack + helmetItem->bonusATK;
 	defense = defense + helmetItem->bonusDEF;
@@ -405,7 +538,7 @@ void BaseAlly::SetHelmetStats()
 
 void BaseAlly::SetArmorStats()
 {
-	life = life + armorItem->bonusHP;
+	
 	maxHP = maxHP + armorItem->bonusHP;
 	attack = attack + armorItem->bonusATK;
 	defense = defense + armorItem->bonusDEF;
@@ -415,7 +548,7 @@ void BaseAlly::SetArmorStats()
 
 void BaseAlly::SetWeaponStats()
 {
-	life = life + weaponItem->bonusHP;
+	
 	maxHP = maxHP + weaponItem->bonusHP;
 	attack = attack + weaponItem->bonusATK;
 	defense = defense + weaponItem->bonusDEF;

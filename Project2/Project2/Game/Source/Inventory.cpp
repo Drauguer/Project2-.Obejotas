@@ -520,17 +520,38 @@ bool Inventory::Update(float dt)
 			app->scene->allies[inventorySelectedIndex]->isHelmetEquipped = true;
 			break;
 		case ItemType::ARMOR:
-			if (app->scene->allies[inventorySelectedIndex]->isArmorEquipped)
+			if (strcmp(app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->itemName.GetString(), "Mage Item Quest") == 0)
 			{
-				app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = false;
-				app->scene->allies[inventorySelectedIndex]->armorItem = app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex];
-				app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = true;
+				if (inventorySelectedIndex != 0)
+				{
+					if (app->scene->allies[inventorySelectedIndex]->isArmorEquipped)
+					{
+						app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = false;
+						app->scene->allies[inventorySelectedIndex]->armorItem = app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex];
+						app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = true;
+					}
+					else {
+						app->scene->allies[inventorySelectedIndex]->armorItem = app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex];
+						app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = true;
+					}
+					app->scene->allies[inventorySelectedIndex]->isArmorEquipped = true;
+				}
 			}
-			else {
-				app->scene->allies[inventorySelectedIndex]->armorItem = app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex];
-				app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = true;
+			else
+			{
+				if (app->scene->allies[inventorySelectedIndex]->isArmorEquipped)
+				{
+					app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = false;
+					app->scene->allies[inventorySelectedIndex]->armorItem = app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex];
+					app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = true;
+				}
+				else {
+					app->scene->allies[inventorySelectedIndex]->armorItem = app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex];
+					app->scene->allies[inventorySelectedIndex]->armorItem->isEquipped = true;
+				}
+				app->scene->allies[inventorySelectedIndex]->isArmorEquipped = true;
 			}
-			app->scene->allies[inventorySelectedIndex]->isArmorEquipped = true;
+			
 			break;
 		case ItemType::WEAPON:
 			if (app->scene->allies[inventorySelectedIndex]->isWeaponEquipped)
