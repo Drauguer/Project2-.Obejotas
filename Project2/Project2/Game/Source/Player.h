@@ -95,6 +95,7 @@ public:
 	bool showBossLocked = false;
 	int bossLockedTimer = 0;
 	
+	
 };
 
 #endif // __PLAYER_H__

@@ -116,6 +116,7 @@ public:
 	BattleScene* battleScene;
 	EntityManager* entityManager;
 	Map* map;
+
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
