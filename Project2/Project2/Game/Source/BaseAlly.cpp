@@ -244,6 +244,8 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 	case 1:
 		hasAttacked = true;
 		printf("Aumenta el ataque x1,5 WROAAAAR\n");
+
+		app->battleScene->isText = true;
 		
 		app->audio->PlayFx(attackUpSFX);
 		app->battleScene->idAttack = 1;
