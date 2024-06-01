@@ -876,14 +876,120 @@ void BattleScene::CheckEnemyAbility(int abilityId, int indexPlayerToAttack) {
 		}
 		break;
 	case 1:
-		printf("No hace nada de da�o\n");
+		app->scene->enemies[currentEnemyInCombatIndex + 1]->life -= 10;
+		app->scene->enemies[currentEnemyInCombatIndex]->life += 25;
+		if (app->scene->enemies[currentEnemyInCombatIndex]->life >= app->scene->enemies[currentEnemyInCombatIndex]->maxHP)
+		{
+			app->scene->enemies[currentEnemyInCombatIndex]->life = app->scene->enemies[currentEnemyInCombatIndex]->maxHP;
+		}
+
+		printf("Daño a su amigo y se cura\n");
 		break;
 	case 2:
-		printf("Wtf amigo\n");
+		damage = app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexPlayerToAttack]->defense * 20;
+		printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+		printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+		if (app->physics->debug == false)
+		{
+			app->scene->allies[indexPlayerToAttack]->life -= damage;
+		}
+
+		printf("Placaje XD\n");
 		break;
 	case 3:
+		damage = app->scene->enemies[currentEnemyInCombatIndex]->magicPower - 10;
+		printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+		printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+		if (app->physics->debug == false)
+		{
+			app->scene->allies[indexPlayerToAttack]->life -= damage;
+		}
+
+		printf("Blob Attack\n");
 		break;
 	case 4:
+		damage = (app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexPlayerToAttack]->defense * 20) * 0.5f;
+		for (int i = 0; i < app->scene->allies.Count(); ++i)
+		{
+			srand((unsigned)time(NULL));
+			randomIndex = rand() % 100;
+
+			if (app->physics->debug == false && (randomIndex <= app->scene->enemies[currentEnemyInCombatIndex]->dexerity))
+			{
+				app->scene->allies[i]->life -= damage;
+				printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+				printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+			}
+		}
+
+		printf("Disparos laser\n");
+
+		break;
+	case 5:
+		damage = app->scene->enemies[currentEnemyInCombatIndex]->attack * 2 / app->scene->allies[indexPlayerToAttack]->defense * 20;
+		
+
+		srand((unsigned)time(NULL));
+		randomIndex = rand() % 100;
+
+		if (app->physics->debug == false && (randomIndex <= app->scene->enemies[currentEnemyInCombatIndex]->dexerity))
+		{
+			app->scene->allies[indexPlayerToAttack]->life -= damage;
+			printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+			printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+		}
+
+		printf("Cañon\n");
+		break;
+	case 6:
+		app->scene->enemies[currentEnemyInCombatIndex]->life += app->scene->enemies[currentEnemyInCombatIndex]->maxHP / 2;
+		if (app->scene->enemies[currentEnemyInCombatIndex]->life >= app->scene->enemies[currentEnemyInCombatIndex]->maxHP)
+		{
+			app->scene->enemies[currentEnemyInCombatIndex]->life = app->scene->enemies[currentEnemyInCombatIndex]->maxHP;
+		}
+
+		printf("Se cura la mitad de vida\n");
+		break;
+	case 7:
+		damage = app->scene->enemies[currentEnemyInCombatIndex]->attack * 2 / app->scene->allies[indexPlayerToAttack]->defense * 20;
+
+		srand((unsigned)time(NULL));
+		randomIndex = rand() % 100;
+
+		if (app->physics->debug == false && (randomIndex <= app->scene->enemies[currentEnemyInCombatIndex]->dexerity))
+		{
+			app->scene->allies[indexPlayerToAttack]->life -= damage;
+			printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+			printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+		}
+
+		printf("Cañonazo\n");
+		break;
+	case 8:
+		damage = (app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexPlayerToAttack]->defense * 20) * 0.75f;
+		for (int i = 0; i < app->scene->allies.Count(); ++i)
+		{
+			srand((unsigned)time(NULL));
+			randomIndex = rand() % 100;
+
+			if (app->physics->debug == false && (randomIndex <= app->scene->enemies[currentEnemyInCombatIndex]->dexerity))
+			{
+				app->scene->allies[i]->life -= damage;
+				printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+				printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+			}
+		}
+
+		printf("Disparos laser\n");
+		break;
+	case 9:
+		app->scene->enemies[currentEnemyInCombatIndex]->life += app->scene->enemies[currentEnemyInCombatIndex]->maxHP / 3;
+		if (app->scene->enemies[currentEnemyInCombatIndex]->life >= app->scene->enemies[currentEnemyInCombatIndex]->maxHP)
+		{
+			app->scene->enemies[currentEnemyInCombatIndex]->life = app->scene->enemies[currentEnemyInCombatIndex]->maxHP;
+		}
+
+		printf("Se cura un tercio de vida\n");
 		break;
 	}
 }

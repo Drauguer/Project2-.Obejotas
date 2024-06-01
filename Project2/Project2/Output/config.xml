@@ -620,7 +620,7 @@
 
 	  </ally2>
     
-    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="1">
+    <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="100" attack="45" defense="40" magicPower="15" dexerity="50" combatID="1">
       <Idle animspeed="0.1f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
         <pushback x="64" y="0" width="64" height="64"/>
@@ -633,33 +633,11 @@
         <pushback x="448" y="0" width="64" height="64"/>
         <pushback x="512" y="0" width="64" height="64"/>
       </Attack>
-      <ability id="0" name="Sable Laser"/>
-      <ability id="1" name="Grito de Guerra"/>
-      <ability id="2" name="Visión Laser"/>
+      <ability id="0" name="Navajazo"/>
+      <ability id="1" name="Ataque traicionero"/>
+     
     </enemy>
-    <enemy x="900" y="250" texturepath="Assets/Textures/enemigo1.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50" combatID="1">
-	  <Idle animspeed="0.1f" loop="true">
-		  <pushback x="0" y="0" width="64" height="64"/>
-		  <pushback x="64" y="0" width="64" height="64"/>
-		  <pushback x="128" y="0" width="64" height="64"/>
-		  <pushback x="192" y="0" width="64" height="64"/>
-		  <pushback x="256" y="0" width="64" height="64"/>
-		  <pushback x="320" y="0" width="64" height="64"/>
-	  </Idle>
-	  <Attack animspeed="0.1f" loop="false">
-		 
-		  <pushback x="448" y="0" width="64" height="64"/>
-		  <pushback x="512" y="0" width="64" height="64"/>
-		  <pushback x="576" y="0" width="64" height="64"/>
-		  <pushback x="640" y="0" width="64" height="64"/>
-		  <pushback x="704" y="0" width="64" height="64"/>
-		  <pushback x="768" y="0" width="64" height="64"/>
-	  </Attack>
-	  <ability id="0" name="Sable Laser"/>
-	  <ability id="1" name="Grito de Guerra"/>
-	  <ability id="2" name="Visión Laser"/>
-	  </enemy>
-	  <enemy x="900" y="400" texturepath="Assets/Textures/enemigo2.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50" combatID="1">
+	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo2.png" life="60" attack="20" defense="20" magicPower="45" dexerity="50" combatID="5">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -685,12 +663,30 @@
 			  <pushback x="1152" y="0" width="64" height="64"/>
 			  <pushback x="1216" y="0" width="64" height="64"/>
 		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="2" name="Placaje"/>
+		  <ability id="3" name="Blob Attack"/>
+		  
 	  </enemy>
+	  
+	  <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="100" attack="45" defense="40" magicPower="15" dexerity="50" combatID="5">
+      <Idle animspeed="0.1f" loop="true">
+        <pushback x="0" y="0" width="64" height="64"/>
+        <pushback x="64" y="0" width="64" height="64"/>
+        <pushback x="128" y="0" width="64" height="64"/>
+        <pushback x="192" y="0" width="64" height="64"/>
+      </Idle>
+      <Attack animspeed="0.1f" loop="false">
+        <pushback x="320" y="0" width="64" height="64"/>
+        <pushback x="384" y="0" width="64" height="64"/>
+        <pushback x="448" y="0" width="64" height="64"/>
+        <pushback x="512" y="0" width="64" height="64"/>
+      </Attack>
+      <ability id="0" name="Navajazo"/>
+      <ability id="1" name="Ataque traicionero"/>
+     
+    </enemy>
 
-	  <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="5">
+	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="100" attack="45" defense="40" magicPower="15" dexerity="50" combatID="7">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -703,11 +699,12 @@
 			  <pushback x="448" y="0" width="64" height="64"/>
 			  <pushback x="512" y="0" width="64" height="64"/>
 		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="0" name="Navajazo"/>
+		  <ability id="1" name="Ataque traicionero"/>
+
 	  </enemy>
-	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo1.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50" combatID="5">
+
+	  <enemy x="900" y="100" texturepath="Assets/Textures/enemigo1.png" life="70" attack="30" defense="60" magicPower="15" dexerity="80" combatID="7">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -725,12 +722,12 @@
 			  <pushback x="704" y="0" width="64" height="64"/>
 			  <pushback x="768" y="0" width="64" height="64"/>
 		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="4" name="Disparos Laser"/>
+		  <ability id="5" name="Cañon"/>
+		  <ability id="6" name="Autorreparacion"/>
 	  </enemy>
 
-	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo1.png" life="60" attack="50" defense="20" magicPower="15" dexerity="50" combatID="7">
+	  <enemy x="900" y="400" texturepath="Assets/Textures/enemigo1.png" life="70" attack="30" defense="60" magicPower="15" dexerity="80" combatID="7">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -748,102 +745,74 @@
 			  <pushback x="704" y="0" width="64" height="64"/>
 			  <pushback x="768" y="0" width="64" height="64"/>
 		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="4" name="Disparos Laser"/>
+		  <ability id="5" name="Cañon"/>
+		  <ability id="6" name="Autorreparacion"/>
 	  </enemy>
 
-	  <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="8">
+	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo2.png" life="60" attack="20" defense="20" magicPower="45" dexerity="50" combatID="8">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
 			  <pushback x="128" y="0" width="64" height="64"/>
 			  <pushback x="192" y="0" width="64" height="64"/>
-		  </Idle>
-		  <Attack animspeed="0.1f" loop="false">
+			  <pushback x="256" y="0" width="64" height="64"/>
 			  <pushback x="320" y="0" width="64" height="64"/>
 			  <pushback x="384" y="0" width="64" height="64"/>
 			  <pushback x="448" y="0" width="64" height="64"/>
 			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+			  <pushback x="1024" y="0" width="64" height="64"/>
+			  <pushback x="1088" y="0" width="64" height="64"/>
+			  <pushback x="1152" y="0" width="64" height="64"/>
+			  <pushback x="1216" y="0" width="64" height="64"/>
 		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="2" name="Placaje"/>
+		  <ability id="3" name="Blob Attack"/>
+
 	  </enemy>
 
-	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="8">
+	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo2.png" life="60" attack="20" defense="20" magicPower="45" dexerity="50" combatID="8">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
 			  <pushback x="128" y="0" width="64" height="64"/>
 			  <pushback x="192" y="0" width="64" height="64"/>
-		  </Idle>
-		  <Attack animspeed="0.1f" loop="false">
+			  <pushback x="256" y="0" width="64" height="64"/>
 			  <pushback x="320" y="0" width="64" height="64"/>
 			  <pushback x="384" y="0" width="64" height="64"/>
 			  <pushback x="448" y="0" width="64" height="64"/>
 			  <pushback x="512" y="0" width="64" height="64"/>
-		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
-	  </enemy>
-
-	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="11">
-		  <Idle animspeed="0.1f" loop="true">
-			  <pushback x="0" y="0" width="64" height="64"/>
-			  <pushback x="64" y="0" width="64" height="64"/>
-			  <pushback x="128" y="0" width="64" height="64"/>
-			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
 		  </Idle>
 		  <Attack animspeed="0.1f" loop="false">
-			  <pushback x="320" y="0" width="64" height="64"/>
-			  <pushback x="384" y="0" width="64" height="64"/>
-			  <pushback x="448" y="0" width="64" height="64"/>
-			  <pushback x="512" y="0" width="64" height="64"/>
+
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+			  <pushback x="1024" y="0" width="64" height="64"/>
+			  <pushback x="1088" y="0" width="64" height="64"/>
+			  <pushback x="1152" y="0" width="64" height="64"/>
+			  <pushback x="1216" y="0" width="64" height="64"/>
 		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="2" name="Placaje"/>
+		  <ability id="3" name="Blob Attack"/>
+
 	  </enemy>
 
-	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="12">
-		  <Idle animspeed="0.1f" loop="true">
-			  <pushback x="0" y="0" width="64" height="64"/>
-			  <pushback x="64" y="0" width="64" height="64"/>
-			  <pushback x="128" y="0" width="64" height="64"/>
-			  <pushback x="192" y="0" width="64" height="64"/>
-		  </Idle>
-		  <Attack animspeed="0.1f" loop="false">
-			  <pushback x="320" y="0" width="64" height="64"/>
-			  <pushback x="384" y="0" width="64" height="64"/>
-			  <pushback x="448" y="0" width="64" height="64"/>
-			  <pushback x="512" y="0" width="64" height="64"/>
-		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
-	  </enemy>
-
-	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="80" attack="40" defense="40" magicPower="15" dexerity="50" combatID="13">
-		  <Idle animspeed="0.1f" loop="true">
-			  <pushback x="0" y="0" width="64" height="64"/>
-			  <pushback x="64" y="0" width="64" height="64"/>
-			  <pushback x="128" y="0" width="64" height="64"/>
-			  <pushback x="192" y="0" width="64" height="64"/>
-		  </Idle>
-		  <Attack animspeed="0.1f" loop="false">
-			  <pushback x="320" y="0" width="64" height="64"/>
-			  <pushback x="384" y="0" width="64" height="64"/>
-			  <pushback x="448" y="0" width="64" height="64"/>
-			  <pushback x="512" y="0" width="64" height="64"/>
-		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
-	  </enemy>
-
-	  <enemy x="900" y="250" texturepath="Assets/Textures/BossSpriteSheet.png" life="250" attack="50" defense="60" magicPower="30" dexerity="70" combatID="14">
+	  <enemy x="900" y="250" texturepath="Assets/Textures/BossSpriteSheet.png" life="350" attack="70" defense="65" magicPower="30" dexerity="70" combatID="14">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="136" height="160"/>
 			  <pushback x="136" y="0" width="136" height="160"/>
@@ -884,9 +853,9 @@
 			  <pushback x="2952" y="160" width="164" height="160"/>
 			  <pushback x="3116" y="160" width="164" height="160"/>
 		  </Attack>
-		  <ability id="0" name="Sable Laser"/>
-		  <ability id="1" name="Grito de Guerra"/>
-		  <ability id="2" name="Visión Laser"/>
+		  <ability id="7" name="Super Disparo"/>
+		  <ability id="8" name="Bombardeo"/>
+		  <ability id="9" name="Retirada"/>
 	  </enemy>
 	  
 	  <itemMage x="-100" y="-100" texturepath="Assets/Textures/Items/Armors/Armers3.png" type="2" itemName="Mage Item Quest" bonusMP="20" bonusDEF="15" description="the magic armor that the mage has lost +20 mp +15 def"/>

@@ -180,6 +180,9 @@ public:
 	// Timer para textbox
 	bool isText = false;
 	int timerText = 0;
+
+	//
+	int randomIndex;
 	
 };
 
