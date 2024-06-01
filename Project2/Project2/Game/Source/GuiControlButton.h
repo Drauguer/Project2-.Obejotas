@@ -23,7 +23,7 @@ private:
 
 	int mouseX, mouseY;
 	unsigned int click;
-
+	SDL_Rect normalRec, disabledRec, focusedRec, pressedRec, selectedRec;
 	bool canClick = true;
 	bool drawBasic = false;
 	int cooldown = 0;
