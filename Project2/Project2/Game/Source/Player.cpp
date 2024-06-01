@@ -557,11 +557,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 					app->scene->allies[i]->life = app->scene->allies[i]->maxHP;
 				}
 				LoadNewMap(9, 17);
+				app->scene->hasEnteredBoss = true;
 			}
 			else
 			{
 				showBossLocked = true;
 				isTalking = true;
+				app->scene->hasEnteredBoss = false;
 			}
 			
 

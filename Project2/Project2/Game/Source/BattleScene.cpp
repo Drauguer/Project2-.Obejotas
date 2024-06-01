@@ -85,7 +85,17 @@ bool BattleScene::Start()
 	declineFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/029Decline09.wav");
 	deniedFx = app->audio->LoadFx("Assets/Audio/Fx/10_UI_Menu_SFX/033Denied03.wav");
 
-	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg", 1.0f);
+
+	//if player has entered boss room, play boss music
+	if (app->scene->hasEnteredBoss)
+	{
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/FinalBossBattleTheme.ogg");
+	}
+	else
+	{
+		app->audio->PlayMusic("Assets/Audio/Music/Music Loops/BattleTheme.ogg");
+	}
+	
 
 	sableLaser = app->tex->Load("Assets/Textures/LaserSwords.png");
 	gritoGuerra = app->tex->Load("Assets/Textures/Scream_Icon.png");
