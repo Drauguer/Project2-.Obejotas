@@ -71,6 +71,9 @@ bool Inventory::Update(float dt)
 {
 	int scale = app->win->GetScale();
 
+	GamePad& pad = app->input->pads[0];
+
+
 	for (int i = 0; i < app->scene->allies.Count(); ++i)
 	{
 		int t = 0;
@@ -437,22 +440,29 @@ bool Inventory::Update(float dt)
 
 	
 
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && itemSelectedIndex + 1 < app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex + 1]->isEquipped == false)
+	if (((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) || (pad.l_x > 0 && app->selectActionCooldown == 0))
+		&& itemSelectedIndex + 1 < app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() 
+		&& app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex + 1]->isEquipped == false)
 	{
 		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex += 1;
+		app->selectActionCooldown = 15;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && itemSelectedIndex - 1 >= 0 && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex - 1]->isEquipped == false)
+	if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || (pad.l_x < 0 && app->selectActionCooldown == 0)) && itemSelectedIndex - 1 >= 0 && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex - 1]->isEquipped == false)
 	{
 		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex -= 1;
+		app->selectActionCooldown = 15;
+
 	}
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && itemSelectedIndex + 3 < app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex + 3]->isEquipped == false)
+	if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || (pad.l_y > 0 && app->selectActionCooldown == 0)) && itemSelectedIndex + 3 < app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex + 3]->isEquipped == false)
 	{
 		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex += 3;
+		app->selectActionCooldown = 15;
+
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	else if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || (pad.l_y > 0 && app->selectActionCooldown == 0)))
 	{
 
 		int count = app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() - 1;
@@ -463,16 +473,19 @@ bool Inventory::Update(float dt)
 		else {
 			itemSelectedIndex = app->scene->allies[inventorySelectedIndex]->inventoryChar.Count() - 1;
 		}
+		app->selectActionCooldown = 15;
 
 		app->audio->PlayFx(app->scene->hoverFx);
 		
 	}
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && itemSelectedIndex - 3 >= 0 && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex - 3]->isEquipped == false)
+	if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || (pad.l_y < 0 && app->selectActionCooldown == 0)) && itemSelectedIndex - 3 >= 0 && app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex - 3]->isEquipped == false)
 	{
 		app->audio->PlayFx(app->scene->hoverFx);
 		itemSelectedIndex -= 3;
+		app->selectActionCooldown = 15;
+
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	else if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || (pad.l_y < 0 && app->selectActionCooldown == 0)))
 	{
 		app->audio->PlayFx(app->scene->hoverFx);
 		if (app->scene->allies[inventorySelectedIndex]->inventoryChar[0]->isEquipped)
@@ -482,11 +495,14 @@ bool Inventory::Update(float dt)
 		else {
 			itemSelectedIndex = 0;
 		}
+		app->selectActionCooldown = 15;
+
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->allies[inventorySelectedIndex]->inventoryChar.start != NULL)
+	if ((app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || (pad.a == 1 && app->selectActionCooldown == 0)) && app->scene->allies[inventorySelectedIndex]->inventoryChar.start != NULL)
 	{
-		
+		app->selectActionCooldown = 20;
+
 
 		switch (app->scene->allies[inventorySelectedIndex]->inventoryChar[itemSelectedIndex]->itemType)
 		{
@@ -550,7 +566,7 @@ bool Inventory::Update(float dt)
 
 	
 	
-		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		if ((app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || (pad.y == 1 && app->selectActionCooldown == 0)))
 		{
 
 			if (inventorySelectedIndex + 1 >= app->scene->allies.Count())
@@ -571,6 +587,10 @@ bool Inventory::Update(float dt)
 
 		}
 	
+	if (app->selectActionCooldown > 0) {
+		app->selectActionCooldown--;
+	}
+
 
 	currentArrowAnim = &idleArrowAnim;
 	currentArrowAnim->Update();

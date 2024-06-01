@@ -82,6 +82,7 @@ bool BaseAlly::Start() {
 	baseDexerity = parameters.attribute("dexerity").as_float();
 	charName = parameters.attribute("charName").as_string();
 	maxHP = baseLife;
+	life = maxHP;
 
 	SetStats();
 
@@ -385,7 +386,6 @@ void BaseAlly::CheckAttack(int selectAttackIndex, int currentPlayerIndex)
 
 void BaseAlly::SetStats()
 {
-	life = baseLife;
 	maxHP = baseLife;
 	attack = baseAttack;
 	defense = baseDefense;

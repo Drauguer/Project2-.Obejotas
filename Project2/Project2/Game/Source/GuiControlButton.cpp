@@ -27,7 +27,7 @@ bool GuiControlButton::Update(float dt)
 	{
 		if (isButtonPressed) {
 			state = GuiControlState::FOCUSED;
-
+			app->input->GetMousePosition(mouseX, mouseY);
 			if (((mouseX * scale > bounds.x && mouseX * scale < bounds.x + bounds.w && mouseY * scale > bounds.y && mouseY * scale < bounds.y + bounds.h)
 				&&(app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP))
 				|| (pad.a == 1 && app->selectActionCooldown == 0)) {
