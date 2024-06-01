@@ -94,12 +94,21 @@ bool BattleScene::Start()
 	healingMagic = app->tex->Load("Assets/Textures/MagicHealth_Icon.png");
 	laserCannon = app->tex->Load("Assets/Textures/laserbeam_Icon.png");
 	martillazo = app->tex->Load("Assets/Textures/RedMace.png");
+	elMuro = app->tex->Load("Assets/Textures/EnanoShield_Icon.png");
+	lluviaAsesina = app->tex->Load("Assets/Textures/RedMace.png");
+	inspiracionBardica = app->tex->Load("Assets/Textures/SatyrAttack1_Icon.png");
+	vivaRock = app->tex->Load("Assets/Textures/SatyrAttack2_Icon.png");
+	musicaMaldita = app->tex->Load("Assets/Textures/SatyrAttack3_Icon.png");
+
+
+
 	lifeMago = app->tex->Load("Assets/Textures/LifeMago.png");
 	lifeEnano = app->tex->Load("Assets/Textures/LifeEnano.png");
 	lifeEldrin = app->tex->Load("Assets/Textures/LifeEldrin.png");
 	lifeBardo = app->tex->Load("Assets/Textures/LifeBardo.png");
 	lifeEnemy = app->tex->Load("Assets/Textures/LifeEnemy.png");
-
+	IdleContinueButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalContinue.png");
+	IdleExitButton = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalExit.png");
 	background = app->tex->Load("Assets/Maps/FondoCombate.png");
 
 	arrowTexture = app->tex->Load(arrowTexturePath);
@@ -110,11 +119,11 @@ bool BattleScene::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	SDL_Rect ContinueButton_ = { windowW / 2 + 60,windowH / 2 + 120, 240, 80 };
-	continueBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continue", ContinueButton_, this);
+	continueBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continue", ContinueButton_, this, IdleContinueButton);
 	continueBattle->state = GuiControlState::DISABLED;
 
 	SDL_Rect ExitButton_ = { windowW / 2 - 360,windowH / 2 + 120, 240, 80 };
-	exitBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this);
+	exitBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this, IdleExitButton);
 	exitBattle->state = GuiControlState::DISABLED;
 	
 	
@@ -144,8 +153,8 @@ bool BattleScene::Update(float dt)
 
 		int winW = windowW;
 		int winH = windowH;
-		dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 120 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
-		dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 120) / scale, 1200 / scale, 250 / scale };
+		dialogueBoxPos = { (winW / 2 - 600 - app->render->camera.x) / scale, (winH / 2 + 170 - app->render->camera.y) / scale, 1200 / scale, 250 / scale };
+		dialogueBoxPos2 = { (winW / 2 - 600) / scale, (winH / 2 + 170) / scale, 1200 / scale, 250 / scale };
 
 		app->render->DrawTexture(background, 0, 0);
 
@@ -292,6 +301,24 @@ bool BattleScene::Update(float dt)
 					case 6:
 						app->render->DrawTexture(martillazo, (400 + 200 * i) / scale, 525 / scale);
 						break;
+					case 7:
+						app->render->DrawTexture(elMuro, (400 + 200 * i) / scale, 525 / scale);
+						break;
+					case 8:
+						app->render->DrawTexture(sableLaser, (400 + 200 * i) / scale, 525 / scale);
+						break;
+					case 9:
+						app->render->DrawTexture(lluviaAsesina, (400 + 200 * i) / scale, 525 / scale);
+						break;
+					case 10:
+						app->render->DrawTexture(inspiracionBardica, (400 + 200 * i) / scale, 525 / scale);
+						break;
+					case 11:
+						app->render->DrawTexture(vivaRock, (400 + 200 * i) / scale, 525 / scale);
+						break;
+					case 12:
+						app->render->DrawTexture(musicaMaldita, (400 + 200 * i) / scale, 525 / scale);
+						break;
 					}
 
 				}
@@ -407,6 +434,28 @@ bool BattleScene::Update(float dt)
 							app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
 							damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
 							app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+							isText = true;
+							break;
+						case 7:
+							break;
+						case 8:
+							app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
+							damage = app->scene->allies[currentPlayerInCombatIndex]->attack / app->scene->enemies[currentEnemySelectedIndex]->defense * 20;
+							app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+							isText = true;
+							break;
+						case 9:
+							break;
+						case 10:
+							break;
+						case 11:
+							break;
+						case 12:
+							app->scene->allies[currentPlayerInCombatIndex]->hasAttacked = true;
+							damage = app->scene->allies[currentPlayerInCombatIndex]->magicPower * 0.5f;
+							printf("El ataque ha hecho %f de da�o y le ha bajado la defensa\n", damage);
+							app->scene->enemies[currentEnemySelectedIndex]->life -= damage;
+							app->scene->enemies[currentEnemySelectedIndex]->defense *= 0.5f;
 							isText = true;
 							break;
 						}
@@ -764,11 +813,11 @@ void BattleScene::TextAttack(int indexAttack)
 		break;
 	case 1:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "aumenta mi ataque WROAAAAR!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "wroarrrrrr!! (+atk)");
 		break;
 	case 2:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "pium pium!! Visión Laser!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "pium pium!! get shot!!");
 		break;
 	case 3:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
@@ -776,15 +825,39 @@ void BattleScene::TextAttack(int indexAttack)
 		break;
 	case 4:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "diosa curame!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "godess heal me!!");
 		break;
 	case 5:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "bomba laseeer!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "bombaaa!!");
 		break;
 	case 6:
 		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
-		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "ja ja ja martillo vaa!!");
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "hammer time!!");
+		break;
+	case 7:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "im immovable! (+def)");
+		break;
+	case 8:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "this sword will seal your sin");
+		break;
+	case 9:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "succumb under my rain!");
+		break;
+	case 10:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "don't worry, be happy! (+hp y +atk)");
+		break;
+	case 11:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "rock and roll!!");
+		break;
+	case 12:
+		app->render->DrawTexture(app->dialogueManager->chatbox, dialogueBoxPos.x, dialogueBoxPos.y);
+		app->fonts->BlitText(dialogueBoxPos2.x + 30, dialogueBoxPos2.y + 15, app->dialogueManager->Font, "this song will give you nighmares");
 		break;
 	}
 }

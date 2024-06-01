@@ -48,6 +48,7 @@ enum class ColliderType {
 	TO_ZONE2_OUT,
 	TO_ZONE_FINAL,
 	NPC,
+	HEALING_STATUE,
 	PUZLE,
 	UNKNOWN
 	// ..

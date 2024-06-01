@@ -40,6 +40,7 @@
     <ClCompile Include="Source\PuzlePassword.cpp" />
     <ClCompile Include="Source\PuzleArrows.cpp" />
     <ClCompile Include="Source\GuiControlSlider.cpp" />
+    <ClCompile Include="Source\HealingStatue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -111,6 +112,7 @@
     <ClInclude Include="Source\PuzlePassword.h" />
     <ClInclude Include="Source\PuzleArrows.h" />
     <ClInclude Include="Source\GuiControlSlider.h" />
+    <ClInclude Include="Source\HealingStatue.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
