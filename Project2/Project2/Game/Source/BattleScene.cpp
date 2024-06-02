@@ -227,7 +227,7 @@ bool BattleScene::Update(float dt)
 			{
 			case CombatState::SELECT_CHARACTER:
 				//Navigate in the selection character menu
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == true && app->selectActionCooldown == 0)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || (pad.l_y < 0 || pad.down == true) && app->selectActionCooldown == 0)
 				{
 					if (currentPlayerInCombatIndex + 1 < app->scene->allies.Count() &&
 						app->scene->allies[currentPlayerInCombatIndex + 1]->life > 0 &&
@@ -239,10 +239,10 @@ bool BattleScene::Update(float dt)
 
 						app->audio->PlayFx(hoverFx);
 					}
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 				
 				}
-				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == true && app->selectActionCooldown == 0)
+				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || (pad.l_y > 0 || pad.up == true) && app->selectActionCooldown == 0)
 				{
 					if (currentPlayerInCombatIndex - 1 >= 0 &&
 						app->scene->allies[currentPlayerInCombatIndex - 1]->life > 0 &&
@@ -254,13 +254,13 @@ bool BattleScene::Update(float dt)
 
 						app->audio->PlayFx(hoverFx);
 					}
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 				
 				}
 				//Selected character, waiting for action
 				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && app->selectActionCooldown == 0)
 				{
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 					if (app->scene->allies[currentPlayerInCombatIndex]->life > 0)
 					{
 						app->scene->allies[currentPlayerInCombatIndex]->isHighlighted = false;
@@ -340,7 +340,7 @@ bool BattleScene::Update(float dt)
 
 
 				//Navigate in the selection attack menu
-				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.right == true && app->selectActionCooldown == 0)
+				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.l_x > 0 || pad.right == true) && app->selectActionCooldown == 0)
 				{
 					if (selectAttackIndex < app->scene->allies[currentPlayerInCombatIndex]->abilities.Count() - 1)
 					{
@@ -348,10 +348,10 @@ bool BattleScene::Update(float dt)
 
 						app->audio->PlayFx(hoverFx);
 					}
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 				
 				}
-				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left == true && app->selectActionCooldown == 0)
+				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || (pad.l_x < 0 || pad.left == true) && app->selectActionCooldown == 0)
 				{
 					if (selectAttackIndex > 0)
 					{
@@ -359,13 +359,13 @@ bool BattleScene::Update(float dt)
 
 						app->audio->PlayFx(hoverFx);
 					}
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 				
 				}
 				//Selected action
 				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && app->selectActionCooldown == 0)
 				{
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 
 					currentEnemySelectedIndex = FindFirstEnemyIndex();
 					app->scene->allies[currentPlayerInCombatIndex]->CheckAttack(app->scene->allies[currentPlayerInCombatIndex]->abilities[selectAttackIndex].id, currentPlayerInCombatIndex);
@@ -379,12 +379,12 @@ bool BattleScene::Update(float dt)
 					combatState = CombatState::SELECT_CHARACTER;
 
 					app->audio->PlayFx(declineFx);
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 				}
 				break;
 			case CombatState::SELECT_ENEMY:
 				//Navigate in the selection enemy menu
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == true && app->selectActionCooldown == 0)
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || (pad.l_y < 0 || pad.down == true) && app->selectActionCooldown == 0)
 				{
 					if (currentEnemySelectedIndex + 1 < app->scene->enemies.Count() && app->scene->enemies[currentEnemySelectedIndex + 1]->life > 0)
 					{
@@ -395,10 +395,10 @@ bool BattleScene::Update(float dt)
 
 						app->audio->PlayFx(hoverFx);
 					}
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 				
 				}
-				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == true && app->selectActionCooldown == 0)
+				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || (pad.l_y > 0 || pad.up == true) && app->selectActionCooldown == 0)
 				{
 					if (currentEnemySelectedIndex - 1 >= 0 && app->scene->enemies[currentEnemySelectedIndex - 1]->life > 0)
 					{
@@ -408,13 +408,13 @@ bool BattleScene::Update(float dt)
 
 						app->audio->PlayFx(hoverFx);
 					}
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 				
 				}
 				//Selected character, waiting for action
 				if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a && app->selectActionCooldown == 0)
 				{
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 					if (app->scene->enemies[currentEnemySelectedIndex]->life > 0)
 					{
 						app->scene->enemies[currentEnemySelectedIndex]->isHighlighted = false;
@@ -503,7 +503,7 @@ bool BattleScene::Update(float dt)
 					combatState = CombatState::SELECT_CHARACTER;
 
 					app->audio->PlayFx(declineFx);
-					app->selectActionCooldown = 10;
+					app->selectActionCooldown = 20;
 
 				}
 
@@ -568,13 +568,13 @@ bool BattleScene::Update(float dt)
 		}
 		else
 		{
-			if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.right == true && app->selectActionCooldown == 0) && uiGamePadCounter < 1)
+			if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || (pad.l_x > 0 || pad.right == true) && app->selectActionCooldown == 0) && uiGamePadCounter < 1)
 			{
 				uiGamePadCounter ++;
 				app->selectActionCooldown = 20;
 
 			}
-			if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left == true && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+			if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || (pad.l_x < 0 || pad.left == true) && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
 			{
 				uiGamePadCounter --;
 				app->selectActionCooldown = 20;
@@ -756,6 +756,11 @@ void BattleScene::PlayerWin()
 			app->scene->npcIDcombatFinished.Add(app->scene->npcs[i]->npcID);
 			GiveReward(app->scene->npcs[i]->npcID);
 		}
+	}
+
+	if (npcIDbattle == 14)
+	{
+		app->scene->isEnd = true;
 	}
 
 	app->scene->isOnCombat = false;

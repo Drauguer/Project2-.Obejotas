@@ -44,6 +44,7 @@
     <ClCompile Include="Source\HealingStatue.cpp" />
     <ClCompile Include="Source\ParticleSystemDirt.cpp" />
     <ClCompile Include="Source\ParticleSystemFire.cpp" />
+    <ClCompile Include="Source\EndScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Source\HealingStatue.h" />
     <ClInclude Include="Source\ParticleSystemDirt.h" />
     <ClInclude Include="Source\ParticleSystemFire.h" />
+    <ClInclude Include="Source\EndScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

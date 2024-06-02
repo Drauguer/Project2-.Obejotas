@@ -18,6 +18,7 @@
 #include "PuzleArrows.h"
 #include "PuzlePassword.h"
 #include "HealingStatue.h"
+#include "EndScreen.h"
 
 
 #include "Defs.h"
@@ -804,6 +805,15 @@ bool Scene::Update(float dt)
 				break;
 			}
 		}
+	}
+
+	if (isEnd)
+	{
+		app->entityManager->Disable();
+		app->physics->Disable();
+		app->endScreen->Enable();
+		app->map->Disable();
+		Disable();
 	}
 
 	

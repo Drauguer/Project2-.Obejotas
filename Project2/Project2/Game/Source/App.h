@@ -34,6 +34,7 @@ class Inventory;
 class ParticleSystem;
 class ParticleSystemDirt;
 class ParticleSystemBug;
+class EndScreen;
 
 class App
 {
@@ -132,6 +133,8 @@ public:
 	ParticleSystem* particleSystem;
 	ParticleSystemDirt* particleSystemDirt;
 	ParticleSystemBug* particleSystemBug;
+	EndScreen* endScreen;
+
 	bool IsVsincActive = true;
 
 	bool hasSolvedArrowPuzzle = false;
