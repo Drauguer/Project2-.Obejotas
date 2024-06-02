@@ -44,7 +44,7 @@ bool EndScreen::Start()
 
 	currentAnimation = &logoAnim;
 
-	app->audio->PlayMusic("Assets/Audio/Music/ScreenMusic/EndingMusic.ogg", 0.5f);
+	app->audio->PlayMusic("Assets/Audio/Music/Music Loops/EndingMusic.ogg", 0.5f);
 
 	return true;
 }
