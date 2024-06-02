@@ -99,6 +99,7 @@
     <ClCompile Include="Source\BaseEnemy.cpp" />
     <ClCompile Include="Source\BattleScene.cpp" />
     <ClCompile Include="Source\DialogueManager.cpp" />
+    <ClCompile Include="Source\EndScreen.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiControlSlider.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Source\BattleScene.h" />
     <ClInclude Include="Source\Dialogue.h" />
     <ClInclude Include="Source\DialogueManager.h" />
+    <ClInclude Include="Source\EndScreen.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\GuiControl.h" />

@@ -211,6 +211,9 @@ public:
 	SDL_Texture* inventoryIdle;
 	SDL_Texture* inventoryNewItem;
 	bool isNewItem = false;
+
+	// Endscreen
+	bool isEnd = false;
 };
 
 #endif // __SCENE_H__

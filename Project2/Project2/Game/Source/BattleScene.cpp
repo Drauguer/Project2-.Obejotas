@@ -758,6 +758,11 @@ void BattleScene::PlayerWin()
 		}
 	}
 
+	if (npcIDbattle == 14)
+	{
+		app->scene->isEnd = true;
+	}
+
 	app->scene->isOnCombat = false;
 	return;
 }
