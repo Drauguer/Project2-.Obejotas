@@ -12,7 +12,7 @@ This is only a Vertical Slice, so there are many features that are going to be a
  - {Different areas}
  - {Fun conversations}
  
-## Controls
+## Controls Keyboard
 
  - E to talk to NPC
  - X to open/close inventory
@@ -24,6 +24,18 @@ This is only a Vertical Slice, so there are many features that are going to be a
  - ARROWS to move in the menu while in combat
  - F5 to save game
  - F6 to load game
+
+## Controls Controller
+
+- Y talk to a NPC
+- X to open/close inventory
+- A to equip item
+- Joystick to change player selected ivnentory
+- A to skip dialogue and select atacks
+- Joystick to move the player
+- START to pause the game
+- Joystick to move in the menu while in combat
+- Joystick to move the menu in combat
 
 ## Debug Controls
  - F10 to enter god mode
