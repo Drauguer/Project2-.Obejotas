@@ -8,7 +8,9 @@
 #include "Point.h"
 #include "SString.h"
 
+
 #include "SDL/include/SDL.h"
+#include "Log.h"
 
 enum class GuiControlType
 {
@@ -31,6 +33,25 @@ enum class GuiControlState
 	FOCUSED,
 	PRESSED,
 	SELECTED
+};
+enum class FunctionGUI
+{
+	START,
+	CONTINUE,
+	EXIT,
+	SETTINGS,
+	CREDITS,
+	MUSIC,
+	FX,
+	FULLSCREEN,
+	VSYNC,
+	TIMER,
+	LIVES,
+	COINS,
+
+	RESUME,
+	BACKTOTITLE,
+	BACKTOPAUSE
 };
 
 class GuiControl
@@ -70,9 +91,15 @@ public:
 		observer = module;
 	}
 
+	void SetFunction(FunctionGUI function)
+	{
+		this->function = function;
+	}
+
 	// 
 	void NotifyObserver()
 	{
+
 		observer->OnGuiMouseClickEvent(this);
 	}
 
@@ -81,6 +108,7 @@ public:
 	uint32 id;
 	GuiControlType type;
 	GuiControlState state;
+	FunctionGUI function;
 
 	SString text;           // Control text (if required)
 	SDL_Rect bounds;        // Position and size
@@ -90,6 +118,11 @@ public:
 	SDL_Rect section;       // Texture atlas base section
 
 	Module* observer;        // Observer 
+
+
+
+	//checking
+	bool hasToExit;
 };
 
 #endif // __GUICONTROL_H__

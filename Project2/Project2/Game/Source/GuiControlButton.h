@@ -16,7 +16,6 @@ public:
 
 	// Called each loop iteration
 	bool Update(float dt);
-
 	bool isButtonPressed = false;
 
 private:
@@ -26,7 +25,6 @@ private:
 	SDL_Rect normalRec, disabledRec, focusedRec, pressedRec, selectedRec;
 	bool canClick = true;
 	bool drawBasic = false;
-	int cooldown = 0;
 };
 
 #endif // __GUICONTROLBUTTON_H__

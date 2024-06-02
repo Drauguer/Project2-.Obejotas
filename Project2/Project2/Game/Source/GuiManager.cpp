@@ -28,13 +28,13 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	{
 	case GuiControlType::BUTTON:
 		guiControl = new GuiControlButton(id, bounds, text);
-		guiControl->texture = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalStart.png");
+		guiControl->texture = app->tex->Load("Assets/Textures/BotonesUI/BotonIdleTest2.png");
 		break;
-	
 	case GuiControlType::SLIDER:
-		guiControl = new GuiControlSlider(id, sliderBounds, text);
+		guiControl = new GuiControlSlider(id, bounds, text);
 		break;
 	}
+
 	//Set the observer
 	guiControl->observer = observer;
 
@@ -45,7 +45,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 }
 
 bool GuiManager::Update(float dt)
-{	
+{
 
 	ListItem<GuiControl*>* control = guiControlsList.start;
 
