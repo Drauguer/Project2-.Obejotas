@@ -3,7 +3,6 @@
 ## Description
 
 Explore a magical fantasy world mixed with some Cyberpunk elements! Battle in RPG turn-based combats against different enemies with your own party!!
-This is only a Vertical Slice, so there are many features that are going to be added in the future.
 
 ## Key Features
 
@@ -30,12 +29,12 @@ This is only a Vertical Slice, so there are many features that are going to be a
 - Y talk to a NPC
 - X to open/close inventory
 - A to equip item
-- Joystick to change player selected ivnentory
-- A to skip dialogue and select atacks
+- D-pad to navigate player inventory
+- A to skip dialogue and select attacks
 - Joystick to move the player
 - START to pause the game
-- Joystick to move in the menu while in combat
-- Joystick to move the menu in combat
+- Joystick and D-pad to move in the menu while in combat
+- Joystick and D-pad to move the menu in combat
 
 ## Debug Controls
  - F10 to enter god mode
@@ -64,7 +63,7 @@ This is only a Vertical Slice, so there are many features that are going to be a
 
 
 
-This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
+This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed-source software. Check [LICENSE](LICENSE) for further details.
 
 {AdditionalLicenses}
 
@@ -80,7 +79,7 @@ For detailed information about third-party audio assets go to our audio bible: h
 
 ### Tiles License information
 
-We used 2 predone tiles:
+We used 2 pre-done tiles:
 
  - https://livingtheindie.itch.io/pixel-cyberpunk-interior
 
