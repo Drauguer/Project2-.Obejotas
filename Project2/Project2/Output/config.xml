@@ -241,7 +241,7 @@
       </idleAnim>
 		<dialogue text="this neighbourhood is not for you buddy"/>
 		<dialogue text="what is that? you want to overthrow the goverment?"/>
-		<dialogue text="good luck wizard, put your fist in the air"/>
+		<dialogue text="good luck elf, put your fist in the air"/>
     </npc>
     <npc x="700" y="300" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="8" npcID="0" hasQuest="false">
       <idleAnim animspeed="0.2f" loop="true">
@@ -255,11 +255,11 @@
       <idleAnim animspeed="0.2f" loop="true">
         <pushback x="0" y="0" width="32" height="32"/>
       </idleAnim>
-      <dialogue text="where are you going old man?"/>
+      <dialogue text="where are you going kid?"/>
       <dialogue text="inside? the bar? dont get cocky with me, scram"/>
       <dialogue text="why are you still here?"/>
-      <dialogue text="alright geezer, you asked for this"/>
-	<dialogue text="hey dudes! this grandpa wants to fight!"/>
+      <dialogue text="alright champ, you asked for this"/>
+	<dialogue text="hey dudes! this mo-ron wants to fight!"/>
     </npc>
 	  <npc x="500" y="500" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="2" npcID="2" hasQuest="false">
 		  <idleAnim animspeed="0.2f" loop="true">
@@ -415,8 +415,94 @@
 		  <dialogue text="defeat"/>
 		  <dialogue text="me"/>
 	  </npc>
-
-    <mage x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="50" attack="30" defense="15" magicPower="95" dexerity="70" charName="Gale el Mago">
+	  <npc x="2450" y="1600" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="15" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="32" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="who are you? you don't look from around here?!"/>
+		  <dialogue text="you look like proletarian swine! guards! guards!"/>
+		  <dialogue text="oh when they come here you will be so dead."/>
+	  </npc>
+	  <npc x="3000" y="1410" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="16" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="64" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="hey, you are not from here are you?"/>
+		  <dialogue text="that's alright, at least you are from our country!"/>
+		  <dialogue text="im not a racist, i just want them to come legally"/>
+		  <dialogue text="that or at least they should work for us"/>
+		  <dialogue text="in horrible conditions..."/>
+	  </npc>
+	  <npc x="1100" y="670" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="17" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="64" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="this here is the statue of a spirit"/>
+		  <dialogue text="the spirit of freedom!"/>
+		  <dialogue text="built by the slaves of conquered lands!"/>
+		  <dialogue text="what? you say that it is highly hypocritical?"/>
+		  <dialogue text="you just hate freedom"/>
+	  </npc>
+	  <npc x="3900" y="650" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="18" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="hey, i know you, you are from the slums"/>
+		  <dialogue text="yes my daddy owns the factory where you worked"/>
+		  <dialogue text="thanks for producing our commodities"/>
+		  <dialogue text="your sweat and tears makes us more comfortable"/>
+	  </npc>
+	  <npc x="4700" y="100" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="19" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="32" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="don't go beyond here, you'll get lost"/>
+		  <dialogue text="or do, i don't really care"/>
+		  <dialogue text="i hate this place"/>
+	  </npc>
+	  <npc x="4850" y="1750" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="20" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="what a weather huh?"/>
+		  <dialogue text="and how weird is this rain"/>
+		  <dialogue text="as if god said 'fuck it, big ass rain'"/>
+		</npc>
+	  <npc x="500" y="1750" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="21" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="32" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="damn it, where is that combination..."/>
+		  <dialogue text="i swear, these pockets can't hold a thing"/>
+		  <dialogue text="the kid that sewed them probably has no thumbs"/>
+	  </npc>
+	  <npc x="1100" y="1350" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="22" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="look at this book, it makes no sense"/>
+		  <dialogue text="it says 'history repeats itself"/>
+		  <dialogue text="first as a tragedy, second as a farce'"/>
+		  <dialogue text="what the sigma"/>
+	  </npc>
+	  <npc x="2750" y="850" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="23" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="96" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="i love living next to the king"/>
+		  <dialogue text="i can almost feel my lips on his feet"/>
+		  <dialogue text="...what?"/>
+	  </npc>
+	  <npc x="4100" y="230" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="false" triggerInRange="false" mapID="5" npcID="24" hasQuest="false">
+		  <idleAnim animspeed="0.2f" loop="true">
+			  <pushback x="0" y="64" width="32" height="32"/>
+		  </idleAnim>
+		  <dialogue text="what a view"/>
+		  <dialogue text="one day this will all burn"/>
+		  <dialogue text="and when society colapses"/>
+		  <dialogue text="my ideology wil thrive"/>
+	  </npc>
+	  <mage x="200" y="100" texturepath="Assets/Textures/SpriteSheetMagoEnCombate.png" life="50" attack="30" defense="15" magicPower="95" dexerity="70" charName="Gale el Mago">
 		<Idle animspeed="0.1f" loop="true">
 			<pushback x="0" y="0" width="64" height="64"/>
 			<pushback x="64" y="0" width="64" height="64"/>
