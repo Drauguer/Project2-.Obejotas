@@ -66,7 +66,7 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::NORMAL:
 			app->render->DrawTexture(texture, (bounds.x - 20 - app->render->camera.x) / 2, (bounds.y - 7 - app->render->camera.y) / 2);
-			app->render->DrawRectangle(bounds, 0, 0, 20, 100, true, false);
+			//app->render->DrawRectangle(bounds, 0, 0, 20, 100, true, false);
 			break;
 		case GuiControlState::FOCUSED:
 			app->render->DrawTexture(texture, (bounds.x - 20 - app->render->camera.x) / 2, (bounds.y - 7 - app->render->camera.y) / 2);
@@ -74,7 +74,7 @@ bool GuiControlButton::Update(float dt)
 			break;
 		case GuiControlState::PRESSED:
 			app->render->DrawTexture(texture, (bounds.x - 20 - app->render->camera.x) / 2, (bounds.y - 7 - app->render->camera.y) / 2);
-			app->render->DrawRectangle(bounds, 0, 0, 20, 100, true, false);
+			app->render->DrawRectangle(bounds, 0, 255, 0, 100, true, false);
 			break;
 		}
 
