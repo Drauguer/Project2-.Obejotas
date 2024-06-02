@@ -159,10 +159,6 @@ bool BaseAlly::Update(float dt)
 			SetWeaponStats();
 		}
 	}
-
-	
-
-
 	
 	if (attackAnim.HasFinished()) {
 		currentAnim = &idleAnim;		

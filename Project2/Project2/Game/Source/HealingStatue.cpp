@@ -62,14 +62,18 @@ bool HealingStatue::Update(float dt)
 
 
 	pbody->body->SetTransform({ PIXEL_TO_METERS((float32)((position.x + 32))), PIXEL_TO_METERS((float32)((position.y + 40))) }, 0);
-	if (canHeal)
+	if (!app->inventory->isInventory)
 	{
-		app->render->DrawTexture(statueOn, (position.x), (position.y));
+		if (canHeal)
+		{
+			app->render->DrawTexture(statueOn, (position.x), (position.y));
+		}
+		else if (!canHeal)
+		{
+			app->render->DrawTexture(statueOff, (position.x), (position.y));
+		}
 	}
-	else if (!canHeal)
-	{
-		app->render->DrawTexture(statueOff, (position.x), (position.y));
-	}
+	
 
 
 	return true;

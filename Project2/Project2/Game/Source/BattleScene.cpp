@@ -1006,6 +1006,34 @@ void BattleScene::CheckEnemyAbility(int abilityId, int indexPlayerToAttack) {
 
 		printf("Se cura un tercio de vida\n");
 		break;
+	case 10:
+		damage = app->scene->enemies[currentEnemyInCombatIndex]->attack * 2 / app->scene->allies[indexPlayerToAttack]->defense * 20;
+		printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+		printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+		if (app->physics->debug == false)
+		{
+			app->scene->allies[indexPlayerToAttack]->life -= damage;
+		}
+
+		printf("Placaje XD\n");
+		break;
+	case 11:
+		damage = (app->scene->enemies[currentEnemyInCombatIndex]->attack / app->scene->allies[indexPlayerToAttack]->defense * 20) * 0.6f;
+		for (int i = 0; i < app->scene->allies.Count(); ++i)
+		{
+			srand((unsigned)time(NULL));
+			randomIndex = rand() % 100;
+
+			if (app->physics->debug == false && (randomIndex <= app->scene->enemies[currentEnemyInCombatIndex]->dexerity))
+			{
+				app->scene->allies[i]->life -= damage;
+				printf("Ataque de enemigo a %s y le ha hecho %f de da�o\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), damage);
+				printf("La vida de %s es: %f\n", app->scene->allies[indexPlayerToAttack]->charName.GetString(), app->scene->allies[indexPlayerToAttack]->life);
+			}
+		}
+
+		printf("Disparos laser\n");
+		break;
 	}
 }
 
@@ -1024,14 +1052,38 @@ void BattleScene::GiveReward(int npcID)
 	case 11:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemNum1);
 		app->scene->itemNum1->newInInventory = true;
+		for (int i = 0; i < app->scene->listItems.Count(); ++i)
+		{
+			if (strcmp(app->scene->listItems[i]->itemName.GetString(), "Weapon 1") == 0)
+			{
+				app->scene->allies[0]->inventoryChar.Add(app->scene->listItems[i]);
+				app->scene->listItems[i]->newInInventory = true;
+			}
+		}
 		break;
 	case 12:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemNum2);
 		app->scene->itemNum2->newInInventory = true;
+		for (int i = 0; i < app->scene->listItems.Count(); ++i)
+		{
+			if (strcmp(app->scene->listItems[i]->itemName.GetString(), "Armor 3") == 0)
+			{
+				app->scene->allies[2]->inventoryChar.Add(app->scene->listItems[i]);
+				app->scene->listItems[i]->newInInventory = true;
+			}
+		}
 		break;
 	case 13:
 		app->scene->allies[0]->inventoryChar.Add(app->scene->itemNum3);
 		app->scene->itemNum3->newInInventory = true;
+		for (int i = 0; i < app->scene->listItems.Count(); ++i)
+		{
+			if (strcmp(app->scene->listItems[i]->itemName.GetString(), "Helmet 3") == 0)
+			{
+				app->scene->allies[3]->inventoryChar.Add(app->scene->listItems[i]);
+				app->scene->listItems[i]->newInInventory = true;
+			}
+		}
 		break;
 	}
 }

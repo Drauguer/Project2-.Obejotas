@@ -373,9 +373,9 @@
 
 	  <npc x="1792" y="1600" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="false" mapID="5" npcID="11" hasQuest="false">
 		  <idleAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="64" width="32" height="32"/>
+			  <pushback x="0" y="128" width="48" height="46"/>
 		  </idleAnim>
-		  <dialogue text="i am the first canciller of the king!"/>
+		  <dialogue text="i am the first royal knight of the king!"/>
 		  <dialogue text="you can't battle the king before fighting us!"/>
 		  <dialogue text="if you defeat each one of us, you will get the password"/>
 		  <dialogue text="for the king!!!!!"/>
@@ -383,9 +383,9 @@
 
 	  <npc x="4672" y="640" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="false" mapID="5" npcID="12" hasQuest="false">
 		  <idleAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="64" width="32" height="32"/>
+			  <pushback x="0" y="128" width="48" height="46"/>
 		  </idleAnim>
-		  <dialogue text="i am the second canciller of the king!"/>
+		  <dialogue text="i am the second royal knight of the king!"/>
 		  <dialogue text="you can't battle the king before fighting us!"/>
 		  <dialogue text="if you defeat each one of us, you will get the password"/>
 		  <dialogue text="for the king!!!!!"/>
@@ -393,15 +393,15 @@
 
 	  <npc x="1024" y="128" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="false" mapID="5" npcID="13" hasQuest="false">
 		  <idleAnim animspeed="0.2f" loop="true">
-			  <pushback x="0" y="64" width="32" height="32"/>
+			  <pushback x="0" y="128" width="48" height="46"/>
 		  </idleAnim>
-		  <dialogue text="i am the third canciller of the king!"/>
+		  <dialogue text="i am the third royal knight of the king!"/>
 		  <dialogue text="you can't battle the king before fighting us!"/>
 		  <dialogue text="if you defeat each one of us, you will get the password"/>
 		  <dialogue text="for the king!!!!!"/>
 	  </npc>
 
-	  <npc x="288" y="288" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="9" npcID="14" hasQuest="false">
+	  <npc x="500" y="288" texturepath="Assets/Textures/SpriteSheetNPCs.png" hasCombat="true" triggerInRange="true" mapID="9" npcID="14" hasQuest="false">
 		  <idleAnim animspeed="0.2f" loop="true">
 			  <pushback x="96" y="96" width="32" height="32"/>
 		  </idleAnim>
@@ -620,7 +620,7 @@
 
 	  </ally2>
     
-    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="100" attack="45" defense="40" magicPower="15" dexerity="50" combatID="1">
+    <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="45" defense="40" magicPower="15" dexerity="50" combatID="1">
       <Idle animspeed="0.1f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
         <pushback x="64" y="0" width="64" height="64"/>
@@ -700,7 +700,7 @@
 	  </enemy>
 
 
-	  <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="100" attack="45" defense="40" magicPower="15" dexerity="50" combatID="5">
+	  <enemy x="900" y="100" texturepath="Assets/Textures/enemigo3.png" life="80" attack="45" defense="40" magicPower="15" dexerity="50" combatID="5">
       <Idle animspeed="0.1f" loop="true">
         <pushback x="0" y="0" width="64" height="64"/>
         <pushback x="64" y="0" width="64" height="64"/>
@@ -718,7 +718,7 @@
      
     </enemy>
 
-	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="100" attack="45" defense="40" magicPower="15" dexerity="50" combatID="7">
+	  <enemy x="900" y="250" texturepath="Assets/Textures/enemigo3.png" life="80" attack="45" defense="40" magicPower="15" dexerity="50" combatID="7">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="64" height="64"/>
 			  <pushback x="64" y="0" width="64" height="64"/>
@@ -844,7 +844,205 @@
 
 	  </enemy>
 
-	  <enemy x="900" y="250" texturepath="Assets/Textures/BossSpriteSheet.png" life="350" attack="70" defense="65" magicPower="30" dexerity="70" combatID="14">
+	  <enemy x="900" y="100" texturepath="Assets/Textures/Caballero_SpriteSheet.png" life="150" attack="60" defense="60" magicPower="10" dexerity="100" combatID="11">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="256" y="0" width="64" height="64"/>
+			  <pushback x="320" y="0" width="64" height="64"/>
+			  <pushback x="384" y="0" width="64" height="64"/>
+			  <pushback x="448" y="0" width="64" height="64"/>
+			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+
+			  <pushback x="0" y="64" width="68" height="64"/>
+			  <pushback x="68" y="64" width="68" height="64"/>
+			  <pushback x="136" y="64" width="68" height="64"/>
+			  <pushback x="204" y="64" width="68" height="64"/>
+			  <pushback x="272" y="64" width="68" height="64"/>
+			  <pushback x="340" y="64" width="68" height="64"/>
+		  </Attack>
+		  <ability id="10" name="Bonk"/>
+		  <ability id="11" name="Vision Laser"/>
+
+	  </enemy>
+
+	  <enemy x="900" y="250" texturepath="Assets/Textures/Caballero_SpriteSheet.png" life="150" attack="60" defense="60" magicPower="10" dexerity="100" combatID="11">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="256" y="0" width="64" height="64"/>
+			  <pushback x="320" y="0" width="64" height="64"/>
+			  <pushback x="384" y="0" width="64" height="64"/>
+			  <pushback x="448" y="0" width="64" height="64"/>
+			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+
+			  <pushback x="0" y="64" width="68" height="64"/>
+			  <pushback x="68" y="64" width="68" height="64"/>
+			  <pushback x="136" y="64" width="68" height="64"/>
+			  <pushback x="204" y="64" width="68" height="64"/>
+			  <pushback x="272" y="64" width="68" height="64"/>
+			  <pushback x="340" y="64" width="68" height="64"/>
+		  </Attack>
+		  <ability id="10" name="Bonk"/>
+		  <ability id="11" name="Vision Laser"/>
+
+	  </enemy>
+
+	  <enemy x="900" y="100" texturepath="Assets/Textures/Caballero_SpriteSheet.png" life="150" attack="60" defense="60" magicPower="10" dexerity="100" combatID="12">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="256" y="0" width="64" height="64"/>
+			  <pushback x="320" y="0" width="64" height="64"/>
+			  <pushback x="384" y="0" width="64" height="64"/>
+			  <pushback x="448" y="0" width="64" height="64"/>
+			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+
+			  <pushback x="0" y="64" width="68" height="64"/>
+			  <pushback x="68" y="64" width="68" height="64"/>
+			  <pushback x="136" y="64" width="68" height="64"/>
+			  <pushback x="204" y="64" width="68" height="64"/>
+			  <pushback x="272" y="64" width="68" height="64"/>
+			  <pushback x="340" y="64" width="68" height="64"/>
+		  </Attack>
+		  <ability id="10" name="Bonk"/>
+		  <ability id="11" name="Vision Laser"/>
+
+	  </enemy>
+
+	  <enemy x="900" y="250" texturepath="Assets/Textures/Caballero_SpriteSheet.png" life="150" attack="60" defense="60" magicPower="10" dexerity="100" combatID="12">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="256" y="0" width="64" height="64"/>
+			  <pushback x="320" y="0" width="64" height="64"/>
+			  <pushback x="384" y="0" width="64" height="64"/>
+			  <pushback x="448" y="0" width="64" height="64"/>
+			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+
+			  <pushback x="0" y="64" width="68" height="64"/>
+			  <pushback x="68" y="64" width="68" height="64"/>
+			  <pushback x="136" y="64" width="68" height="64"/>
+			  <pushback x="204" y="64" width="68" height="64"/>
+			  <pushback x="272" y="64" width="68" height="64"/>
+			  <pushback x="340" y="64" width="68" height="64"/>
+		  </Attack>
+		  <ability id="10" name="Bonk"/>
+		  <ability id="11" name="Vision Laser"/>
+
+	  </enemy>
+
+	  <enemy x="900" y="100" texturepath="Assets/Textures/Caballero_SpriteSheet.png" life="150" attack="60" defense="60" magicPower="10" dexerity="100" combatID="13">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="256" y="0" width="64" height="64"/>
+			  <pushback x="320" y="0" width="64" height="64"/>
+			  <pushback x="384" y="0" width="64" height="64"/>
+			  <pushback x="448" y="0" width="64" height="64"/>
+			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+
+			  <pushback x="0" y="64" width="68" height="64"/>
+			  <pushback x="68" y="64" width="68" height="64"/>
+			  <pushback x="136" y="64" width="68" height="64"/>
+			  <pushback x="204" y="64" width="68" height="64"/>
+			  <pushback x="272" y="64" width="68" height="64"/>
+			  <pushback x="340" y="64" width="68" height="64"/>
+		  </Attack>
+		  <ability id="10" name="Bonk"/>
+		  <ability id="11" name="Vision Laser"/>
+
+	  </enemy>
+
+	  <enemy x="900" y="250" texturepath="Assets/Textures/Caballero_SpriteSheet.png" life="150" attack="60" defense="60" magicPower="10" dexerity="100" combatID="13">
+		  <Idle animspeed="0.1f" loop="true">
+			  <pushback x="0" y="0" width="64" height="64"/>
+			  <pushback x="64" y="0" width="64" height="64"/>
+			  <pushback x="128" y="0" width="64" height="64"/>
+			  <pushback x="192" y="0" width="64" height="64"/>
+			  <pushback x="256" y="0" width="64" height="64"/>
+			  <pushback x="320" y="0" width="64" height="64"/>
+			  <pushback x="384" y="0" width="64" height="64"/>
+			  <pushback x="448" y="0" width="64" height="64"/>
+			  <pushback x="512" y="0" width="64" height="64"/>
+			  <pushback x="576" y="0" width="64" height="64"/>
+			  <pushback x="640" y="0" width="64" height="64"/>
+			  <pushback x="704" y="0" width="64" height="64"/>
+			  <pushback x="768" y="0" width="64" height="64"/>
+			  <pushback x="832" y="0" width="64" height="64"/>
+			  <pushback x="896" y="0" width="64" height="64"/>
+			  <pushback x="960" y="0" width="64" height="64"/>
+		  </Idle>
+		  <Attack animspeed="0.1f" loop="false">
+
+			  <pushback x="0" y="64" width="68" height="64"/>
+			  <pushback x="68" y="64" width="68" height="64"/>
+			  <pushback x="136" y="64" width="68" height="64"/>
+			  <pushback x="204" y="64" width="68" height="64"/>
+			  <pushback x="272" y="64" width="68" height="64"/>
+			  <pushback x="340" y="64" width="68" height="64"/>
+		  </Attack>
+		  <ability id="10" name="Bonk"/>
+		  <ability id="11" name="Vision Laser"/>
+
+	  </enemy>
+
+	  <enemy x="900" y="250" texturepath="Assets/Textures/BossSpriteSheet.png" life="350" attack="100" defense="65" magicPower="30" dexerity="70" combatID="14">
 		  <Idle animspeed="0.1f" loop="true">
 			  <pushback x="0" y="0" width="136" height="160"/>
 			  <pushback x="136" y="0" width="136" height="160"/>
@@ -909,7 +1107,7 @@
 	  <healing_statue x="2122" y="416" mapID="0"/>
 	  <healing_statue x="576" y="256" mapID="5"/>
 	  <healing_statue x="1472" y="32" mapID="5"/>
-	  <healing_statue x="160" y="384" mapID="9"/>
+	  
 	
   </scene>
 
