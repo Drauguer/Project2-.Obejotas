@@ -14,6 +14,7 @@
 #include "LogoScene.h"
 #include "ModuleFadeToBlack.h"
 #include "Inventory.h"
+#include "ParticleSystem.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -51,6 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	mainMenu = new MainMenu(false);
 	fadeToBlack = new ModuleFadeToBlack(true);
 	inventory = new Inventory(false);
+	particleSystem = new ParticleSystem(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -78,6 +80,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(dialogueManager);
 	AddModule(fonts);
+	AddModule(particleSystem);
+
 	
 	
 

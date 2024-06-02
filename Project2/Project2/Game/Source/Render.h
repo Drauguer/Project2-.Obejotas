@@ -4,9 +4,13 @@
 #include "Module.h"
 
 #include "Point.h"
+#include "ParticleSystem.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_ttf/include/SDL_ttf.h"
+
+#include <vector>
+
 
 class Render : public Module
 {
@@ -49,6 +53,8 @@ public:
 
 	//
 	bool SaveState(pugi::xml_node node);
+
+	void RenderParticles(std::vector<Particle> particles, SDL_Texture* texture);
 
 public:
 

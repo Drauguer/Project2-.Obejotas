@@ -31,6 +31,7 @@ class MainMenu;
 class LogoScene;
 class ModuleFadeToBlack;
 class Inventory;
+class ParticleSystem;
 
 class App
 {
@@ -126,6 +127,7 @@ public:
 	LogoScene* logoScene;
 	ModuleFadeToBlack* fadeToBlack;
 	Inventory* inventory;
+	ParticleSystem* particleSystem;
 	bool IsVsincActive = true;
 
 	bool hasSolvedArrowPuzzle = false;

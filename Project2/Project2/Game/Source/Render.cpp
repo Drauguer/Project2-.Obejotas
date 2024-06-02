@@ -4,6 +4,8 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "ParticleSystem.h"
+
 
 #define VSYNC true
 
@@ -277,4 +279,12 @@ bool Render::SaveState(pugi::xml_node node) {
 	
 
 	return true;
+}
+
+void Render::RenderParticles(std::vector<Particle> particles, SDL_Texture* texture) {
+	
+	for (const auto& p : particles) {
+		SDL_Rect rect = { static_cast<int>(p.x), static_cast<int>(p.y), 10, 10 };
+		DrawTexture(texture, p.x, p.y,false);
+	}
 }

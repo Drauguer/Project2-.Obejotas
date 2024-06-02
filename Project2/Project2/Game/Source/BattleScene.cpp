@@ -13,6 +13,7 @@
 #include "ModuleFonts.h"
 #include "Physics.h"
 #include "ModuleFadeToBlack.h"
+#include "ParticleSystem.h"
 
 #include "Defs.h"
 #include "Log.h"
