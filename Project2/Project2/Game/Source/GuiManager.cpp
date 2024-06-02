@@ -19,7 +19,7 @@ bool GuiManager::Start()
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Texture* texture_, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -27,8 +27,8 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = new GuiControlButton(id, bounds, text,texture_);
-		app->render->DrawTexture(texture_, bounds.x, bounds.y);
+		guiControl = new GuiControlButton(id, bounds, text);
+		guiControl->texture = app->tex->Load("Assets/Textures/BotonesUI/MenuPrincipalStart.png");
 		break;
 	
 	case GuiControlType::SLIDER:

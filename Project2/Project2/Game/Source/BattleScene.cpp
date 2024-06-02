@@ -130,11 +130,11 @@ bool BattleScene::Start()
 	app->win->GetWindowSize(windowW, windowH);
 
 	SDL_Rect ContinueButton_ = { windowW / 2 + 60,windowH / 2 + 120, 240, 80 };
-	continueBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continue", ContinueButton_, this, IdleContinueButton);
+	continueBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continue", ContinueButton_, this);
 	continueBattle->state = GuiControlState::DISABLED;
 
 	SDL_Rect ExitButton_ = { windowW / 2 - 360,windowH / 2 + 120, 240, 80 };
-	exitBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this, IdleExitButton);
+	exitBattle = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", ExitButton_, this);
 	exitBattle->state = GuiControlState::DISABLED;
 	
 	

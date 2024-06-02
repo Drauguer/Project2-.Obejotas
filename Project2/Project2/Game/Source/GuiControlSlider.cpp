@@ -13,6 +13,12 @@ GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, const char* text)
 
     // Slider specific properties
     sliderButton = { bounds.x+ bounds.x/2, bounds.y, 10, bounds.h }; // Small rectangle representing the slider handle
+    canClick = true;
+    drawBasic = false;
+    maxValue = 128;
+    minValue = 0;
+    minValueFrom = bounds.x;
+    maxValueFrom = bounds.x + bounds.w;
 }
 
 // Destructor
@@ -24,45 +30,61 @@ GuiControlSlider::~GuiControlSlider()
 // Update method
 bool GuiControlSlider::Update(float dt)
 {
-    int scale = app->win->GetScale();
+	if (state != GuiControlState::DISABLED)
+	{
+		// Update the state of the GUiButton according to the mouse position
+		int mouseX, mouseY;
+		float screenScale = 1 / (float)app->win->GetScale();
 
-    if (state != GuiControlState::DISABLED)
-    {
-        int mouseX, mouseY;
-        app->input->GetMousePosition(mouseX, mouseY);
+		SDL_GetMouseState(&mouseX, &mouseY);
 
-        // Check if the mouse is over the slider
-        if (mouseX * scale > bounds.x && mouseX * scale < bounds.x + bounds.w && mouseY * scale > bounds.y && mouseY * scale < bounds.y + bounds.h) {
 
-            state = GuiControlState::FOCUSED;
+		if ((mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) ||
+			(mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h)) {
+			state = GuiControlState::FOCUSED;
 
-            if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
-                state = GuiControlState::PRESSED;
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+			{
 
-                // Update the slider value based on mouse position
-                newValue = (float)(mouseX - bounds.x*scale) / (float)(bounds.w*scale);
-                newValue = minValue + newValue * (maxValue - minValue);
-                SetValue(newValue);
-                
-            }
-            if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-                NotifyObserver();
-            }
-        }
-        else
-        {
-            state = GuiControlState::NORMAL;
-        }
+				//10* is an offset to get the thumb in the right position
+				sliderButton.x = mouseX - (10);
 
-        // Draw slider
-        app->render->DrawRectangle(bounds, 255, 255, 255, 255, true, false); // Draw the slider bar
-        app->render->DrawRectangle(sliderButton, 0, 255, 0, 255, true, false); // Draw the handle
+				if (mouseX < bounds.x || sliderButton.x < bounds.x)
+					sliderButton.x = bounds.x;
 
-        // Draw text
-        app->render->DrawText(text.GetString(), bounds.x, bounds.y - 50, bounds.w, 50);
-    }
+				if (mouseX > (bounds.x + bounds.w) || sliderButton.x + 40 > (bounds.x + bounds.w))
+					sliderButton.x = (bounds.x + bounds.w) - 40;
 
-    return false;
+
+				value = UpdateValue(mouseX);
+				//LOG("slider value:%f", GetValue(mouseX));
+				state = GuiControlState::PRESSED;
+			}
+			// If mouse button pressed -> Generate event!
+			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			{
+				NotifyObserver();
+			}
+
+		}
+		else state = GuiControlState::NORMAL;
+	}
+
+	return false;
+}
+
+int GuiControlSlider::UpdateValue(float pos)
+{
+
+	if (pos <= bounds.x + (sliderButton.w * 0.5f))
+		return value = minValue;
+
+	if (pos >= (bounds.x + bounds.w) + (sliderButton.w * 0.5f))
+		return	value = maxValue;
+
+	value = minValue + (maxValue - minValue) * ((pos - minValueFrom) / (maxValueFrom - minValueFrom));
+
+	return value;
 }
 
 void GuiControlSlider::SetValue(float value)

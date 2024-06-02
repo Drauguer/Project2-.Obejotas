@@ -11,7 +11,7 @@ class GuiControlButton : public GuiControl
 
 public:
 
-	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text, SDL_Texture* texture);
+	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text);
 	virtual ~GuiControlButton();
 
 	// Called each loop iteration
