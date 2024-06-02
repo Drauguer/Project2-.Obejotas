@@ -14,6 +14,7 @@
 #include "Physics.h"
 #include "ModuleFadeToBlack.h"
 #include "ParticleSystem.h"
+#include "ParticleSystemFire.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -644,6 +645,8 @@ bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id == 1) 
 	{
 		app->particleSystem->Enable();
+		app->particleSystemBug->Disable();
+
 		app->audio->PlayFx(clickFx);
 		exitBattle->state = GuiControlState::DISABLED;
 		continueBattle->state = GuiControlState::DISABLED;

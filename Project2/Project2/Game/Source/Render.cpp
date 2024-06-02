@@ -5,6 +5,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "ParticleSystem.h"
+#include "Animation.h"
 
 
 #define VSYNC true
@@ -286,5 +287,19 @@ void Render::RenderParticles(std::vector<Particle> particles, SDL_Texture* textu
 	for (const auto& p : particles) {
 		SDL_Rect rect = { static_cast<int>(p.x), static_cast<int>(p.y), 10, 10 };
 		DrawTexture(texture, p.x, p.y,false);
+	}
+}
+
+void Render::RenderParticlesWithAnim(std::vector<Particle> particles, SDL_Texture* texture, const SDL_Rect* section) {
+	
+	for (const auto& p : particles) {
+		SDL_Rect rect = { static_cast<int>(p.x), static_cast<int>(p.y), 10, 10 };
+		if (p.xVel<0) {
+			DrawTexture(texture, p.x, p.y, section, true);
+		}
+		else
+		{
+			DrawTexture(texture, p.x, p.y, section, false);
+		}
 	}
 }

@@ -33,6 +33,7 @@ class ModuleFadeToBlack;
 class Inventory;
 class ParticleSystem;
 class ParticleSystemDirt;
+class ParticleSystemBug;
 
 class App
 {
@@ -130,6 +131,7 @@ public:
 	Inventory* inventory;
 	ParticleSystem* particleSystem;
 	ParticleSystemDirt* particleSystemDirt;
+	ParticleSystemBug* particleSystemBug;
 	bool IsVsincActive = true;
 
 	bool hasSolvedArrowPuzzle = false;

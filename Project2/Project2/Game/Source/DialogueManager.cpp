@@ -9,6 +9,7 @@
 #include "BattleScene.h"
 #include "Audio.h"
 #include "ModuleFadeToBlack.h"
+#include "ParticleSystemFire.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -90,6 +91,7 @@ bool DialogueManager::Update(float dt)
 						app->scene->isOnCombat = !app->scene->isOnCombat;
 						if (app->scene->isOnCombat) {
 							app->particleSystem->Disable();
+							app->particleSystemBug->Enable();
 						}
 						app->battleScene->npcIDbattle = npcIDcombat;
 						app->scene->combatID = npcIDcombat;

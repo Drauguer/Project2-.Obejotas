@@ -55,6 +55,7 @@ public:
 	bool SaveState(pugi::xml_node node);
 
 	void RenderParticles(std::vector<Particle> particles, SDL_Texture* texture);
+	void RenderParticlesWithAnim(std::vector<Particle> particles, SDL_Texture* texture, const SDL_Rect* section);
 
 public:
 

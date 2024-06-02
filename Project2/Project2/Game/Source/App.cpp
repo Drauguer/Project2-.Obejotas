@@ -16,6 +16,7 @@
 #include "Inventory.h"
 #include "ParticleSystem.h"
 #include "ParticleSystemDirt.h"
+#include "ParticleSystemFire.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -55,6 +56,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	inventory = new Inventory(false);
 	particleSystem = new ParticleSystem(false);
 	particleSystemDirt = new ParticleSystemDirt(false);
+	particleSystemBug = new ParticleSystemBug(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -68,10 +70,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(battleScene);
+	AddModule(particleSystemBug);
+
+
 	AddModule(scene);
 
 	AddModule(inventory);
 	AddModule(particleSystemDirt);
+	
+
 	AddModule(entityManager);
 	
 	AddModule(particleSystem);
