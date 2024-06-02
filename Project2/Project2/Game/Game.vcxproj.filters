@@ -42,6 +42,7 @@
     <ClCompile Include="Source\GuiControlSlider.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\HealingStatue.cpp" />
+    <ClCompile Include="Source\ParticleSystemDirt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -115,6 +116,7 @@
     <ClInclude Include="Source\GuiControlSlider.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\HealingStatue.h" />
+    <ClInclude Include="Source\ParticleSystemDirt.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

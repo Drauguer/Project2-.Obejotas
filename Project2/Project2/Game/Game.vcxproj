@@ -118,6 +118,7 @@
     <ClCompile Include="Source\ModuleFonts.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
+    <ClCompile Include="Source\ParticleSystemDirt.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
+    <ClInclude Include="Source\ParticleSystemDirt.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />

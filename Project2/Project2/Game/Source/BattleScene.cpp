@@ -643,6 +643,7 @@ bool BattleScene::OnGuiMouseClickEvent(GuiControl* control)
 
 	if (control->id == 1) 
 	{
+		app->particleSystem->Enable();
 		app->audio->PlayFx(clickFx);
 		exitBattle->state = GuiControlState::DISABLED;
 		continueBattle->state = GuiControlState::DISABLED;

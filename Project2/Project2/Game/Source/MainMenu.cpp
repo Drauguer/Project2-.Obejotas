@@ -345,7 +345,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	if (control->id == 1) {
 
 		app->fadeToBlack->FadeToBlack(this, app->scene, 30);
-
+		app->particleSystem->Enable();
 		app->physics->Enable();
 		app->map->Enable();
 		app->entityManager->Enable();
@@ -395,7 +395,7 @@ bool MainMenu::OnGuiMouseClickEvent(GuiControl* control)
 		app->audio->PlayFx(clickFx);
 	}
 	if (control->id == 10) {
-
+		app->particleSystem->Enable();
 		app->physics->Enable();
 		app->map->Enable();
 		app->entityManager->Enable();

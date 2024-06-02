@@ -88,6 +88,9 @@ bool DialogueManager::Update(float dt)
 					if (activateCombat)
 					{
 						app->scene->isOnCombat = !app->scene->isOnCombat;
+						if (app->scene->isOnCombat) {
+							app->particleSystem->Disable();
+						}
 						app->battleScene->npcIDbattle = npcIDcombat;
 						app->scene->combatID = npcIDcombat;
 						if (firstCombat)

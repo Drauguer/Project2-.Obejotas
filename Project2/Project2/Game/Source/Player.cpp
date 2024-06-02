@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "Inventory.h"
 #include "ModuleFonts.h"
+#include "ParticleSystemDirt.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -186,6 +187,16 @@ bool Player::Update(float dt)
 
 	GamePad& pad = app->input->pads[0];
 
+	if (vel.x==0 && vel.y==0) {
+		
+		app->particleSystemDirt->Disable();
+	}
+	else
+	{
+		app->particleSystemDirt->positionX = position.x;
+		app->particleSystemDirt->positionY = position.y;
+	}
+
 
 	int scale = app->win->GetScale();
 
@@ -218,6 +229,7 @@ bool Player::Update(float dt)
 			if (isOnPause == false) {
 
 				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || pad.l_x < 0 && pad.l_y < 0.6 && pad.l_y > -0.6) {
+					app->particleSystemDirt->Enable();
 					vel.x += -0.2 * dt;
 					isFlipped = true;
 					currentAnimation = &sideWalk;
@@ -226,6 +238,7 @@ bool Player::Update(float dt)
 
 				}
 				else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || pad.l_x > 0 && pad.l_y < 0.6 && pad.l_y > -0.6) {
+					app->particleSystemDirt->Enable();
 					vel.x += 0.2 * dt;
 					currentAnimation = &sideWalk;
 					sideWalk.Update();
@@ -233,12 +246,14 @@ bool Player::Update(float dt)
 					app->audio->PlayFx(walkingRockFx);
 				}
 				else if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || pad.l_y < 0) {
+					app->particleSystemDirt->Enable();
 					vel.y += -0.2 * dt;
 					currentAnimation = &backWalk;
 					backWalk.Update();
 					app->audio->PlayFx(walkingRockFx);
 				}
 				else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || pad.l_y > 0) {
+					app->particleSystemDirt->Enable();
 					vel.y += 0.2 * dt;
 					currentAnimation = &frontWalk;
 					frontWalk.Update();
@@ -363,6 +378,11 @@ bool Player::Update(float dt)
 
 		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x - 10);
 		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y - 10);
+		if (app->particleSystemDirt->isRunning) {
+			
+		}
+	
+		
 
 		if (!app->inventory->isInventory)
 		{

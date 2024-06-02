@@ -1,9 +1,10 @@
-#ifndef __PARTICLESYSTEM_H__
-#define __PARTICLESYSTEM_H__
+#ifndef __PARTICLESYSTEMDIRT_H__
+#define __PARTICLESYSTEMDIRT_H__
 
 
 
 #include "Module.h"
+#include "ParticleSystem.h"
 #include <string>
 
 #include <vector>
@@ -11,17 +12,12 @@
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
-struct Particle {
-    float x, y;
-    float xVel, yVel;
-    int lifetime;
-};
 
-class ParticleSystem : public Module 
+class ParticleSystemDirt : public Module 
 {
 public:
-    ParticleSystem(bool startEnabled);
-    ~ParticleSystem();
+    ParticleSystemDirt(bool startEnabled);
+    ~ParticleSystemDirt();
 
    // bool Awake();
     bool Start();
@@ -33,10 +29,15 @@ public:
 
     void Disable();
 
+public: 
+    int positionX = 1;
+    int positionY = 1;
+    bool isRunning = false;
 private:
     std::vector<Particle> particles;
-    int numParticles = 100;
-    SDL_Texture* waterTexture = nullptr;
+    int numParticles = 50;
+    SDL_Texture* dirtTexture = nullptr;
+    
 };
 
-#endif // __PARTICLESYSTEM_H__
+#endif // __PARTICLESYSTEMDIRT_H__
