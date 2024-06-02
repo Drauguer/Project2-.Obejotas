@@ -115,6 +115,7 @@ bool PuzleArrows::Start() {
 
 bool PuzleArrows::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedArrowPuzzle)
 	{
 		
@@ -149,30 +150,33 @@ bool PuzleArrows::Update(float dt)
 					//El 200 se cambia mas adelante cuando tenga un sprite mas pequeño 
 					app->render->DrawTexture(arrowsTexture, (position.x + i*80)-200 , position.y, &currentAnim->GetCurrentFrame());
 				}
-				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+				if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == 1 && app->selectActionCooldown == 0) {
 					if (solutionIds[0] == 3) {
 						solutionIds.RemoveAt(0);
 					}
-
+					app->selectActionCooldown = 15;
 					app->audio->PlayFx(app->scene->hoverFx);
 				}
-				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+				if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down == 1 && app->selectActionCooldown == 0) {
 					if (solutionIds[0] == 4) {
 						solutionIds.RemoveAt(0);
 					}
 					app->audio->PlayFx(app->scene->hoverFx);
+					app->selectActionCooldown = 15;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+				if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left == 1 && app->selectActionCooldown == 0) {
 					if (solutionIds[0] == 1) {
 						solutionIds.RemoveAt(0);
 					}
 					app->audio->PlayFx(app->scene->hoverFx);
+					app->selectActionCooldown = 15;
 				}
-				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+				if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.right == 1 && app->selectActionCooldown == 0) {
 					if (solutionIds[0] == 2) {
 						solutionIds.RemoveAt(0);
 					}
 					app->audio->PlayFx(app->scene->hoverFx);
+					app->selectActionCooldown = 15;
 				}
 			}
 			else

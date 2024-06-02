@@ -89,6 +89,8 @@ bool PuzlePassword::Start() {
 
 bool PuzlePassword::Update(float dt)
 {
+
+	GamePad& pad = app->input->pads[0];
 	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedPasswordPuzzle) 
 	{
 		if (isPasswordSFXPlayed == false)
@@ -97,7 +99,7 @@ bool PuzlePassword::Update(float dt)
 			isPasswordSFXPlayed = true;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.up == 1 && app->selectActionCooldown == 0) {
 			if (currentCombination[currentIndex] < 9) 
 			{
 				currentCombination[currentIndex]++;
@@ -107,9 +109,10 @@ bool PuzlePassword::Update(float dt)
 					app->scene->player->showPasswordCorrect = true;
 				}
 			}
+			app->selectActionCooldown = 15;
 			app->audio->PlayFx(app->scene->hoverFx);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.down ==1 && app->selectActionCooldown == 0) {
 			if (currentCombination[currentIndex] >0)
 			{
 				currentCombination[currentIndex]--;
@@ -120,9 +123,10 @@ bool PuzlePassword::Update(float dt)
 
 				}
 			}
+			app->selectActionCooldown = 15;
 			app->audio->PlayFx(app->scene->hoverFx);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.left ==1 && app->selectActionCooldown == 0) {
 			if (currentIndex < 1)
 			{
 				currentIndex = 2;
@@ -131,9 +135,10 @@ bool PuzlePassword::Update(float dt)
 			{
 				currentIndex--;
 			}
+			app->selectActionCooldown = 15;
 			app->audio->PlayFx(app->scene->hoverFx);
 		}
-		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.right ==1 && app->selectActionCooldown == 0) {
 			if (currentIndex > 1)
 			{
 				currentIndex = 0;
@@ -141,7 +146,8 @@ bool PuzlePassword::Update(float dt)
 			else
 			{
 				currentIndex++;
-			}
+			} 
+			app->selectActionCooldown = 15;
 			app->audio->PlayFx(app->scene->hoverFx);
 		}
 		DrawNumbers();

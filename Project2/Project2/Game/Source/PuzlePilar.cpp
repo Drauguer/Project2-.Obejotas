@@ -85,10 +85,10 @@ bool PuzlePilar::Start() {
 
 bool PuzlePilar::Update(float dt)
 {
-	
+	GamePad& pad = app->input->pads[0];
 	if (OnCollisionStay(this->pbody, app->scene->player->pbody) && !app->hasSolvedPilarPuzzle)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN ) 
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || pad.a == 1 && app->selectActionCooldown == 0)
 		{
 			app->audio->PlayFx(app->scene->firePuzzleSFX);
 			isTriggered = true;
@@ -97,7 +97,7 @@ bool PuzlePilar::Update(float dt)
 				app->scene->CheckPilarPuzleResult();
 			}
 			
-
+			app->selectActionCooldown = 20;
 		}
 	}
 	if (isTriggered || app->hasSolvedPilarPuzzle) {
