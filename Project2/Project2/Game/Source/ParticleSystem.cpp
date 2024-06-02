@@ -32,7 +32,7 @@ bool ParticleSystem::Start()
 }
 
 bool ParticleSystem::Update(float dt) {
-    if (app->scene->mapID == 0 || app->scene->mapID == 1 || app->scene->mapID == 5) {
+    if ((app->scene->mapID == 0 || app->scene->mapID == 1 || app->scene->mapID == 5)&& !app->scene->player->isOnPause) {
         for (auto& p : particles) {
             p.y += p.yVel * dt;
             p.lifetime--;
