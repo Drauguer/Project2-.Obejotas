@@ -163,28 +163,28 @@ bool MainMenu::Update(float dt)
 		//Vsync 
 		//Go back
 
-		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 3)
+		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0 || pad.down == true && app->selectActionCooldown == 0) && uiGamePadCounter < 3)
 		{
 			uiGamePadCounter++;
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0 || pad.up == true && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
 		{
 			uiGamePadCounter--;
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 2)
+		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0 || pad.right == true && app->selectActionCooldown == 0) && uiGamePadCounter < 2)
 		{
 			uiGamePadCounter += 2;
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 1)
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0 || pad.left == true && app->selectActionCooldown == 0) && uiGamePadCounter > 1)
 		{
 			uiGamePadCounter -= 2;
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
 		start->isButtonPressed = false;
@@ -212,19 +212,19 @@ bool MainMenu::Update(float dt)
 	}
 	else
 	{
-		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 6)
+		if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || pad.l_y > 0 && app->selectActionCooldown == 0 || pad.down == true && app->selectActionCooldown == 0) && uiGamePadCounter < 6)
 		{
 			uiGamePadCounter++;
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
+		if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || pad.l_y < 0 && app->selectActionCooldown == 0 || pad.up == true && app->selectActionCooldown == 0) && uiGamePadCounter > 0)
 		{
 			uiGamePadCounter--;
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0) && uiGamePadCounter < 2)
+		if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || pad.l_x > 0 && app->selectActionCooldown == 0 || pad.right == true && app->selectActionCooldown == 0) && uiGamePadCounter < 2)
 		{
 			if (uiGamePadCounter == 0)
 			{
@@ -234,10 +234,10 @@ bool MainMenu::Update(float dt)
 			{
 				uiGamePadCounter += 4;
 			}
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
-		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0) && uiGamePadCounter > 1)
+		if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || pad.l_x < 0 && app->selectActionCooldown == 0 || pad.left == true && app->selectActionCooldown == 0) && uiGamePadCounter > 1)
 		{
 			if (uiGamePadCounter==2) 
 			{
@@ -252,7 +252,7 @@ bool MainMenu::Update(float dt)
 			{
 				uiGamePadCounter -= 4;
 			}
-			app->selectActionCooldown = 20;
+			app->selectActionCooldown = 15;
 
 		}
 		FullScreen->isButtonPressed = false;
