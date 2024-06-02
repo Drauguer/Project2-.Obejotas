@@ -106,7 +106,7 @@ bool BattleScene::Start()
 	laserCannon = app->tex->Load("Assets/Textures/laserbeam_Icon.png");
 	martillazo = app->tex->Load("Assets/Textures/RedMace.png");
 	elMuro = app->tex->Load("Assets/Textures/EnanoShield_Icon.png");
-	lluviaAsesina = app->tex->Load("Assets/Textures/RedMace.png");
+	lluviaAsesina = app->tex->Load("Assets/Textures/AtaqueProta_Icon.png");
 	inspiracionBardica = app->tex->Load("Assets/Textures/SatyrAttack1_Icon.png");
 	vivaRock = app->tex->Load("Assets/Textures/SatyrAttack2_Icon.png");
 	musicaMaldita = app->tex->Load("Assets/Textures/SatyrAttack3_Icon.png");
