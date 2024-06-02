@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "BattleScene.h"
 #include "Window.h"
+#include "Inventory.h"
 
 #include<iostream>
 #include<cstdlib>
@@ -32,7 +33,7 @@ bool ParticleSystem::Start()
 }
 
 bool ParticleSystem::Update(float dt) {
-    if ((app->scene->mapID == 0 || app->scene->mapID == 1 || app->scene->mapID == 5)&& !app->scene->player->isOnPause) {
+    if ((app->scene->mapID == 0 || app->scene->mapID == 1 || app->scene->mapID == 5)&& !app->scene->player->isOnPause && !app->inventory->isInventory) {
         for (auto& p : particles) {
             p.y += p.yVel * dt;
             p.lifetime--;

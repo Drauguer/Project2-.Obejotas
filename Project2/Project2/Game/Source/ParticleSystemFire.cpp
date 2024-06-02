@@ -56,7 +56,7 @@ bool ParticleSystemBug::Update(float dt) {
         }
         // Add new particles to maintain the number of particles
         while (particles.size() < numParticles) {
-            AddParticle(std::rand() % (app->win->width), (std::rand() % app->win->height)+ (app->win->height /8),
+            AddParticle(std::rand() % (app->win->width /2), (std::rand() % app->win->height)+ (app->win->height /8),
                 GenerateRandomFloat(), 0, std::rand() % 200 + 50);
         }
         currentAnim->Update();

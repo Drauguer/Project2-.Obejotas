@@ -39,10 +39,13 @@ public:
 
 private:
     std::vector<Particle> particles;
-    int numParticles = 50;
+    int numParticles = 10;
     SDL_Texture* bugTexture = nullptr;
     Animation bugAnim;
     Animation* currentAnim;
+
+    //lluvia 
+    
 };
 
 #endif // __PARTICLESYSTEMFIRE_H__
